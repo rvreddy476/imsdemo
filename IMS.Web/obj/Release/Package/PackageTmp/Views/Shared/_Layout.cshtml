@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+@{
+
+
+}
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="img-src * 'self' data:;">
+    <title>@ViewBag.Title Harbinger Techventure Vendor Management System</title>
+    <link href="~/Content/GridView.css" rel="stylesheet" />
+    <link href="~/Content/External2.css" rel="stylesheet" />
+    <link href="~/Content/table.css" rel="stylesheet" />
+    <link href="~/Content/Common.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/PM-Responsive.css" rel="stylesheet" />
+
+    @*<script src="~/Scripts/modernizr-2.8.3.js"></script>*@
+    @*<script src="~/Scripts/modernizr-2.6.2.js"></script>*@
+</head>
+<style>
+
+    .logout-btn {
+        right: 0;
+        position: absolute;
+    }
+
+    /*.img1 {
+        background-image: url('../Images/VMS_LOGO.svg');
+        background-repeat: no-repeat;
+    }*/
+</style>
+
+<body>
+    <div class="navbar  navbar-fixed-top">
+        <div class="container-fluid col-lg-12 displayFlex">
+            <div class="navbar-header col-lg-3">
+
+                <img class="img1" src="~/Images/HTV VMS Logo With Harbinger.png" x />
+                @*<img class="img1" />*@
+            </div>
+
+
+            <div class="logout-btn col-lg-3 logout-position" @*style="padding-left: 206px; padding-top: 32px;"*@>
+                <fieldset>
+
+                    @if ((Session["Email"] != null) || (Session["vendor_Email"] != null))
+                    {
+
+
+                        <div class="dropdown show">
+                            <div class="user-details">
+                                <span> Welcome </span>
+
+                                @if (Session["Email"] != null)
+                                {
+                                    @Session["Email"].ToString();
+                                }
+                                else
+                                {
+                                    @Session["vendor_Email"].ToString();
+                                }
+                            </div>
+                            <a class="btn btn-secondary dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-user-circle userprofile" style="font-size: 33px;"></i>
+                            </a>
+
+                            <div class="dropdown-menu pull-right elementToFadeInAndOut" aria-labelledby="dropdownMenuLink">
+                                @if (Session["role"] != null)
+                                {
+                                    if (Session["role"].ToString() == "Vendor")
+                                    {
+                                        <div>
+                                            <i class="fa fa-key"></i>
+                                            <a class="dropdown-item" href="@Url.Action("ChangePassword", "Login")"> Change Password</a>
+                                        </div>
+                                    }
+                                }
+                                @*<div>
+                                        <i class="fa fa-question-circle"></i>
+                                        <a class="dropdown-item" target="_blank" href="@Url.Action("HelpDocument", "Login")">Help</a>
+                                    </div>*@
+                                <div class="user-details-small">
+                                    <span> Welcome </span>
+
+                                    @if (Session["Email"] != null)
+                                    {
+                                        @Session["Email"].ToString();
+                                    }
+                                    else
+                                    {
+                                        @Session["vendor_Email"].ToString();
+                                    }
+                                </div>
+                                <div>
+                                    <i class="fa fa-question-circle"></i>
+                                    <a class="dropdown-item" href="@Url.Action("Help_Document", "Login")">Help Page</a>
+                                </div>
+
+                                <div>
+                                    <i class="fa fa-power-off"></i>
+                                    <a onclick="noBack()" class="dropdown-item" href="@Url.Action("SignOut", "Login")">Log Out</a>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    }
+
+
+                    else if ((Session["Email"] == null))
+                    {
+                        Session.Abandon();
+                        Session.Clear();
+                        Session.RemoveAll();
+                        Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));
+
+
+
+                        <script>
+                            alert("Your Session Expired.");
+                            //window.location = "login";
+                        window.location.href = "@Url.Action("Login", "Login")";
+                        </script>
+
+                    }
+                </fieldset>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid body-content ">
+        @RenderBody()
+        @RenderSection("scripts", required: false)
+
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 1990 - @DateTime.Now.Year Harbinger Group. All Rights Reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    @*<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>*@
+
+    @*<Script type="text/javascript">
+            debugger;
+            window.history.forward();
+            function noBack() { window.history.go(-1) }
+        </Script>*@
+</body>
+</html>
+

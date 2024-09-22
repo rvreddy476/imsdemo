@@ -1,0 +1,170 @@
+﻿@{
+    ViewBag.Title = "OutwardDetails";
+    Layout = "~/Views/Shared/_Layout_IMS.cshtml";
+}
+<link href="~/assets/css/custom.css" rel="stylesheet" />
+
+<div class="rightpanel-height">
+    <div class="d-flex align-items-center justify-content-between">
+        <h5 class="content-title mb-3">Outward Details</h5>
+        <a class="back-btn d-flex" href="@Url.Action("OutwardList", "Add_OutwardMaterial")">
+            <img class="mr-8" src="~/assets/images/icons/back-arrow.svg" /> Back
+        </a>
+    </div>
+    <div class="card card-height">
+        <div class="card-body">
+            <input type="hidden" name="Gatepasstype" id="gatepasstype" value="@Model.OutwardDetail.GatepassType" />
+            <input type="hidden" id="outwardmaterialid" value="@Model.OutwardDetail.OW_MaterialID" />
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="right-space ft-18 gatepass-no">Outward No:</div>
+                    <div class="">
+                        <p class="form-control-plaintext ft-18 gatepass-no">@Model.OutwardDetail.OutwardNo</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <table class="gatepass-table">
+                        <thead>
+                            <tr>
+                                <th class="col-lg-2">Gatepass Number</th>
+                                <th class="col-lg-2">Outward Date</th>
+                                <th class="col-lg-2">Receiver Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@Model.OutwardDetail.Gatepass_Number</td>
+                                <td>@Model.OutwardDetail.OutwardDatetime.ToString("dd MMM yyyy")</td>
+                                <td>@Model.OutwardDetail.ReceiverName</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <h5 class="mb-3 items">Items</h5>
+
+            <!-- Table to display materials -->
+            <table class="table outwarddetail-table">
+                <thead class="border-btm">
+                    <tr>
+                        <th>Asset ID</th>
+                        <th>Expense Nature</th>
+                        <th>Material Name</th>
+                        <th>Model No</th>
+                        <th>Serial No</th>
+                        <th>GRN Number</th>
+                        <th>Status</th>
+                        @if (Model.OutwardDetail.GatepassType != "NonReturnable")
+                        {
+                            <th>Received</th>
+                        }
+                        </tr>
+                </thead>
+                <tbody>
+                    @if (Model.MaterialItems != null)
+                    {
+                        foreach (var item in Model.MaterialItems)
+                        {
+                            <tr>
+                                <td>@item.AssetId</td>
+                                <td>@item.ExpenseNature</td>
+                                <td>@item.MaterialName</td>
+                                <td>@item.ModelNo</td>
+                                <td>@item.SerialNo</td>
+                                <td>@item.GRN_Number</td>
+                                <td>@item.OutStatus</td>
+                                @if (Model.OutwardDetail.GatepassType != "NonReturnable")
+                                {
+                                    <td>
+                                        <input type="checkbox" class="received-checkbox" data-outmat-id="@item.OutMat_ID" @(item.OutStatus == "Material In" ? "disabled" : "") />
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="8" class="text-center">No materials found for this Outward Material ID.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+
+
+            <!-- Buttons for cancel and save -->
+            <div class="border-top"></div>
+
+
+            <div class="text-right mt-5">
+                <a href="@Url.Action("OutwardList", "Add_OutwardMaterial")" class="button cancel-btn">Cancel</a>
+                @if (Model.OutwardDetail.GatepassType != "NonReturnable")
+                {
+                    <button id="save-button" class="action-btn">Save</button>
+                }
+                </div>
+        </div>
+    </div>
+</div>
+
+<!-- Ensure jQuery is loaded -->
+<script src="~/assets/libs/jquery/dist/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        // Function to check if all checkboxes are disabled
+        function checkAllCheckboxes() {
+            var allDisabled = $('.received-checkbox').length === $('.received-checkbox:disabled').length;
+            $('#save-button').prop('disabled', allDisabled); // Disable save button if all checkboxes are disabled
+        }
+
+        // Run check on page load
+        checkAllCheckboxes();
+
+        // When the save button is clicked
+        $('#save-button').click(function () {
+            var selectedOutMatIds = [];
+            var gatePassID = ''; // Assuming all items belong to the same GatePassID
+
+            // Collect all checked materials
+            $('.received-checkbox:checked').each(function () {
+                selectedOutMatIds.push($(this).data('outmat-id'));
+            });
+
+            // Ensure that some checkboxes are checked before making the call
+            if (selectedOutMatIds.length > 0) {
+                // Make an AJAX call to send selected OutMat_IDs to the server
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("MarkAsReceived", "Add_OutwardMaterial")',
+                    data: {
+                        outMatIds: selectedOutMatIds, // Array of OutMat_IDs
+                        gatepassID: '@Model.OutwardDetail.GatepassID' // Single GatePassID
+                    },
+                    success: function (response) {
+                        debugger;
+                        var url = '@Url.Action("OutwardDetails", "Add_OutwardMaterial")';
+                        var OID = $("#outwardmaterialid").val();
+                        if (response.message == "success") {
+                            alert("Materials marked as received successfully.");
+                            window.location.href = url + '?id=' + OID;
+                           // location.reload(); // Reload the page to reflect the updated status
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function () {
+                        alert("An error occurred while processing your request.");
+                    }
+                });
+            } else {
+                alert("Please select at least one material to mark as received.");
+            }
+        });
+    });
+</script>

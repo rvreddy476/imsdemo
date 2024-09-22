@@ -1,0 +1,292 @@
+﻿@model IMS.Models.IMS_Users
+@{
+    string userEmail = ViewBag.UserEmail;
+}
+<style>
+    .navbar {
+        display: none;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+    #swal2-content {
+        font-size: 17px;
+    }
+
+    #swal2-title {
+        font-size: 15px;
+    }
+
+    .btn-submit1 {
+        margin-left: -14px;
+        display: inline;
+        border-radius: 5px;
+        border: 1px solid transparent;
+        background: #eb616b;
+        display: block;
+        letter-spacing: 0.5px;
+        color: #fff;
+        font-size: 15px;
+    }
+
+        .btn-submit1:hover {
+            border: 1px solid transparent;
+            background: #e63946;
+            color: #fff;
+        }
+
+    swal2-confirm swal2-styled {
+        color: #fff !important;
+        background: #e63946;
+        border: 1px solid #e63946;
+    }
+</style>
+<link href="~/Content/sweetalert2.min.css" rel="stylesheet" />
+<link href="~/assets/css/custom.css" rel="stylesheet" />
+<link href="~/Content/table.css" rel="stylesheet" />
+
+<body class="body-style welcome-screen">
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+         data-sidebar-position="fixed" data-header-position="fixed">
+        <div class="container-fluid body-content ">
+            <div class="container">
+                <div class="row">
+                    <input type="hidden" value="@userEmail" id="userEmail" name="userEmail" />
+
+                    <div class="work-image col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                        <img class="loginleft-image" src="~/assets/images/backgrounds/Login-left.png" alt="login image" />
+                    </div>
+                    <div class="welcome-mid-panel col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                        <div class="welcome-form">
+                            <div class="loginwrapper-logos d-flex align-items-center justify-content-between logo-div">
+                                <a href="./index.html" class="text-nowrap logo-img border-0">
+                                    <img width="150" height="68" src="~/assets/images/logos/harbinger-logo.svg" />
+                                </a>
+                                <span></span>
+                                <a class="sidebar-link border-start ms-4" href="./index.html" aria-expanded="false">
+                                    <img width="220" height="68" src="~/assets/images/logos/logo-black.svg" />
+                                </a>
+                                <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+                                    <i class="ti ti-x fs-8"></i>
+                                </div>
+                            </div>
+                            <div id="welcome-message" class="welcome-details" style="display:none;">
+                                <h4 class="text-start welcome-text">Welcome!</h4>
+                                <div class="user-email">@userEmail</div>
+                                <a href="#" type="submit" value="Welcome" id="btn_submit" onclick="getDesignation(this)" name="submit"
+                                   class="btn action-btn wlink getStartedBtn text-white "
+                                   data-toggle="modal" data-target=".bs-example-modal-lg">Get Started</a>
+                            </div>
+                            <div class="verification-block">
+                                <input type="hidden" id="VerificationTime" class="VerificationTime" value="@ViewBag.VerificationTime" />
+                                <h4 class="text-start welcome-text verification-text">Verification code</h4>
+                                <div class="ver-sub-text">A verification code has been sent to your email.</div>
+
+                                <div class="code-wrapper">
+                                    <input type="password" maxlength="1" class="code-no" id="otp1" />
+                                    <input type="password" maxlength="1" class="code-no" id="otp2" />
+                                    <input type="password" maxlength="1" class="code-no" id="otp3" />
+                                    <input type="password" maxlength="1" class="code-no" id="otp4" />
+                                </div>
+                                <div class="req-txt">
+                                    Didn't receive a code?
+                                    <a id="resendotp" class="clickable">Request again</a>
+                                </div>
+                                <button id="verifyotp" class="action-btn verify-otp-btn">Verify OTP</button>
+                            </div>
+
+
+                            @Html.Hidden("RedirectTo", Url.Action("Index", "Dashboard"))
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Select Role:</h4>
+                            </div>
+                            <div class="modal-body" style="height:20rem">
+                                @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+                                {
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label>Please Select Designation</label><br />
+                                            @Html.DropDownList("designation", new SelectList(ViewBag.designation, "userDepartmentId", "RoleInIMS"), "Select", new { @class = "form-control input-col", @id = "designation", @required = "required" })
+                                            <input type="hidden" value="@userEmail" id="userEmail" name="userEmail" />
+                                            <input type="hidden" value="" id="user_department" name="user_department" />
+                                            <input type="hidden" value="" id="userLocation" name="userLocation" />
+                                            <input type="hidden" value="" id="RoleInIMS" name="RoleInIMS" />
+                                            <input type="hidden" value="" id="userDepartmentId" name="userDepartmentId" />
+                                            <br /><br />
+                                            <div class="col-md-10 role-action-btn">
+                                                <button type="submit" id="modal_submit" class="btn action-btn">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Scripts/sweetalert2.all.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btn_submit").hide();
+            $("#otperrormsg").text('');
+            $("#otperrormsg").hide();
+            $("#resendotp").hide();
+
+           $('#resendotp').on('click', function (e) {
+               var userEmail = $('#userEmail').val();
+               $.ajax({
+        url: '@Url.Action("ResendOtp")',
+        type: 'GET',
+        data: { Email: userEmail },
+        success: function (r) {
+            var data = JSON.parse(r);
+            if (data.data) {
+                Swal.fire("Your OTP has been resent to your email.");
+                $('.code-no').val('');
+                $("#resendotp").hide();
+                $('#verifyotp').show();
+                $("#otperrormsg").text('');
+                $("#otperrormsg").hide();
+            } else {
+                $('.code-no').val('');
+                $("#resendotp").show();
+                $('#verifyotp').hide();
+            }
+        },
+        error: function (e) {
+            console.log(e);
+        }
+    });
+});
+
+
+
+
+            $('#verifyotp').on('click', function (e) {
+                // Concatenate the values of the four OTP input fields
+                var OTPValue = $('#otp1').val() + $('#otp2').val() + $('#otp3').val() + $('#otp4').val();
+                var verificationTime = $('#VerificationTime').val();
+
+                // Ensure the OTPValue has exactly 4 digits before proceeding
+                if (OTPValue.length === 4) {
+                    $.ajax({
+                        url: '@Url.Action("VerifyOTP")',
+                        type: 'GET',
+                        data: { OTPValue: OTPValue, verificationTime: verificationTime },
+                        success: function (r) {
+                            var data = JSON.parse(r);
+                            if (data.isValidOTP) {
+                                Swal.fire("", "Your OTP verified successfully.", "success");
+                                $("#btn_submit").show();
+                                $("#welcome-message").show();
+                                $("#proceed-div").show();
+                                $(".verification-block").hide();
+                                $('.code-no').val(''); // Clear all OTP input fields
+                            } else {
+                                Swal.fire("", data.Errormsg, "error");
+                                $('.code-no').val('');
+                                $("#resendotp").show();
+                                $(".verification-block").show();
+                                $("#verifyotp").hide();
+                            }
+                        },
+                        error: function (e) {
+                            console.log(e);
+                        }
+                    });
+                } else {
+                    Swal.fire("", "Please enter all four digits of the OTP.", "error");
+                }
+            });
+
+            $('#modal_submit').click(function (e) {
+                var selectedText = $("#designation").find("option:selected").text();
+                var selectedval = $("#designation").find("option:selected").val();
+                var temp = selectedText.split("-");
+                $('#user_department').val(temp[1]);
+                $('#userEmail').val($('#Email').val());
+                $('#RoleInIMS').val(temp[0]);
+                $('#userLocation').val(temp[2]);
+                $('#userDepartmentId').val(selectedval);
+            });
+
+            $('#getDesignation').click(function () {
+                $('#designation').empty();
+                $('#designation').prop("disabled", false);
+                var userEmail = $('#userEmail').val();
+                $.ajax({
+                    url: '@Url.Action("GetRolesdata")',
+                    method: "GET",
+                    data: { Email: userEmail },
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        $("#designation").append('<option value="0">Select</option>');
+                        $.each(data.designationdata, function (index, value) {
+                            $("#designation").append('<option value=' + value.userDepartmentId + '>' + value.RoleInIMS + "-" + value.user_department + "-" + value.userLocation + '</option>');
+                        });
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            });
+        });
+
+        function getDesignation(_this) {
+            $('#designation').empty();
+            $('#designation').prop("disabled", false);
+            var userEmail = $('#userEmail').val();
+
+            $.ajax({
+                url: '@Url.Action("GetRolesdata")',
+                method: "GET",
+                data: { Email: userEmail },
+                success: function (data) {
+                    data = JSON.parse(data);
+                    var optionhtml = '<option value="0">Select</option>';
+                    $("#designation").append(optionhtml);
+                    $.each(data, function (i) {
+                        var optionhtml1 = '<option value="' +
+                            data[i].userDepartmentId + '">' + data[i].RoleInIMS + "-" + data[i].userDepartmentName + "-" + data[i].userLocation + '</option>';
+                        $("#designation").append(optionhtml1);
+                    });
+                },
+                error: function (err) {
+                    console.error(err)
+                }
+            })
+        }
+        $(document).ready(function () {
+            $(".code-no").keyup(function () {
+                if (this.value.length == this.maxLength) {
+                    $(this).next('.code-no').focus();
+                }
+            });
+        });
+
+    </script>
+}

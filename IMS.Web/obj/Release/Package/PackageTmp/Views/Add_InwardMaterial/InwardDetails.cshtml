@@ -1,0 +1,1052 @@
+﻿@model IEnumerable<IMS.Models.IMSEntity>
+
+@{
+    string role = ViewBag.role;
+    string empid = ViewBag.userid;
+    string dept = ViewBag.department;
+    string location = ViewBag.location;
+    string inwardID = ViewBag.inwardID;
+    string expense = ViewBag.expensenature;
+
+    byte[] encodedid = System.Text.Encoding.UTF8.GetBytes(inwardID);
+    var invv_id = Convert.ToBase64String(encodedid);
+
+    ViewBag.Title = "InwardDetails";
+    Layout = "~/Views/Shared/_Layout_IMS.cshtml";
+}
+
+<link href="~/assets/css/custom.css" rel="stylesheet" />
+
+
+<div class="inward-details">
+    <div class="d-flex align-items-center justify-content-between">
+        <h5 class="content-title mb-3">Inward Details</h5>
+        <a class="back-btn d-flex" href="@Url.Action("InwardList", "Add_InwardMaterial")">
+            <img class="mr-8" src="~/assets/images/icons/back-arrow.svg" /> Back
+        </a>
+    </div>
+    <input type="hidden" value="@inwardID" id="inwardID" />
+    <input type="hidden" value="@invv_id" id="encodedid" />
+    <div class="card">
+        <div class="card-body p-0">
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-lg-4 col-md-12 general-details">
+                        <div class="">
+                            <div class="d-flex align-items-start mb-4 mt-3">
+                                <div>
+                                    <img src="~/assets/images/icons/dept-name.svg" alt="" />
+                                </div>
+                                <div class="ms-3">
+                                    <p class="mb-1 label-name">Department Name</p>
+                                    <p class="mb-0 label-value">@item.userDepartmentName</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start mb-4">
+                                <div>
+                                    <img src="~/assets/images/icons/location.svg" alt="" />
+                                </div>
+                                <div class="ms-3">
+                                    <p class="mb-1 label-name">Location</p>
+                                    <p class="mb-0 label-value">@item.Location</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start mb-4">
+                                <div>
+                                    <img src="~/assets/images/icons/grn.svg" alt="" />
+                                </div>
+                                <div class="ms-3">
+                                    <p class="mb-1 label-name">GRN Number</p>
+                                    <p class="mb-0 label-value">@item.GRN_Number</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start mb-4">
+                                <div>
+                                    <img src="~/assets/images/icons/vendor.svg" alt="" />
+                                </div>
+                                <div class="ms-3">
+                                    <p class="mb-1 label-name">Vendor Name</p>
+                                    <p class="mb-0 label-value">@item.vendorName</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start mb-4">
+                                <div>
+                                    <img src="~/assets/images/icons/inward.svg" alt="" />
+                                </div>
+                                <div class="ms-3">
+                                    <p class="mb-1 label-name">Inward Entered by</p>
+                                    <p class="mb-0 label-value">@item.InwardEnteredBy</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start mb-4">
+                                <div>
+                                    <img src="~/assets/images/icons/vendor.svg" alt="" />
+                                </div>
+                                <div class="ms-3">
+                                    @{
+
+                                        string StrFilePathName1 = null;
+                                        string filename1 = null;
+                                        string[] filesNames1 = Directory.GetFiles(@"D:\IMSDocs\InwardMaterial\" + item.InwardID + "//");
+
+                                        List<string> items1 = new List<string>();
+                                        foreach (string file in filesNames1)
+                                        {
+                                            string fileName = Path.GetFileName(file);
+                                            string fileExtn = Path.GetExtension(file);
+                                            StrFilePathName1 = fileName;
+
+                                            if (fileName == StrFilePathName1)
+                                            {
+                                                filename1 = StrFilePathName1;
+                                                items1.Add(fileName);
+                                            }
+
+                                        }
+                                    }
+                                    <p class="mb-1 label-name">Inward PDF</p>
+                                    <p class="mb-0 label-value"> <a href="@Url.Action("DownloadInwarddocx", "Add_InwardMaterial", new { @items = filename1, @InvId = invv_id, @type = "InwardPDF" }, null)" target="_blank">@filename1</a></p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start mb-4">
+                                <div>
+                                    <img src="~/assets/images/icons/expense.svg" alt="" />
+                                </div>
+                                <div class="ms-3">
+                                    <p class="mb-1 label-name">Expense Nature</p>
+                                    <p class="mb-0 label-value">@item.Inward_ExpenseNature</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-12 pt-4">
+                        <div class="px-3">
+                            <p class="mb-1 label-name">Inward Note</p>
+                            <p class="mb-0 label-value">@item.InwardNote</p>
+                        </div>
+                        <div class="mt-4 px-3">
+                            <div class="d-flex  pb-3">
+                                <div class="me-5">
+                                    <p class="mb-1 label-name">Inward DateTime</p>
+                                    <p class="mb-0 label-value">@item.InwardDateTime</p>
+                                </div>
+
+                                <div class="me-5">
+                                    <p class="mb-1 label-name">Inward Status</p>
+                                    <p class="mb-0 label-value">@item.Inward_Status</p>
+                                </div>
+                                <div class="me-5">
+                                    <p class="mb-1 label-name">Bill of Entry</p>
+                                    <p class="mb-0 label-value">@item.BillofEntry</p>
+                                </div>
+                            </div>
+                            @{
+                                var context3 = new IMS.Entities.ServiceVMSEntities();
+                                var DCdetails = (from i in context3.DeliveryChallens
+                                                 where i.InwardID == inwardID
+                                                 select i);
+                            }
+                            @if (DCdetails.Count() > 0)
+                            {
+                                <table class="inward-table delivery-details-table mt-3">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Challan Numbers</th>
+                                            <th scope="col">File Name</th>
+                                            <th scope="col">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var i in DCdetails)
+                                        {
+                                            string StrFilePathName = null;
+
+                                            string filename = null;
+                                            string[] filesNames = Directory.GetFiles(@"D:\IMSDocs\DeliveryChallen\" + "//" + i.InwardID + "//" + i.DC_ID + "//");
+
+                                            List<string> items = new List<string>();
+                                            foreach (string file in filesNames)
+                                            {
+                                                string fileName = Path.GetFileName(file);
+                                                string fileExtn = Path.GetExtension(file);
+                                                StrFilePathName = fileName;
+
+                                                if (fileName == StrFilePathName)
+                                                {
+                                                    filename = StrFilePathName;
+                                                    items.Add(fileName);
+                                                }
+
+                                            }
+
+
+
+                                            <tr>
+                                                <td data-label="dc-number">@i.DC_Number</td>
+                                                <td data-label="file-name">@i.DC_Filename</td>
+                                                <td data-label="actions">
+                                                    @{
+                                                        byte[] encoded1 = System.Text.Encoding.UTF8.GetBytes(i.InwardID);
+                                                        var innv_id = Convert.ToBase64String(encoded1);
+
+                                                        byte[] encodeddc = System.Text.Encoding.UTF8.GetBytes(i.DC_ID);
+                                                        var dc_id = Convert.ToBase64String(encodeddc);
+
+                                                    }
+                                                    <a href="@Url.Action("ViewInwarddocx", "Add_InwardMaterial", new { id = dc_id, name = "DeliveryChallen", InvId  = innv_id}, null)" target="_blank"> <img class="pe-2" src="~/assets/images/icons/view.svg" alt="" /> </a>
+                                                    <a href="@Url.Action("DownloadInwarddocx", "Add_InwardMaterial", new { @items = filename, @InvId = innv_id, @type = "Deliverychallen", @dcid = dc_id})" target="_blank"> <img class="px-2" src="~/assets/images/icons/download.svg" alt="" /></a>
+
+                                                </td>
+                                            </tr>
+
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                            @{
+                                string roleinims = string.Empty;
+                                string Location = string.Empty;
+                                var context2 = new IMS.Entities.ServiceVMSEntities();
+                                var doctype = from r in context2.InwardApprovers
+                                              where r.employeeId == empid
+                                              select new { r.RoleInIMS, r.Location };
+                                foreach (var g in doctype)
+                                {
+                                    roleinims = g.RoleInIMS;
+                                    Location = g.Location;
+
+                                };
+                                var q = (from t in context2.InwardMaterials
+                                         where t.InwardID == inwardID && t.Inward_Status != "Deleted"
+                                         select new { t.Inward_Status, t.InwardID }).FirstOrDefault();
+
+                            }
+                            @if (ViewBag.expensenature == null && role == "Receiver" && q.Inward_Status == "Inward Added" && role == roleinims && location == Location)
+                            {
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="inwardExpenseNature" class="form-label">Inward Expense Nature</label><br />
+                                        <input type="radio" name="Inward_ExpenseNature" id="opex" value="opex" checked>
+                                        <label class="form-label pe-3 ps-1 pt-2 radio-label" for="opex">Opex</label>
+                                        <input type="radio" name="Inward_ExpenseNature" id="capex" value="capex">
+                                        <label class="form-label pe-3 ps-1 pt-2 radio-label" for="capex">Capex</label>
+                                        <input type="radio" name="Inward_ExpenseNature" id="rental" value="rental">
+                                        <label class="form-label pe-3 ps-1 pt-2 radio-label" for="rental">Rental</label>
+                                        <br />
+                                        <input type="radio" name="Inward_ExpenseNature" id="customerasset" value="customerasset">
+                                        <label class="form-label pe-3 ps-1 pt-2 radio-label" for="customerasset">Customer Asset</label>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="Inwardnote" class="form-label">Inward Note</label>
+                                        <textarea class="form-control" placeholder="Please provide the inward note." rows="3" cols="5" id="InwardNote" name="InwardNote" required></textarea>
+                                    </div>
+                                </div>
+                            }
+
+                            @{
+                                if (ViewBag.GRNnumber != null)
+                                {
+                                    string grnnumber = ViewBag.GRNnumber;
+                                    var invoicedetails = (from i in context2.HTV_Invoice
+                                                          where i.GRN_Number.Equals(grnnumber) && i.invoiceStatus != "Deleted"
+                                                          select i);
+                                    if (invoicedetails.Count() > 0)
+                                    {
+                                        foreach (var item1 in invoicedetails)
+                                        {
+
+                                            string inv_id = item1.invoiceId;
+                                            byte[] encoded = System.Text.Encoding.UTF8.GetBytes(inv_id);
+                                            inv_id = Convert.ToBase64String(encoded);
+
+                                            var extra_docCount = (from ti in context2.InvoiceExtraDocuments
+                                                                  join i in context2.HTV_Invoice on ti.invoiceId equals i.invoiceId
+                                                                  where i.GRN_Number.Equals(grnnumber) && ti.invoice_extra_doc_status != "Deleted"
+                                                                  select ti).Count();
+
+                                            DateTime uploaddate = DateTime.Parse(item1.invoiceUploadDate.ToString());
+
+                                            <div class="d-flex view-invoice align-items-center">
+                                                <div class="me-5">
+                                                    <p class="mb-1 label-name">Invoice Number</p>
+                                                    <p class="mb-0 label-value">@item.Invoice_Number</p>
+                                                </div>
+                                                <div class="me-5">
+                                                    <p class="mb-1 label-name">Invoice Upload Date</p>
+                                                    <p class="mb-0 label-value">@uploaddate.ToShortDateString()</p>
+                                                </div>
+                                                @Html.ActionLink("View Invoice", "ViewInvoicedocx", "Add_Invoice", new { id = inv_id, name = "Invoice" }, new { target = "blank" })
+                                            </div>
+                                        }
+                                    }
+                                }
+                            }
+                            <table class="inward-table my-4">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">
+                                            @if (ViewBag.expensenature == null && role == "Receiver" && q.Inward_Status == "Inward Added" && role == roleinims && location == Location)
+                                            {
+                                                <input type="checkbox" class="form-check-input me-1" id="selectallmaterial" value="" />
+                                            }
+                                            <span for="materialName" class="form-label">Name</span>
+                                        </th>
+                                        <th scope="col">Remark</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Inward Type</th>
+                                        <th scope="col">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        string invid = ViewBag.inwardID;
+
+                                        IMS.Entities.ServiceVMSEntities context22 = new IMS.Entities.ServiceVMSEntities();
+                                        if (ViewBag.expensenature == "capex")
+                                        {
+
+                                            var projectdetails1 = from t in context22.InwardMaterial_CAPEX
+                                                                  where t.InwardID == invid
+                                                                  select new { t.MaterialName, t.Quantity, t.Inward_Type, t.Status, t.MaterialID, t.Material_Remark, t.Material_Price, t.Material_Totalprice };
+                                            var ii = projectdetails1.Count();
+                                            var classnm = string.Empty;
+                                            foreach (var cpitem in projectdetails1)
+                                            {
+                                                <tr>
+                                                    <td data-label="material-name">
+                                                        <span>@cpitem.MaterialName</span>
+                                                    </td>
+                                                    <td data-label="material-remark">@cpitem.Material_Remark</td>
+                                                    <td data-label="quantity">@cpitem.Quantity</td>
+                                                    @if (cpitem.Inward_Type == "NonReturnable")
+                                                    {
+                                                        classnm = "non-returnable";
+                                                    }
+                                                    else
+                                                    {
+                                                        classnm = "returnable";
+                                                    }
+                                                    <td data-label="inward-type" class="@classnm">
+                                                        <span>@cpitem.Inward_Type</span>
+                                                    </td>
+                                                    <td data-label="status">@cpitem.Status</td>
+                                                </tr>
+                                            }
+                                        }
+                                        else if (ViewBag.expensenature == "rental")
+                                        {
+                                            var projectdetails1 = from t in context22.InwardMaterial_Rental
+                                                                  where t.InwardID == invid
+                                                                  select new { t.MaterialName, t.Quantity, t.Inward_Type, t.Status, t.MaterialID, t.Material_Remark, t.Material_Price, t.Material_Totalprice };
+                                            var classnm = string.Empty;
+                                            foreach (var cpitem in projectdetails1)
+                                            {
+                                                <tr>
+                                                    <td data-label="material-name">
+                                                        <span>@cpitem.MaterialName</span>
+                                                    </td>
+                                                    <td data-label="material-remark">@cpitem.Material_Remark</td>
+                                                    <td data-label="quantity">@cpitem.Quantity</td>
+                                                    @if (cpitem.Inward_Type == "NonReturnable")
+                                                    {
+                                                        classnm = "non-returnable";
+                                                    }
+                                                    else
+                                                    {
+                                                        classnm = "returnable";
+                                                    }
+                                                    <td data-label="inward-type" class="@classnm">
+                                                        <span>@cpitem.Inward_Type</span>
+                                                    </td>
+                                                    <td data-label="status">@cpitem.Status</td>
+                                                </tr>
+                                            }
+                                        }
+                                        else if (ViewBag.expensenature == "opex")
+                                        {
+                                            var projectdetails2 = from t in context22.InwardMaterial_OPEX
+                                                                  where t.InwardID == invid
+                                                                  select new { t.Material_Name, t.Quantity, t.Inward_Type, t.Status, t.Material_Remark };
+                                            var classnm = string.Empty;
+                                            foreach (var cpitem in projectdetails2)
+                                            {
+                                                <tr>
+                                                    <td data-label="material-name">
+                                                        <span>@cpitem.Material_Name</span>
+                                                    </td>
+                                                    <td data-label="material-remark">@cpitem.Material_Remark</td>
+                                                    <td data-label="quantity">@cpitem.Quantity</td>
+                                                    @if (cpitem.Inward_Type == "NonReturnable")
+                                                    {
+                                                        classnm = "non-returnable";
+                                                    }
+                                                    else
+                                                    {
+                                                        classnm = "returnable";
+                                                    }
+                                                    <td data-label="inward-type" class="@classnm">
+                                                        <span>@cpitem.Inward_Type</span>
+                                                    </td>
+                                                    <td data-label="status">@cpitem.Status</td>
+                                                </tr>
+                                            }
+                                        }
+                                        else if (ViewBag.expensenature == "customerasset")
+                                        {
+                                            var projectdetails1 = from t in context22.InwardMaterial_CustomerAsset
+                                                                  where t.InwardID == invid
+                                                                  select new { t.MaterialName, t.Quantity, t.Inward_Type, t.Status, t.MaterialID, t.Material_Remark, t.Material_Price, t.Material_Totalprice };
+                                            var classnm = string.Empty;
+                                            foreach (var cpitem in projectdetails1)
+                                            {
+                                                <tr>
+                                                    <td data-label="material-name">
+                                                        <span>@cpitem.MaterialName</span>
+                                                    </td>
+                                                    <td data-label="material-remark">@cpitem.Material_Remark</td>
+                                                    <td data-label="quantity">@cpitem.Quantity</td>
+                                                    @if (cpitem.Inward_Type == "NonReturnable")
+                                                    {
+                                                        classnm = "non-returnable";
+                                                    }
+                                                    else
+                                                    {
+                                                        classnm = "returnable";
+                                                    }
+                                                    <td data-label="inward-type" class="@classnm">
+                                                        <span>@cpitem.Inward_Type</span>
+                                                    </td>
+                                                    <td data-label="status">@cpitem.Status</td>
+                                                </tr>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            var projectdetails3 = from t in context22.InwardMaterial_Temp
+                                                                  where t.InwardID == invid
+                                                                  select new { t.MaterialName, t.Quantity, t.Inward_Type, t.MaterialID, t.Material_Remark };
+                                            var classnm = string.Empty;
+                                            foreach (var cpitem in projectdetails3)
+                                            {
+                                                <tr>
+                                                    <td data-label="material-name">
+                                                        @if (ViewBag.expensenature == null && role == "Receiver" && q.Inward_Status == "Inward Added" && role == roleinims && location == Location)
+                                                        {
+                                                            <input type="checkbox" id="@cpitem.MaterialID" value="@cpitem.MaterialID" class="materialcheck form-check-input me-1" name="materiallist" />
+                                                        }
+
+                                                        <span>@cpitem.MaterialName</span>
+                                                    </td>
+                                                    <td data-label="material-remark">@cpitem.Material_Remark</td>
+                                                    <td data-label="quantity">@cpitem.Quantity</td>
+                                                    @if (cpitem.Inward_Type == "NonReturnable")
+                                                    {
+                                                        classnm = "non-returnable";
+                                                    }
+                                                    else
+                                                    {
+                                                        classnm = "returnable";
+                                                    }
+                                                    <td data-label="inward-type" class="@classnm">
+                                                        <span>@cpitem.Inward_Type</span>
+                                                    </td>
+
+                                                </tr>
+                                            }
+                                        }
+                                    }
+
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                        @if (ViewBag.expensenature == null && role == "Receiver" && q.Inward_Status == "Inward Added" && role == roleinims && location == Location)
+                        {
+                            <div class="accept-btn">
+                                <button type="button" onclick="divupdatestatus('@invid','InwardAccepted')" id="btnAccept" class="btn btn-primary my-4">Accept</button>
+                                <button type="button" onclick="divupdatestatus('@invid','InwardRejected')" id="btnReject" class="btn btn-primary my-4 ms-3">Reject</button>
+                            </div>
+                        }
+                        else if ((ViewBag.expensenature == "capex" || ViewBag.expensenature == "rental" || ViewBag.expensenature == "customerasset") && role == "Inventory Incharge" && q.Inward_Status == "Inward Pending" && role == roleinims && location == Location)
+                        {
+                            <div class="accept-btn">
+                                <button type="button" id="approvematerial" onclick="divupdatestatuscapex('@invid','MaterialAccepted')" class="btn btn-primary my-4">Accept</button>
+                            </div>
+                        }
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="modal modal-lg fade" id="InwardPriceModal" tabindex="-1" role="dialog" aria-labelledby="InwardPriceModal" aria-hidden="true" data-backdrop="static" data-keyboard="true" style="--bs-modal-width:1346px;">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content p-3">
+                <div class="modal-header">
+                    <h4>Inventory Register Details</h4>
+                    @*<button type="button" id="closeModalHeader" class="btn-close close" data-dismiss="modal" aria-label="Close"></button>*@
+                </div>
+                <div class="modal-body" id="InwardMaterialPriceTable">
+                    <div class="row">
+                        <table>
+                            <tr>
+                                <th>Material Name</th>
+                                <th>Qty</th>
+                                <th>Model No.</th>
+                                <th>Serial No.</th>
+                                <th>Purchase Rate.</th>
+                                @if (ViewBag.expensenature == "rental")
+                                {
+                                    <th>Rental Cost</th>
+                                }
+                                <th>Make</th>
+                                @if (ViewBag.expensenature == "rental" || ViewBag.expensenature == "customerasset" || ViewBag.expensenature == "capex")
+                                {
+                                    <th>Machine ID</th>
+                                    <th>RAM</th>
+                                    <th>HDD</th>
+                                    <th>OS</th>
+                                }
+
+                                <th>
+                                    <button class="btn btn-sm duplicate-to-all-btn">
+                                        <img class="px-2" src="/assets/images/icons/copy-all.svg" alt="Copy All" title="Copy All" />
+                                    </button>
+                                </th>
+                                <th>
+                                    <button class="btn btn-sm clear-to-all-btn">
+                                        <img class="px-2" src="/assets/images/icons/clear-all.svg" alt="" title="Clear All" />
+
+                                    </button>
+                                </th>
+
+                            </tr>
+                            @{
+                                string invid1 = ViewBag.inwardID;
+                                IMS.Entities.ServiceVMSEntities context21 = new IMS.Entities.ServiceVMSEntities();
+
+                                if (ViewBag.expensenature == "rental")
+                                {
+
+                                    var projectdetailscapex = (from t in context21.InwardMaterial_Rental
+                                                               where t.InwardID == invid1 && t.Status != "Material Rejected"
+                                                               select t).ToList();
+
+                                    foreach (var item in projectdetailscapex)
+                                    {
+                                        for (int i = 0; i < item.Quantity; i++)
+                                        {
+                                            var classi = "cost" + item.MaterialID + i;
+                                            var classrentalcost = "rentalcost" + item.MaterialID + i;
+                                            var classsr = "serial" + item.MaterialID + i;
+                                            var classmk = "make" + item.MaterialID + i;
+                                            var classmodel = "model" + item.MaterialID + i;
+                                            var classmachine = "machine" + item.MaterialID + i;
+                                            var classRAM = "RAM" + item.MaterialID + i;
+                                            var classHDD = "HDD" + item.MaterialID + i;
+                                            var classOS = "OS" + item.MaterialID + i;
+
+
+                            <tr>
+                                <input type="hidden" class="invrentalid" value="@item.InvMaterialrental_ID" />
+                                <input type="hidden" class="inward_id" value="@invid1" />
+
+
+                                <td>
+                                    @Html.DisplayFor(modelitem => item.MaterialName)
+                                </td>
+                                <td>
+                                    <span class="materialqty" value="1">1</span>
+                                </td>
+                                <td>
+                                    <input type="text" id="@classmodel" class="materialmodelno form-control textmarginmaterial" value="" required />
+                                </td>
+                                <td>
+                                    <input type="text" id="@classsr" class="materialserialno form-control textmarginmaterial" value="" required />
+                                </td>
+
+                                <td>
+                                    <input type="text" id="@classi" class="materialcost form-control textmarginmaterial" value="" required />
+                                </td>
+
+                                <td>
+                                    <input type="text" id="@classrentalcost" class="materialrentalcost form-control textmarginmaterial" value="" required />
+                                </td>
+                                <td>
+                                    <input type="text" id="@classmk" class="materialmake form-control textmarginmaterial" value="" required />
+                                </td>
+                                <td>
+                                    <input type="text" id="@classmachine" class="material_machine form-control textmarginmaterial" value="" required />
+                                </td>
+                                <td>
+                                    <input type="text" id="@classRAM" class="material_RAM form-control textmarginmaterial" value="" required />
+                                </td>
+                                <td>
+                                    <input type="text" id="@classHDD" class="material_HDD form-control textmarginmaterial" value="" required />
+                                </td>
+                                <td>
+                                    <input type="text" id="@classOS" class="material_OS form-control textmarginmaterial" value="" required />
+
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm duplicate-btn">
+                                        <img class="px-2" src="/assets/images/icons/copy.svg" alt="Copy" title="Copy" />
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm clear-btn">
+                                        <img class="px-2" src="/assets/images/icons/clear.svg" alt="Clear" title="Clear" />
+                                    </button>
+                                </td>
+                            </tr>
+                                        }
+                                    }
+                                }
+                                else if (ViewBag.expensenature == "capex")
+                                {
+                                    var projectdetailsrental = (from t in context21.InwardMaterial_CAPEX
+                                                                where t.InwardID == invid1 && t.Status != "Material Rejected"
+                                                                select new { t.MaterialName, t.Quantity, t.Inward_Type, t.Status, t.MaterialID, t.Material_Remark, t.InvMaterialCP_ID });
+
+                                    foreach (var item in projectdetailsrental)
+                                    {
+                                        for (int i = 0; i < item.Quantity; i++)
+                                        {
+                                            var classi = "cost" + item.MaterialID + i;
+                                            var classsr = "serial" + item.MaterialID + i;
+                                            var classmk = "make" + item.MaterialID + i;
+                                            var classmodel = "model" + item.MaterialID + i;
+                                            var classmachine = "machine" + item.MaterialID + i;
+                                            var classRAM = "RAM" + item.MaterialID + i;
+                                            var classHDD = "HDD" + item.MaterialID + i;
+                                            var classOS = "OS" + item.MaterialID + i;
+
+                                            <tr>
+                                                <input type="hidden" class="invcpid" value="@item.InvMaterialCP_ID" />
+                                                <input type="hidden" class="inward_id" value="@invid1" />
+                                                <td>
+                                                    @Html.DisplayFor(modelitem => item.MaterialName)
+                                                </td>
+                                                <td>
+                                                    <span class="materialqty" value="1">1</span>
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="@classmodel" class="material_modelno form-control textmarginmaterial" value="" required />
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="@classsr" class="material_serialno form-control textmarginmaterial" value="" required />
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="@classi" class="material_cost form-control textmarginmaterial" value="" required />
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="@classmk" class="material_make form-control textmarginmaterial" value="" required />
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="@classmachine" class="material_machin form-control textmarginmaterial" value="" required />
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="@classRAM" class="material_Ram form-control textmarginmaterial" value="" required />
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="@classHDD" class="material_Hdd form-control textmarginmaterial" value="" required />
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="@classOS" class="material_Os form-control textmarginmaterial" value="" required />
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-sm duplicate-btn">
+                                                        <img class="px-2" src="/assets/images/icons/copy.svg" alt="Copy" title="Copy" />
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-sm clear-btn">
+                                                        <img class="px-2" src="/assets/images/icons/clear.svg" alt="Clear" title="Clear" />
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+                                else if (ViewBag.expensenature == "customerasset")
+                                {
+                                    var projectdetailsca = (from t in context21.InwardMaterial_CustomerAsset
+                                                            where t.InwardID == invid1 && t.Status != "Material Rejected"
+                                                            select new { t.MaterialName, t.Quantity, t.Inward_Type, t.Status, t.MaterialID, t.Material_Remark, t.InvMaterialCA_ID });
+
+                                    foreach (var item in projectdetailsca)
+                                    {
+                                        for (int i = 0; i < item.Quantity; i++)
+                                        {
+                                            var classi = "cost" + item.MaterialID + i;
+                                            var classsr = "serial" + item.MaterialID + i;
+                                            var classmk = "make" + item.MaterialID + i;
+                                            var classmodel = "model" + item.MaterialID + i;
+
+                                            var classmachine = "machine" + item.MaterialID + i;
+                                            var classRAM = "RAM" + item.MaterialID + i;
+                                            var classHDD = "HDD" + item.MaterialID + i;
+                                            var classOS = "OS" + item.MaterialID + i;
+
+
+                                            <tr>
+                                                <input type="hidden" class="invcaid" value="@item.InvMaterialCA_ID" />
+                                                <input type="hidden" class="inward_id" value="@invid1" />
+                                                <td>
+                                                    @Html.DisplayFor(modelitem => item.MaterialName)
+                                                </td>
+                                                <td>
+                                                    <span class="materialqty" value="1">1</span>
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="@classmodel" class="material_modelno form-control textmarginmaterial" value="" required />
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="@classsr" class="material_serialno form-control textmarginmaterial" value="" required />
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="@classi" class="materialccost form-control textmarginmaterial" value="" required />
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="@classmk" class="material_make form-control textmarginmaterial" value="" required />
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="@classmachine" class="materialmachine form-control textmarginmaterial" value="" required />
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="@classRAM" class="materialRAM form-control textmarginmaterial" value="" required />
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="@classHDD" class="materialHDD form-control textmarginmaterial" value="" required />
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="@classOS" class="materialOS form-control textmarginmaterial" value="" required />
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-sm duplicate-btn">
+                                                        <img class="px-2" src="/assets/images/icons/copy.svg" alt="Copy" title="Copy" />
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-sm clear-btn">
+                                                        <img class="px-2" src="/assets/images/icons/clear.svg" alt="Clear" title="Clear" />
+                                                    </button>
+                                                </td>
+
+                                            </tr>
+                                        }
+                                    }
+                                }
+                            }
+                        </table>
+                    </div>
+
+                </div>
+                <div class="modal-footer justify-content-start p-0 pt-3">
+                    <button type="submit" id="modal_submit" class="btn btn-primary button button4">Submit</button>
+                    <button type="button" id="close" class="btn btn-primary button button4">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+
+<script type="text/javascript">
+    var nature = '@ViewBag.expensenature';
+    var enid = $('#encodedid').val();
+    var url = '@Url.Action("InwardDetails", "Add_InwardMaterial")';
+    var invurl = '@Url.Action("Index", "Add_InventoryRegister")';
+
+    $(document).ready(function () {
+        $("#selectallmaterial").click(function () {
+            debugger;
+            $(".materialcheck").attr("checked", this.checked);
+        });
+
+
+        $("tbody").on("click", ".duplicate-btn", function () {
+            debugger;
+            var currentRow = $(this).closest('tr');
+            var nextRow = currentRow.next('tr');
+            var inputs = currentRow.find('input').not('[type="hidden"]');
+            var nextRowInputs = nextRow.find('input').not('[type="hidden"]');
+
+            inputs.each(function (index) {
+                nextRowInputs.eq(index).val($(this).val());
+            });
+        });
+
+        $("tbody").on("click", ".clear-btn", function () {
+            debugger;
+            // Find the current row
+            var currentRow = $(this).closest('tr');
+            var inputs = currentRow.find('input').not('[type="hidden"]');
+            inputs.each(function (index) {
+              $(this).val('');
+            });
+        });
+
+        $("tbody").on("click", ".duplicate-to-all-btn", function () {
+            debugger;
+            // Find the current row
+            var currentRow = $(this).closest('tr');
+            var nextRow = currentRow.next('tr');
+            var inputs = nextRow.find('input').not('[type="hidden"]');
+            var allRows = $('#InwardMaterialPriceTable tbody tr');
+            allRows.each(function () {
+                var rowInputs = $(this).find('input').not('[type="hidden"]');
+                inputs.each(function (index) {
+                    rowInputs.eq(index).val($(this).val());
+                });
+            });
+        });
+
+        $("tbody").on("click", ".clear-to-all-btn", function () {
+            debugger;
+
+            var currentRow = $(this).closest('tr');
+            var nextRow = currentRow.next('tr');
+            var inputs = nextRow.find('input').not('[type="hidden"]');
+            inputs.val('');
+            var allRows = $('#InwardMaterialPriceTable tbody tr');
+            allRows.each(function () {
+                var rowInputs = $(this).find('input').not('[type="hidden"]');
+                inputs.each(function (index) {
+                    rowInputs.eq(index).val($(this).val());
+                });
+            });
+        });
+
+    });
+
+    function divupdatestatuscapex(invid,status) {
+        $('#InwardPriceModal').modal('show');
+    }
+
+    $("#modal_submit").click(function () {
+        debugger;
+        var materialCostInputs = $('.textmarginmaterial');
+
+        var isEmpty = false;
+            materialCostInputs.each(function () {
+            if ($(this).val().trim() === '') {
+                isEmpty = true;
+            }
+        });
+        if (isEmpty) {
+            event.preventDefault();
+            alert('Please fill in all required fields.');
+            return false;
+        }
+        var invid = $("#inwardID").val();
+        var radio = '@expense';
+        var dataarray = [];
+        var status = "Inward Pending";
+        var classnm = "input.materialcost";
+        debugger;
+
+        if (radio == 'capex') {
+            classnm = "input.material_cost";
+        }
+        else if (radio == 'rental')
+        {
+            classnm = "input.materialrentalcost";
+
+        }
+        else if (radio == 'customerasset') {
+            classnm = "input.materialccost";
+        }
+
+        $(classnm).each(function (index) {
+            debugger;
+            var invcpid = null;
+            var serialno = null;
+            var make = null;
+            var rate = null;
+            var rentalcost = null;
+            var modelno = null;
+            var machineno = null;
+            var RAM = null;
+            var HDD = null;
+            var OS = null;
+
+
+            if (radio == 'capex') {
+                invcpid = $(".invcpid").eq(index).val();
+                serialno = $(".material_serialno").eq(index).val();
+                make = $(".material_make").eq(index).val();
+                rate = $(".material_cost").eq(index).val();
+                modelno = $(".material_modelno").eq(index).val();
+                machineno = $(".material_machin").eq(index).val();
+                RAM = $(".material_Ram").eq(index).val();
+                HDD = $(".material_Hdd").eq(index).val();
+                OS = $(".material_Os").eq(index).val();
+            }
+            else if (radio == 'customerasset') {
+                invcpid = $(".invcaid").eq(index).val();
+                serialno = $(".material_serialno").eq(index).val();
+                make = $(".material_make").eq(index).val();
+                rate = $(".materialccost").eq(index).val();
+                modelno = $(".material_modelno").eq(index).val();
+                machineno = $(".materialmachine").eq(index).val();
+                RAM = $(".materialRAM").eq(index).val();
+                HDD = $(".materialHDD").eq(index).val();
+                OS = $(".materialOS").eq(index).val();
+
+            }
+            else {
+                invcpid = $(".invrentalid").eq(index).val();
+                serialno = $(".materialserialno").eq(index).val();
+                make = $(".materialmake").eq(index).val();
+                rate = $(".materialcost").eq(index).val();
+                rentalcost = $(".materialrentalcost").eq(index).val();
+                modelno = $(".materialmodelno").eq(index).val();
+                machineno = $(".material_machine").eq(index).val();
+                RAM = $(".material_RAM").eq(index).val();
+                HDD = $(".material_HDD").eq(index).val();
+                OS = $(".material_OS").eq(index).val();
+            }
+
+            var dataobj = {
+                invcpid: invcpid,
+                serialno: serialno,
+                make: make,
+                rate: rate,
+                rentalcost: rentalcost,
+                modelno: modelno,
+                MachineID: machineno,
+                RAM: RAM,
+                HDD: HDD,
+                OS: OS
+            }
+
+            dataarray.push(dataobj);
+        });
+
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("UpdateInwardStatus","Add_InwardMaterial")',
+            data: { "InwardId": invid, "expensenature": radio, "status": status, "pricelist": dataarray },
+            async: 'false',
+            cache: false,
+            success: function (data) {
+                if ((radio == "rental" && status == "Inward Pending") || (radio == "capex" && status == "Inward Pending") || (radio == "customerasset" && status == "Inward Pending")) {
+                    window.location.href = invurl;
+                } else {
+                    window.location.href = url + '?inwardID=' + enid;
+                }
+            }
+        });
+    });
+
+    $("#close").on("click", function () {
+        $('#InwardPriceModal').modal('hide');
+    });
+
+    const inputBoxes = document.querySelectorAll('input.materialcost');
+    debugger;
+    for (let i = 0; i < inputBoxes.length; i++) {
+
+        inputBoxes[i].addEventListener('change', function () {
+            debugger;
+            const index = Array.from(inputBoxes).indexOf(this);
+
+            var qty = $(".materialqty").eq(index).text();
+            var mcost = $(this).val();
+            var total = qty * mcost;
+            var totamount = $(".totalamount").eq(index).val(total);
+            console.log("Changed input index:", index);
+        });
+    }
+
+
+
+    function divupdatestatus(invid, status) {
+        debugger;
+        var checklength = $('input[name="materiallist"]:checked').length;
+        if (checklength == 0) {
+            alert("Please select the material checkbox.");
+            return false;
+        }
+        var note = $("#InwardNote").val();
+        var radio = $('input[name="Inward_ExpenseNature"]:checked').val();
+        if (radio == null) {
+            alert("Please Select Expense Nature.");
+            return false;
+        }
+
+        if (status == "Inward Accepted") {
+            $("#btnReject").attr('disabled', 'disabled');
+            $("#btnAccept").removeAttr('disabled');
+        }
+        else if (status == "Inward Rejected") {
+            $("#btnAccept").attr('disabled', 'disabled');
+            $("#btnReject").removeAttr('disabled');
+        }
+        var val = new Array();
+
+        $('input[name="materiallist"]:checked').each(function () {
+            val.push(this.value);
+
+        });
+
+        var url = '@Url.Action("InwardDetails", "Add_InwardMaterial")';
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("UpdateInwardStatus","Add_InwardMaterial")',
+            data: { "InwardId": invid, "expensenature": radio, "status": status, "materiallist": val, "materialcount": checklength, "inwardnote" : note},
+            async: 'false',
+            cache: false,
+            success: function (data) {
+                if ((radio == "rental" && status == "Inward Pending") || (radio == "capex" && status == "Inward Pending") || (radio == "customerasset" && status == "Inward Pending")) {
+                    window.location.href = invurl;
+                } else {
+                    window.location.href = url + '?inwardID=' + enid;
+                }
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        debugger;
+        var inputs;
+        if (nature == 'capex' || nature =='customerasset') {
+            inputs = document.getElementsByClassName('material_cost');
+        }
+        else {
+            inputs = document.getElementsByClassName('materialcost');
+        }
+        var validateInput = function (event) {
+            // Allow: backspace, delete, tab, escape, enter, dot
+            if ([46, 8, 9, 27, 13, 110, 190].indexOf(event.keyCode) !== -1 ||
+                // Allow: Ctrl/cmd+A
+                (event.keyCode == 65 && (event.ctrlKey === true || event.metaKey === true)) ||
+                // Allow: Ctrl/cmd+C
+                (event.keyCode == 67 && (event.ctrlKey === true || event.metaKey === true)) ||
+                // Allow: Ctrl/cmd+X
+                (event.keyCode == 88 && (event.ctrlKey === true || event.metaKey === true)) ||
+                // Allow: home, end, left, right
+                (event.keyCode >= 35 && event.keyCode <= 39)) {
+                // let it happen, don't do anything
+                return;
+            }
+            // Ensure that it is a number and stop the keypress
+            if ((event.shiftKey || (event.keyCode < 48 || event.keyCode > 57)) && (event.keyCode < 96 || event.keyCode > 105)) {
+                event.preventDefault();
+            }
+        };
+
+        for (var i = 0; i < inputs.length; i++) {
+            inputs[i].addEventListener('keydown', validateInput, false);
+        }
+    });
+
+</script>

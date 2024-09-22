@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
+  <defs>
+    <clipPath id="clip-help">
+      <rect width="20" height="20"/>
+    </clipPath>
+  </defs>
+  <g id="help" clip-path="url(#clip-help)">
+    <rect width="20" height="20" fill="rgba(73,80,86,0)"/>
+    <path id="help-svgrepo-com" d="M10.7,14.978h.009M10.7,12.411c.762-1.631,2.567-1.511,2.567-3.422A2.466,2.466,0,0,0,10.7,6.422,2.416,2.416,0,0,0,8.264,8.133M10.7,18.4A7.7,7.7,0,1,0,3,10.7a7.7,7.7,0,0,0,7.7,7.7Z" transform="translate(-0.7 -0.7)" fill="none" stroke="#534c49" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/>
+  </g>
+</svg>

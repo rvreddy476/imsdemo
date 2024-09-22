@@ -1,0 +1,990 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ServiceVMSModelStoreContainer" CdmEntityContainer="ServiceVMSEntities">
+    <EntitySetMapping Name="Category_Number">
+      <EntityTypeMapping TypeName="ServiceVMSModel.Category_Number">
+        <MappingFragment StoreEntitySet="Category_Number">
+          <ScalarProperty Name="CategoryNameId" ColumnName="CategoryNameId" />
+          <ScalarProperty Name="Category_PO_Number" ColumnName="Category_PO_Number" />
+          <ScalarProperty Name="Category_Agreement_Number" ColumnName="Category_Agreement_Number" />
+          <ScalarProperty Name="Category_letterOfIntent_Number" ColumnName="Category_letterOfIntent_Number" />
+          <ScalarProperty Name="Category_Addendum_Number" ColumnName="Category_Addendum_Number" />
+          <ScalarProperty Name="Vendor_Code_Number" ColumnName="Vendor_Code_Number" />
+          <ScalarProperty Name="Category_NoPO_Number" ColumnName="Category_NoPO_Number" />
+          <ScalarProperty Name="Requisition_Identifier" ColumnName="Requisition_Identifier" />
+          <ScalarProperty Name="year_range" ColumnName="year_range" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CategoryExtraDocuments">
+      <EntityTypeMapping TypeName="ServiceVMSModel.CategoryExtraDocument">
+        <MappingFragment StoreEntitySet="CategoryExtraDocument">
+          <ScalarProperty Name="serviceAdditionalDocx" ColumnName="serviceAdditionalDocx" />
+          <ScalarProperty Name="typeOfFile" ColumnName="typeOfFile" />
+          <ScalarProperty Name="DocFileName" ColumnName="DocFileName" />
+          <ScalarProperty Name="DocFileSize" ColumnName="DocFileSize" />
+          <ScalarProperty Name="serviceCode" ColumnName="serviceCode" />
+          <ScalarProperty Name="Cat_extra_status" ColumnName="Cat_extra_status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CounterSignedPOReports">
+      <EntityTypeMapping TypeName="ServiceVMSModel.CounterSignedPOReport">
+        <MappingFragment StoreEntitySet="CounterSignedPOReport">
+          <ScalarProperty Name="counterSignedId" ColumnName="counterSignedId" />
+          <ScalarProperty Name="poReportId" ColumnName="poReportId" />
+          <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeliveryChallens">
+      <EntityTypeMapping TypeName="ServiceVMSModel.DeliveryChallen">
+        <MappingFragment StoreEntitySet="DeliveryChallen">
+          <ScalarProperty Name="DC_ID" ColumnName="DC_ID" />
+          <ScalarProperty Name="DC_Number" ColumnName="DC_Number" />
+          <ScalarProperty Name="DC_Filename" ColumnName="DC_Filename" />
+          <ScalarProperty Name="DC_Filesize" ColumnName="DC_Filesize" />
+          <ScalarProperty Name="InwardID" ColumnName="InwardID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ExceptionLoggers">
+      <EntityTypeMapping TypeName="ServiceVMSModel.ExceptionLogger">
+        <MappingFragment StoreEntitySet="ExceptionLogger">
+          <ScalarProperty Name="exceptionId" ColumnName="exceptionId" />
+          <ScalarProperty Name="exceptionMessage" ColumnName="exceptionMessage" />
+          <ScalarProperty Name="controllerName" ColumnName="controllerName" />
+          <ScalarProperty Name="actionName" ColumnName="actionName" />
+          <ScalarProperty Name="exceptionStackTrace" ColumnName="exceptionStackTrace" />
+          <ScalarProperty Name="exceptionLogTime" ColumnName="exceptionLogTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GatepassApprovers">
+      <EntityTypeMapping TypeName="ServiceVMSModel.GatepassApprover">
+        <MappingFragment StoreEntitySet="GatepassApprovers">
+          <ScalarProperty Name="GatepassApprover_Id" ColumnName="GatepassApprover_Id" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="userDepartmentId" ColumnName="userDepartmentId" />
+          <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+          <ScalarProperty Name="userEmail" ColumnName="userEmail" />
+          <ScalarProperty Name="RoleInIMS" ColumnName="RoleInIMS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GatePasses">
+      <EntityTypeMapping TypeName="ServiceVMSModel.GatePass">
+        <MappingFragment StoreEntitySet="GatePasses">
+          <ScalarProperty Name="Gatepass_DispatchBy" ColumnName="Gatepass_DispatchBy" />
+          <ScalarProperty Name="Approved_By" ColumnName="Approved_By" />
+          <ScalarProperty Name="Gatepass_SecurityGuardFileSize" ColumnName="Gatepass_SecurityGuardFileSize" />
+          <ScalarProperty Name="Gatepass_SecurityGuardFileName" ColumnName="Gatepass_SecurityGuardFileName" />
+          <ScalarProperty Name="Gatepass_InvInchargeFileSize" ColumnName="Gatepass_InvInchargeFileSize" />
+          <ScalarProperty Name="Gatepass_InvInchargeFileName" ColumnName="Gatepass_InvInchargeFileName" />
+          <ScalarProperty Name="GatepassFileSize" ColumnName="GatepassFileSize" />
+          <ScalarProperty Name="GatepassFileName" ColumnName="GatepassFileName" />
+          <ScalarProperty Name="Rejected_By" ColumnName="Rejected_By" />
+          <ScalarProperty Name="GatepassRejectReason" ColumnName="GatepassRejectReason" />
+          <ScalarProperty Name="GatepassID" ColumnName="GatepassID" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="userDepartmentId" ColumnName="userDepartmentId" />
+          <ScalarProperty Name="GatepassType" ColumnName="GatepassType" />
+          <ScalarProperty Name="STP_Bonded_Item" ColumnName="STP_Bonded_Item" />
+          <ScalarProperty Name="SenderID" ColumnName="SenderID" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="Gatepass_Number" ColumnName="Gatepass_Number" />
+          <ScalarProperty Name="ReceiverID" ColumnName="ReceiverID" />
+          <ScalarProperty Name="ReceiverName" ColumnName="ReceiverName" />
+          <ScalarProperty Name="ReceiverAddress" ColumnName="ReceiverAddress" />
+          <ScalarProperty Name="ReceiverContact" ColumnName="ReceiverContact" />
+          <ScalarProperty Name="ReceiverEmail" ColumnName="ReceiverEmail" />
+          <ScalarProperty Name="Gatepass_DateTime" ColumnName="Gatepass_DateTime" />
+          <ScalarProperty Name="Expected_DateofReturn" ColumnName="Expected_DateofReturn" />
+          <ScalarProperty Name="TO_Office" ColumnName="TO_Office" />
+          <ScalarProperty Name="From_Office" ColumnName="From_Office" />
+          <ScalarProperty Name="GatePass_Category" ColumnName="GatePass_Category" />
+          <ScalarProperty Name="GatePass_Status" ColumnName="GatePass_Status" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+          <ScalarProperty Name="SEZ_Bonded_Item" ColumnName="SEZ_Bonded_Item" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HistoryServiceMaintenances">
+      <EntityTypeMapping TypeName="ServiceVMSModel.HistoryServiceMaintenance">
+        <MappingFragment StoreEntitySet="HistoryServiceMaintenance">
+          <ScalarProperty Name="historyServiceId" ColumnName="historyServiceId" />
+          <ScalarProperty Name="serviceCode" ColumnName="serviceCode" />
+          <ScalarProperty Name="historyService_Code" ColumnName="historyService_Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HTV_Documents">
+      <EntityTypeMapping TypeName="ServiceVMSModel.HTV_Documents">
+        <MappingFragment StoreEntitySet="HTV_Documents">
+          <ScalarProperty Name="documentId" ColumnName="documentId" />
+          <ScalarProperty Name="typeOfDocument" ColumnName="typeOfDocument" />
+          <ScalarProperty Name="documentDate" ColumnName="documentDate" />
+          <ScalarProperty Name="documentIdentifier" ColumnName="documentIdentifier" />
+          <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+          <ScalarProperty Name="document_filename" ColumnName="document_filename" />
+          <ScalarProperty Name="fileSize" ColumnName="fileSize" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HTV_ForgotPasswordData">
+      <EntityTypeMapping TypeName="ServiceVMSModel.HTV_ForgotPasswordData">
+        <MappingFragment StoreEntitySet="HTV_ForgotPasswordData">
+          <ScalarProperty Name="ForgotPasswordId" ColumnName="ForgotPasswordId" />
+          <ScalarProperty Name="ForgotPasswordTimeStamp" ColumnName="ForgotPasswordTimeStamp" />
+          <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+          <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HTV_Invoice">
+      <EntityTypeMapping TypeName="ServiceVMSModel.HTV_Invoice">
+        <MappingFragment StoreEntitySet="HTV_Invoice">
+          <ScalarProperty Name="invoiceId" ColumnName="invoiceId" />
+          <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+          <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+          <ScalarProperty Name="sprintId" ColumnName="sprintId" />
+          <ScalarProperty Name="serviceCode" ColumnName="serviceCode" />
+          <ScalarProperty Name="invoiceStatus" ColumnName="invoiceStatus" />
+          <ScalarProperty Name="billingDate" ColumnName="billingDate" />
+          <ScalarProperty Name="invoiceReason" ColumnName="invoiceReason" />
+          <ScalarProperty Name="invoiceAmount" ColumnName="invoiceAmount" />
+          <ScalarProperty Name="invoiceUploadDate" ColumnName="invoiceUploadDate" />
+          <ScalarProperty Name="uploadedBy" ColumnName="uploadedBy" />
+          <ScalarProperty Name="invoiceNumber" ColumnName="invoiceNumber" />
+          <ScalarProperty Name="approvedDate" ColumnName="approvedDate" />
+          <ScalarProperty Name="paymentDueDate" ColumnName="paymentDueDate" />
+          <ScalarProperty Name="invoiceProcessingDate" ColumnName="invoiceProcessingDate" />
+          <ScalarProperty Name="paymentProcessingDate" ColumnName="paymentProcessingDate" />
+          <ScalarProperty Name="invoiceFileName" ColumnName="invoiceFileName" />
+          <ScalarProperty Name="invoiceFileSize" ColumnName="invoiceFileSize" />
+          <ScalarProperty Name="invoiceRejectReason" ColumnName="invoiceRejectReason" />
+          <ScalarProperty Name="invoiceProcessedBy" ColumnName="invoiceProcessedBy" />
+          <ScalarProperty Name="isPriorPayment" ColumnName="isPriorPayment" />
+          <ScalarProperty Name="approvalRemark" ColumnName="approvalRemark" />
+          <ScalarProperty Name="location" ColumnName="location" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="ExpanseNature" ColumnName="ExpanseNature" />
+          <ScalarProperty Name="Nature_of_Business" ColumnName="Nature_of_Business" />
+          <ScalarProperty Name="PaymentProcessedBy" ColumnName="PaymentProcessedBy" />
+          <ScalarProperty Name="gstAmount" ColumnName="gstAmount" />
+          <ScalarProperty Name="mail_count" ColumnName="mail_count" />
+          <ScalarProperty Name="second_level_approved_date" ColumnName="second_level_approved_date" />
+          <ScalarProperty Name="First_level_approved_date" ColumnName="First_level_approved_date" />
+          <ScalarProperty Name="CGST_amount" ColumnName="CGST_amount" />
+          <ScalarProperty Name="SGST_amount" ColumnName="SGST_amount" />
+          <ScalarProperty Name="total_Invoice_amount" ColumnName="total_Invoice_amount" />
+          <ScalarProperty Name="IGST_amount" ColumnName="IGST_amount" />
+          <ScalarProperty Name="invoiceDeleteReason" ColumnName="invoiceDeleteReason" />
+          <ScalarProperty Name="deletedby" ColumnName="deletedby" />
+          <ScalarProperty Name="deletedDate" ColumnName="deletedDate" />
+          <ScalarProperty Name="GRN_Number" ColumnName="GRN_Number" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HTV_Login">
+      <EntityTypeMapping TypeName="ServiceVMSModel.HTV_Login">
+        <MappingFragment StoreEntitySet="HTV_Login">
+          <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+          <ScalarProperty Name="userEmail" ColumnName="userEmail" />
+          <ScalarProperty Name="countAttempt" ColumnName="countAttempt" />
+          <ScalarProperty Name="loginDatetime" ColumnName="loginDatetime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HTV_Service">
+      <EntityTypeMapping TypeName="ServiceVMSModel.HTV_Service">
+        <MappingFragment StoreEntitySet="HTV_Service">
+          <ScalarProperty Name="serviceCode" ColumnName="serviceCode" />
+          <ScalarProperty Name="details" ColumnName="details" />
+          <ScalarProperty Name="startDate" ColumnName="startDate" />
+          <ScalarProperty Name="endDate" ColumnName="endDate" />
+          <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+          <ScalarProperty Name="serviceStatus" ColumnName="serviceStatus" />
+          <ScalarProperty Name="serviceCategoryId" ColumnName="serviceCategoryId" />
+          <ScalarProperty Name="serviceTypeId" ColumnName="serviceTypeId" />
+          <ScalarProperty Name="serviceValue" ColumnName="serviceValue" />
+          <ScalarProperty Name="billingUnit" ColumnName="billingUnit" />
+          <ScalarProperty Name="poNumber" ColumnName="poNumber" />
+          <ScalarProperty Name="userDepartmentId" ColumnName="userDepartmentId" />
+          <ScalarProperty Name="subTypeOfService" ColumnName="subTypeOfService" />
+          <ScalarProperty Name="budgetValue" ColumnName="budgetValue" />
+          <ScalarProperty Name="document_type" ColumnName="document_type" />
+          <ScalarProperty Name="service_status" ColumnName="service_status" />
+          <ScalarProperty Name="service_delete_reason" ColumnName="service_delete_reason" />
+          <ScalarProperty Name="budgetRemarks" ColumnName="budgetRemarks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HTV_Sprint">
+      <EntityTypeMapping TypeName="ServiceVMSModel.HTV_Sprint">
+        <MappingFragment StoreEntitySet="HTV_Sprint">
+          <ScalarProperty Name="sprintId" ColumnName="sprintId" />
+          <ScalarProperty Name="sprintName" ColumnName="sprintName" />
+          <ScalarProperty Name="poReportId" ColumnName="poReportId" />
+          <ScalarProperty Name="sprintValue" ColumnName="sprintValue" />
+          <ScalarProperty Name="sprintEndDate" ColumnName="sprintEndDate" />
+          <ScalarProperty Name="sprintCreateDate" ColumnName="sprintCreateDate" />
+          <ScalarProperty Name="serviceCode" ColumnName="serviceCode" />
+          <ScalarProperty Name="sprint_status" ColumnName="sprint_status" />
+          <ScalarProperty Name="sprint_delete_reason" ColumnName="sprint_delete_reason" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HTV_Tokens">
+      <EntityTypeMapping TypeName="ServiceVMSModel.HTV_Tokens">
+        <MappingFragment StoreEntitySet="HTV_Tokens">
+          <ScalarProperty Name="token_Id" ColumnName="token_Id" />
+          <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+          <ScalarProperty Name="token" ColumnName="token" />
+          <ScalarProperty Name="creation_time" ColumnName="creation_time" />
+          <ScalarProperty Name="expire_time" ColumnName="expire_time" />
+          <ScalarProperty Name="redirect_path" ColumnName="redirect_path" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="invoiceId" ColumnName="invoiceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HTV_Vendor">
+      <EntityTypeMapping TypeName="ServiceVMSModel.HTV_Vendor">
+        <MappingFragment StoreEntitySet="HTV_Vendor">
+          <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+          <ScalarProperty Name="vendorName" ColumnName="vendorName" />
+          <ScalarProperty Name="vendorAddress" ColumnName="vendorAddress" />
+          <ScalarProperty Name="vendorEmail" ColumnName="vendorEmail" />
+          <ScalarProperty Name="vendorPassword" ColumnName="vendorPassword" />
+          <ScalarProperty Name="poc" ColumnName="poc" />
+          <ScalarProperty Name="reason" ColumnName="reason" />
+          <ScalarProperty Name="vendorCreditPeriod" ColumnName="vendorCreditPeriod" />
+          <ScalarProperty Name="vendorStatus" ColumnName="vendorStatus" />
+          <ScalarProperty Name="legalStatus" ColumnName="legalStatus" />
+          <ScalarProperty Name="businessNature" ColumnName="businessNature" />
+          <ScalarProperty Name="establishmentRegNo" ColumnName="establishmentRegNo" />
+          <ScalarProperty Name="establishmentRegNoCategory" ColumnName="establishmentRegNoCategory" />
+          <ScalarProperty Name="phoneNo" ColumnName="phoneNo" />
+          <ScalarProperty Name="mobileNo" ColumnName="mobileNo" />
+          <ScalarProperty Name="beneficiaryName" ColumnName="beneficiaryName" />
+          <ScalarProperty Name="bankName" ColumnName="bankName" />
+          <ScalarProperty Name="branchAddress" ColumnName="branchAddress" />
+          <ScalarProperty Name="accountNo" ColumnName="accountNo" />
+          <ScalarProperty Name="IFSCCode" ColumnName="IFSCCode" />
+          <ScalarProperty Name="PANNo" ColumnName="PANNo" />
+          <ScalarProperty Name="TANNo" ColumnName="TANNo" />
+          <ScalarProperty Name="ESICNo" ColumnName="ESICNo" />
+          <ScalarProperty Name="CSTNo" ColumnName="CSTNo" />
+          <ScalarProperty Name="PFNo" ColumnName="PFNo" />
+          <ScalarProperty Name="ProfessionalTaxNo" ColumnName="ProfessionalTaxNo" />
+          <ScalarProperty Name="GSTNo" ColumnName="GSTNo" />
+          <ScalarProperty Name="vendorCode" ColumnName="vendorCode" />
+          <ScalarProperty Name="registrationResult" ColumnName="registrationResult" />
+          <ScalarProperty Name="MsmeVendorRegistrationNo" ColumnName="MsmeVendorRegistrationNo" />
+          <ScalarProperty Name="MSME_vendor_category" ColumnName="MSME_vendor_category" />
+          <ScalarProperty Name="vendorRegistrationDate" ColumnName="vendorRegistrationDate" />
+          <ScalarProperty Name="vendor_Reject_Reason" ColumnName="vendor_Reject_Reason" />
+          <ScalarProperty Name="IsVendorLogin" ColumnName="IsVendorLogin" />
+          <ScalarProperty Name="IsTAVendor" ColumnName="IsTAVendor" />
+          <ScalarProperty Name="vendor_Active_Reason" ColumnName="vendor_Active_Reason" />
+          <ScalarProperty Name="userDepartmentId" ColumnName="userDepartmentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HTV_VendorService">
+      <EntityTypeMapping TypeName="ServiceVMSModel.HTV_VendorService">
+        <MappingFragment StoreEntitySet="HTV_VendorService">
+          <ScalarProperty Name="vendorServiceId" ColumnName="vendorServiceId" />
+          <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+          <ScalarProperty Name="vendorServiceTypeId" ColumnName="vendorServiceTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IMSExceptionLoggers">
+      <EntityTypeMapping TypeName="ServiceVMSModel.IMSExceptionLogger">
+        <MappingFragment StoreEntitySet="IMSExceptionLogger">
+          <ScalarProperty Name="exceptionId" ColumnName="exceptionId" />
+          <ScalarProperty Name="exceptionMessage" ColumnName="exceptionMessage" />
+          <ScalarProperty Name="controllerName" ColumnName="controllerName" />
+          <ScalarProperty Name="actionName" ColumnName="actionName" />
+          <ScalarProperty Name="exceptionStackTrace" ColumnName="exceptionStackTrace" />
+          <ScalarProperty Name="exceptionLogTime" ColumnName="exceptionLogTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IMSRoles">
+      <EntityTypeMapping TypeName="ServiceVMSModel.IMSRole">
+        <MappingFragment StoreEntitySet="IMSRole">
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="IMSRole_Id" ColumnName="IMSRole_Id" />
+          <ScalarProperty Name="IMSuser_Id" ColumnName="IMSuser_Id" />
+          <ScalarProperty Name="userDepartmentId" ColumnName="userDepartmentId" />
+          <ScalarProperty Name="RoleInIMS" ColumnName="RoleInIMS" />
+          <ScalarProperty Name="userLocation" ColumnName="userLocation" />
+          <ScalarProperty Name="Role_Status" ColumnName="Role_Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IMSUsers">
+      <EntityTypeMapping TypeName="ServiceVMSModel.IMSUser">
+        <MappingFragment StoreEntitySet="IMSUsers">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="userEmail" ColumnName="userEmail" />
+          <ScalarProperty Name="userPassword" ColumnName="userPassword" />
+          <ScalarProperty Name="userphone" ColumnName="userphone" />
+          <ScalarProperty Name="userStatus" ColumnName="userStatus" />
+          <ScalarProperty Name="archiveduserReason" ColumnName="archiveduserReason" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Inventory_Register">
+      <EntityTypeMapping TypeName="ServiceVMSModel.Inventory_Register">
+        <MappingFragment StoreEntitySet="Inventory_Register">
+          <ScalarProperty Name="userDepartmentId" ColumnName="userDepartmentId" />
+          <ScalarProperty Name="OS" ColumnName="OS" />
+          <ScalarProperty Name="HDD" ColumnName="HDD" />
+          <ScalarProperty Name="RAM" ColumnName="RAM" />
+          <ScalarProperty Name="MachineID" ColumnName="MachineID" />
+          <ScalarProperty Name="AssetGenerateDate" ColumnName="AssetGenerateDate" />
+          <ScalarProperty Name="IR_Status" ColumnName="IR_Status" />
+          <ScalarProperty Name="InventoryReg_ID" ColumnName="InventoryReg_ID" />
+          <ScalarProperty Name="AssetID" ColumnName="AssetID" />
+          <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+          <ScalarProperty Name="MaterialName" ColumnName="MaterialName" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Purchase_Rate" ColumnName="Purchase_Rate" />
+          <ScalarProperty Name="Asset_Cost" ColumnName="Asset_Cost" />
+          <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+          <ScalarProperty Name="Make" ColumnName="Make" />
+          <ScalarProperty Name="Serial_No" ColumnName="Serial_No" />
+          <ScalarProperty Name="GRN_Number" ColumnName="GRN_Number" />
+          <ScalarProperty Name="Invoice_Number" ColumnName="Invoice_Number" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Alloted_To" ColumnName="Alloted_To" />
+          <ScalarProperty Name="Allot_date" ColumnName="Allot_date" />
+          <ScalarProperty Name="InwardID" ColumnName="InwardID" />
+          <ScalarProperty Name="Inward_CP_Rental_ID" ColumnName="Inward_CP_Rental_ID" />
+          <ScalarProperty Name="ExpenseNature" ColumnName="ExpenseNature" />
+          <ScalarProperty Name="Model_Number" ColumnName="Model_Number" />
+          <ScalarProperty Name="Material_CategoryID" ColumnName="Material_CategoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InvoiceExtraDocuments">
+      <EntityTypeMapping TypeName="ServiceVMSModel.InvoiceExtraDocument">
+        <MappingFragment StoreEntitySet="InvoiceExtraDocument">
+          <ScalarProperty Name="invoiceAdditionalId" ColumnName="invoiceAdditionalId" />
+          <ScalarProperty Name="invoiceFileName" ColumnName="invoiceFileName" />
+          <ScalarProperty Name="invoiceFileSize" ColumnName="invoiceFileSize" />
+          <ScalarProperty Name="invoiceTypeOfDoc" ColumnName="invoiceTypeOfDoc" />
+          <ScalarProperty Name="invoiceId" ColumnName="invoiceId" />
+          <ScalarProperty Name="invoice_extra_doc_status" ColumnName="invoice_extra_doc_status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InwardApprovers">
+      <EntityTypeMapping TypeName="ServiceVMSModel.InwardApprover">
+        <MappingFragment StoreEntitySet="InwardApprovers">
+          <ScalarProperty Name="InwardApprover_Id" ColumnName="InwardApprover_Id" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="userDepartmentId" ColumnName="userDepartmentId" />
+          <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+          <ScalarProperty Name="userEmail" ColumnName="userEmail" />
+          <ScalarProperty Name="RoleInIMS" ColumnName="RoleInIMS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InwardMaterials">
+      <EntityTypeMapping TypeName="ServiceVMSModel.InwardMaterial">
+        <MappingFragment StoreEntitySet="InwardMaterial">
+          <ScalarProperty Name="TempVendorID" ColumnName="TempVendorID" />
+          <ScalarProperty Name="InwardID" ColumnName="InwardID" />
+          <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+          <ScalarProperty Name="GRN_Number" ColumnName="GRN_Number" />
+          <ScalarProperty Name="InwardDateTime" ColumnName="InwardDateTime" />
+          <ScalarProperty Name="InwardNote" ColumnName="InwardNote" />
+          <ScalarProperty Name="Inward_ExpenseNature" ColumnName="Inward_ExpenseNature" />
+          <ScalarProperty Name="userDepartmentId" ColumnName="userDepartmentId" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="InwardEnteredBy" ColumnName="InwardEnteredBy" />
+          <ScalarProperty Name="BillofEntry" ColumnName="BillofEntry" />
+          <ScalarProperty Name="Inward_Status" ColumnName="Inward_Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InwardMaterial_CAPEX">
+      <EntityTypeMapping TypeName="ServiceVMSModel.InwardMaterial_CAPEX">
+        <MappingFragment StoreEntitySet="InwardMaterial_CAPEX">
+          <ScalarProperty Name="Accepted_Date" ColumnName="Accepted_Date" />
+          <ScalarProperty Name="InvMaterialCP_ID" ColumnName="InvMaterialCP_ID" />
+          <ScalarProperty Name="InwardID" ColumnName="InwardID" />
+          <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+          <ScalarProperty Name="MaterialName" ColumnName="MaterialName" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Inward_Type" ColumnName="Inward_Type" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Acceptedby" ColumnName="Acceptedby" />
+          <ScalarProperty Name="Material_Price" ColumnName="Material_Price" />
+          <ScalarProperty Name="Material_Totalprice" ColumnName="Material_Totalprice" />
+          <ScalarProperty Name="Material_Remark" ColumnName="Material_Remark" />
+          <ScalarProperty Name="Material_CategoryID" ColumnName="Material_CategoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InwardMaterial_OPEX">
+      <EntityTypeMapping TypeName="ServiceVMSModel.InwardMaterial_OPEX">
+        <MappingFragment StoreEntitySet="InwardMaterial_OPEX">
+          <ScalarProperty Name="Accepted_Date" ColumnName="Accepted_Date" />
+          <ScalarProperty Name="InvMaterialOP_ID" ColumnName="InvMaterialOP_ID" />
+          <ScalarProperty Name="InwardID" ColumnName="InwardID" />
+          <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+          <ScalarProperty Name="Material_Name" ColumnName="Material_Name" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Inward_Type" ColumnName="Inward_Type" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Acceptedby" ColumnName="Acceptedby" />
+          <ScalarProperty Name="Material_Remark" ColumnName="Material_Remark" />
+          <ScalarProperty Name="Material_CategoryID" ColumnName="Material_CategoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InwardMaterial_Rental">
+      <EntityTypeMapping TypeName="ServiceVMSModel.InwardMaterial_Rental">
+        <MappingFragment StoreEntitySet="InwardMaterial_Rental">
+          <ScalarProperty Name="Accepted_Date" ColumnName="Accepted_Date" />
+          <ScalarProperty Name="InvMaterialrental_ID" ColumnName="InvMaterialrental_ID" />
+          <ScalarProperty Name="InwardID" ColumnName="InwardID" />
+          <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+          <ScalarProperty Name="MaterialName" ColumnName="MaterialName" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Inward_Type" ColumnName="Inward_Type" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Acceptedby" ColumnName="Acceptedby" />
+          <ScalarProperty Name="Material_Price" ColumnName="Material_Price" />
+          <ScalarProperty Name="Material_Totalprice" ColumnName="Material_Totalprice" />
+          <ScalarProperty Name="Material_Remark" ColumnName="Material_Remark" />
+          <ScalarProperty Name="Material_CategoryID" ColumnName="Material_CategoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InwardMaterial_Temp">
+      <EntityTypeMapping TypeName="ServiceVMSModel.InwardMaterial_Temp">
+        <MappingFragment StoreEntitySet="InwardMaterial_Temp">
+          <ScalarProperty Name="InvMaterialTemp_ID" ColumnName="InvMaterialTemp_ID" />
+          <ScalarProperty Name="InwardID" ColumnName="InwardID" />
+          <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+          <ScalarProperty Name="MaterialName" ColumnName="MaterialName" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Inward_Type" ColumnName="Inward_Type" />
+          <ScalarProperty Name="Material_Remark" ColumnName="Material_Remark" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Material_CategoryID" ColumnName="Material_CategoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Material_Category">
+      <EntityTypeMapping TypeName="ServiceVMSModel.Material_Category">
+        <MappingFragment StoreEntitySet="Material_Category">
+          <ScalarProperty Name="Material_CategoryID" ColumnName="Material_CategoryID" />
+          <ScalarProperty Name="Material_CategoryName" ColumnName="Material_CategoryName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Materials">
+      <EntityTypeMapping TypeName="ServiceVMSModel.Material">
+        <MappingFragment StoreEntitySet="Materials">
+          <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+          <ScalarProperty Name="MaterialName" ColumnName="MaterialName" />
+          <ScalarProperty Name="MaterialDescription" ColumnName="MaterialDescription" />
+          <ScalarProperty Name="Material_Status" ColumnName="Material_Status" />
+          <ScalarProperty Name="MaterialPrefix" ColumnName="MaterialPrefix" />
+          <ScalarProperty Name="Material_CategoryID" ColumnName="Material_CategoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OfficeAddresses">
+      <EntityTypeMapping TypeName="ServiceVMSModel.OfficeAddress">
+        <MappingFragment StoreEntitySet="OfficeAddress">
+          <ScalarProperty Name="addressId" ColumnName="addressId" />
+          <ScalarProperty Name="locationName" ColumnName="locationName" />
+          <ScalarProperty Name="locationAddress" ColumnName="locationAddress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OutMaterials">
+      <EntityTypeMapping TypeName="ServiceVMSModel.OutMaterial">
+        <MappingFragment StoreEntitySet="OutMaterials">
+          <ScalarProperty Name="MaterialDispatchDate" ColumnName="MaterialDispatchDate" />
+          <ScalarProperty Name="OutMat_ID" ColumnName="OutMat_ID" />
+          <ScalarProperty Name="GatepassID" ColumnName="GatepassID" />
+          <ScalarProperty Name="Material_CategoryID" ColumnName="Material_CategoryID" />
+          <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+          <ScalarProperty Name="MaterialName" ColumnName="MaterialName" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Serial_Number" ColumnName="Serial_Number" />
+          <ScalarProperty Name="Out_Status" ColumnName="Out_Status" />
+          <ScalarProperty Name="Material_InDate" ColumnName="Material_InDate" />
+          <ScalarProperty Name="Model_Number" ColumnName="Model_Number" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="InwardID" ColumnName="InwardID" />
+          <ScalarProperty Name="InventoryReg_ID" ColumnName="InventoryReg_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OutwardMaterials">
+      <EntityTypeMapping TypeName="ServiceVMSModel.OutwardMaterial">
+        <MappingFragment StoreEntitySet="OutwardMaterial">
+          <ScalarProperty Name="OutwardNo" ColumnName="OutwardNo" />
+          <ScalarProperty Name="OW_MaterialID" ColumnName="OW_MaterialID" />
+          <ScalarProperty Name="GatepassID" ColumnName="GatepassID" />
+          <ScalarProperty Name="OutwardNote" ColumnName="OutwardNote" />
+          <ScalarProperty Name="OutwardDatetime" ColumnName="OutwardDatetime" />
+          <ScalarProperty Name="Outward_Status" ColumnName="Outward_Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentTerms">
+      <EntityTypeMapping TypeName="ServiceVMSModel.PaymentTerm">
+        <MappingFragment StoreEntitySet="PaymentTerms">
+          <ScalarProperty Name="PaymentTermsId" ColumnName="PaymentTermsId" />
+          <ScalarProperty Name="PaymentTerms" ColumnName="PaymentTerms" />
+          <ScalarProperty Name="CreditPeriod" ColumnName="CreditPeriod" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="POReports">
+      <EntityTypeMapping TypeName="ServiceVMSModel.POReport">
+        <MappingFragment StoreEntitySet="POReport">
+          <ScalarProperty Name="poReportId" ColumnName="poReportId" />
+          <ScalarProperty Name="poReportName" ColumnName="poReportName" />
+          <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+          <ScalarProperty Name="poReportReason" ColumnName="poReportReason" />
+          <ScalarProperty Name="poReportStatus" ColumnName="poReportStatus" />
+          <ScalarProperty Name="poReportValue" ColumnName="poReportValue" />
+          <ScalarProperty Name="poReportDate" ColumnName="poReportDate" />
+          <ScalarProperty Name="serviceCode" ColumnName="serviceCode" />
+          <ScalarProperty Name="poFileName" ColumnName="poFileName" />
+          <ScalarProperty Name="poFileSize" ColumnName="poFileSize" />
+          <ScalarProperty Name="HSPLpercent" ColumnName="HSPLpercent" />
+          <ScalarProperty Name="HILpercent" ColumnName="HILpercent" />
+          <ScalarProperty Name="HTVpercent" ColumnName="HTVpercent" />
+          <ScalarProperty Name="HKPpercent" ColumnName="HKPpercent" />
+          <ScalarProperty Name="hsplBillingAddressId" ColumnName="hsplBillingAddressId" />
+          <ScalarProperty Name="hsplShippingAddressId" ColumnName="hsplShippingAddressId" />
+          <ScalarProperty Name="hilplBillingAddressId" ColumnName="hilplBillingAddressId" />
+          <ScalarProperty Name="hilplShippingAddressId" ColumnName="hilplShippingAddressId" />
+          <ScalarProperty Name="htvBillingAddressId" ColumnName="htvBillingAddressId" />
+          <ScalarProperty Name="htvShippingAddressId" ColumnName="htvShippingAddressId" />
+          <ScalarProperty Name="hkpplBillingAddressId" ColumnName="hkpplBillingAddressId" />
+          <ScalarProperty Name="hkpplShippingAddressId" ColumnName="hkpplShippingAddressId" />
+          <ScalarProperty Name="poCreditPeriod" ColumnName="poCreditPeriod" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="PaymentTermsId" ColumnName="PaymentTermsId" />
+          <ScalarProperty Name="po_delete_reason" ColumnName="po_delete_reason" />
+          <ScalarProperty Name="PoDate" ColumnName="PoDate" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="AdditionalClause" ColumnName="AdditionalClause" />
+          <ScalarProperty Name="QuotationNumber" ColumnName="QuotationNumber" />
+          <ScalarProperty Name="QuotationDate" ColumnName="QuotationDate" />
+          <ScalarProperty Name="ContractFromDate" ColumnName="ContractFromDate" />
+          <ScalarProperty Name="ContractToDate" ColumnName="ContractToDate" />
+          <ScalarProperty Name="deliverybox" ColumnName="deliverybox" />
+          <ScalarProperty Name="Tax_Details" ColumnName="Tax_Details" />
+          <ScalarProperty Name="po_TLAFileName" ColumnName="po_TLAFileName" />
+          <ScalarProperty Name="po_TLAFileSize" ColumnName="po_TLAFileSize" />
+          <ScalarProperty Name="po_FHFileName" ColumnName="po_FHFileName" />
+          <ScalarProperty Name="po_FHFileSize" ColumnName="po_FHFileSize" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RejectedInvMaterials">
+      <EntityTypeMapping TypeName="ServiceVMSModel.RejectedInvMaterial">
+        <MappingFragment StoreEntitySet="RejectedInvMaterial">
+          <ScalarProperty Name="RejectedInv_ID" ColumnName="RejectedInv_ID" />
+          <ScalarProperty Name="InvMaterialOP_ID" ColumnName="InvMaterialOP_ID" />
+          <ScalarProperty Name="InvMaterialCP_ID" ColumnName="InvMaterialCP_ID" />
+          <ScalarProperty Name="RejectedInvDateTime" ColumnName="RejectedInvDateTime" />
+          <ScalarProperty Name="RejectedReason" ColumnName="RejectedReason" />
+          <ScalarProperty Name="RejectedBy" ColumnName="RejectedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Req_Service">
+      <EntityTypeMapping TypeName="ServiceVMSModel.Req_Service">
+        <MappingFragment StoreEntitySet="Req_Service">
+          <ScalarProperty Name="Req_ServiceID" ColumnName="Req_ServiceID" />
+          <ScalarProperty Name="requisitionCode" ColumnName="requisitionCode" />
+          <ScalarProperty Name="serviceCode" ColumnName="serviceCode" />
+          <ScalarProperty Name="req_service_relationstatus" ColumnName="req_service_relationstatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Requisitions">
+      <EntityTypeMapping TypeName="ServiceVMSModel.Requisition">
+        <MappingFragment StoreEntitySet="Requisition">
+          <ScalarProperty Name="requisitionCode" ColumnName="requisitionCode" />
+          <ScalarProperty Name="requisitionIdentifier" ColumnName="requisitionIdentifier" />
+          <ScalarProperty Name="dateOfRequisition" ColumnName="dateOfRequisition" />
+          <ScalarProperty Name="raisedBy" ColumnName="raisedBy" />
+          <ScalarProperty Name="req_Department" ColumnName="req_Department" />
+          <ScalarProperty Name="req_CompanyName" ColumnName="req_CompanyName" />
+          <ScalarProperty Name="req_DeliveryLocation" ColumnName="req_DeliveryLocation" />
+          <ScalarProperty Name="req_ContactDetails" ColumnName="req_ContactDetails" />
+          <ScalarProperty Name="budgeted_Comments" ColumnName="budgeted_Comments" />
+          <ScalarProperty Name="req_status" ColumnName="req_status" />
+          <ScalarProperty Name="preparedBy" ColumnName="preparedBy" />
+          <ScalarProperty Name="checkedBy" ColumnName="checkedBy" />
+          <ScalarProperty Name="approvedBy" ColumnName="approvedBy" />
+          <ScalarProperty Name="productDetails" ColumnName="productDetails" />
+          <ScalarProperty Name="Rec_vendor_name" ColumnName="Rec_vendor_name" />
+          <ScalarProperty Name="Rec_vendor_address" ColumnName="Rec_vendor_address" />
+          <ScalarProperty Name="Rec_vendor_contact_detail" ColumnName="Rec_vendor_contact_detail" />
+          <ScalarProperty Name="Rec_vendor_contact_person" ColumnName="Rec_vendor_contact_person" />
+          <ScalarProperty Name="Req_Reject_Reason" ColumnName="Req_Reject_Reason" />
+          <ScalarProperty Name="ComparisonSheet" ColumnName="ComparisonSheet" />
+          <ScalarProperty Name="ComparisonSheet_size" ColumnName="ComparisonSheet_size" />
+          <ScalarProperty Name="Approved_by_date" ColumnName="Approved_by_date" />
+          <ScalarProperty Name="Evalution_note" ColumnName="Evalution_note" />
+          <ScalarProperty Name="Payment_term" ColumnName="Payment_term" />
+          <ScalarProperty Name="negotiatedValue" ColumnName="negotiatedValue" />
+          <ScalarProperty Name="vendorProposedValue" ColumnName="vendorProposedValue" />
+          <ScalarProperty Name="requisition_delete_reason" ColumnName="requisition_delete_reason" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RequisitionApprovers">
+      <EntityTypeMapping TypeName="ServiceVMSModel.RequisitionApprover">
+        <MappingFragment StoreEntitySet="RequisitionApprovers">
+          <ScalarProperty Name="IT_approvers" ColumnName="IT_approvers" />
+          <ScalarProperty Name="Non_IT_approvers" ColumnName="Non_IT_approvers" />
+          <ScalarProperty Name="ReqApproverNumber" ColumnName="ReqApproverNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RequisitionExtraDocs">
+      <EntityTypeMapping TypeName="ServiceVMSModel.RequisitionExtraDoc">
+        <MappingFragment StoreEntitySet="RequisitionExtraDoc">
+          <ScalarProperty Name="RequisitionExtraDocID" ColumnName="RequisitionExtraDocID" />
+          <ScalarProperty Name="RequisitionExtraFileName" ColumnName="RequisitionExtraFileName" />
+          <ScalarProperty Name="RequisitionExtraFileSize" ColumnName="RequisitionExtraFileSize" />
+          <ScalarProperty Name="RequisitionID" ColumnName="RequisitionID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Serial_Number">
+      <EntityTypeMapping TypeName="ServiceVMSModel.Serial_Number">
+        <MappingFragment StoreEntitySet="Serial_Number">
+          <ScalarProperty Name="Serial_Outward_Number" ColumnName="Serial_Outward_Number" />
+          <ScalarProperty Name="Serial_NumberId" ColumnName="Serial_NumberId" />
+          <ScalarProperty Name="Serial_GRN_Number" ColumnName="Serial_GRN_Number" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Year_Range" ColumnName="Year_Range" />
+          <ScalarProperty Name="Serial_Gatepass_Number" ColumnName="Serial_Gatepass_Number" />
+          <ScalarProperty Name="Serial_Asset_Number" ColumnName="Serial_Asset_Number" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServiceCategories">
+      <EntityTypeMapping TypeName="ServiceVMSModel.ServiceCategory">
+        <MappingFragment StoreEntitySet="ServiceCategory">
+          <ScalarProperty Name="serviceCategoryId" ColumnName="serviceCategoryId" />
+          <ScalarProperty Name="categoryName" ColumnName="categoryName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServiceDoccumentTypes">
+      <EntityTypeMapping TypeName="ServiceVMSModel.ServiceDoccumentType">
+        <MappingFragment StoreEntitySet="ServiceDoccumentType">
+          <ScalarProperty Name="serviceDocumentId" ColumnName="serviceDocumentId" />
+          <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+          <ScalarProperty Name="user_email" ColumnName="user_email" />
+          <ScalarProperty Name="userDesignation" ColumnName="userDesignation" />
+          <ScalarProperty Name="documentType" ColumnName="documentType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServiceTypes">
+      <EntityTypeMapping TypeName="ServiceVMSModel.ServiceType">
+        <MappingFragment StoreEntitySet="ServiceType">
+          <ScalarProperty Name="serviceTypeId" ColumnName="serviceTypeId" />
+          <ScalarProperty Name="typeName" ColumnName="typeName" />
+          <ScalarProperty Name="isTAService" ColumnName="isTAService" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServiceUsers">
+      <EntityTypeMapping TypeName="ServiceVMSModel.ServiceUser">
+        <MappingFragment StoreEntitySet="ServiceUser">
+          <ScalarProperty Name="serviceUserId" ColumnName="serviceUserId" />
+          <ScalarProperty Name="serviceCode" ColumnName="serviceCode" />
+          <ScalarProperty Name="firstLevelApprover" ColumnName="firstLevelApprover" />
+          <ScalarProperty Name="secondLevelApprover" ColumnName="secondLevelApprover" />
+          <ScalarProperty Name="thirdLevelApprover" ColumnName="thirdLevelApprover" />
+          <ScalarProperty Name="userDepartmentId" ColumnName="userDepartmentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServiceUserDepartments">
+      <EntityTypeMapping TypeName="ServiceVMSModel.ServiceUserDepartment">
+        <MappingFragment StoreEntitySet="ServiceUserDepartment">
+          <ScalarProperty Name="userDepartmentId" ColumnName="userDepartmentId" />
+          <ScalarProperty Name="userDepartmentName" ColumnName="userDepartmentName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServiceVendors">
+      <EntityTypeMapping TypeName="ServiceVMSModel.ServiceVendor">
+        <MappingFragment StoreEntitySet="ServiceVendor">
+          <ScalarProperty Name="serviceVendorId" ColumnName="serviceVendorId" />
+          <ScalarProperty Name="serviceCode" ColumnName="serviceCode" />
+          <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Signatures">
+      <EntityTypeMapping TypeName="ServiceVMSModel.Signature">
+        <MappingFragment StoreEntitySet="Signature">
+          <ScalarProperty Name="signatureId" ColumnName="signatureId" />
+          <ScalarProperty Name="categoryName" ColumnName="categoryName" />
+          <ScalarProperty Name="referenceId" ColumnName="referenceId" />
+          <ScalarProperty Name="role" ColumnName="role" />
+          <ScalarProperty Name="signaturePath" ColumnName="signaturePath" />
+          <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+          <ScalarProperty Name="signatureStatus" ColumnName="signatureStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Taxes">
+      <EntityTypeMapping TypeName="ServiceVMSModel.Tax">
+        <MappingFragment StoreEntitySet="Taxes">
+          <ScalarProperty Name="TaxesId" ColumnName="TaxesId" />
+          <ScalarProperty Name="TaxesTerms" ColumnName="TaxesTerms" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TempVendors">
+      <EntityTypeMapping TypeName="ServiceVMSModel.TempVendor">
+        <MappingFragment StoreEntitySet="TempVendor">
+          <ScalarProperty Name="TempCategory" ColumnName="TempCategory" />
+          <ScalarProperty Name="TempVendorID" ColumnName="TempVendorID" />
+          <ScalarProperty Name="TempVendorName" ColumnName="TempVendorName" />
+          <ScalarProperty Name="TempVendorEmail" ColumnName="TempVendorEmail" />
+          <ScalarProperty Name="TempVendorContact" ColumnName="TempVendorContact" />
+          <ScalarProperty Name="TempVendorAddress" ColumnName="TempVendorAddress" />
+          <ScalarProperty Name="TempVendorStatus" ColumnName="TempVendorStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="ServiceVMSModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="designation" ColumnName="designation" />
+          <ScalarProperty Name="userEmail" ColumnName="userEmail" />
+          <ScalarProperty Name="userPassword" ColumnName="userPassword" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="archivedUserReason" ColumnName="archivedUserReason" />
+          <ScalarProperty Name="userStatus" ColumnName="userStatus" />
+          <ScalarProperty Name="userDepartmentId" ColumnName="userDepartmentId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="AccessinIMS" ColumnName="AccessinIMS" />
+          <ScalarProperty Name="AccessinVMS" ColumnName="AccessinVMS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserFeedbacks">
+      <EntityTypeMapping TypeName="ServiceVMSModel.UserFeedback">
+        <MappingFragment StoreEntitySet="UserFeedback">
+          <ScalarProperty Name="userfeedbackId" ColumnName="userfeedbackId" />
+          <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+          <ScalarProperty Name="user_Role" ColumnName="user_Role" />
+          <ScalarProperty Name="user_Rating" ColumnName="user_Rating" />
+          <ScalarProperty Name="user_Comments" ColumnName="user_Comments" />
+          <ScalarProperty Name="userDepartmentId" ColumnName="userDepartmentId" />
+          <ScalarProperty Name="userfeedbackaddeddate" ColumnName="userfeedbackaddeddate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vendorAnnualTurnovers">
+      <EntityTypeMapping TypeName="ServiceVMSModel.vendorAnnualTurnover">
+        <MappingFragment StoreEntitySet="vendorAnnualTurnover">
+          <ScalarProperty Name="annualTurnoverId" ColumnName="annualTurnoverId" />
+          <ScalarProperty Name="annualTurnoverYear" ColumnName="annualTurnoverYear" />
+          <ScalarProperty Name="annualTurnoverAmmount" ColumnName="annualTurnoverAmmount" />
+          <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vendorCustomerReferences">
+      <EntityTypeMapping TypeName="ServiceVMSModel.vendorCustomerReference">
+        <MappingFragment StoreEntitySet="vendorCustomerReference">
+          <ScalarProperty Name="customerId" ColumnName="customerId" />
+          <ScalarProperty Name="customerName" ColumnName="customerName" />
+          <ScalarProperty Name="customerAddress" ColumnName="customerAddress" />
+          <ScalarProperty Name="CR_poc" ColumnName="CR_poc" />
+          <ScalarProperty Name="CR_phoneNo" ColumnName="CR_phoneNo" />
+          <ScalarProperty Name="CR_email" ColumnName="CR_email" />
+          <ScalarProperty Name="billingRange" ColumnName="billingRange" />
+          <ScalarProperty Name="initialServiceYear" ColumnName="initialServiceYear" />
+          <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VendorDocuments">
+      <EntityTypeMapping TypeName="ServiceVMSModel.VendorDocument">
+        <MappingFragment StoreEntitySet="VendorDocuments">
+          <ScalarProperty Name="vendorDocumentId" ColumnName="vendorDocumentId" />
+          <ScalarProperty Name="documentId" ColumnName="documentId" />
+          <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VendorReviews">
+      <EntityTypeMapping TypeName="ServiceVMSModel.VendorReview">
+        <MappingFragment StoreEntitySet="VendorReview">
+          <ScalarProperty Name="reviewId" ColumnName="reviewId" />
+          <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+          <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+          <ScalarProperty Name="reviewText" ColumnName="reviewText" />
+          <ScalarProperty Name="userDesignation" ColumnName="userDesignation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VendorServiceTypes">
+      <EntityTypeMapping TypeName="ServiceVMSModel.VendorServiceType">
+        <MappingFragment StoreEntitySet="VendorServiceType">
+          <ScalarProperty Name="vendorServiceTypeId" ColumnName="vendorServiceTypeId" />
+          <ScalarProperty Name="vendorServiceName" ColumnName="vendorServiceName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vendorUnitAddresses">
+      <EntityTypeMapping TypeName="ServiceVMSModel.vendorUnitAddress">
+        <MappingFragment StoreEntitySet="vendorUnitAddresses">
+          <ScalarProperty Name="UnitAddressId" ColumnName="UnitAddressId" />
+          <ScalarProperty Name="UnitAddress" ColumnName="UnitAddress" />
+          <ScalarProperty Name="UA_poc" ColumnName="UA_poc" />
+          <ScalarProperty Name="UA_phoneNo" ColumnName="UA_phoneNo" />
+          <ScalarProperty Name="UA_email" ColumnName="UA_email" />
+          <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HTV_Vendor_2092022">
+      <EntityTypeMapping TypeName="ServiceVMSModel.HTV_Vendor_2092022">
+        <MappingFragment StoreEntitySet="HTV_Vendor_2092022">
+          <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+          <ScalarProperty Name="vendorName" ColumnName="vendorName" />
+          <ScalarProperty Name="vendorAddress" ColumnName="vendorAddress" />
+          <ScalarProperty Name="vendorEmail" ColumnName="vendorEmail" />
+          <ScalarProperty Name="vendorPassword" ColumnName="vendorPassword" />
+          <ScalarProperty Name="poc" ColumnName="poc" />
+          <ScalarProperty Name="reason" ColumnName="reason" />
+          <ScalarProperty Name="vendorCreditPeriod" ColumnName="vendorCreditPeriod" />
+          <ScalarProperty Name="vendorStatus" ColumnName="vendorStatus" />
+          <ScalarProperty Name="legalStatus" ColumnName="legalStatus" />
+          <ScalarProperty Name="businessNature" ColumnName="businessNature" />
+          <ScalarProperty Name="establishmentRegNo" ColumnName="establishmentRegNo" />
+          <ScalarProperty Name="establishmentRegNoCategory" ColumnName="establishmentRegNoCategory" />
+          <ScalarProperty Name="phoneNo" ColumnName="phoneNo" />
+          <ScalarProperty Name="mobileNo" ColumnName="mobileNo" />
+          <ScalarProperty Name="beneficiaryName" ColumnName="beneficiaryName" />
+          <ScalarProperty Name="bankName" ColumnName="bankName" />
+          <ScalarProperty Name="branchAddress" ColumnName="branchAddress" />
+          <ScalarProperty Name="accountNo" ColumnName="accountNo" />
+          <ScalarProperty Name="IFSCCode" ColumnName="IFSCCode" />
+          <ScalarProperty Name="PANNo" ColumnName="PANNo" />
+          <ScalarProperty Name="TANNo" ColumnName="TANNo" />
+          <ScalarProperty Name="ESICNo" ColumnName="ESICNo" />
+          <ScalarProperty Name="CSTNo" ColumnName="CSTNo" />
+          <ScalarProperty Name="PFNo" ColumnName="PFNo" />
+          <ScalarProperty Name="ProfessionalTaxNo" ColumnName="ProfessionalTaxNo" />
+          <ScalarProperty Name="GSTNo" ColumnName="GSTNo" />
+          <ScalarProperty Name="vendorCode" ColumnName="vendorCode" />
+          <ScalarProperty Name="registrationResult" ColumnName="registrationResult" />
+          <ScalarProperty Name="MsmeVendorRegistrationNo" ColumnName="MsmeVendorRegistrationNo" />
+          <ScalarProperty Name="MSME_vendor_category" ColumnName="MSME_vendor_category" />
+          <ScalarProperty Name="vendorRegistrationDate" ColumnName="vendorRegistrationDate" />
+          <ScalarProperty Name="vendor_Reject_Reason" ColumnName="vendor_Reject_Reason" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Invoice_BKP_1012021">
+      <EntityTypeMapping TypeName="ServiceVMSModel.Invoice_BKP_1012021">
+        <MappingFragment StoreEntitySet="Invoice_BKP_1012021">
+          <ScalarProperty Name="invoiceId" ColumnName="invoiceId" />
+          <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+          <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+          <ScalarProperty Name="sprintId" ColumnName="sprintId" />
+          <ScalarProperty Name="serviceCode" ColumnName="serviceCode" />
+          <ScalarProperty Name="invoiceStatus" ColumnName="invoiceStatus" />
+          <ScalarProperty Name="billingDate" ColumnName="billingDate" />
+          <ScalarProperty Name="invoiceReason" ColumnName="invoiceReason" />
+          <ScalarProperty Name="invoiceAmount" ColumnName="invoiceAmount" />
+          <ScalarProperty Name="invoiceUploadDate" ColumnName="invoiceUploadDate" />
+          <ScalarProperty Name="uploadedBy" ColumnName="uploadedBy" />
+          <ScalarProperty Name="invoiceNumber" ColumnName="invoiceNumber" />
+          <ScalarProperty Name="approvedDate" ColumnName="approvedDate" />
+          <ScalarProperty Name="paymentDueDate" ColumnName="paymentDueDate" />
+          <ScalarProperty Name="invoiceProcessingDate" ColumnName="invoiceProcessingDate" />
+          <ScalarProperty Name="paymentProcessingDate" ColumnName="paymentProcessingDate" />
+          <ScalarProperty Name="invoiceFileName" ColumnName="invoiceFileName" />
+          <ScalarProperty Name="invoiceFileSize" ColumnName="invoiceFileSize" />
+          <ScalarProperty Name="invoiceRejectReason" ColumnName="invoiceRejectReason" />
+          <ScalarProperty Name="invoiceProcessedBy" ColumnName="invoiceProcessedBy" />
+          <ScalarProperty Name="isPriorPayment" ColumnName="isPriorPayment" />
+          <ScalarProperty Name="approvalRemark" ColumnName="approvalRemark" />
+          <ScalarProperty Name="location" ColumnName="location" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="ExpanseNature" ColumnName="ExpanseNature" />
+          <ScalarProperty Name="Nature_of_Business" ColumnName="Nature_of_Business" />
+          <ScalarProperty Name="PaymentProcessedBy" ColumnName="PaymentProcessedBy" />
+          <ScalarProperty Name="gstAmount" ColumnName="gstAmount" />
+          <ScalarProperty Name="mail_count" ColumnName="mail_count" />
+          <ScalarProperty Name="second_level_approved_date" ColumnName="second_level_approved_date" />
+          <ScalarProperty Name="First_level_approved_date" ColumnName="First_level_approved_date" />
+          <ScalarProperty Name="CGST_amount" ColumnName="CGST_amount" />
+          <ScalarProperty Name="SGST_amount" ColumnName="SGST_amount" />
+          <ScalarProperty Name="total_Invoice_amount" ColumnName="total_Invoice_amount" />
+          <ScalarProperty Name="IGST_amount" ColumnName="IGST_amount" />
+          <ScalarProperty Name="invoiceDeleteReason" ColumnName="invoiceDeleteReason" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InwardMaterial_CustomerAsset">
+      <EntityTypeMapping TypeName="ServiceVMSModel.InwardMaterial_CustomerAsset">
+        <MappingFragment StoreEntitySet="InwardMaterial_CustomerAsset">
+          <ScalarProperty Name="Accepted_Date" ColumnName="Accepted_Date" />
+          <ScalarProperty Name="Material_CategoryID" ColumnName="Material_CategoryID" />
+          <ScalarProperty Name="Material_Remark" ColumnName="Material_Remark" />
+          <ScalarProperty Name="Material_Totalprice" ColumnName="Material_Totalprice" />
+          <ScalarProperty Name="Material_Price" ColumnName="Material_Price" />
+          <ScalarProperty Name="Acceptedby" ColumnName="Acceptedby" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Inward_Type" ColumnName="Inward_Type" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="MaterialName" ColumnName="MaterialName" />
+          <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+          <ScalarProperty Name="InwardID" ColumnName="InwardID" />
+          <ScalarProperty Name="InvMaterialCA_ID" ColumnName="InvMaterialCA_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IMS_Signature">
+      <EntityTypeMapping TypeName="ServiceVMSModel.IMS_Signature">
+        <MappingFragment StoreEntitySet="IMS_Signature">
+          <ScalarProperty Name="IMSsignatureStatus" ColumnName="IMSsignatureStatus" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="IMSsignaturePath" ColumnName="IMSsignaturePath" />
+          <ScalarProperty Name="role" ColumnName="role" />
+          <ScalarProperty Name="referenceId" ColumnName="referenceId" />
+          <ScalarProperty Name="categoryName" ColumnName="categoryName" />
+          <ScalarProperty Name="IMSsignatureId" ColumnName="IMSsignatureId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,133 @@
+﻿@model IEnumerable<IMS.Models.IMSEntity>
+
+@{
+    string role = ViewBag.role;
+    string empid = ViewBag.empid;
+    string dept = ViewBag.department;
+    string location = ViewBag.location;
+    string inwardID = ViewBag.inwardID;
+    string expense = ViewBag.expensenature;
+
+    ViewBag.Title = "InventoryDetails";
+    Layout = "~/Views/Shared/_Layout_IMS.cshtml";
+}
+
+
+<link href="~/assets/css/custom.css" rel="stylesheet" />
+<div class="inventory-details invtry-details">
+    <div class="d-flex align-items-center justify-content-between">
+        <h5 class="content-title mb-3">Inventory Register Details</h5>
+        <a class="back-btn d-flex" href="@Url.Action("Index", "Add_InventoryRegister")">
+            <img class="mr-8" src="~/assets/images/icons/back-arrow.svg" /> Back
+        </a>
+    </div>
+    <div class="card">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card-body">
+                    <div class="d-flex align-items-center asset-id">
+                        @foreach (var item in Model)
+                        {
+                            <div>Asset ID: </div>
+                            <div>
+                                @Html.DisplayFor(modelitem => item.AssetID)
+                            </div>
+                        }
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="col-lg-2">Material Category Name</th>
+                                <th class="col-lg-2">MaterialName</th>
+                                <th class="col-lg-2">Expense Nature</th>
+                                <th class="col-lg-2">GRN Number</th>
+                                <th class="col-lg-2">Department Name</th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            @foreach (var item in Model)
+                            {
+                                <td>
+                                    @Html.DisplayFor(modelitem => item.Material_CategoryName)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelitem => item.MaterialName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelitem => item.ExpenseNature)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelitem => item.GRN_Number)
+                                </td>
+                                <td>
+
+                                    @Html.DisplayFor(modelitem => item.userDepartmentName)
+                                </td>
+                            }
+                        </tr>
+                    </table>
+
+
+                    <table>
+                        <thead>
+                            <tr>
+
+                                <th class="col-lg-2">Purchase Rate</th>
+                                <th class="col-lg-2">Asset Cost</th>
+                                <th class="col-lg-2">Make</th>
+                                <th class="col-lg-2">Serial No</th>
+                                <th class="col-lg-2">Model No</th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            @foreach (var item in Model)
+                            {
+
+                                <td>
+                                    @Html.DisplayFor(modelitem => item.Purchase_Rate)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelitem => item.Asset_Cost)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelitem => item.Makenm)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelitem => item.Serial_No)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelitem => item.Model_Number)
+                                </td>
+                            }
+                        </tr>
+                    </table>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="col-lg-2">Machine ID</th>
+                                <th class="col-lg-2">RAM</th>
+                                <th class="col-lg-2">HDD</th>
+                                <th class="col-lg-2">OS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelitem => item.MachineID)</td>
+                                    <td>@Html.DisplayFor(modelitem => item.RAM)</td>
+                                    <td>@Html.DisplayFor(modelitem => item.HDD)</td>
+                                    <td>@Html.DisplayFor(modelitem => item.OS)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/libs/jquery/dist/jquery.min.js"></script>

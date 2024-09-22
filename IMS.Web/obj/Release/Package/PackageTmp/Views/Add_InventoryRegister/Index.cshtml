@@ -1,0 +1,259 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<IMS.Models.IMSEntity>
+<link href="~/assets/css/custom.css" rel="stylesheet" />
+@{
+    string role = ViewBag.role;
+    string empid = ViewBag.empid;
+    string dept = ViewBag.department;
+    string location = ViewBag.location;
+    ViewBag.Title = "InventoryRegister";
+    Layout = "~/Views/Shared/_Layout_IMS.cshtml";
+}
+<link href="~/assets/css/custom.css" rel="stylesheet" />
+<div class="InventoryRegister">
+    <h5 class="content-title">Inventory Register List</h5>
+    <div class="card">
+        @{
+            string count = ViewBag.display;
+        }
+        <div class="d-flex p-3 px-4 align-items-center inward-search-div ol-md-12 justify-content-between">
+            <div class="d-flex align-items-center w-70">
+                <h5 class="search-font pe-2">Search By:</h5>
+
+                @using (Html.BeginForm("Index", "Add_InventoryRegister", FormMethod.Post))
+                {
+                    @Html.DropDownList("Name", new List<SelectListItem>
+                    {
+                       new SelectListItem{Text = "Asset ID", Value="Asset_id"},
+                       new SelectListItem{Text= "Department" , Value="Inv_department"},
+                       new SelectListItem{Text= "Location" , Value="Inventorylocation"},
+                       new SelectListItem{Text= "ExpenseNature" , Value="Inv_nature"},
+                       new SelectListItem{Text= "Material Category" , Value="Mat_category"},
+                       new SelectListItem{Text= "Material Name" , Value="Mat_name"},
+                       new SelectListItem{Text= "VendorName" , Value="Vendor_name"},
+
+
+                    }, "Select", new { @id = "select", @class = "form-control input-col inward-list-dropdown", @onchange = "Valuefunction()" })
+
+                    @Html.TextBox("SearchValue", null, new { @style = "display:none;", @class = "search1", @id = "search_by_text", @placeholder = "Search" })
+                    {
+                        // Assuming you have fetched the department data from the database and stored it in a variable named departmentsList
+                        List<SelectListItem> departmentItems = new List<SelectListItem>();
+                        var context = new IMS.Entities.ServiceVMSEntities();
+                        var departmentsList = (from s in context.ServiceUserDepartments
+                                               select new
+                                               {
+                                                   userDepartmentName = s.userDepartmentName,
+                                               });
+
+                        foreach (var department in departmentsList)
+                        {
+                            departmentItems.Add(new SelectListItem { Text = department.userDepartmentName, Value = department.userDepartmentName });
+                        }
+                        @Html.DropDownList("SearchValue1", departmentItems, "Select Department", new { @id = "select_DN", @style = "display:none; ", @class = "form-control input-col inward-list-dropdown", @onchange = "Valuefunction()" })
+                    }
+                    @Html.DropDownList("SearchValue_ExpenseN", new List<SelectListItem>
+                    {
+                      new SelectListItem{ Text = "opex", Value ="opex"},
+                      new SelectListItem{Text= "capex" , Value ="capex"},
+                      new SelectListItem{Text= "rental" , Value ="rental"},
+                    }
+                  , "Select", new { @id = "ExpenseNature", @name = "SearchValue2", @class = "search1 form-control input-col inward-list-dropdown", @style = "display:none;" })
+
+
+                    <input type="submit" value="Search" id="submit">
+
+                    if (ViewBag.countForsearch == 1)
+                    {
+
+                        <a class="clear-font" href="@Url.Action("Index", "Add_InventoryRegister")">
+                            Clear Search
+                        </a>
+                    }
+
+
+                }
+            </div>
+            <div style="float:right" class="align-content-end">
+                <a class="action-btn" href="/Add_InventoryRegister/AddInventoryRegister">Add Inventory Register</a>
+            </div>
+
+        </div>
+        <div class="card-body pt-0">
+            <div class="form addInward inward-list-table">
+                <div class="table-wrapper">
+                    <table id="paginatedTable">
+                        <thead>
+                            <tr>
+
+                                <th scope="col">
+                                    @Html.ActionLink("AssetID", "Index", new { sortOrder = ViewBag.Asset_id, searchString = ViewBag.searchString, Name = ViewBag.Name, SearchValue = ViewBag.searchValue, Page_no = ViewBag.page })
+                                </th>
+                                <th scope="col">
+                                    @Html.ActionLink("DeptName", "Index", new { sortOrder = ViewBag.Inv_department, searchString = ViewBag.searchString, Name = ViewBag.Name, SearchValue = ViewBag.searchValue, Page_no = ViewBag.page })
+                                </th>
+                                <th scope="col">
+                                    @Html.ActionLink("Location", "Index", new { sortOrder = ViewBag.Inv_location, searchString = ViewBag.searchString, Name = ViewBag.Name, SearchValue = ViewBag.searchValue, Page_no = ViewBag.page })
+                                </th>
+                                <th scope="col">
+                                    @Html.ActionLink("ExpenseNature", "Index", new { sortOrder = ViewBag.Inv_nature, searchString = ViewBag.searchString, Name = ViewBag.Name, SearchValue = ViewBag.searchValue, Page_no = ViewBag.page })
+                                </th>
+                                @*<th scope="col">
+                                        @Html.ActionLink("MaterialCategory", "Index", new { sortOrder = ViewBag.Mat_category, searchString = ViewBag.searchString, Name = ViewBag.Name, SearchValue = ViewBag.searchValue, Page_no = ViewBag.page })
+                                    </th>*@
+                                <th scope="col">
+                                    @Html.ActionLink("MaterialName", "Index", new { sortOrder = ViewBag.Mat_name, searchString = ViewBag.searchString, Name = ViewBag.Name, SearchValue = ViewBag.searchValue, Page_no = ViewBag.page })
+                                </th>
+                                <th scope="col">
+                                    @Html.ActionLink("VendorName", "Index", new { sortOrder = ViewBag.vendorId, searchString = ViewBag.searchString, Name = ViewBag.Name, SearchValue = ViewBag.searchValue, Page_no = ViewBag.page })
+                                </th>
+                                <th scope="col">
+                                    @Html.ActionLink("Purchase Rate", "Index", new { sortOrder = ViewBag.purchaserate, searchString = ViewBag.searchString, Name = ViewBag.Name, SearchValue = ViewBag.searchValue, Page_no = ViewBag.page })
+                                </th>
+
+                            </tr>
+                            @if (Model.Count() == 0)
+                            {
+                                <tr>
+                                    <td> Records not found </td>
+                                </tr>
+                            }
+                        </thead>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td data-label="assetid">
+                                    @{
+                                        var Assetid = item.InventoryReg_ID;
+                                        byte[] encodedid = System.Text.Encoding.UTF8.GetBytes(Assetid);
+                                        var ass_id = Convert.ToBase64String(encodedid);
+                                    }
+                                    @Html.ActionLink(item.AssetID, "InventoryDetails", "Add_InventoryRegister", new { id = ass_id }, null)
+
+
+                                </td>
+                                <td data-label="department">
+                                    @Html.DisplayFor(modelItem => item.userDepartmentName)
+                                </td>
+                                <td data-label="location">
+                                    @Html.DisplayFor(modelItem => item.Location)
+                                </td>
+                                <td data-label="expensenature">
+                                    @Html.DisplayFor(modelItem => item.ExpenseNature)
+                                </td>
+                                @*<td data-label="category">
+                                        @Html.DisplayFor(modelItem => item.Material_CategoryName)
+                                    </td>*@
+                                <td data-label="materialname">
+                                    @Html.DisplayFor(modelItem => item.MaterialName)
+                                </td>
+                                <td data-label="vendor">
+                                    @Html.DisplayFor(modelItem => item.vendorName)
+                                </td>
+                                <td data-label="rate">
+                                    @Html.DisplayFor(modelItem => item.Purchase_Rate)
+                                </td>
+                            </tr>
+                        }
+                    </table>
+
+                    <br />
+                </div>
+            </div>
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            @*<div class="pagination" style="align-items: center;display: flex;justify-content: center;">
+                    @Html.PagedListPager(Model, page => Url.Action("Index",
+                        new { Page_no = page, sortOrder = ViewBag.CurrentSort, Name = ViewBag.Name, SearchValue = ViewBag.SearchValue, SearchValue1 = ViewBag.SearchValue1, SearchValue2 = ViewBag.SearchValue2, SearchValue3 = ViewBag.SearchValue3, reason = ViewBag.reason, searchdate = ViewBag.searchdate }))
+                </div>*@
+            <div class="pagination justify-content-end">
+                @Html.PagedListPager(Model, page => Url.Action("Index",
+                      new { Page_no = page, sortOrder = ViewBag.CurrentSort, Name = ViewBag.Name, SearchValue = ViewBag.SearchValue, SearchValue1 = ViewBag.SearchValue1, SearchValue2 = ViewBag.SearchValue2, SearchValue3 = ViewBag.SearchValue3, reason = ViewBag.reason, searchdate = ViewBag.searchdate }))
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+@section Scripts
+		{
+    <script type="text/javascript">
+
+        var prevElem = document.getElementsByClassName("PagedList-skipToPrevious")[0];
+        var nextElem = document.getElementsByClassName("PagedList-skipToNext")[0];
+
+
+        if (prevElem) {
+            prevElem.firstChild.textContent = "Prev";
+        }
+        if (nextElem) {
+            nextElem.firstChild.textContent = "Next";
+        }
+
+
+        function Valuefunction() {
+            debugger
+            var search_decide = document.getElementById("select");
+            var search_option = search_decide.options[search_decide.selectedIndex].value;
+            if (search_option == "Asset_id") {
+                document.getElementById("search_by_text").style.display = "inline";
+                document.getElementById("ExpenseNature").style.display = "none";
+                document.getElementById("select_DN").style.display = "none";
+                //document.getElementById("search_by_date").style.display = "none";
+            }
+            else if (search_option == "Inventorylocation") {
+                debugger
+                document.getElementById("search_by_text").style.display = "inline";
+                document.getElementById("ExpenseNature").style.display = "none";
+                document.getElementById("select_DN").style.display = "none";
+                //document.getElementById("search_by_date").style.display = "none";
+            }
+            else if (search_option == "Mat_category") {
+                document.getElementById("search_by_text").style.display = "inline";
+                document.getElementById("ExpenseNature").style.display = "none";
+                document.getElementById("select_DN").style.display = "none";
+
+            }
+            else if (search_option == "Mat_name") {
+                document.getElementById("search_by_text").style.display = "inline";
+                document.getElementById("ExpenseNature").style.display = "none";
+                document.getElementById("select_DN").style.display = "none";
+
+            }
+            else if (search_option == "Vendor_name") {
+                document.getElementById("search_by_text").style.display = "inline";
+                document.getElementById("ExpenseNature").style.display = "none";
+                document.getElementById("select_DN").style.display = "none";
+
+            }
+            else if (search_option == "Inv_department") {
+                document.getElementById("select_DN").style.display = "inline";
+                document.getElementById("search_by_text").style.display = "none";
+                document.getElementById("ExpenseNature").style.display = "none";
+                //document.getElementById("MaterialCat").style.display = "none";
+                //document.getElementById("search_by_date").style.display = "none";
+
+            }
+
+            else if (search_option == "Inv_nature") {
+
+                document.getElementById("ExpenseNature").style.display = "inline";
+                document.getElementById("search_by_text").style.display = "none";
+                document.getElementById("select_DN").style.display = "none";
+
+            }
+
+            else if (search_option == "Inward_datetime") {
+
+                //document.getElementById("search_by_date").style.display = "inline";
+                document.getElementById("ExpenseNature").style.display = "none";
+                document.getElementById("search_by_text").style.display = "none";
+                document.getElementById("select_DN").style.display = "none";
+
+            }
+
+
+        }
+    </script>
+}

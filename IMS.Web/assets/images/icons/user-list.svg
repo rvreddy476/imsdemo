@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
+  <defs>
+    <clipPath id="clip-user-list">
+      <rect width="20" height="20"/>
+    </clipPath>
+  </defs>
+  <g id="user-list" clip-path="url(#clip-user-list)">
+    <rect width="20" height="20" fill="rgba(73,80,86,0)"/>
+    <g id="Group_54955" data-name="Group 54955" transform="translate(-617.852 -44.274)">
+      <g id="Group_54953" data-name="Group 54953" transform="translate(624.691 53.96)">
+        <path id="Path_29578" data-name="Path 29578" d="M19.442,4.883A1.442,1.442,0,1,0,18,3.442a1.442,1.442,0,0,0,1.442,1.442Z" transform="translate(-16.281 -2)" fill="#fff"/>
+        <path id="Path_29579" data-name="Path 29579" d="M13,17.149V18.3a.575.575,0,0,0,.575.575h5.172a.575.575,0,0,0,.575-.575V17.149A5.172,5.172,0,0,0,16.161,16,5.172,5.172,0,0,0,13,17.149Z" transform="translate(-13 -12.542)" fill="#fff"/>
+      </g>
+      <path id="user-list-svgrepo-com_1_" data-name="user-list-svgrepo-com (1)" d="M17.47,16.771a.894.894,0,0,0-.66-.292H.893a.893.893,0,0,0-.89.976l.849,9.122a.893.893,0,0,0,.89.811H15.96a.893.893,0,0,0,.89-.811l.849-9.122A.893.893,0,0,0,17.47,16.771Z" transform="translate(619 35.192)" fill="none" stroke="#fff" stroke-width="1"/>
+      <path id="user-list-svgrepo-com_1_2" data-name="user-list-svgrepo-com (1)" d="M16.178,14.273a.67.67,0,0,1-.67.67H2.583a.67.67,0,1,1,0-1.34H15.508A.67.67,0,0,1,16.178,14.273ZM14.409,11.8a.67.67,0,0,1-.67.67H4.352a.67.67,0,1,1,0-1.34h9.387A.67.67,0,0,1,14.409,11.8Z" transform="translate(618.806 34.836)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

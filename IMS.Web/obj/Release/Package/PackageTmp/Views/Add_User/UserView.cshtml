@@ -1,0 +1,237 @@
+﻿@model IEnumerable<IMS.Models.IMSEntity>
+@{
+    ViewBag.Title = "UserView";
+    Layout = "~/Views/Shared/_Layout_IMS.cshtml";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link href="~/assets/css/custom.css" rel="stylesheet" />
+
+<div class="inward-list">
+    <h5 class="content-title">Inward List</h5>
+    <div class="card">
+        @{
+            string count = ViewBag.display;
+        }
+        <div class="d-flex p-3 px-4 align-items-center inward-search-div ol-md-12">
+            <h5 class="search-font pe-2">Sort By:</h5>
+
+            @using (Html.BeginForm("UserView", "Add_User", FormMethod.Post))
+            {
+                @Html.DropDownList("Name", new List<SelectListItem>
+                {
+                   new SelectListItem{Text= "UserId", Value="userId"},
+                   new SelectListItem{Text= "Department" , Value="userDepartmentName"},
+                   new SelectListItem{Text= "UserName" , Value="userName"},
+                   new SelectListItem{Text= "userEmail" , Value="userEmail"},
+                   new SelectListItem{Text= "RoleInIMS" , Value="RoleInIMS"},
+                   new SelectListItem{Text= "Location" , Value="userLocation"},
+                  
+                }, "Select", new { @id = "select", @class= "form-control input-col inward-list-dropdown", @onchange = "Valuefunction()" })
+
+                @Html.TextBox("SearchValue", null, new { @style = "display:none;", @class = "search1", @id = "search_by_text", @placeholder = "Search" })
+                {
+                    // Assuming you have fetched the department data from the database and stored it in a variable named departmentsList
+                    List<SelectListItem> departmentItems = new List<SelectListItem>();
+                    var context = new IMS.Entities.ServiceVMSEntities();
+                    var departmentsList = (from s in context.ServiceUserDepartments
+                                           select new
+                                           {
+                                               userDepartmentName = s.userDepartmentName,
+                                           });
+
+
+                    foreach (var department in departmentsList)
+                    {
+                        departmentItems.Add(new SelectListItem { Text = department.userDepartmentName, Value = department.userDepartmentName });
+                    }
+                    @Html.DropDownList("SearchValue1", departmentItems, "Select Department", new { @id = "select_DN", @style = "display:none; ", @class = "form-control input-col inward-list-dropdown", @onchange = "Valuefunction()" })
+                }
+               
+                <input class="search2" type="date" value="Search" style="display:none;" id="search_by_date" name="searchdate" />
+                <input type="submit" value="Search" id="submit">
+
+                if (ViewBag.countForsearch == 1)
+                {
+
+                    <a class="clear-font" href="@Url.Action("UserView", "Add_User")">
+                        Clear Search
+                    </a>
+                }
+                @* if (role == "Procurement Operator" || role == "Third Level Approver")
+                    {
+                        @Html.ActionLink("Actionable Items", "RequisitionView", "Add_Requisition", new { @name = "Actionalble" }, new { @class = "btn btn-primary", @style = "margin-bottom:3px;" })
+
+                    }*@
+
+            }
+        </div>
+
+        <div class="card-body pt-0">
+            <div class="form addInward inward-list-table">
+                <div class="table-wrapper">
+                    <table id="paginatedTable">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    @Html.ActionLink("UserID", "UserView", new { sortOrder = ViewBag.userID, searchString = ViewBag.searchString, Name = ViewBag.Name, SearchValue = ViewBag.searchValue })
+                                </th>
+                                <th scope="col">
+                                    @Html.ActionLink("UserName", "UserView", new { sortOrder = ViewBag.namesortParameter, searchString = ViewBag.searchString, Name = ViewBag.Name, SearchValue = ViewBag.searchValue})
+                                </th>
+                                <th scope="col">
+                                    @Html.ActionLink("UserEmail", "UserView", new { sortOrder = ViewBag.emailpara, searchString = ViewBag.searchString, Name = ViewBag.Name, SearchValue = ViewBag.searchValue })
+                                </th>
+                                <th scope="col">
+                                    @Html.ActionLink("Role", "UserView", new { sortOrder = ViewBag.rolepara, searchString = ViewBag.searchString, Name = ViewBag.Name, SearchValue = ViewBag.searchValue })
+                                </th>
+                                <th scope="col">
+                                    @Html.ActionLink("Department", "UserView", new { sortOrder = ViewBag.departmentpara, searchString = ViewBag.searchString, Name = ViewBag.Name, SearchValue = ViewBag.searchValue })
+                                </th>
+                                <th scope="col">
+                                    @Html.ActionLink("Location", "UserView", new { sortOrder = ViewBag.locpara, searchString = ViewBag.searchString, Name = ViewBag.Name, SearchValue = ViewBag.searchValue })
+                                </th>
+                                <th scope="col">
+                                </th>
+                                
+                            </tr>
+                            @if (Model.Count() == 0)
+                            {
+                                <tr>
+                                    <td> Records not found </td>
+                                </tr>
+                            }
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td data-label="inward-date">
+                                    @Html.DisplayFor(modelItem => item.userId)
+                                </td>
+                                <td data-label="inward-date">
+                                    @Html.DisplayFor(modelItem => item.userName)
+                                </td>
+                                <td data-label="inward-date">
+                                    @Html.DisplayFor(modelItem => item.userEmail)
+                                </td>
+                                <td data-label="inward-date">
+                                    @Html.DisplayFor(modelItem => item.RoleInIMS)
+                                </td>
+                                <td data-label="department">                                   
+                                    @Html.DisplayFor(modelItem => item.userDepartmentName)
+                                </td>
+                                <td data-label="location">
+                                    @Html.DisplayFor(modelItem => item.userLocation)
+                                </td>
+
+                                <td data-label="actions">
+                                    @{
+                                        byte[] encoded = System.Text.Encoding.UTF8.GetBytes(item.userId);
+                                        var userCode = Convert.ToBase64String(encoded);
+
+                                        byte[] encoded1 = System.Text.Encoding.UTF8.GetBytes(item.IMSRole_Id);
+                                        var role_id = Convert.ToBase64String(encoded1);
+                                    }  
+                                    
+                                  <a class="dropdown-item1" href="@Url.Action("Edit_User", "Add_User", new { @id = userCode, @roleid = role_id}, null)"><img class="px-2" src="~/assets/images/icons/pen.svg" alt="Edit" /></a>
+                                  <a class="dropdown-item1" onclick="Deletedivshow('@item.userId','@item.IMSRole_Id');"><img class="px-2" src="~/assets/images/icons/trash.svg" alt="Delete" /></a>                                
+
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <br />
+
+            </div>
+          
+        </div>
+    </div>
+
+</div>
+
+<div class="modal modal-lg fade" id="myCompanyModal" tabindex="-1" role="dialog" aria-labelledby="myCompanyModal" aria-hidden="true" data-backdrop="static" data-keyboard="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content p-3">
+            <div class="modal-header">
+                <h4>Delete User</h4>
+                <button type="button" id="closeModalHeader" class="btn-close close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            @using (Html.BeginForm("DeleteUser", "Add_User", FormMethod.Post))
+            { 
+                <div class="modal-body" style="padding-top:2px">
+                    <div class="row">
+                        <input type="hidden" name="userId" id="userId" value=""/>
+                        <input type="hidden" name="IMSRole_Id" id="IMSRole_Id" value=""/>
+                        <div class="col-md-4 mt-3">
+                            <label class="form-label">Reason</label>
+                            <textarea class="form-control" placeholder="Please provide the reason for delete user." rows="3" cols="5" id="Reason" name="Reason" required></textarea>
+                        </div>
+                    </div>
+                </div>
+            <div class="modal-footer justify-content-start">
+                <button type="submit" id="modal_submit" class="btn btn-primary button button4">Submit</button>
+                <button type="button" id="close" class="btn btn-primary button button4">Close</button>
+
+            </div>
+
+            }
+
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+@section Scripts
+		{
+    <script type="text/javascript">
+	function Valuefunction() {
+				debugger
+				var search_decide = document.getElementById("select");
+				var search_option = search_decide.options[search_decide.selectedIndex].value;
+                if (search_option == "userId") {
+					debugger
+					document.getElementById("search_by_text").style.display = "inline";					
+					document.getElementById("select_DN").style.display = "none";					
+				}
+                else if (search_option == "userDepartmentName") {
+					document.getElementById("select_DN").style.display = "inline";
+					document.getElementById("search_by_text").style.display = "none";					
+				}
+                else if (search_option == "userName") {
+					document.getElementById("search_by_text").style.display = "inline";								 
+					document.getElementById("select_DN").style.display = "none";					
+				}
+                else if (search_option == "userEmail") {
+					document.getElementById("search_by_text").style.display = "inline";
+					document.getElementById("select_DN").style.display = "none";					
+				}
+                else if (search_option == "RoleInIMS") {
+					document.getElementById("search_by_text").style.display = "inline";
+					document.getElementById("select_DN").style.display = "none";				 
+				}
+				else if (search_option == "userLocation") {
+					document.getElementById("search_by_text").style.display = "inline";				
+					document.getElementById("select_DN").style.display = "none";
+				}
+
+        }
+
+        function Deletedivshow(userid, roleid) {
+            $('#userId').val('');
+            $('#IMSRole_Id').val('');
+            $('#myCompanyModal').modal('show');
+            $('#userId').val(userid);
+            $('#IMSRole_Id').val(roleid);
+        }
+
+        $("#close").on("click", function () {
+            $('#myCompanyModal').modal('hide');
+        });
+
+    </script>
+}
+

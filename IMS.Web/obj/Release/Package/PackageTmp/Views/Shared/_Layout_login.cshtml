@@ -1,0 +1,59 @@
+﻿
+<!DOCTYPE html>
+
+<html class="noScoll">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="img-src * 'self' data:;">
+    @*<meta http-equiv="cache-control" content="no-cache" />*@
+    <title>@ViewBag.Title Harbinger Techventure Vendor Management System</title>
+    <link href="~/Content/PM-Responsive.css" rel="stylesheet" />
+    <link href="~/Content/External2.css" rel="stylesheet" />
+    <link href="~/Content/table.css" rel="stylesheet" />
+    <link href="~/Content/Common.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    @*<link href="~/Content/project_list.css" rel="stylesheet" type="text/css" />*@
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+   
+    <div class="navbar navbar-fixed-top no-bottom">
+  
+        <div class="container-fluid col-lg-12">
+            <div class="navbar-header col-lg-3">
+
+                @*<img class="img1" src="~/Images/Harbinger_new_logo.jpg"/>*@
+
+               
+            </div>
+            @{
+               int count = 0;
+            }
+            @if (Session["Email"] != null)
+            {
+                <div class="col-lg-5">
+                    <h1 class="main-heading" style="margin-left:160px">VENDOR MANAGEMENT SYSTEM</h1>
+                </div>
+            }           
+        </div>
+    </div>
+
+
+    <div class="container-fluid body-content ">
+        @RenderBody()
+        @RenderSection("scripts", required: false)
+
+        <footer class="footer">
+            <p>&copy; @DateTime.Now.Year - Harbinger Techventure Pvt. Ltd.</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+</body>
+</html>
+

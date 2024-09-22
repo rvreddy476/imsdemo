@@ -1,0 +1,6 @@
+D:\IMS\IMS_Application\IMS\IMS.Models\bin\Debug\IMS.Models.dll
+D:\IMS\IMS_Application\IMS\IMS.Models\bin\Debug\IMS.Models.pdb
+D:\IMS\IMS_Application\IMS\IMS.Models\obj\Debug\IMS.Models.csprojAssemblyReference.cache
+D:\IMS\IMS_Application\IMS\IMS.Models\obj\Debug\IMS.Models.csproj.CoreCompileInputs.cache
+D:\IMS\IMS_Application\IMS\IMS.Models\obj\Debug\IMS.Models.dll
+D:\IMS\IMS_Application\IMS\IMS.Models\obj\Debug\IMS.Models.pdb

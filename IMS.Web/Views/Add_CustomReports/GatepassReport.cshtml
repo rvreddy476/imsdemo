@@ -1,0 +1,376 @@
+﻿@model IMS.Models.IMSEntity
+@{
+                /**/
+
+                ViewBag.Title = "Index";
+                Layout = "~/Views/Shared/_Layout_IMS.cshtml";
+                var role = ViewBag.role;
+}
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link href="~/assets/css/custom.css" rel="stylesheet" />
+<div class="add-category">
+    <h5 class="content-title mb-2">Gatepass Report</h5>
+    <div class="card">
+        <div class="card-body card-height">
+            <div class="row">
+                <div class="col-lg-12">
+                    @using (Html.BeginForm("GatepassReport", "Add_CustomReports", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+
+                        <input type="hidden" name="filterType" value="" id="filterType" />
+
+                        <!-- Expense Nature -->
+                        <div class="form-group divchooseexpensenature">
+                            <label class="control-lable-small-forms form-label">Choose Expense Nature</label>
+                            <div class="d-flex align-items-center">
+                                <div class="mr-18 d-flex align-items-center"><input type="radio" value="yes" name="filterByExpenseNature" id="expYes" class="mr-2" />Yes</div>
+                                <div class="mr-18 d-flex align-items-center"><input type="radio" value="No" name="filterByExpenseNature" id="expNo" class="mr-2" />No</div>
+                                <p class="radioErrorTermsforExpenseNature" style="display:none; color:red">Please select one option.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group divexpensenature col-4">
+                            @Html.LabelFor(model => model.ExpenseNature, htmlAttributes: new { @class = "control-lable-small-forms form-label mt-4" })
+                            @Html.DropDownListFor(m=>m.ExpenseNature, new SelectList(ViewBag.expenseNatureList, "Value", "Text"), "Select Expense Nature", new
+                       {
+                           @class = "form-control input-col",
+                           @required = "required",
+                           @disabled = "disabled"
+                       })
+                            <div class="error-message">
+                                @Html.ValidationMessageFor(model => model.ExpenseNature, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        <!-- Department Name -->
+                        <div class="form-group divchoosedepartment">
+                            <label class="control-lable-small-forms form-label">Choose Department</label>
+                            <div class="d-flex align-items-center">
+                                <div class="mr-18 d-flex align-items-center"><input type="radio" value="yes" name="filterByDepartment" id="deptYes" class="mr-2" />Yes</div>
+                                <div class="mr-18 d-flex align-items-center"><input type="radio" value="No" name="filterByDepartment" id="deptNo" class="mr-2" />No</div>
+                                <p class="radioErrorTermsforDepartment" style="display:none; color:red">Please select one option.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group divdeptname col-4">
+                            @Html.LabelFor(model => model.userDepartmentId, htmlAttributes: new { @class = "control-lable-small-forms mt-4 form-label" })
+                            @Html.DropDownList("userDepartmentId", new SelectList(ViewBag.userDepartmentList, "userDepartmentId", "userDepartmentName"), "Select Department", new
+                       {
+                           @class = "form-control input-col",
+                           @required = "required",
+                           @disabled = "disabled"
+                       })
+                            <div class="error-message">
+                                @Html.ValidationMessageFor(model => model.userDepartmentId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <!-- Gatepass Category -->
+                        <div class="form-group divchoosecategory mb-4">
+                            <label class="control-lable-small-forms form-label">Choose Gatepass Category</label>
+                            <div class="d-flex align-items-center">
+                                <div class="mr-18 d-flex align-items-center"><input type="radio" value="External" name="filterByCategory" id="categoryExternal" class="mr-2" />External</div>
+                                <div class="mr-18 d-flex align-items-center"><input type="radio" value="InterOffice" name="filterByCategory" id="categoryInterOffice" class="mr-2" />InterOffice</div>
+                            </div>
+                            <p class="radioErrorTermsforCategory" style="display:none; color:red">Please select one option.</p>
+                        </div>
+
+                        <!-- Gatepass Type -->
+                        <div class="form-group divchoosetype mb-4">
+                            <label class="control-lable-small-forms form-label">Choose Gatepass Type</label>
+                            <div class="d-flex align-items-center">
+                                <div class="mr-18 d-flex align-items-center"><input type="radio" value="Returnable" name="filterByType" id="typeReturnable" class="mr-2" />Returnable</div>
+                                <div class="mr-18 d-flex align-items-center"><input type="radio" value="NonReturnable" name="filterByType" id="typeNonReturnable" class="mr-2" />Non Returnable</div>
+                            </div>
+                            <p class="radioErrorTermsforType" style="display:none; color:red">Please select one option.</p>
+                        </div>
+
+
+                        <div class="form-group mb-4">
+
+                            <label class="control-lable-small-forms form-label">Report Schedule </label>
+                            <div class="d-flex align-items-center">
+                                <div class="mr-18 d-flex align-items-center"><input type="radio" value="Month" name="searchByMIS" id="Month" class="mr-2" required /> Monthly</div>
+                                @*<input type="radio" value="Quater" name="searchByMIS" id="Quater" required /> Quarterly &nbsp;&nbsp;*@
+                                <div class="mr-18 d-flex align-items-center"><input type="radio" value="Year" name="searchByMIS" id="Year" class="mr-2" required /> Yearly</div>
+                                <div class="mr-18 d-flex align-items-center"><input type="radio" value="FinancialYear" name="searchByMIS" id="FinancialYear" class="mr-2" required />Financial Year</div>
+                                <input type="radio" value="CustomInwardDate" name="searchByMIS" id="CustomInwardDate" class="mr-2" required />Search By Start & End Date
+                            </div>
+                        </div>
+
+                        <div class="customdate">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group mb-4">
+                                        @Html.LabelFor(model => model.inwardstartdate, htmlAttributes: new { @class = "control-label-small-forms form-label" })
+                                        <div>
+                                            @Html.EditorFor(model => model.inwardstartdate, new { htmlAttributes = new { @class = "form-control input-col col-4", @required = "required", @disabled = "disabled" } })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group mb-4">
+                                        @Html.LabelFor(model => model.inwardenddate, htmlAttributes: new { @class = "control-label-small-forms form-label" })
+                                        <div>
+                                            @Html.EditorFor(model => model.inwardenddate, new
+                                       {
+                                           htmlAttributes = new { @class = "form-control input-col col-4", @required = "required", @disabled = "disabled" }
+                                       })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group mb-4">
+
+
+                                    @Html.LabelFor(model => model.monthly, htmlAttributes: new { @class = "form-label", style = "display:block;" })
+                                    @Html.DropDownListFor(model => model.monthly, new List<SelectListItem>
+                                    {
+                                       new SelectListItem{ Text = "January ", Value="January"},
+                                        new SelectListItem{ Text = "February ", Value="February"},
+                                        new SelectListItem{ Text = "March ", Value="March"},
+                                        new SelectListItem{ Text = "April ", Value="April"},
+                                        new SelectListItem{ Text = "May ", Value="May"},
+                                        new SelectListItem{ Text = "June ", Value="June"},
+                                        new SelectListItem{ Text = "July ", Value="July"},
+                                         new SelectListItem{ Text = "August ", Value="August"},
+                                        new SelectListItem{ Text = "September ", Value="September"},
+                                        new SelectListItem{ Text = "October ", Value="October"},
+                                        new SelectListItem{ Text = "November ", Value="November"},
+                                        new SelectListItem{ Text = "December ", Value="December"},
+                                    }, "Select", new { @class = "form-control", @disabled = "disabled", @required = "required" })
+                                    <div>
+                                        @Html.ValidationMessageFor(model => model.monthly, "", new { @class = "text-danger" })
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group mb-4">
+
+                                    @Html.LabelFor(model => model.quarterly, htmlAttributes: new { @class = "form-label", style = "display:block;" })
+                                    @Html.DropDownListFor(model => model.quarterly, new List<SelectListItem>
+                                    {
+                                        new SelectListItem{ Text = "January-March ", Value="1"},
+                                        new SelectListItem{ Text = "April-June ", Value="2"},
+                                        new SelectListItem{ Text = "July-September ", Value="3"},
+                                        new SelectListItem{ Text = "October-December ", Value="4"},
+
+                                    }, "Select", new { @class = "form-control", @disabled = "disabled", @required = "required" })
+                                    <div>
+                                        @Html.ValidationMessageFor(model => model.quarterly, "", new { @class = "text-danger" })
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group mb-4">
+
+                                    @Html.LabelFor(model => model.yearly, htmlAttributes: new { @class = "form-label" })
+
+                                    <div>
+                                        @Html.DropDownListFor(model => model.yearly, new List<SelectListItem>
+                                    {
+
+                                        new SelectListItem{ Text = "2024 ", Value="2024"},
+                                        new SelectListItem{ Text = "2025 ", Value="2025"},
+                                        new SelectListItem{ Text = "2026 ", Value="2026"},
+                                        new SelectListItem{ Text = "2027 ", Value="2027"},
+                                        new SelectListItem{ Text = "2028 ", Value="2028"},
+                                        new SelectListItem{ Text = "2029 ", Value="2029"},
+                                        new SelectListItem{ Text = "2030 ", Value="2030"},
+                                        new SelectListItem{ Text = "2031 ", Value="2031"},
+                                        new SelectListItem{ Text = "2032 ", Value="2032"},
+                                        new SelectListItem{ Text = "2033 ", Value="2033"},
+                                        new SelectListItem{ Text = "2034 ", Value="2034"},
+                                        new SelectListItem{ Text = "2035 ", Value="2035"},
+
+                                    }, "Select", new { @class = "form-control", @disabled = "disabled", @required = "required" })
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group mb-4">
+
+                                    @Html.LabelFor(model => model.financialyearly, htmlAttributes: new { @class = "form-label" })
+
+                                    <div>
+                                        @Html.DropDownListFor(model => model.financialyearly, new List<SelectListItem>
+                                    {
+
+                                         new SelectListItem{ Text = "2024-2025 ", Value="2024-2025"},
+                                        new SelectListItem{ Text = "2025-2026 ", Value="2025-2026"},
+                                        new SelectListItem{ Text = "2026-2027 ", Value="2026-2027"},
+                                        new SelectListItem{ Text = "2027-2028 ", Value="2027-2028"},
+                                        new SelectListItem{ Text = "2028-2029 ", Value="2028-2029"},
+                                         new SelectListItem{ Text = "2029-2030 ", Value="2029-2030"},
+                                          new SelectListItem{ Text = "2030-2031 ", Value="2030-2031"},
+                                           new SelectListItem{ Text = "2031-2032 ", Value="2031-2032"},
+                                            new SelectListItem{ Text = "2032-2033 ", Value="2032-2033"},
+                                        new SelectListItem{ Text = "2033-2034 ", Value="2033-2034"},
+                                        new SelectListItem{ Text = "2034-2035 ", Value="2034-2035"},
+                                        new SelectListItem{ Text = "2035-2036 ", Value="2035-2026"},
+
+                                    }, "Select", new { @class = "form-control", @disabled = "disabled", @required = "required" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-top"></div>
+                        <div class="form-group">
+                            <a href="#" class="cancel-btn mr-18">Cancel</a>
+                            <input type="submit" value="Download" class="btn btn-primary add-user-submit action-btn" name="submit" id="submit" />
+                        </div>
+                    }
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+
+<script type="text/javascript">
+    $('input[type=radio][name=searchByMIS]').change(function () {
+        debugger;
+        var Value = $(this).val();
+
+        $("#filterType").val("");
+
+        if (Value == "Month") {
+            $("#monthly").attr('disabled', false);
+            $("#monthly").attr('required', true);
+            $('#quarterly').attr('disabled', true);
+            $('#yearly').attr('disabled', false);
+            $("#yearly").attr('required', true);
+            $('#financialyearly').attr('disabled', true);
+            $("#filterType").val("Monthly");
+
+            $('#inwardstartdate').attr('disabled', true);
+            $('#inwardstartdate').attr('required', false);
+            $('#inwardenddate').attr('disabled', true);
+            $('#inwardenddate').attr('required', false);
+        }
+
+        else if (Value == "Year") {
+            $("#filterType").val("Yearly");
+            $("#monthly").attr('disabled', true);
+            $('#quarterly').attr('disabled', true);
+            $('#yearly').attr('disabled', false);
+            $("#yearly").attr('required', true);
+            $('#financialyearly').attr('disabled', true);
+
+            $('#inwardstartdate').attr('disabled', true);
+            $('#inwardstartdate').attr('required', false);
+            $('#inwardenddate').attr('disabled', true);
+            $('#inwardenddate').attr('required', false);
+        }
+        else if (Value == "Quater") {
+
+            $("#monthly").attr('disabled', true);
+            $('#quarterly').attr('disabled', false);
+            $("#quarterly").attr('required', true);
+            $('#yearly').attr('disabled', false);
+            $("#yearly").attr('required', true);
+            $('#financialyearly').attr('disabled', true);
+
+            $('#inwardstartdate').attr('disabled', true);
+            $('#inwardstartdate').attr('required', false);
+            $('#inwardenddate').attr('disabled', true);
+            $('#inwardenddate').attr('required', false);
+        }
+        else if (Value == "FinancialYear") {
+            $("#filterType").val("FinancialYear");
+            $("#monthly").attr('disabled', true);
+            $('#quarterly').attr('disabled', true);
+            $('#yearly').attr('disabled', true);
+            $('#financialyearly').attr('disabled', false);
+            $("#financialyearly").attr('required', true);
+
+            $('#inwardstartdate').attr('disabled', true);
+            $('#inwardstartdate').attr('required', false);
+            $('#inwardenddate').attr('disabled', true);
+            $('#inwardenddate').attr('required', false);
+        }
+
+        else if (Value == "CustomInwardDate") {
+            $("#filterType").val("Custom");
+            $("#monthly").attr('disabled', true);
+            $('#quarterly').attr('disabled', true);
+            $('#yearly').attr('disabled', true);
+            $('#financialyearly').attr('disabled', true);
+
+            $('#inwardstartdate').attr('disabled', false);
+            $('#inwardstartdate').attr('required', true);
+            $('#inwardenddate').attr('disabled', false);
+            $('#inwardenddate').attr('required', true);
+
+        }
+    });
+
+
+    $('input[type=radio][name=filterByVendor]').change(function () {
+        debugger;
+        var Value = $(this).val();
+        $('input[type=radio][name=filterByVendor]').attr('required', true);
+
+        if (Value == "yes") {
+
+            $('#vendorId').prop('disabled', false);
+        }
+        else {
+
+            $('#vendorId').prop('disabled', true);
+        }
+    });
+
+
+    $('input[type=radio][name=filterByDepartment]').change(function () {
+        debugger;
+        var Value = $(this).val();
+        $('input[type=radio][name=filterByDepartment]').attr('required', true);
+
+        if (Value == "yes") {
+            $('#userDepartmentId').prop('disabled', false);
+        }
+        else {
+            $('#userDepartmentId').prop('disabled', true);
+        }
+    });
+
+
+    $('input[type=radio][name=filterByExpenseNature]').change(function () {
+        var Value = $(this).val();
+
+        if (Value == "yes") {
+            $('#ExpenseNature').prop('disabled', false);
+        }
+        else {
+            $('#ExpenseNature').prop('disabled', true);
+        }
+    });
+</script>
+

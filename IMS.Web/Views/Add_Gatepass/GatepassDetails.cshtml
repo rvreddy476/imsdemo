@@ -1,0 +1,835 @@
+﻿@model IEnumerable<IMS.Models.IMSEntity>
+
+@{
+    string role = ViewBag.role;
+    string empid = ViewBag.empid;
+    string dept = ViewBag.department;
+    string location = ViewBag.location;
+    string GatepassID = ViewBag.GatepassID;
+
+    ViewBag.Title = "GatepassDetails";
+    Layout = "~/Views/Shared/_Layout_IMS.cshtml";
+}
+
+<link href="~/assets/css/custom.css" rel="stylesheet" />
+<link href="~/Content/sweetalert2.min.css" rel="stylesheet" />
+<link href="~/Content/Common.css" rel="stylesheet" />
+
+<div class="gatepass-list">
+    <div class="d-flex align-items-center justify-content-between">
+        <h5 class="content-title mb-3">Gatepass Details</h5>
+        <a class="back-btn d-flex" href="@Url.Action("GatepassList", "Add_Gatepass")">
+            <img class="mr-8" src="~/assets/images/icons/back-arrow.svg" /> Back
+        </a>
+    </div>
+    <div class="card">
+        <div id="loader"></div>
+        <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="">
+                    <input type="hidden" value="@GatepassID" id="GatepassID" />
+                    <div class="d-flex align-items-center gatepass-no mb-4">
+                        <div class="right-space ft-18">Gatepass Number:</div>
+                        <div>
+                            @foreach (var item in Model)
+                            {
+                                <span class="ft-18">@Html.DisplayFor(modelitem => item.Gatepass_Number)</span>
+                                <span>&nbsp;&nbsp;</span>
+                                <span class="status-color">@item.GatePass_Status</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+                @foreach (var item in Model)
+                {
+                    <div class="d-flex align-items-center right-actionbtn mb-4">
+                        <a class="d-flex align-items-center print" href="javascript:void(0)" onclick="printPDF('@item.GatepassID')">
+                            <img src="~/assets/images/icons/print.svg" />
+                            <span class="ml-8">Print</span>
+                        </a>
+                        <a class="d-flex align-items-center" href="javascript:void(0)" onclick="downloadPDF('@item.GatepassID')">
+                            <img width="16" src="~/assets/images/icons/download-svg.svg" />
+                            <span class="ml-8">Download</span>
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+
+                    <table class="gatepass-table">
+                        <thead>
+                            <tr>
+                                <th class="col-lg-2">User Department</th>
+                                <th class="col-lg-2">Location</th>
+                                <th class="col-lg-2">Gatepass Type</th>
+                                <th class="col-lg-2">Gatepass Datetime</th>
+                                <th class="col-lg-2">Expected Date of Return</th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            @foreach (var item in Model)
+                            {
+                                <td>
+                                    @Html.DisplayFor(modelitem => item.userDepartmentName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelitem => item.Location)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelitem => item.GatepassType)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelitem => item.Gatepass_DateTime)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelitem => item.Expected_DateofReturn)
+                                </td>
+                            }
+                        </tr>
+                    </table>
+
+                    <div class="gatepass-reason mt-3">Reason:</div>
+                    <div class="gate-reason">
+                        @foreach (var item in Model)
+                        {
+                            @Html.DisplayFor(modelitem => item.Reason)
+                        }
+                    </div>
+
+                    <table class="mt-5">
+                        <thead class="border-btm">
+                            <tr>
+
+                                <th class="col-lg-2">Material Name</th>
+                                <th class="col-lg-2">Quantity</th>
+                                <th class="col-lg-2">Serial No.</th>
+                                <th class="col-lg-2">Model No.</th>
+                                <th class="col-lg-2">Material Remark</th>
+                                <th class="col-lg-2">Status</th>
+
+
+                            </tr>
+                        </thead>
+                        @{
+                            string gpvid = ViewBag.GatepassID;
+
+                            IMS.Entities.ServiceVMSEntities context21 = new IMS.Entities.ServiceVMSEntities();
+
+
+                            var projectdetails1 = from t in context21.OutMaterials
+                                                  where t.GatepassID == gpvid
+                                                  select new { t.MaterialName, t.Quantity, t.Serial_Number, t.Model_Number, t.Out_Status, t.Remarks };
+                            var ii = projectdetails1.Count();
+                            foreach (var item in projectdetails1)
+                            {
+                                <tr>
+
+                                    <td>
+                                        @Html.DisplayFor(modelitem => item.MaterialName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelitem => item.Quantity)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelitem => item.Serial_Number)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelitem => item.Model_Number)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelitem => item.Remarks)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelitem => item.Out_Status)
+                                    </td>
+                                </tr>
+                            }
+
+                        }
+                    </table>
+
+                    <table class="gatepass-table mt-4">
+                        <thead>
+                            <tr>
+                                <th class="col-lg-2 bonded-item">STP/SEZ Bonded Item </th>
+
+                            </tr>
+                        </thead>
+                        <tr>
+                            @foreach (var item in Model)
+                            {
+                                if (item.STP_Bonded_Item == true)
+                                {
+                                    <td>STP</td>
+                                }
+                                else if (item.SEZ_Bonded_Item == true)
+                                {
+                                    <td>SEZ</td>
+                                }
+                                else
+                                {
+                                    <td>-</td>
+                                }
+
+                            }
+                        </tr>
+                    </table>
+
+
+                    <div class="gatepass-reason mt-4">Receiver Name</div>
+                    <div class="gate-reason">
+
+                        @foreach (var item in Model)
+                        {
+                            @Html.DisplayFor(modelitem => item.ReceiverName)
+
+                        }
+
+                    </div>
+                    <table class="gatepass-table mt-4">
+                        <thead>
+                            <tr>
+                                <th class="col-lg-2">Receiver Email</th>
+                                <th class="col-lg-2">Sender Name</th>
+
+                                @if (ViewBag.Category == "External")
+                                {
+                                    <th class="col-lg-2">Receiver Contact</th>
+                                    <th class="col-lg-2">Receiver Address</th>
+                                    <th class="col-lg-2">Receiver Email</th>
+                                }
+                                else
+                                {
+                                    <th class="col-lg-2">Receiver Contact No.</th>
+                                    <th class="col-lg-2">Receiver Address</th>
+
+                                }
+
+                            </tr>
+                        </thead>
+                        <tr>
+                            @foreach (var item in Model)
+                            {
+                                <td>
+                                    @Html.DisplayFor(modelitem => item.ReceiverEmail)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelitem => item.SenderName)
+                                </td>
+
+
+
+                                if (item.GatePass_Category == "External")
+                                {
+                                    <td>
+                                        @Html.DisplayFor(modelitem => item.ReceiverContact)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelitem => item.ReceiverAddress)
+                                    </td>
+
+                                }
+                                else
+                                {
+                                    <td>
+                                        @Html.DisplayFor(modelitem => item.TO_Office)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelitem => item.From_Office)
+                                    </td>
+
+                                }
+                            }
+                        </tr>
+                    </table>
+
+
+
+
+
+
+                    @{
+
+                        string status = string.Empty;
+                        string roleinims = string.Empty;
+                        string Location = string.Empty;
+
+
+                        var Gatepass_id = string.Empty;
+                        var context2 = new IMS.Entities.ServiceVMSEntities();
+
+                        var doctype = from r in context2.GatepassApprovers
+                                      where r.employeeId == empid
+                                      select new { r.RoleInIMS, r.Location };
+                        foreach (var g in doctype)
+                        {
+                            roleinims = g.RoleInIMS;
+                            Location = g.Location;
+
+                        };
+
+                        if (role == "Inventory Incharge" && ViewBag.GPStatus == "Pending for approver" && role == roleinims && location == Location)
+                        {
+                            <div class="border-top"></div>
+                            <div class="accept-btn">
+                                <button type="button" onclick="divupdateGPstatus('@GatepassID','Approved')" id="btnAccept" class="btn btn-primary">Approve</button>
+                                <button type="button" onclick="divRejectgatepass('@GatepassID')" id="btnReject" class="btn btn-primary ms-3">Reject</button>
+                            </div>
+                        }
+                        else if (role == "Security Guard" && ViewBag.GPStatus == "Approved" && ViewBag.GPLocation == location)
+                        {
+                            <div class="border-top"></div>
+                            <div class="accept-btn">
+                                <button type="button" onclick="divupdateGPstatus('@GatepassID','Dispatched')" id="btnAccept" class="btn btn-primary">Dispatch</button>
+                                <button type="button" onclick="divRejectgatepass('@GatepassID')" id="btnReject" class="btn btn-primary ms-3">Reject</button>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="modal modal-lg fade gatepassdetail-modal" id="GatepassModel" tabindex="-1" role="dialog" aria-labelledby="GatepassModel" aria-hidden="true" data-backdrop="static" data-keyboard="true" style="--bs-modal-width:1150px;">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content p-3">
+                    <div class="modal-header pb-2 pt-1">
+                        <h4 class="mb-0">Approve Gatepass</h4>
+                    </div>
+                    <div class="modal-body" id="gatepassTable">
+                        <div class="row">
+                            <div class="signature-pad">
+                                <div class="sigPad">
+                                    @if (ViewBag.SignatureExist == 0)
+                                    {
+                                        if (role != "Security Guard")
+                                        {
+                                            <div class="col-md-12 mb-4">
+                                                <div class="form-group" id="radiobtn">
+                                                    <div class="d-flex">
+                                                        <div class="d-flex align-content-center mr-18"><input type="radio" value="Draw" name="ds" id="Draw" required="required" class="mr-2" />Draw Signature</div>
+
+
+                                                        <div class="d-flex align-content-center">
+                                                            <input type="radio" value="Place" name="ds" id="Place" required="required" checked class="mr-2" />Place Signature
+                                                        </div>
+
+                                                    </div>
+                                                    <p class="radioError" style="display:none; color:red">Please select one option.</p>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="signature-pad">
+                                                <div class="row">
+
+                                                    <div class="col-md-6">
+                                                        <div class="sig-wrapper">
+                                                            <div class="d-flex justify-content-between cus-wid">
+                                                                <label class="d-block mb-2 sig-header"><b>Signature</b></label>
+                                                                @if (ViewBag.SignatureExist == 0)
+                                                                {
+                                                                    <button type="button" class="btn btn-primary btn-sm btn-clear-canvas" id="btn-clear-canvas" disabled>Clear</button>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <button type="button" class="btn btn-primary btn-sm btn-clear-canvas" id="btn-clear-canvas">Clear</button>
+                                                                }
+                                                            </div>
+                                                            <div class="overlaysignature" style="display:none"></div>
+                                                            <canvas class="panel panel-default" id="sig_canvas" placeholder="Draw your signature"></canvas>
+                                                        </div>
+                                                        <input type="hidden" id="Gatepass_id" name="Gatepass_id" value="" />
+
+                                                        @if (role == "Security Guard")
+                                                        {
+
+                                                            <div class="col-md-10 mt-2">
+                                                                <label for="Gatepass DispatchBy" class="form-label">Gatepass DispatchBy</label>
+                                                                @if (ViewBag.role == "Security Guard")
+                                                                {
+                                                                    if (ViewBag.role == "Security Guard" && ViewBag.location == "Global Port")
+                                                                    {
+                                                                        <select class="form-control input-col enteredby-select" required="required" name="Gatepass_DispatchBy1" id="Gatepass_DispatchBy1">
+                                                                            <option value="Dilip Surwalkar">Dilip Surwalkar</option>
+                                                                            <option value="Kavita Thorat">Kavita Thorat</option>
+                                                                            <option value="Mahesh Navathale">Mahesh Navathale</option>
+                                                                            <option value="Santosh Shimpalee">Santosh Shimpale</option>
+                                                                        </select>
+                                                                    }
+                                                                    else if (ViewBag.role == "Security Guard" && ViewBag.location == "SEZ")
+                                                                    {
+                                                                        <select class="form-control input-col enteredby-select" required="required" name="Gatepass_DispatchBy1" id="Gatepass_DispatchBy1">
+                                                                            <option value="Anupam Sabale">Anupam Sabale</option>
+                                                                            <option value="Manoj Dhurander">Manoj Dhurander</option>
+                                                                            <option value="Raju Chavan">Raju Chavan</option>
+                                                                            <option value="Sachin Lokhande">Sachin Lokhande</option>
+                                                                        </select>
+                                                                    }
+                                                                    else if (ViewBag.role == "Security Guard" && ViewBag.location == "Siddhant")
+                                                                    {
+                                                                        <select class="form-control input-col enteredby-select" required="required" name="Gatepass_DispatchBy1" id="Gatepass_DispatchBy1">
+                                                                            <option value="Aditya Bhoj">Aditya Bhoj</option>
+                                                                            <option value="Arjun Singh">Arjun Singh</option>
+                                                                            <option value="Dada Jadhav">Dada Jadhav</option>
+                                                                            <option value="Nagesh Shinde">Nagesh Shinde</option>
+                                                                            <option value="Umesh Lokhande">Umesh Lokhande</option>
+                                                                            <option value="Vijay Kshirsagar">Vijay Kshirsagar </option>
+                                                                        </select>
+                                                                    }
+                                                                }
+
+
+                                                            </div>
+                                                        }
+
+
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        @if (ViewBag.SignatureExist == 0)
+                                                        {
+                                                            if (role != "Security Guard")
+                                                            {
+                                                                <div class="vline"></div>
+
+                                                                <button type="button" class="btn-sm btn-place-signature mb-3" id="btn-place-signature"> Proceed </button>
+                                                                <div class="passwordauth" style="margin-top:11px;display:none">
+                                                                    <div class="col-md-10">
+                                                                        <div class="form-group">
+                                                                            <label class="d-block mb-2 form-label">Please Enter Your Password:</label>
+                                                                            <input class="form-control mb-3" type="password" name="userPassword" id="userPassword" />
+                                                                            <p class="passError" style="display:none; color:red">Please Enter Password.</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-10 mb-3">
+                                                                        <button type="submit" id="btn_verifypassword" class="action-btn button button4">Verify</button>
+                                                                    </div>
+                                                                </div>
+                                                            }
+
+                                                        }
+
+
+
+                                                    </div>
+                                                    <input type="hidden" value="" id="signaturePath" name="signaturePath" />
+                                                    <input type="hidden" value="" id="Gatepass_DispatchBy" name="Gatepass_DispatchBy" />
+                                                    <input type="hidden" value="" id="Status" name="Status" />
+                                                    <input type="hidden" value="@role" id="userrole" name="userrole" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="col-md-10">
+                                        <img class="col-md-3" style="margin-top:20px" id="savetarget" src="" />
+                                        <img style="visibility:hidden" id="basesavetarget" src="" />
+                                    </div>
+                                    <div class="form-group col-md-10">
+                                        <button type="button" class="btn-sm btn-place-signature" id="btn-save-signature">Save Signature</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-top"></div>
+                    <div class="modal-footer justify-content-start p-0 pt-1">
+                        <button type="submit" id="modal_submit" class="button button4 btnsignaturesubmit action-btn mr-18">Submit</button>
+                        <button type="button" id="close" class="button button4 cancel-btn">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <fieldset>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="modal" tabindex="-1" id="RejectGatepassModal"
+                                 data-keyboard="true" data-backdrop="static">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content p-3">
+                                        <div class="modal-header">
+                                            <div class="ft-18 form-label">Reject Gatepass</div>
+
+                                        </div>
+                                        <div class="modal-body pb-0 reject-modal">
+                                            @using (Html.BeginForm("GatepassStatusUpdate", "Add_Gatepass", FormMethod.Get))
+                                            {
+                                                <div class="form-group required mb-4">
+                                                    <label class="d-block form-label ft-16">Reason for Rejection</label>
+                                                    <textarea rows="6" cols="130" class="form-control" name="GatepassRejectReason" style="width:50% !important" required="required"></textarea>
+                                                </div>
+
+                                                <input type="hidden" value="Reject" id="GatePass_Status" name="GatePass_Status" />
+                                                <input type="hidden" value="" id="rejectGatepassId" name="rejectGatepassId" />
+                                                <div class="border-top"></div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="action-btn button button4 mr-18">Submit</button>
+                                                    <button type="button" id="rejectclose" class="cancel-btn button button4">Close</button>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <div id="overlay">
+        <div class="cv-spinner">
+            <span class="spinner"></span>
+        </div>
+    </div>
+</div>
+<script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="~/Scripts/signature_pad.min.js"></script>
+<script src="~/Scripts/SignaturePadInit.js"></script>
+<script src="~/Scripts/sweetalert2.all.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+
+<script type="text/javascript">
+
+    function printPDF(gatepassID) {
+        var encodedGatepassID = encodeGatepassID(gatepassID);
+        var printWindow = window.open('/Add_Gatepass/PrintPDF?gatepassID=' + encodeURIComponent(encodedGatepassID), '_blank');
+        printWindow.onload = function () {
+            printWindow.focus();
+            printWindow.print();
+        };
+    }
+    function downloadPDF(gatepassID) {
+        var encodedGatepassID = encodeGatepassID(gatepassID);
+        var downloadUrl = '/Add_Gatepass/DownloadPDF?gatepassID=' + encodeURIComponent(encodedGatepassID);
+        window.location.href = downloadUrl;
+    }
+    function encodeGatepassID(gatepassID) {
+        return btoa(gatepassID);
+    }
+
+    $('#Gatepass_DispatchBy1').change(function () {
+        // Get the selected value from the dropdown
+        $('#Gatepass_DispatchBy').val('');
+        var selectedValue = $(this).val();
+
+        // Set the value in the hidden input field
+        $('#Gatepass_DispatchBy').val(selectedValue);
+    });
+
+    function divupdateGPstatus(GPId, status) {
+
+            $('#GatepassModel').modal('show');
+            var gid = document.getElementById('Gatepass_id');
+
+            var Base64 = { _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=", encode: function (e) { var t = ""; var n, r, i, s, o, u, a; var f = 0; e = Base64._utf8_encode(e); while (f < e.length) { n = e.charCodeAt(f++); r = e.charCodeAt(f++); i = e.charCodeAt(f++); s = n >> 2; o = (n & 3) << 4 | r >> 4; u = (r & 15) << 2 | i >> 6; a = i & 63; if (isNaN(r)) { u = a = 64 } else if (isNaN(i)) { a = 64 } t = t + this._keyStr.charAt(s) + this._keyStr.charAt(o) + this._keyStr.charAt(u) + this._keyStr.charAt(a) } return t }, decode: function (e) { var t = ""; var n, r, i; var s, o, u, a; var f = 0; e = e.replace(/[^A-Za-z0-9\+\/\=]/g, ""); while (f < e.length) { s = this._keyStr.indexOf(e.charAt(f++)); o = this._keyStr.indexOf(e.charAt(f++)); u = this._keyStr.indexOf(e.charAt(f++)); a = this._keyStr.indexOf(e.charAt(f++)); n = s << 2 | o >> 4; r = (o & 15) << 4 | u >> 2; i = (u & 3) << 6 | a; t = t + String.fromCharCode(n); if (u != 64) { t = t + String.fromCharCode(r) } if (a != 64) { t = t + String.fromCharCode(i) } } t = Base64._utf8_decode(t); return t }, _utf8_encode: function (e) { e = e.replace(/\r\n/g, "\n"); var t = ""; for (var n = 0; n < e.length; n++) { var r = e.charCodeAt(n); if (r < 128) { t += String.fromCharCode(r) } else if (r > 127 && r < 2048) { t += String.fromCharCode(r >> 6 | 192); t += String.fromCharCode(r & 63 | 128) } else { t += String.fromCharCode(r >> 12 | 224); t += String.fromCharCode(r >> 6 & 63 | 128); t += String.fromCharCode(r & 63 | 128) } } return t }, _utf8_decode: function (e) { var t = ""; var n = 0; var r = c1 = c2 = 0; while (n < e.length) { r = e.charCodeAt(n); if (r < 128) { t += String.fromCharCode(r); n++ } else if (r > 191 && r < 224) { c2 = e.charCodeAt(n + 1); t += String.fromCharCode((r & 31) << 6 | c2 & 63); n += 2 } else { c2 = e.charCodeAt(n + 1); c3 = e.charCodeAt(n + 2); t += String.fromCharCode((r & 15) << 12 | (c2 & 63) << 6 | c3 & 63); n += 3 } } return t } };
+
+            var sid;
+            if (GPId != "") {
+                sid = GPId;
+                var encoded = Base64.encode(sid);
+                sid = (encoded);
+            }
+            gid.value = sid;
+            var gstatus = document.getElementById('Status');
+            gstatus.value = status;
+
+        }
+
+        $('#btn-place-signature').click(function () {
+            $('.passwordauth').css('display', 'block');
+        });
+
+        function divRejectgatepass(GPId) {
+            $('#RejectGatepassModal').modal('show');
+
+            var gid = document.getElementById('rejectGatepassId');
+
+            var Base64 = { _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=", encode: function (e) { var t = ""; var n, r, i, s, o, u, a; var f = 0; e = Base64._utf8_encode(e); while (f < e.length) { n = e.charCodeAt(f++); r = e.charCodeAt(f++); i = e.charCodeAt(f++); s = n >> 2; o = (n & 3) << 4 | r >> 4; u = (r & 15) << 2 | i >> 6; a = i & 63; if (isNaN(r)) { u = a = 64 } else if (isNaN(i)) { a = 64 } t = t + this._keyStr.charAt(s) + this._keyStr.charAt(o) + this._keyStr.charAt(u) + this._keyStr.charAt(a) } return t }, decode: function (e) { var t = ""; var n, r, i; var s, o, u, a; var f = 0; e = e.replace(/[^A-Za-z0-9\+\/\=]/g, ""); while (f < e.length) { s = this._keyStr.indexOf(e.charAt(f++)); o = this._keyStr.indexOf(e.charAt(f++)); u = this._keyStr.indexOf(e.charAt(f++)); a = this._keyStr.indexOf(e.charAt(f++)); n = s << 2 | o >> 4; r = (o & 15) << 4 | u >> 2; i = (u & 3) << 6 | a; t = t + String.fromCharCode(n); if (u != 64) { t = t + String.fromCharCode(r) } if (a != 64) { t = t + String.fromCharCode(i) } } t = Base64._utf8_decode(t); return t }, _utf8_encode: function (e) { e = e.replace(/\r\n/g, "\n"); var t = ""; for (var n = 0; n < e.length; n++) { var r = e.charCodeAt(n); if (r < 128) { t += String.fromCharCode(r) } else if (r > 127 && r < 2048) { t += String.fromCharCode(r >> 6 | 192); t += String.fromCharCode(r & 63 | 128) } else { t += String.fromCharCode(r >> 12 | 224); t += String.fromCharCode(r >> 6 & 63 | 128); t += String.fromCharCode(r & 63 | 128) } } return t }, _utf8_decode: function (e) { var t = ""; var n = 0; var r = c1 = c2 = 0; while (n < e.length) { r = e.charCodeAt(n); if (r < 128) { t += String.fromCharCode(r); n++ } else if (r > 191 && r < 224) { c2 = e.charCodeAt(n + 1); t += String.fromCharCode((r & 31) << 6 | c2 & 63); n += 2 } else { c2 = e.charCodeAt(n + 1); c3 = e.charCodeAt(n + 2); t += String.fromCharCode((r & 15) << 12 | (c2 & 63) << 6 | c3 & 63); n += 3 } } return t } };
+
+            var sid;
+            if (GPId != "") {
+                sid = GPId;
+                var encoded = Base64.encode(sid);
+                sid = (encoded);
+            }
+            gid.value = sid;
+
+        }
+
+        $("#close").on("click", function () {
+            $('#GatepassModel').modal('hide');
+        });
+
+        $("#rejectclose").on("click", function () {
+            $('#RejectGatepassModal').modal('hide');
+        });
+
+         $('#btn-save-signature').click(function () {
+
+            var poID = $("#Gatepass_id").val();
+            var ImgStr = $('#basesavetarget').attr('src');
+            var role = $('#userrole').val();
+            $("#overlay").fadeIn(300);
+             $.ajax({
+                 type: 'POST',
+                 url: '@Url.Action("SaveImage", "Add_Gatepass")',
+                 data: { "ImgStr": ImgStr, "GPID": poID, "role": role },
+                    dataType: 'text',
+                    async: 'false',
+                    success: function (data) {
+
+                        var converteddata = JSON.parse(data);
+                        console.log(data);
+                        $("#overlay").fadeOut(300);
+                        $('.btnsignaturesubmit').prop('disabled', false);
+                        $("#signaturePath").val(converteddata.url);
+                        Swal.fire("", "Signature Saved Succeessfully.", "success");
+                    }
+                })
+        });
+
+        $('#btn_verifypassword').click(function () {
+
+            $("#overlay").fadeIn(300);
+            var password = $('#userPassword').val();
+            $(".passError").hide();
+            var password = $('#userPassword').val();
+            if (password == '') {
+                $("#overlay").fadeOut(300);
+                $(".passError").show();
+                return false;
+            }
+            $("#loader").show();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("verifyuserpassword", "Add_Gatepass")',
+                data: { "userpassword": password },
+                dataType: 'Text',
+                async: 'false',
+                success: function (data) {
+                    $("#loader").hide();
+                    var convertdata = JSON.parse(data);
+                    if (convertdata.data == true)
+                    {
+                        $("#overlay").fadeOut(300);
+                        Swal.fire("", "Password Verified Successfully.", "success");
+                        //alert('Password Verified Successfully.');
+                        var poID = $("#Gatepass_id").val();
+                        var role = $('#userrole').val();
+                        var canvas = document.getElementById('sig_canvas');
+                        var signaturePad = new SignaturePad(canvas, {
+                            penColor: "#0B0B45"
+
+                        });
+                        signaturePad.clear();
+                        $('#signaturePath').val('');
+                        $('#savetarget').attr("src", "");
+                        $('#basesavetarget').attr("src", "");
+                        $("#overlay").fadeIn(300);
+                         $.ajax({
+                             type: 'POST',
+                             url: '@Url.Action("PickSignature", "Add_Gatepass")',
+                             data: { "gpid": poID, "role": role },
+                                dataType: 'text',
+                                async: 'false',
+                                success: function (data) {
+
+                                    $("#overlay").fadeOut(300);
+                                    var converteddata = JSON.parse(data);
+                                    console.log(data);
+                                    $('#savetarget').attr("src", converteddata.imgurl.url);
+                                    $('#basesavetarget').attr("src", converteddata.baseimgurl);
+                                    $('.passwordauth').css('display', 'none');
+                                }
+                            })
+                       }
+                    else
+                    {
+                        $("#overlay").fadeOut(300);
+                        $('#userPassword').val('');
+                        Swal.fire("", "Wrong Password", "error");
+
+                    }
+                }
+
+            });
+
+        });
+
+        $('input[type=radio][name=ds]').change(function () {
+            var Value = $(this).val();
+            $('.radioError').hide();
+            if (Value == 'Draw') {
+                $('.overlaysignature').hide();
+                $('.btnsignaturesubmit').prop('disabled', false);
+                $('#btn-place-signature').prop('disabled', true);
+                $('#btn-clear-canvas').prop('disabled', false);
+                $('#signaturePath').val('');
+                $('#savetarget').attr("src", "");
+                $('#basesavetarget').attr("src", "");
+                $('.passwordauth').css('display', 'none');
+                var canvas = document.getElementById('sig_canvas');
+                var signaturePad = new SignaturePad(canvas, {
+                    penColor: "#0B0B45"
+                });
+                signaturePad.onEnd = function () {
+
+                    // Returns signature image as data URL and set it to hidden input
+
+                    base64str = signaturePad.toDataURL();
+                    var poid = $("#Gatepass_id").val();
+                    $('#basesavetarget').attr("src", base64str);
+
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Add_Gatepass/PreviewImage',
+                        data: { "ImgStr": base64str, "GPID": poid },
+                        async: 'false',
+                        cache: false,
+                        success: function (data) {
+
+                            console.log(data);
+                            if (data.data == 00) {
+                                $('#savetarget').attr("src", data.url);
+                            }
+                        }
+                    })
+                };
+            }
+            else if (Value == 'Place') {
+                //$('.sig-wrapper').hide();
+                $('.btnsignaturesubmit').prop('disabled', false);
+                $('#btn-place-signature').prop('disabled', false);
+                $('#btn-clear-canvas').prop('disabled', true);
+
+                $('#signaturePath').val('');
+                $('#savetarget').attr("src", "");
+                $('#basesavetarget').attr("src", "");
+                var canvas = document.getElementById('sig_canvas');
+                var signaturePad = new SignaturePad(canvas, {
+                    penColor: "#0B0B45"
+                });
+                signaturePad.clear();
+                signaturePad.off();
+                $('.overlaysignature').show();
+            }
+
+        });
+
+
+        $(".btnsignaturesubmit").click(function () {
+
+             $("#overlay").fadeIn(300);
+
+
+            if ($('input[type=radio][name=ds]').length) {
+
+                 if ($('input[name="ds"]:checked').length == 0) {
+                     $("#overlay").fadeOut(300);
+                     $('.radioError').show();
+                     $('.btnsignaturesubmit').prop('disabled', true);
+                     return false;
+                 }
+                 else {
+                     $('.radioError').hide();
+                     $('.btnsignaturesubmit').prop('disabled', false);
+                 }
+            }
+
+            if ($('#signaturePath').val() == '') {
+                $("#overlay").fadeOut(300);
+                Swal.fire("", "Please Save the Signature before Submitting.", "error");
+                $('.btnsignaturesubmit').prop('disabled', true);
+               return false;
+            }
+
+                var Approver_Signature = $('#signaturePath').val();
+
+                var status = $('#Status').val();
+                var sid = $('#Gatepass_id').val();
+            var userrole = $('#userrole').val();
+            var gpdispatchby = $('#Gatepass_DispatchBy').val();
+
+
+            var model = {
+                signaturePath: Approver_Signature,
+                GatepassID: sid,
+                Gatepass_DispatchBy: gpdispatchby
+             };
+
+
+                $('#btnsignaturesubmit').prop('disabled', 'false');
+                $.ajax({
+                 type: 'POST',
+                    url: '@Url.Action("GatepassStatusUpdate", "Add_Gatepass")',
+                    data: { "model": model, "status": status},
+                    dataType: 'text',
+                    async: 'false',
+                    success: function (data) {
+                        debugger
+                     //  data = JSON.parse(data);
+                       var url = '@Url.Action("GatepassDetails", "Add_Gatepass")';
+
+
+                        $('#GatepassModel').modal('hide');
+                        $("#overlay").fadeOut(300);
+                        if (data.data == 11) {
+                            var d = data.ErrorMsg;
+                            console.log(d);
+                            Swal.fire({
+                                icon: 'error',
+                                title: "Your transaction cannot be Completed.Please contact to adminisrator.",
+                                text: d,
+                                showConfirmButton: false,
+                                showDenyButton: true,
+                                denyButtonText: `Ok`,
+                            }).then((result) => {
+                                if (result.isDenied) {
+                                    window.location.href = url + '?GatepassID=' + sid;
+                                }
+                            })
+                        }
+                        else {
+                            debugger;
+                            window.location.href = url + '?GatepassID=' + sid;
+                        }
+                    }
+
+                })
+        });
+
+
+        function divshowPO(gpid) {
+
+            $("#RejectGatepassModal").modal('show');
+
+            var Base64 = { _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=", encode: function (e) { var t = ""; var n, r, i, s, o, u, a; var f = 0; e = Base64._utf8_encode(e); while (f < e.length) { n = e.charCodeAt(f++); r = e.charCodeAt(f++); i = e.charCodeAt(f++); s = n >> 2; o = (n & 3) << 4 | r >> 4; u = (r & 15) << 2 | i >> 6; a = i & 63; if (isNaN(r)) { u = a = 64 } else if (isNaN(i)) { a = 64 } t = t + this._keyStr.charAt(s) + this._keyStr.charAt(o) + this._keyStr.charAt(u) + this._keyStr.charAt(a) } return t }, decode: function (e) { var t = ""; var n, r, i; var s, o, u, a; var f = 0; e = e.replace(/[^A-Za-z0-9\+\/\=]/g, ""); while (f < e.length) { s = this._keyStr.indexOf(e.charAt(f++)); o = this._keyStr.indexOf(e.charAt(f++)); u = this._keyStr.indexOf(e.charAt(f++)); a = this._keyStr.indexOf(e.charAt(f++)); n = s << 2 | o >> 4; r = (o & 15) << 4 | u >> 2; i = (u & 3) << 6 | a; t = t + String.fromCharCode(n); if (u != 64) { t = t + String.fromCharCode(r) } if (a != 64) { t = t + String.fromCharCode(i) } } t = Base64._utf8_decode(t); return t }, _utf8_encode: function (e) { e = e.replace(/\r\n/g, "\n"); var t = ""; for (var n = 0; n < e.length; n++) { var r = e.charCodeAt(n); if (r < 128) { t += String.fromCharCode(r) } else if (r > 127 && r < 2048) { t += String.fromCharCode(r >> 6 | 192); t += String.fromCharCode(r & 63 | 128) } else { t += String.fromCharCode(r >> 12 | 224); t += String.fromCharCode(r >> 6 & 63 | 128); t += String.fromCharCode(r & 63 | 128) } } return t }, _utf8_decode: function (e) { var t = ""; var n = 0; var r = c1 = c2 = 0; while (n < e.length) { r = e.charCodeAt(n); if (r < 128) { t += String.fromCharCode(r); n++ } else if (r > 191 && r < 224) { c2 = e.charCodeAt(n + 1); t += String.fromCharCode((r & 31) << 6 | c2 & 63); n += 2 } else { c2 = e.charCodeAt(n + 1); c3 = e.charCodeAt(n + 2); t += String.fromCharCode((r & 15) << 12 | (c2 & 63) << 6 | c3 & 63); n += 3 } } return t } };
+
+            var Gatepassid;
+
+
+            if (gpid != "") {
+                Gatepassid = gpid;
+                var encoded = Base64.encode(Gatepassid);
+                Gatepassid = (encoded);
+
+            }
+            var vid = document.getElementById("rejectGatepassId");
+            vid.value = poid;
+            $("#close").click(function () {
+                $("#RejectGatepassModal").modal('hide');
+            });
+
+        }
+
+</script>
+
+

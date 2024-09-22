@@ -1,0 +1,1222 @@
+﻿@model IMS.Models.IMSEntity
+
+@{
+    Layout = "~/Views/Shared/_Layout_IMS.cshtml";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link href="~/Content/sweetalert2.min.css" rel="stylesheet" />
+<link href="~/assets/css/custom.css" rel="stylesheet" />
+
+<div class="edit-inward">
+    <div class="d-flex justify-content-between mt-2 align-items-center">
+        <h5 class="content-title mt-0">Edit Inward Material</h5>
+        <h5 class="mandatory-fields">* All Fields are Mandatory</h5>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="form addInward editInward">
+                @using (Html.BeginForm("Edit_InwardMaterial", "Add_InwardMaterial", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "validateForm()", name = "myForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="SerialNumber" value="@ViewBag.Count" name="SerialNumber" />
+                    <input type="hidden" id="SerialNumberdetail" name="SerialNumbedetail" />
+                    <div class="mb-2">
+                        <div class="card-body row p-0">
+                            <input type="hidden" id="dcNumbersData" value="@ViewBag.DCNUmberyest" />
+                            <input type="hidden" name="InwardID" id="InwardID" value="@ViewBag.InwardID" />
+                            <input type="hidden" name="InwardDateTime" id="InwardDateTime" value="@DateTime.Now" />
+                            <input type="hidden" id="finalnumberforDC" value="0" name="finalnumberforUA" />
+                            <input type="hidden" id="MaterialID" value="@ViewBag.MaterialID" name="MaterialID" />
+                            <input type="hidden" id="Material_CategoryID" value="@ViewBag.Material_CategoryID" name="Material_CategoryID" />
+                            <input type="hidden" id="Quantity" value="@ViewBag.Quantity" name="Quantity" />
+                            <input type="hidden" id="MaterialName" value="@ViewBag.MaterialName" name="MaterialName" />
+                            <input type="hidden" id="Inward_Type" value="@ViewBag.Inward_Type" name="Inward_Type" />
+                            <input type="hidden" id="Material_Remark" value="@ViewBag.Material_Remark" name="Material_Remark" />
+                            @if (@ViewBag.DCNUmberyest != null)
+                            {
+                                string commaSeparatedList = string.Join(",", @ViewBag.DCNUmberyest);
+                                <input class="DC-numbers-list" value="@commaSeparatedList" type="hidden" />
+                            }
+
+                            @if (ViewBag.MaterialIdlist != null)
+                            {
+                                string commaSeparatedmaterialList = string.Join(",", ViewBag.MaterialIdlist);
+                                <input class="MaterialID-list" value="@commaSeparatedmaterialList" type="hidden" />
+                            }
+
+
+                            <div class="col-md-4 mb-3">
+                                @Html.LabelFor(model => model.userDepartmentId, htmlAttributes: new { @class = "form-label" })
+                                @Html.DropDownList("userDepartmentId", new SelectList(ViewBag.userDepartment, "userDepartmentId", "userDepartmentName"), "Select", new { @class = "form-control input-col user-dept-dropdown", @required = "required" })
+                                <div>
+                                    @Html.ValidationMessageFor(model => model.userDepartmentId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "form-label required" })
+                                @if (ViewBag.role == "Security Guard")
+                                {
+                                    if (ViewBag.role == "Security Guard" && ViewBag.location == "Global Port")
+                                    {
+                                        @Html.DropDownListFor(model => model.Location, new List
+                                        <SelectListItem>
+                                        {
+                                        new SelectListItem{Text= "Global Port" , Value="Global Port", Selected = true},
+                                        }, new { disabled = "disabled", @style = "width:65%", @class = "form-control input-col", @required = "required", @name = "Location", @id = "Location" }) }
+                                    else if (ViewBag.role == "Security Guard" && ViewBag.location == "SEZ")
+                                    {
+                                        @Html.DropDownListFor(model => model.Location, new List
+                                        <SelectListItem>
+                                        {
+                                        new SelectListItem{Text= "SEZ" , Value="SEZ", Selected = true},
+                                        }, new { disabled = "disabled", @style = "width:65%", @class = "form-control input-col", @required = "required", @name = "Location", @id = "Location" }) }
+                                    else if (ViewBag.role == "Security Guard" && ViewBag.location == "Siddhant")
+                                    {
+                                        @Html.DropDownListFor(model => model.Location, new List
+                                        <SelectListItem>
+                                        {
+                                        new SelectListItem{Text= "Siddhant" , Value="Siddhant", Selected = true},
+                                        }, new { disabled = "disabled", @style = "width:65%", @class = "form-control input-col", @required = "required", @name = "Location", @id = "Location" }) }
+                                }
+                                else
+                                {
+                                    @Html.DropDownListFor(model => model.Location, new List
+                                    <SelectListItem>
+                                    {
+                                    new SelectListItem{Text= "Global Port" , Value="Global Port"},
+                                    new SelectListItem{Text= "Siddhant" , Value="Siddhant"},
+                                    new SelectListItem{Text= "SEZ" , Value="SEZ"},
+                                    }, "Select", new { @style = "width:50%", @class = "form-control input-col", @required = "required", @name = "Location" })}
+                            </div>
+                            <div class="col-md-4 mb-3 divbill" style="display:none">
+                                <label for="billentry" class="form-label">Bill of Entry</label>
+                                <input type="text" class="form-control" name="BillofEntry" id="BillofEntry" value="">
+                            </div>
+                            <div class="External row col-md-12">
+                                <!-- Existing Vendor Section -->
+                                <div id="existvendor" class="mt-3 mb-3">
+                                    <div class="col-md-4 mb-3">
+                                        @Html.LabelFor(model => model.vendorId, htmlAttributes: new { @class = "form-label" })
+                                        <span> </span>
+                                        <button type="button" class="trasparantbutton" onclick="divshow()">Vendor Not Found?</button>
+                                        @Html.DropDownList("vendorId", new SelectList(ViewBag.vendorList, "vendorId", "vendorName"), "Select Vendor", new { @class = "form-control input-col", id = "vendorDropdown" })
+                                        <div>
+                                            @Html.ValidationMessageFor(model => model.vendorId, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Temporary Vendor Section -->
+                                <div id="tempvendor" class="mt-3 mb-3" style="display:none;">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="hidden" name="TempVendorID" id="TempVendorID" value="@Model.TempVendorID" />
+
+                                            <div class="mb-3">
+                                                <label for="ReceiverName" class="form-label">Vendor Name</label>
+                                                <span> </span>
+                                                <button type="button" class="trasparantbutton" id="vendornm" onclick="divshowexist()">Exist Vendor?</button>
+                                                <input type="text" class="form-control" name="ReceiverName" id="ReceiverName" value="@ViewBag.VendorName" />
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="ReceiverEmail" class="form-label">Vendor Email</label>
+                                                <input type="email" class="form-control" name="ReceiverEmail" id="ReceiverEmail" value="@ViewBag.VendorEmail" />
+                                                <div class="emailvalidation text-danger" style="display:none;">Invalid email address. Please enter a valid email.</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="ReceiverContact" class="form-label">Vendor Contact No.</label>
+                                                <input type="text" class="form-control" name="ReceiverContact" id="ReceiverContact" value="@ViewBag.VendorContact" />
+                                                <div class="phonevalidation text-danger" style="display:none;">Please enter a valid phone number!</div>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="ReceiverAddress" class="form-label">Vendor Address</label>
+                                                <textarea class="form-control" id="ReceiverAddress" name="ReceiverAddress">@ViewBag.VendorAddress</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <label for="InwardEnteredBy" class="form-label">InwardEnteredBy</label>
+                                @if (ViewBag.role == "Security Guard")
+                                {
+                                    if (ViewBag.role == "Security Guard" && ViewBag.location == "Global Port")
+                                    {
+                                        @Html.DropDownListFor(model => model.InwardEnteredBy, new List
+                                        <SelectListItem>
+                                        {
+                                              new SelectListItem{Text= "Dilip Surwalkar" , Value="Dilip Surwalkar"},
+                                              new SelectListItem{Text= "Kavita Thorat" , Value="Kavita Thorat"},
+                                              new SelectListItem{Text= "Mahesh Navathale" , Value="Mahesh Navathale"},
+                                              new SelectListItem{Text= "Santosh Shimpale" , Value="Santosh Shimpale"},
+                                        }, new { @style = "width:100%", @class = "form-control input-col", @required = "required", @name = "InwardEnteredBy", @id = "InwardEnteredBy" }) }
+                                    else if (ViewBag.role == "Security Guard" && ViewBag.location == "SEZ")
+                                    {
+                                        @Html.DropDownListFor(model => model.InwardEnteredBy, new List
+                                        <SelectListItem>
+                                        {
+                                       new SelectListItem{Text= "Anupam Sabale" , Value="Anupam Sabale"},
+                                              new SelectListItem{Text= "Manoj Dhurander" , Value="Manoj Dhurander"},
+                                              new SelectListItem{Text= "Raju Chavan" , Value="Raju Chavan"},
+                                              new SelectListItem{Text= "Sachin Lokhande" , Value="Sachin Lokhande"},
+                                        }, new { @style = "width:100%", @class = "form-control input-col", @required = "required", @name = "InwardEnteredBy", @id = "InwardEnteredBy" }) }
+                                    else if (ViewBag.role == "Security Guard" && ViewBag.location == "Siddhant")
+                                    {
+                                        @Html.DropDownListFor(model => model.InwardEnteredBy, new List
+                                        <SelectListItem>
+                                        {
+                                      new SelectListItem{Text= "Aditya Bhoj" , Value="Aditya Bhoj"},
+                                              new SelectListItem{Text= "Arjun Singh" , Value="Arjun Singh"},
+                                              new SelectListItem{Text= "Dada Jadhav" , Value="Dada Jadhav"},
+                                              new SelectListItem{Text= "Nagesh Shinde" , Value="Nagesh Shinde"},
+                                              new SelectListItem{Text= "Umesh Lokhande" , Value="Umesh Lokhande"},
+                                              new SelectListItem{Text= "Vijay Kshirsagar" , Value="Vijay Kshirsagar"},
+                                              new SelectListItem{Text= "Vinay Kumar Pandey" , Value="Vinay Kumar Pandey"},
+                                        }, new { @style = "width:100%", @class = "form-control input-col", @required = "required", @name = "InwardEnteredBy", @id = "InwardEnteredBy" })}
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" id="btnAddRow" class="btn btn-primary mb-4">Add Material</button>
+                    <div style="display:none" id="errorGST">
+                        <p style="color:red;">Please fill the above details before submitting.</p>
+                    </div>
+                    <div id="datatable" class="col-md-12">
+                        <input type="hidden" id="hdnRows" value="1" />
+                        <table border="1" cellspacing="4" cellpadding="4">
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Material</th>
+                                    <th>Quantity</th>
+                                    <th>Inward_Type</th>
+                                    <th>Remark</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tblPage" name="data[]">
+                                <tr>
+                                    <input type="hidden" name="srno[]" />
+                                    <input type="hidden" name="InvTemp_ID[]" id="InvMaterialTemp_ID" />
+                                    <td><input type="hidden" name="mcategory[]" id="MaterialCategory" /></td>
+                                    <td><input type="hidden" name="material[]" id="Material" /></td>
+                                    <td><input type="hidden" name="quantity[]" id="M_Quantity" /></td>
+                                    <td><input type="hidden" name="inwardtype[]" id="InwardType" /></td>
+                                    <td><input type="hidden" name="materialremark[]" id="mremark" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-12 col-sm-6">
+                        <div class="">
+                            <div class="card-body p-0 pt-3 challan">
+                                @*<input type="hidden" name="DC_Filename" id="DC_Filename" value="" />
+                                    <input type="hidden" name="DC_Filesize" id="DC_Filesize" value="" />*@
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <p class="delivery-title mb-0">Delivery Challan</p>
+                                    <button type="button" id="btnAddDC" class="btn btn-primary mb-2">+ Add New </button>
+                                </div>
+
+                                @{
+                                    int i = 0;
+                                }
+                                @foreach (var ad in ViewBag.DClist)
+                                {
+                                    <div class="DC_@i">
+                                        <div class="delivery-challen-row row mb-3" data-dc-id="@ad.DC_ID">
+                                            <div class="col-md-3">
+                                                <label for="DC_Number" class="form-label">Delivery Challan No</label>
+                                                <input type="hidden" name="EditedRows[@i].DC_ID" value="@ad.DC_ID">
+                                                <input type="text" class="DC_Number dcnm form-control" name="EditedRows[@i].DC_Number" id="DC_Number@i" value="@ad.DC_Number">
+                                                <p id="uniDCNumber_@i" style="display:none; color:red">already exists! Please enter a unique DC number.</p>
+                                            </div>
+
+
+                                            <div class="col-md-3">
+                                                <label for="actions" class="form-label">Actions</label> <br />
+
+                                                <a href="@Url.Action("ViewInwarddocx", "Add_InwardMaterial", new { id = ad.DC_ID, name = "DeliveryChallen"}, null)" target="_blank">
+                                                    <img class="px-2" id="deliverychallendoc" src="/assets/images/icons/view.svg" alt="" />
+                                                </a>
+                                                <a onclick="editDeliveryChallen('@ad.DC_ID')">
+                                                    <img class="px-2" id="change_dc" src="/assets/images/icons/edit.svg" alt="" />
+                                                </a>
+                                            </div>
+                                            <div class="uploadfile col-md-6" style="display:none">
+                                                <div>
+
+                                                    <label class="form-label" for="fileupload_@i">Upload Delivery Challan </label>
+                                                    <input type="hidden" name="EditedRows[@i].DC_Filename_EXI" value="@ad.DC_Filename" />
+                                                    <input type="hidden" name="EditedRows[@i].DC_FileSize_EXI" value="@ad.DC_Filesize" />
+
+                                                    <input type="file" id="fileupload_@i" name="EditedRows[@i].DC_Filename" class="fileupload btn  btn-file form-control input-col" value="@ad.DC_Filename" style="display:none" />
+                                                    <button class="addfiles uploadfilebtn">Upload Delivery Challan</button>
+                                                    <p class="uploadsowerror" style="display:none; color:red">Please upload the file.</p>
+                                                    <p class="filetypeerror" style="display:none; color:red">Please upload the correct file</p>
+                                                </div>
+                                                <div>
+                                                    <div class="form-group" style="display:block;">
+                                                        <label class="control-lable-small-forms">File Name </label>
+                                                        <textarea class="filename form-control input-col" style="font-size:12px;" id="filename_@i" name="ExistingFilenames[@i]" readonly="readonly">@ad.DC_Filename</textarea>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    i++;
+                                }
+
+                                <div class="delivery-challan mb-3" id="DC_1" style="display:none">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label for="DC_Number" class="form-label">Delivery Challen No</label>
+                                            <input type="text" class="dcnm form-control" placeholder="DC No" name="DC_Number1" id="DC_Number1" value="">
+                                        </div>
+                                        <div class="col-md-9">
+                                            <label class="form-label" for="fileupload1">Upload Delivery Challen </label>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="pe-2">
+                                                    <label class="d-flex">
+                                                        <!--<img src="~/assets/images/icons/file-icon.svg" alt="" />-->
+                                                        <input type="file" id="fileupload1" name="DC_Filename" class="btn  btn-file form-control input-col addfiles1" />
+                                                        <input type="hidden" name="filename1" id="filename1" value="" />
+                                                    </label>
+                                                    <p class="uploadsowerror1" style="display:none; color:red">Please upload the file.</p>
+                                                    <p class="filetypeerror1" style="display:none; color:red">Please upload the correct file</p>
+                                                    <!--<label for="file_size" class="form-label file-size">2.4 MB</label>-->
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div id="DC_2" class="delivery-challan mb-3" style="display:none">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label for="DC_Number" class="form-label">Delivery Challen No</label>
+                                            <input type="text" class="dcnm form-control" placeholder="DC No" name="DC_Number2" id="DC_Number2" value="">
+                                        </div>
+                                        <div class="col-md-9">
+                                            <label class="form-label" for="fileupload2">Upload Delivery Challen </label>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="pe-2">
+                                                    <label class="d-flex">
+                                                        <!-- <img src="~/assets/images/icons/file-icon.svg" alt="" />-->
+                                                        <input type="file" id="fileupload2" name="DC_Filename" class="btn  btn-file form-control input-col addfiles2" />
+                                                        <input type="hidden" name="filename2" id="filename1" value="" />
+                                                    </label>
+                                                    <p class="uploadsowerror1" style="display:none; color:red">Please upload the file.</p>
+                                                    <p class="filetypeerror1" style="display:none; color:red">Please upload the correct file</p>
+                                                    <!--<label for="file_size" class="form-label file-size">2.4 MB</label>-->
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="DC_3" class="delivery-challan mb-3" style="display:none">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label for="DC_Number" class="form-label">Delivery Challen No</label>
+                                            <input type="text" class="dcnm form-control" placeholder="DC No" name="DC_Number3" id="DC_Number3" value="">
+                                        </div>
+
+                                        <div class="col-md-9">
+                                            <label class="form-label" for="fileupload1">Upload Delivery Challen </label>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="pe-2">
+                                                    <label class="d-flex">
+                                                        <!-- <img src="~/assets/images/icons/file-icon.svg" alt="" />-->
+                                                        <input type="file" id="fileupload3" name="DC_Filename" class="btn  btn-file form-control input-col addfiles3" />
+                                                        <input type="hidden" name="filename3" id="filename3" value="" />
+                                                    </label>
+                                                    <p class="uploadsowerror1" style="display:none; color:red">Please upload the file.</p>
+                                                    <p class="filetypeerror1" style="display:none; color:red">Please upload the correct file</p>
+                                                    <!--<label for="file_size" class="form-label file-size">2.4 MB</label>-->
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="border-top mt-4"></div>
+                                <button type="submit" value="Submit" class="btn btn-primary edit-submit" id="submit">Submit</button>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="modal modal-lg fade" tabindex="-1" id="myCompanyModal"
+             data-keyboard="true" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content p-3">
+                    <div class="modal-header">
+                        <h4>Add Materials</h4>
+                        <button type="button" id="closeModalHeader" class="btn-close close" data-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label class="form-label">Material Category</label>
+                                @Html.DropDownList("Material_CategoryID", new SelectList(ViewBag.materialcategory, "Material_CategoryID", "Material_CategoryName"), "Select", new { @class = "form-control input-col materialcatadd", @value = ViewBag.Material_Category })
+                                <div>
+                                    @Html.ValidationMessageFor(model => model.Material_CategoryID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Material</label>
+                                @Html.DropDownListFor(model => model.MaterialID, new List
+                                <SelectListItem>
+                                {
+                                }, "Select", new { @class = "form-control input-col addmaterial" })
+                                <div>
+                                    @Html.ValidationMessageFor(model => model.MaterialID, "", new { @class = "text-danger " })
+                                </div>
+                            </div>
+                            <div class="col-md-4 quantity-style">
+                                <label class="form-label mb-2" for="Quantity">Quantity</label><br />
+                                <input type='button' value='-' class='qtyminus minus' field='quantity' />
+                                <input type='text' name='Quantity' value='0' id="Quantity" class='qty matqty' />
+                                <input type='button' value='+' class='qtyplus plus' field='quantity' />
+                            </div>
+                            <div class="col-md-4 mt-3">
+                                <label class="form-label">Inward Type</label>
+                                @Html.DropDownListFor(model => model.Inward_Type, new List
+                                <SelectListItem>
+                                {
+                                new SelectListItem{ Text = "Returnable", Value="Returnable"},
+                                new SelectListItem{Text= "NonReturnable", Value="NonReturnable"},
+                                }, "Select", new { @class = "form-control input-col addinward" })
+                            </div>
+                            <div class="col-md-7 mt-3">
+                                <label class="form-label">Material Remark</label>
+                                <textarea class="form-control matremark" id="Material_Remark" name="Material_Remark" rows="1" cols="12" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-start">
+                        <button type="submit" id="modal_submit" class="btn btn-primary button button4 material-submit">Submit</button>
+                        <button type="button" id="closemodal" class="btn btn-primary button button4">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal modal-lg fade" tabindex="-1" id="EditMaterialpopup"
+             data-keyboard="true" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content p-3">
+                    <div class="modal-header">
+                        <h4>Edit Materials</h4>
+                        <button type="button" id="closeModalHeader" class="btn-close close" data-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label class="form-label">Material Category</label>
+                                @Html.DropDownList("Material_CategoryID", new SelectList(ViewBag.materialcategory, "Material_CategoryID", "Material_CategoryName"), "Select", new { @class = "form-control input-col materialcat", @value = ViewBag.Material_Category })
+                                <div>
+                                    @Html.ValidationMessageFor(model => model.Material_CategoryID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Material</label>
+                                @*@Html.DropDownList("MaterialID", new SelectList("","MaterialID", "MaterialName"), "Select", new { @class = "form-control input-col"})*@
+                                @Html.DropDownListFor(model => model.MaterialID, new List
+                                <SelectListItem>
+                                {
+                                }, "Select", new { @class = "form-control input-col materialedit" })
+                                <div>
+                                    @Html.ValidationMessageFor(model => model.MaterialID, "", new { @class = "text-danger " })
+                                </div>
+                            </div>
+                            <div class="col-md-4 quantity-style">
+                                <label class="form-label mb-2" for="Quantity">Quantity</label><br />
+                                <input type='button' value='-' class='qtyminus minus' field='quantity' />
+                                <input type='text' name='Quantity' value='0' id="Quantityedit" class='qty' />
+                                <input type='button' value='+' class='qtyplus plus' field='quantity' />
+                            </div>
+                            <div class="col-md-4 mt-3">
+                                <label class="form-label">Inward Type</label>
+                                @Html.DropDownListFor(model => model.Inward_Type, new List
+                                <SelectListItem>
+                                {
+                                new SelectListItem{ Text = "Returnable", Value="Returnable"},
+                                new SelectListItem{Text= "NonReturnable", Value="NonReturnable"},
+                                }, "Select", new { @class = "form-control input-col inwardedit" })
+                            </div>
+                            <div class="col-md-4 mt-3">
+                                <label class="form-label">Material Remark</label>
+                                <textarea class="form-control materialremark" id="Material_Remark" name="Material_Remark" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-start">
+                        @*<button type="submit" id="modal_submit" class="btn btn-primary button button4">Submit</button>*@
+                        <input type="button" value="Save" id="btnEditRow" onclick="save_rowinward()" class="btn btn-primary m-0" />
+                        <button type="button" id="closeedit" class="btn btn-primary button button4">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="~/Scripts/sweetalert2.all.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+
+<script type="text/javascript">
+       $(document).ready(function () {
+           debugger;
+           var list = @Html.Raw(Json.Encode(ViewBag.details));
+
+           var len = '@ViewBag.rowlength';
+           var srno = 1;
+           for (var i = 0; i < len; i++) {
+
+               $("#tblPage").append('<tr>' +
+                   '<input type="hidden" name="InvTemp_ID[]" id="InvTemp_ID' + srno + '" value ="' + list[i].InvMaterialTemp_ID + ' "readonly="readonly"/> ' +
+                   '<input type="text" name="srno[]" id="Serialno' + srno + '" value ="' + srno + ' "readonly="readonly"/> ' +
+                   '<input type="hidden" name="mid[]" id="mid' + srno + '" value ="' + list[i].MaterialID + '"/>' +
+                   '<input type="hidden" name="mcatid[]" id="mcatid' + srno + '" value ="' + list[i].Material_CategoryID + '"/>' +
+                   '<td><input type="text" name="mcategory[]" id="materialcat' + srno + '" value ="' + list[i].Material_CategoryName + '" data-catid = "' + list[i].Material_CategoryID + '" readonly="readonly"/></td>' +
+                   '<td><input type="text" name="material[]" id="materials' + srno + '" value ="' + list[i].MaterialName + '" data-mid = "' + list[i].MaterialID + '" readonly="readonly"/></td>' +
+                   '<td><input type="text" name="m_quantity[]" id="M_Quantity' + srno + '"value ="' + list[i].Quantity + '"readonly="readonly"/></td>' +
+                    '<td><input class="inward-type" name="invtype[]" id="invtype' + srno + '"value ="' + list[i].Inward_Type + '"readonly="readonly"/></td>' +
+                   '<td><input type="text" name="matremark[]" id="mremark' + srno + '"value ="' + list[i].Material_Remark + '"readonly="readonly"/></td>' +
+                   '<td style ="white-space: nowrap"><div class="d-flex align-items-center"><button class="btnDelete" id="btnDelete' + srno + '" onclick="deleteRow(this,' + srno + ');"><img class="px-2" src="/assets/images/icons/trash.svg" alt=""/></button>' +
+                   //'<td><button id="editbtn' + srno + '" onclick="editRow(' + srno + ');">edit Row</button></td>' +
+                   '<input type="button" value="" class="editbtn" id="editbtn' + srno + '" onclick="editRow(' + srno + ',' + "'" + list[i].Material_CategoryID + "'" + ',' + "'" + list[i].MaterialID + "'" + ',' + "'" + list[i].Quantity + "'" + ',' + "'" + list[i].Inward_Type + "'" +','+ "'" + list[i].Material_Remark + "'" +'); "/></div></td>' +
+                   '</tr>');
+
+               srno++;
+           }
+           var inwardTypeSpan = document.querySelectorAll('.inward-type');
+           console.log(inwardTypeSpan);
+           for (var i = 0; i < inwardTypeSpan.length; i++) {
+               if (inwardTypeSpan[i].innerText == "NonReturnable") {
+                   inwardTypeSpan[i].classList.add("non-returnable");
+               }
+               else if (inwardTypeSpan[i].innerText == "Returnable") {
+                   inwardTypeSpan[i].classList.add("returnable");
+               }
+           }
+
+
+       });
+       var jsDCList = [];
+
+       var dcList = {};
+
+
+        $(".dcnm").keyup(function () {
+            debugger;
+                // Get the value of the .DC-numbers-list element
+            var existingValues = $('.DC-numbers-list').val();
+            var inputElement = document.querySelector('.DC-numbers-list');
+
+                // Get the value of the input element
+                var value = inputElement.value;
+
+                // Split the existing values into an array
+                var existingArray = value.split(',');
+                var isDuplicate = false;
+                // Get the current value of the input field
+                var currentValue = $(this).val();
+
+                 var currentInputField = $(this);
+                // Iterate over each input field with class .dcnm
+                $(".dcnm").not($(this)).each(function () {
+                    // Check if the current value already exists in the existing array
+                    if (existingArray.includes(currentValue)) {
+                        currentInputField.val('');
+                        isDuplicate = true;
+                        return false; // Exit the loop early if a match is found
+                    }
+                });
+                    if (isDuplicate) {
+                        Swal.fire({
+                            html: "Delivery Challan Number Already Added!",
+                            showClass: {
+                                popup: 'animate__animated animate__fadeInDown'
+                            },
+                            hideClass: {
+                                popup: 'animate__animated animate__fadeOutUp'
+                            }
+                        });
+                    }
+
+        });
+
+       function editDeliveryChallen(dcId) {
+           debugger
+           $(".uploadfile").hide();
+           $(".delivery-challen-row[data-dc-id='" + dcId + "'] .uploadfile").show();
+
+       }
+       function deleteRow(obj, srno1) {
+           debugger;
+           console.log(obj);
+
+           var quantityvalue = document.getElementById("M_Quantity" + srno1);
+           var quan1;
+           quan1 = quantityvalue.value;
+
+           var serialno = $("#SerialNumber").val();
+           var srno = (parseInt(serialno) - 1);
+           document.getElementById('SerialNumber').value = srno;
+
+           $(obj).parent().parent().parent().remove();
+           if (srno == 0) {
+               document.getElementById('datatable').style.display = 'none';
+           }
+           document.getElementById('QuantityDetails').value = "";
+       }
+
+       function editRow(srno, materialcat, material, qty, invtype, remark) {
+           debugger;
+
+           $('#EditMaterialpopup').modal('show');
+           $('#btnAddRow').hide();
+           var ser = document.getElementById('SerialNumberdetail');
+           ser.value = srno;
+           $('#Material_CategoryID option[value="' + materialcat + '"]').prop("selected", true);
+           ddlistmaterialeditfunction(materialcat);
+
+           $('#MaterialID option[value="' + material + '"]').prop("selected", true);
+           $('#Inward_Type option[value="' + invtype + '"]').prop("selected", true);
+           $("#Quantityedit").val(qty);
+           $(".materialremark").val(remark);
+
+       }
+
+       $("#btnAddRow").on("click", function () {
+           $('#myCompanyModal').modal('show');
+       });
+
+       $("#closemodal").on("click", function () {
+           $('#myCompanyModal').modal('hide');
+       });
+
+
+       $("#btnEditRow").on("click", function () {
+
+           $('#EditMaterialpopup').modal('show');
+       });
+
+       $("#closeedit").on("click", function () {
+           $('#EditMaterialpopup').modal('hide');
+       });
+
+       $('.plus').click(function (e) {
+           let $input = $(this).prev('input.qty');
+           let val = parseInt($input.val());
+           $input.val(val + 1).change();
+       });
+
+       $('.minus').click(function (e) {
+           let $input = $(this).next('input.qty');
+           var val = parseInt($input.val());
+           if (val > 0) {
+               $input.val(val - 1).change();
+           }
+       });
+
+      var selectedMaterials = [];
+
+       $("#modal_submit").on("click", function () {
+           debugger;
+           var serialno = $("#SerialNumber").val();
+           var remark = $(".matremark").val();
+           var material = $('.addmaterial').find('option:selected').text();
+           var materialcat = $('.materialcatadd').find('option:selected').text();
+           var materialid = $('.addmaterial').find('option:selected').val();
+           var materialcatid = $('.materialcatadd').find('option:selected').val();
+           var qty = $(".matqty").val();
+           var invtype = $(".addinward").find('option:selected').text();
+           var srno = (parseInt(serialno) + 1);
+           var mid = $('.addmaterial').find('option:selected').val();
+
+
+
+
+
+
+
+           if (material == "Select" || qty == "0" || invtype == "Select") {
+               $('#submit').hide();
+               document.getElementById('errorGST').style.display = 'block';
+           }
+           else {
+               document.getElementById('datatable').style.display = 'block';
+               var row = $("#hdnRows").val();
+               $("#tblPage").append('<tr>' +
+                   '<input type="text"name="srno[]" id="Serialno' + srno + '" value ="' + srno + ' "readonly="readonly"/> ' +
+                   '<input type="hidden" name="InvTemp_ID[]" value="" id="InvTemp_ID' + srno + '"  "readonly="readonly"/> ' +
+                   '<input type="hidden" name="mid[]" id="mid' + srno + '" value ="' + mid + '"/>' +
+                   '<input type="hidden" name="mcatid[]" id="mcatid' + srno + '" value ="' + materialcatid + '"/>' +
+                   '<td><input type="text" name="mcategory[]" id="materialcat' + srno + '" value ="' + materialcat + '" data-catid = "' + materialcatid + '" readonly="readonly"/></td>' +
+                   '<td><input type="text" name="material[]" id="materials' + srno + '" value ="' + material + '" data-mid = "' + materialid + '" readonly="readonly"/></td>' +
+                   '<td><input type="text" name="m_quantity[]" id="M_Quantity' + srno + '"value ="' + qty + '"readonly="readonly"/></td>' +
+                   '<td><input class="inward-type" type="text" name="invtype[]" id="invtype' + srno + '"value ="' + invtype + '"readonly="readonly"/></td>' +
+                   '<td><input type="text" name="matremark[]" id="mremark' + srno + '"value ="' + remark + '"readonly="readonly"/></td>' +
+                   '<td style ="white-space: nowrap"><div class="d-flex align-items-center"><button class="btnDelete" id="btnDelete' + srno + '" onclick="deleteRow(this,' + srno + ');"><img class="px-2" src="/assets/images/icons/trash.svg" alt=""/></button>' +
+                   //'<td><button id="editbtn' + srno + '" onclick="editRow(' + srno + ');">edit Row</button></td>' +
+                   '<input type="button" value="" class="editbtn" id="editbtn' + srno + '" onclick="editRow(' + srno + ',' + "'" + materialcatid + "'" + ' , ' + "'" + materialid + "'" + ',' + "'" + qty + "'" + ',' + "'" + invtype + "'" + ',' + "'" + remark + "'" + '); "/></div></td>' +
+                   '</tr>');
+               var inwardTypeSpan = document.querySelectorAll('.inward-type');
+               console.log(inwardTypeSpan);
+               for (var i = 0; i < inwardTypeSpan.length; i++) {
+                   if (inwardTypeSpan[i].innerText == "NonReturnable") {
+                       inwardTypeSpan[i].classList.add("non-returnable");
+                   }
+                   else if (inwardTypeSpan[i].innerText == "Returnable") {
+                       inwardTypeSpan[i].classList.add("returnable");
+                   }
+               }
+               document.getElementById('SerialNumber').value = srno;
+
+               $('#submit').show();
+               $('.addmaterial').prop('selectedIndex', 0);
+               $('.materialcatadd').prop('selectedIndex', 0);
+               $('.addmaterial').empty();
+               $('.addinward').prop('selectedIndex', 0);
+               $(".matqty").val(0);
+               $(".matremark").val('');
+               document.getElementById('errorGST').style.display = 'none';
+           }
+       });
+
+         function ddlistmaterialfunction(id) {
+               debugger;
+               $.ajax({
+                   type: 'POST',
+                   url: '@Url.Action("Getmaterials", "Add_InwardMaterial")',
+                   data: { "Material_CategoryID": id},
+                   dataType: 'text',
+                   async: 'false',
+                   success: function (data) {
+                       debugger;
+
+
+                       var parsedata = JSON.parse(data);
+                       parsedata = JSON.parse(parsedata);
+                       console.log(parsedata);
+                       $(".addmaterial").empty();
+                       var optionhtml = '<option>' + "Select" + '</option>';
+                       //$("#MaterialID").append(optionhtml);
+                       $.each(parsedata, function (i) {
+                           var optionhtml1 = '<option value="' +
+                               parsedata[i].MaterialID + '">' + parsedata[i].MaterialName + '</option>';
+                           $(".addmaterial").append(optionhtml1);
+                       })
+
+                   }
+               });
+       }
+
+
+       function save_rowinward() {
+           debugger;
+           var InwordId = "@ViewBag.InwardID";
+           var ser = $('#SerialNumberdetail').val();
+           var material = $('.materialedit').find('option:selected').text();
+           var materialcat = $('.materialcat').find('option:selected').text();
+           var materialid = $('.materialedit').find('option:selected').val();
+           var materialcatid = $('.materialcat').find('option:selected').val();
+           var qty = $("#Quantityedit").val();
+           var remark = $(".materialremark").val();
+           var invtype = $(".inwardedit").find('option:selected').text();
+
+           var inputElement = document.querySelector('.MaterialID-list');
+           var value = inputElement.value;
+
+           // Split the existing values into an array
+           var existingArray = value.split(',');
+
+           var isDuplicate = false;
+
+           var currentValue = materialid;
+
+           // Check if the current value already exists in the existing array
+           if (existingArray.includes(currentValue)) {
+             
+               isDuplicate = true;
+               if (isDuplicate) {
+                   debugger
+                   Swal.fire({
+                       html: "Material Already Added!",
+                       showClass: {
+                           popup: 'animate__animated animate__fadeInDown'
+                       },
+                       hideClass: {
+                           popup: 'animate__animated animate__fadeOutUp'
+                       }
+                   });
+                   return false;
+               }
+               return false; // Exit the loop early if a match is found
+           }
+
+           
+
+
+           if (Material != "Select" || qty != "0" || invtype != "Select") {
+               $('#submit').show();
+               debugger;
+               document.getElementById('errorGST').style.display = 'none';
+
+               var mcat = document.getElementById("materialcat" + ser);
+               mcat.value = materialcat;
+               var quan_id = document.getElementById("M_Quantity" + ser);
+               var remark_id = document.getElementById("mremark" + ser);
+               remark_id.value = remark;
+               quan_id.value = qty;
+               var mid = document.getElementById("materials" + ser);
+               mid.value = material;
+
+
+               var invid = document.getElementById("invtype" + ser);
+               invid.value = invtype;
+
+               $('#MaterialID').prop('selectedIndex', 0);
+               $('#Material_CategoryID').prop('selectedIndex', 0);
+               $('#MaterialID').empty();
+               $('#Inward_Type').prop('selectedIndex', 0);
+               $("#Quantity").val(0);
+               $("#Material_Remark").val('');
+               $('#btnAddRow').show();
+               $('#Editbudgetpopup').modal('hide');
+              // document.getElementById('btnEditRow').style.display = 'none';
+
+
+               $.ajax({
+
+                   type: 'POST',
+                   url: '@Url.Action("Edit_InwardMaterial", "Add_InwardMaterial")',
+                   data: { "Material_CategoryID": id },
+                   dataType: 'text',
+                       async: 'false',
+                           success: function (data) {
+
+
+                       var parsedata = JSON.parse(data);
+                       parsedata = JSON.parse(parsedata);
+                       console.log(parsedata);
+                       $(".materialedit").empty();
+                       var optionhtml = '<option>' + "Select" + '</option>';
+                       //$("#MaterialID").append(optionhtml);
+                       $.each(parsedata, function (i) {
+                           var optionhtml1 = '<option value="' +
+                               parsedata[i].MaterialID + '">' + parsedata[i].MaterialName + '</option>';
+                           $(".materialedit").append(optionhtml1);
+                       })
+
+
+                           }
+
+               })
+           }
+           else {
+               $('#btnAddRow').hide();
+               document.getElementById('btnEditRow').style.display = 'block';
+               $('#submit').hide();
+
+               document.getElementById('errorGST').style.display = 'block';
+           }
+
+       }
+
+
+
+        function ddlistmaterialeditfunction(id) {
+               debugger;
+               $.ajax({
+                   type: 'POST',
+                   url: '@Url.Action("Getmaterials", "Add_InwardMaterial")',
+                   data: { "Material_CategoryID": id},
+                   dataType: 'text',
+                   async: 'false',
+                   success: function (data) {
+                       debugger;
+                       var parsedata = JSON.parse(data);
+                       parsedata = JSON.parse(parsedata);
+                       console.log(parsedata);
+                       $(".materialedit").empty();
+                       var optionhtml = '<option>' + "Select" + '</option>';
+                       //$("#MaterialID").append(optionhtml);
+                       $.each(parsedata, function (i) {
+                           var optionhtml1 = '<option value="' +
+                               parsedata[i].MaterialID + '">' + parsedata[i].MaterialName + '</option>';
+                           $(".materialedit").append(optionhtml1);
+                       })
+
+
+                   }
+               });
+           }
+
+
+
+       $('.materialcatadd').change(function () {
+           debugger;
+           var id = $(".materialcatadd").val();
+           ddlistmaterialfunction(id);
+       });
+
+
+
+
+       $("#change_dc").on("click", function () {
+
+           $(".uploadfile").css("display", "block");
+
+       });
+        $('.addfiles').on('click', function () {
+               debugger;
+            var fileupload = $(this).closest('.delivery-challen-row').find('.fileupload');
+
+           // Clear the file input value (limited browser support)
+           fileupload.val('');
+
+           // Trigger a click event on the fileupload element
+           fileupload.click();
+
+           return false;
+           });
+
+       $('.fileupload').change(function () {
+           debugger
+           //var index = parseInt($(this).closest('.DC_').attr('id').split('_')[1]);
+           var index = parseInt(this.id.split('_')[1]);
+           var filename = this.files[0]; // Get the selected file
+           var Value = $(this).val();
+           var abc = Value.split("\\");
+           var name = abc[abc.length - 1];
+
+           // Create a FormData object to send the file:
+         @*  var formData = new FormData();
+           formData.append("EditedRows[" + index + "].DC_Filename", filename);*@
+
+           // (Optional) Add other data to the FormData if needed:
+           // formData.append("DC_ID", index); // Assuming you have a hidden field for DC_ID
+
+           $.ajax({
+               url: '@Url.Action("GetFileType")', // Replace with your actual URL
+               type: 'Get',
+               data: { "filename": name },
+               dataType: 'text',
+
+               async: 'false',
+               success: function (data) {
+
+                   console.log(data);
+                   data = JSON.parse(data);
+
+                   count = data.count;
+
+                   if (count == 1) {
+                       debugger;
+                       $('.filetypeerror').hide();
+
+                       var upload = document.getElementById('filename_' + index);
+
+                       upload.value = name;
+       @**@
+
+                   }
+                   else if (count == 0) {
+                       $('.filetypeerror1').show();
+                   }
+               }
+           }
+
+
+           );
+       });
+       @* $('.addfiles').on('click', function () {
+               debugger;
+               $('#fileupload').click(); return false;
+           });
+
+            $('#fileupload').change(function () {
+               debugger;
+               $('.uploadsowerror').hide();
+
+               var Value = $(this).val();
+               var abc = Value.split("\\");
+               var name = abc[abc.length - 1];
+
+               $.ajax({
+                   type: 'GET',
+                   url: '@Url.Action("GetFileType")',
+                   data: { "filename": name },
+                   dataType: 'text',
+
+                   async: 'false',
+                   success: function (data) {
+
+                       console.log(data);
+                       data = JSON.parse(data);
+
+                       count = data.count;
+
+                       if (count == 1)
+                       {
+                           debugger;
+                           $('.filetypeerror').hide();
+                           var upload = document.getElementById('filename');
+
+                           upload.value = name;
+
+
+                       }
+                       else if(count == 0) {
+                           $('.filetypeerror').show();
+                       }
+                     }
+                   }
+
+         );
+
+           });*@
+
+
+       $('.addfiles1').on('click', function () {
+               debugger;
+               $('#fileupload1').click(); return false;
+           });
+
+            $('#fileupload1').change(function () {
+               debugger;
+               $('.uploadsowerror1').hide();
+
+               var Value = $(this).val();
+               var abc = Value.split("\\");
+               var name = abc[abc.length - 1];
+
+               $.ajax({
+                   type: 'GET',
+                   url: '@Url.Action("GetFileType")',
+                   data: { "filename": name },
+                   dataType: 'text',
+
+                   async: 'false',
+                   success: function (data) {
+
+                       console.log(data);
+                       data = JSON.parse(data);
+
+                       count = data.count;
+
+                       if (count == 1)
+                       {
+                           debugger;
+                           $('.filetypeerror').hide();
+                           var upload = document.getElementById('filename1');
+
+                           upload.value = name;
+
+
+                       }
+                       else if(count == 0) {
+                           $('.filetypeerror1').show();
+                       }
+                     }
+                   }
+
+         );
+
+       });
+
+       $('.addfiles2').on('click', function () {
+               debugger;
+           $('#fileupload2').click();
+           return false;
+           });
+
+            $('#fileupload2').change(function () {
+               debugger;
+               $('.uploadsowerror2').hide();
+
+               var Value = $(this).val();
+               var abc = Value.split("\\");
+               var name = abc[abc.length - 1];
+
+               $.ajax({
+                   type: 'GET',
+                   url: '@Url.Action("GetFileType")',
+                   data: { "filename": name },
+                   dataType: 'text',
+
+                   async: 'false',
+                   success: function (data) {
+
+                       console.log(data);
+                       data = JSON.parse(data);
+
+                       count = data.count;
+
+                       if (count == 1)
+                       {
+                           debugger;
+                           $('.filetypeerror2').hide();
+                           var upload = document.getElementById('filename2');
+
+                           upload.value = name;
+
+
+                       }
+                       else if(count == 0) {
+                           $('.filetypeerror2').show();
+                       }
+                     }
+                   }
+
+         );
+
+           });
+
+
+        $('.addfiles3').on('click', function () {
+               debugger;
+               $('#fileupload3').click(); return false;
+           });
+
+            $('#fileupload3').change(function () {
+               debugger;
+               $('.uploadsowerror3').hide();
+
+               var Value = $(this).val();
+               var abc = Value.split("\\");
+               var name = abc[abc.length - 1];
+
+               $.ajax({
+                   type: 'GET',
+                   url: '@Url.Action("GetFileType")',
+                   data: { "filename": name },
+                   dataType: 'text',
+
+                   async: 'false',
+                   success: function (data) {
+
+                       console.log(data);
+                       data = JSON.parse(data);
+
+                       count = data.count;
+
+                       if (count == 1)
+                       {
+                           debugger;
+                           $('.filetypeerror3').hide();
+                           var upload = document.getElementById('filename3');
+
+                           upload.value = name;
+
+                       }
+                       else if(count == 0) {
+
+                       }
+                     }
+                   }
+
+         );
+
+            });
+
+        var numBlocksShown3 = 0;
+        $('#btnAddDC').click(function () {
+            debugger
+            var inputElement = document.querySelector('.DC-numbers-list');
+
+            // Get the value of the input element
+            var value = inputElement.value;
+
+            // Split the existing values into an array
+            var existingArray = value.split(',');
+
+            var val_to = parseInt($('#finalnumberforDC').val());
+            var numBlocksShown = $('.dc-block:visible').length;
+            var numBlocksShown1 = numBlocksShown + numBlocksShown3;
+            var totalblockF = existingArray.length + numBlocksShown1;
+            if (val_to >= 0 && val_to < 2 && existingArray.length <= 4  && totalblockF < 4) {
+                var blockId = 'DC_' + (val_to + 1); // Generating ID of the block to show
+                $('#' + blockId).show();
+                numBlocksShown3++;
+                $('#finalnumberforDC').val(val_to + 1);
+            }
+           });
+
+function divshow() {
+    document.getElementById('existvendor').style.display = 'none';
+    document.getElementById('tempvendor').style.display = 'block';
+
+    document.getElementById('vendorDropdown').removeAttribute('required');
+    document.getElementById('vendorDropdown').value = '';
+}
+
+function divshowexist() {
+    document.getElementById('existvendor').style.display = 'block';
+    document.getElementById('tempvendor').style.display = 'none';
+
+    document.getElementById('vendorDropdown').setAttribute('required', 'required');
+    document.getElementById('ReceiverName').value = '';
+    document.getElementById('ReceiverEmail').value = '';
+    document.getElementById('ReceiverContact').value = '';
+    document.getElementById('ReceiverAddress').value = '';
+
+        clearFormInputs('tempvendor');
+    }
+
+    // Function to clear all input fields within a specific section
+    function clearFormInputs(sectionId) {
+        var section = document.getElementById(sectionId);
+        var inputs = section.getElementsByTagName('input');
+        var textareas = section.getElementsByTagName('textarea');
+
+        // Loop through input fields and clear their values
+        for (var i = 0; i < inputs.length; i++) {
+            inputs[i].value = '';
+        }
+
+        // Loop through textarea fields and clear their values
+        for (var i = 0; i < textareas.length; i++) {
+            textareas[i].value = '';
+        }
+    }
+document.addEventListener('DOMContentLoaded', function () {
+    var vendorDropdown = document.getElementById('vendorDropdown');
+    var tempVendorSection = document.getElementById('tempvendor');
+    var existVendorSection = document.getElementById('existvendor');
+
+    if (vendorDropdown && tempVendorSection && existVendorSection) {
+        var selectedVendorId = vendorDropdown.value;
+
+        if (selectedVendorId) {
+            tempVendorSection.style.display = 'none';
+            existVendorSection.style.display = 'block';
+            vendorDropdown.setAttribute('required', 'required');
+        } else {
+            tempVendorSection.style.display = 'block';
+            existVendorSection.style.display = 'none';
+            vendorDropdown.removeAttribute('required');
+        }
+    }
+});
+
+</script>

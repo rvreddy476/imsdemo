@@ -1,0 +1,179 @@
+﻿@model IMS.Models.IMSEntity
+@{
+    ViewBag.Title = "UserRegistration";
+    Layout = "~/Views/Shared/_Layout_IMS.cshtml";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link href="~/assets/css/custom.css" rel="stylesheet" />
+<div class="add-user">
+    <h5 class="content-title mb-2">Add User</h5>
+    <div class="card">
+        <div class="card-body p-0 card-height">
+            @if (TempData["Msg"] != null)
+            {
+                <script type="text/javascript">
+                        alert(@Html.Raw(Json.Encode(TempData["Msg"])));
+                </script>
+            }
+            <div class="row">
+                <div class="col-lg-7 register-form">
+                    @using (Html.BeginForm("UserRegistration", "Add_User", FormMethod.Post, new { id = "createUserForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form">
+                            <div class="row">
+                                <div class="col-lg-9">
+                                    <div class="p-4">
+                                        <h5 class="mb-3 form-label">Registration</h5>
+                                        <input type="hidden" name="userexist" id="userexist" value="0" />
+
+                                        <label for="email" class="form-label">User Email</label>
+                                        <input type="text" class="form-control" placeholder="User Email" name="userEmail" id="userEmail">
+                                        <div class="emailvalidation" style="color:red;margin-bottom:20px;display:none">Invalid email address. Please enter a valid email.</div>
+                                        <div class="existvalidation" style="color:red;margin-bottom:10px;display:none">User Email already exist!</div>
+
+                                        <label for="user-name" class="form-label mt-3">User Name</label>
+                                        <input type="text" class="form-control" placeholder="User Name" name="userName" id="userName" value="">
+
+                                        <div class="existing-user">
+                                            <label for="designation" class="form-label mt-3">User Department</label>
+                                            @Html.DropDownList("userDepartmentId", new SelectList(ViewBag.userDepartment, "userDepartmentId", "userDepartmentName"), "Select", new { @class = "form-control input-col user-dept-select", @required = "required" })
+                                            <div>
+                                                @Html.ValidationMessageFor(model => model.userDepartmentId, "", new { @class = "text-danger" })
+                                            </div>
+
+                                            <label for="ims-role" class="form-label mt-3">IMS Role</label>
+                                            @Html.DropDownListFor(model => model.RoleInIMS, new List<SelectListItem>
+                                               {
+                                                   new SelectListItem{ Text = "Inventory Manager", Value="Inventory Manager"},
+                                                   new SelectListItem{ Text = "Inventory Incharge", Value="Inventory Incharge"},
+                                                   new SelectListItem{ Text = "Receiver", Value="Receiver"},
+                                                   new SelectListItem{ Text = "Security Guard", Value="Security Guard"},
+                                                   new SelectListItem{ Text = "Administrator", Value="Administrator"},
+
+                                                 }, "Select Role", new { @id = "designation", @class = "form-control input-col", @required = "required" })
+
+                                            <label for="location" class="form-label mt-3">Location</label>
+                                            @Html.DropDownListFor(model => model.userLocation, new List<SelectListItem>
+                                                 {
+                                                    new SelectListItem{Text= "Global Port" , Value="Global Port"},
+                                                    new SelectListItem{Text= "Siddhant" , Value="Siddhant"},
+                                                    new SelectListItem{Text= "SEZ" , Value="SEZ"},
+                                                 }, new { @style = "width:65%", @class = "form-control input-col", @required = "required", @name = "userLocation", @id = "userLocation" })
+
+                                            <label for="email" class="form-label mt-3">Phone</label>
+                                            <input type="text" class="form-control" placeholder="User Phone" name="userphone" id="userphone">
+                                        </div>
+
+
+
+                                        <p class="my-4"></p>
+
+                                        <button type="submit" value="Submit" class="btn btn-primary add-user-submit" id="addUserSubmit">Submit</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="col-lg-5">
+                    <img src="~/assets/images/backgrounds/working-desk.png" class="img-fluid user-reg-img" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/scripts/jquery.validate.unobtrusive.min.js"></script>
+<script type="text/javascript">
+
+    $("#userphone").focusout(function (e) {
+
+        var phone = $("#userphone").val();
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("GetEmailIDs")',
+            success: function (data) {
+                data = JSON.parse(data);
+                console.log(data);
+                $("#addUserSubmit").attr('disabled', false);
+                $("#userphone").parent().next(".validation").remove();
+                $.each(data, function (i) {
+                    var phoneno = /^\d{10}$/;
+                    var enteredval = $("#userphone").val();
+
+                    if ((phoneno).test(enteredval)) {
+                        if (data[i].phone == phone) {
+                            // alert("Please Enter phone");
+                            if ($("#userphone").parent().next(".validation").length == 0) {
+                                $("#userphone").parent().after("<div class='validation' style='color:red;margin:bottom: 20px;'>Phone already exist!</div>");
+                            }
+                            e.preventDefault();
+                            $("#userphone").focus();
+                            $("#addUserSubmit").attr('disabled', true);
+                        }
+                    }
+                    else {
+
+                        if ($("#userphone").parent().next(".validation").length == 0) {
+                            $("#userphone").parent().after("<div class='validation' style='color:red;margin:bottom: 20px;'>Please Enter valid phone number!</div>");
+                        }
+                    }
+                });
+            }
+
+        })
+    });
+
+    $("#userEmail").focusout(function (e) {
+        $("#userexist").val(0);
+        $("#userName").val("");
+        $("#userName").prop('disabled', false);
+
+                            $.ajax({
+                               type: 'POST',
+                               url: '@Url.Action("GetEmailIDs")',
+                                success: function (data) {
+                                    data = JSON.parse(data);
+
+                                    $("#addUserSubmit").attr('disabled', false);
+                                    $(".emailvalidation").hide();
+                                    $(".existvalidation").hide();
+                                    $.each(data, function (i) {
+                                        var emailreg = /^[a-zA-Z0-9._-]+@@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+                                        var enteredval = $("#userEmail").val();
+
+                                        if ((emailreg).test(enteredval))
+                                        {
+                                            debugger;
+                                            if (data[i].userEmail.toLowerCase() == enteredval.toLowerCase()) {
+                                                debugger;
+                                                $(".existvalidation").show();
+                                                //e.preventDefault();
+                                                $("#userName").val(data[i].userName);
+                                                $("#userName").prop('disabled', true);
+                                                $("#userexist").val(1);
+                                                //$("#userEmail").focus();
+                                                //$("#addUserSubmit").attr('disabled', true);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            $(".emailvalidation").show();
+                                            e.preventDefault();
+                                        }
+                                    });
+                            }
+                      })
+
+                    });
+</script>
+
+
+

@@ -1,0 +1,280 @@
+﻿
+@model IMS.Models.IMSEntity
+
+@{
+    ViewBag.Title = "Add Inventory Register";
+    Layout = "~/Views/Shared/_Layout_IMS.cshtml";
+}
+<link href="~/assets/css/custom.css" rel="stylesheet" />
+
+<div class="rightpanel-height">
+    <h5 class="content-title mb-3">Add Inventory Register</h5>
+    <div class="card">
+        <div class="card-body card-height">
+
+            @using (Html.BeginForm("AddInventoryRegister", "Add_InventoryRegister", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group mb-3">
+                            @Html.LabelFor(model => model.Material_CategoryID, "Material Category", htmlAttributes: new { @class = "control-label  mb-2 form-label" })
+                            @Html.DropDownList("Material_CategoryID", new SelectList(ViewBag.materialcategory, "Material_CategoryID", "Material_CategoryName"), "Select", new { @class = "form-control", @required = "required" })
+                            @Html.ValidationMessageFor(model => model.Material_CategoryID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group mb-3">
+                            @Html.LabelFor(model => model.MaterialID, "Material", htmlAttributes: new { @class = "control-label mb-2 form-label" })
+                            @Html.DropDownListFor(model => model.MaterialID, new List<SelectListItem>
+                            {
+
+                            }, "Select", new { @class = "form-control", @required = "required" })
+                            @Html.ValidationMessageFor(model => model.MaterialID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div id="existvendor" class="form-group mb-3">
+                            @Html.LabelFor(model => model.vendorId, htmlAttributes: new { @class = "control-label mb-2 form-label" })
+                            <span> </span> <button type="button" class="trasparantbutton" onclick="divshow()">Vendor Not Found?</button>
+
+                            @Html.DropDownList("vendorId", new SelectList(ViewBag.vendorList, "vendorId", "vendorName"), "Select Vendor", new { @class = "form-control input-col vendor-name-select", @required = "required" })
+                            <div>
+                                @Html.ValidationMessageFor(model => model.vendorId, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tempvendor" class="mt-3 mb-3" style="display:none;">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="ReceiverName" class="form-label">Vendor Name</label>
+                                    <span> </span>
+                                    <button type="button" class="trasparantbutton" onclick="divshowexist()">Exist Vendor?</button>
+                                    <input type="text" class="form-control" name="ReceiverName" id="ReceiverName" value="">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="ReceiverEmail" class="form-label">Vendor Email</label>
+                                    <input type="email" class="form-control" name="ReceiverEmail" id="ReceiverEmail" value="">
+                                    <div class="emailvalidation text-danger" style="display:none;">Invalid email address. Please enter a valid email.</div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="ReceiverContact" class="form-label">Vendor Contact No.</label>
+                                    <input type="text" class="form-control" name="ReceiverContact" id="ReceiverContact" value="">
+                                    <div class="phonevalidation text-danger" style="display:none;">Please enter a valid phone number!</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="ReceiverAddress" class="form-label">Vendor Address</label>
+                                    <textarea class="form-control" id="ReceiverAddress" name="ReceiverAddress"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group mb-3">
+                            @Html.LabelFor(model => model.Purchase_Rate, "Purchase Rate", htmlAttributes: new { @class = "control-label mb-2 form-label" })
+                            @Html.EditorFor(model => model.Purchase_Rate, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @Html.ValidationMessageFor(model => model.Purchase_Rate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group mb-3">
+                            @Html.LabelFor(model => model.Makenm, htmlAttributes: new { @class = "control-label mb-2 form-label" })
+                            @Html.TextBoxFor(model => model.Makenm, new { @class = "form-control mb-2 form-label", @required = "required" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group mb-3">
+                            @Html.LabelFor(model => model.Serial_No, htmlAttributes: new { @class = "control-label mb-2 form-label" })
+                            @Html.TextBoxFor(model => model.Serial_No, new { @class = "form-control mb-2 form-label", @required = "required" })
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group mb-3">
+                        @Html.LabelFor(model => model.Model_Number, htmlAttributes: new { @class = "control-label mb-2 form-label" })
+                        @Html.TextBoxFor(model => model.Model_Number, new { @class = "form-control", @required = "required" })
+                    </div>
+                </div>
+
+                <div class="form-group mb-3">
+                    @Html.LabelFor(model => model.ExpenseNature, htmlAttributes: new { @class = "control-label col-md-2 mb-2 form-label" })
+                    <div class="d-flex align-items-center">
+                        <div class="mr-18 d-flex align-items-center"> @Html.RadioButtonFor(model => model.ExpenseNature, "opex", new { @id = "expenseOpex", @required = "required" }) <span class="ml-5">Opex</span></div>
+                        <div class="mr-18 d-flex align-items-center">
+                            @Html.RadioButtonFor(model => model.ExpenseNature, "capex", new { @id = "expenseCapex", @required = "required" }) <span class="ml-5">Capex</span>
+                        </div>
+                        <div class="mr-18 d-flex align-items-center">
+                            @Html.RadioButtonFor(model => model.ExpenseNature, "rental", new { @id = "expenseRental", @required = "required" }) <span class="ml-5">Rental</span>
+                        </div>
+                        <div class="mr-18 d-flex align-items-center">
+                            @Html.RadioButtonFor(model => model.ExpenseNature, "customer asset", new { @id = "expenseCustomerAsset", @required = "required" }) <span class="ml-5">Customer Asset</span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group machine-details mb-4" id="machine-details" style="display:none;">
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                @Html.LabelFor(model => model.MachineID, htmlAttributes: new { @class = "control-label mb-2 form-label" })
+                                @Html.TextBoxFor(model => model.MachineID, new { @class = "form-control", @required = "required" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                @Html.LabelFor(model => model.RAM, htmlAttributes: new { @class = "control-label mb-2 form-label" })
+                                @Html.TextBoxFor(model => model.RAM, new { @class = "form-control", @required = "required" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                @Html.LabelFor(model => model.HDD, htmlAttributes: new { @class = "control-label mb-2 form-label" })
+                                @Html.TextBoxFor(model => model.HDD, new { @class = "form-control", @required = "required" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                @Html.LabelFor(model => model.OS, htmlAttributes: new { @class = "control-label mb-2 form-label" })
+                                @Html.TextBoxFor(model => model.OS, new { @class = "form-control", @required = "required" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-top"></div>
+                <button type="submit" class="action-btn">Submit</button>
+            }
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="~/Scripts/sweetalert2.all.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+@section Scripts {
+    <script type="text/javascript">
+    $('#Material_CategoryID').change(function () {
+    var selectedCategoryId = $(this).val();
+    $.ajax({
+        url: '@Url.Action("Getmaterials", "Add_InventoryRegister")',
+        type: 'GET',
+        data: { Material_CategoryID: selectedCategoryId },
+        success: function (data) {
+            var materials;
+            try {
+                materials = typeof data === 'string' ? JSON.parse(data) : data;
+            } catch (e) {
+                console.error("Failed to parse JSON response:", e);
+                alert("Error processing materials data.");
+                return;
+            }
+
+            if (!Array.isArray(materials)) {
+                console.error("Materials data is not an array:", materials);
+                alert("Error: Expected an array of materials.");
+                return;
+            }
+
+            $('#MaterialID').empty();
+            $.each(materials, function (i, item) {
+                $('#MaterialID').append($('<option>', {
+                    value: item.MaterialID,
+                    text: item.MaterialName
+                }));
+            });
+        },
+        error: function () {
+            alert("Error loading materials.");
+        }
+        });
+      });
+        document.addEventListener("DOMContentLoaded", function () {
+            const expenseNatureRadios = document.querySelectorAll('input[name="ExpenseNature"]');
+            const machineDetails = document.getElementById("machine-details");
+
+            function toggleMachineDetails() {
+                const selectedExpenseNature = document.querySelector('input[name="ExpenseNature"]:checked');
+                if (selectedExpenseNature) {
+                    const value = selectedExpenseNature.value;
+                    if (value === "rental" || value === "customer asset" || value == "capex") {
+                        machineDetails.style.display = "block";
+                        setMachineFieldsRequired(true);
+                    } else {
+                        machineDetails.style.display = "none";
+                        setMachineFieldsRequired(false);
+                    }
+                }
+            }
+
+            function setMachineFieldsRequired(isRequired) {
+                const machineFields = document.querySelectorAll('#machine-details input');
+                machineFields.forEach(field => {
+                    if (isRequired) {
+                        field.setAttribute("required", "required");
+                    } else {
+                        field.removeAttribute("required");
+                        field.value = "NA";
+                    }
+                });
+            }
+
+            toggleMachineDetails();
+
+            expenseNatureRadios.forEach(radio => {
+                radio.addEventListener("change", toggleMachineDetails);
+            });
+        });
+
+        function divshow() {
+            debugger;
+
+            document.getElementById('existvendor').style.display = 'none';
+            document.getElementById('tempvendor').style.display = 'block';
+
+            $("#ReceiverEmail").val("");
+            $("#ReceiverContact").val("");
+            $("#ReceiverAddress").val("");
+
+            $("#vendorId").attr('required', false);
+            $("#ReceiverEmail").attr('disabled', false);
+            $("#ReceiverContact").attr('disabled', false);
+            $("#ReceiverAddress").attr('disabled', false);
+
+        }
+
+        function divshowexist() {
+            debugger;
+            document.getElementById('existvendor').style.display = 'block';
+            document.getElementById('tempvendor').style.display = 'none';
+            $("#vendorId").attr('required', true);
+            $("#ReceiverEmail").val("");
+            $("#ReceiverContact").val("");
+            $("#ReceiverAddress").val("");
+
+        }
+    </script>
+}

@@ -1,0 +1,275 @@
+﻿body {
+    /* background-image: url('../Images/BG02.jpg');*/
+    background-image: url('../assets/images/backgrounds/login-bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow-x: hidden !important;
+}
+
+h3 {
+    font-size: 24px;
+    padding-left: 12px;
+    color: black;
+}
+
+.main {
+    padding-top: 0px;
+}
+
+.container-fluid.main {
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+.demo {
+    height: 65px;
+    width: 100%;
+    padding-left: 60px;
+    background-color: #87d5c7;
+}
+
+.heading {
+    background-color: #c3e9fe;
+    width: 100%;
+    height: 30px;
+}
+
+.content {
+    background-color: white;
+}
+
+.searchby {
+    padding-left: 729px;
+    padding-top: 25px;
+}
+
+.search {
+    padding-left: 255px;
+    padding-top: 15px;
+}
+
+.head {
+    padding-top: 16px;
+    font-size: 25px;
+    position: relative;
+}
+
+.head1 {
+    padding-top: 16px;
+    font-size: 25px;
+    position: relative;
+    left: -48px;
+}
+
+.row1 {
+    padding-top: 80px;
+}
+
+.heading1 {
+    padding-left: 323px;
+    padding-top: 15px;
+}
+
+.link1 {
+    color: white !important;
+}
+
+.img1 {
+    height: 70px;
+    width: 195px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+internal-logo {
+    height: 58px;
+    width: 261px;
+    margin-top: 19px;
+    margin-left: 8% !important;
+}
+
+.details {
+    padding-top: 73px;
+    padding-left: 190px;
+}
+
+.search1 {
+    padding-left: 6px;
+    padding-top: 1px;
+}
+
+.link11 {
+    margin-left: 10%;
+}
+/*.logout-position{
+    width: 20%;
+    padding-top: 2%;
+   display: inline-block;
+}*/
+
+/* login page css */
+.login-form h4 {
+    text-align: left;
+    font-weight: 600;
+    margin-bottom: 30px;
+    margin-top: 26px;
+    color: #000;
+    padding-left: 15px;
+}
+
+.loginleft-image {
+    width: 100%;
+    height: 600px;
+}
+
+.login-mid-panel {
+    padding: 0px !important;
+    background: rgba(229, 219, 215, 0.6);
+    width: 585px;
+    height: 600px;
+    box-shadow: inset 0px 3px 50px rgba(0, 0, 0, 0.16);
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.btnlogin.btn-default, .btnlogin.btn-default:active:focus {
+    background: transparent linear-gradient(133deg, #561398 0%, #2E128B 100%) 0% 0% no-repeat padding-box;
+    border-radius: 24px;
+    border: none;
+    color: #fff;
+    width: 100%;
+    padding: 8px 14px;
+    margin-top: 30px;
+    outline: none;
+    color: #fff;
+}
+
+    .btnlogin.btn-default:hover {
+        color: #fff;
+    }
+
+    .btnlogin.btn-default:focus, .btnlogin.btn-default:focus-visible {
+        color: #fff;
+        outline: none;
+    }
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    margin-top: 28px;
+    padding-left: 15px;
+}
+
+    .remember-me span {
+        color: #000;
+        margin-left: 12px;
+    }
+
+    .remember-me input {
+        margin-top: 0px !important;
+        width: 20px;
+        height: 20px;
+    }
+
+.forget-link {
+    text-decoration: none !important;
+    padding-left: 15px;
+    margin-top: 16px;
+    display: block;
+}
+
+.panel-body {
+    width: 58%;
+    margin: auto;
+}
+
+.loginwrapper-logos {
+    background: transparent linear-gradient(270deg, #FFFFFF0F 0%, #FFFFFF 67%, #FFFFFF 100%) 0% 0% no-repeat padding-box;
+    margin-top: 67px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .loginwrapper-logos span {
+        margin: 0px 24px;
+        content: '';
+        height: 30px;
+        width: 2px;
+        background: #9D8F8A;
+    }
+
+.work-image {
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+
+.form-horizontal .form-control {
+    height: 40px;
+}
+
+.form-horizontal .form-group input::placeholder {
+    color: #495058
+}
+
+.form-horizontal .form-group .text-box {
+    border: 1px solid #C4C9D0;
+    border-radius: 8px;
+}
+
+.form-horizontal .form-group {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+
+.form-horizontal .error {
+    padding-left: 18px;
+}
+
+.pass {
+    margin-bottom: 6px !important;
+}
+
+@media screen and (min-width:1200px) and (max-width:1367px) {
+    .loginleft-image, .login-mid-panel, .welcome-mid-panel {
+        height: 520px;
+    }
+}
+
+.loginwrapper-logos {
+    border-bottom: none !important;
+}
+
+/* welcome screen css*/
+.welcome-screen .container {
+    display: block;
+}
+
+.welcome-details, .verification-block {
+    padding-top: 52px;
+    width: 58%;
+    margin: auto;
+}
+
+.user-email {
+    font-weight: 600;
+}
+
+.welcome-mid-panel {
+    padding: 0px !important;
+    background: rgba(229, 219, 215, 0.6);
+    width: 50%;
+    box-shadow: inset 0px 3px 50px rgba(0, 0, 0, 0.16);
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+@media screen and (min-width:1368px) {
+    .welcome-mid-panel {
+        height: 600px;
+    }
+}
+
+.welcome-screen .sidebar-link {
+    padding-left: 0px;
+}

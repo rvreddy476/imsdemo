@@ -1,0 +1,111 @@
+﻿@model VMS.Models.IMSEntity
+@{
+    ViewBag.Title = "Add_MaterialCategory";
+    Layout = "~/Views/Shared/_Layout_IMS.cshtml";
+}
+
+<h2>Add_MaterialCategory</h2>
+
+<link href="~/assets/css/custom.css" rel="stylesheet" />
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">            
+            <h5 class="card-title fw-semibold mb-4">Add MaterialCategory</h5>
+            <div class="form addMaterial">
+                @using (Html.BeginForm("Add_MaterialCategory", "IMS_Add_Material", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "validateForm()", name = "myForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                 
+                    <div class="card">
+                        <div class="card-body row">
+                            <div class="col-md-4 mb-3">
+                                <input type="hidden" value="" id="category_id" name="category_id" />
+                                <input type="hidden" value="" id="type" name="type" />
+                                <input type="hidden" value="" id="value" name="value" />
+                                @Html.LabelFor(model => model.Material_CategoryID, htmlAttributes: new { @class = "form-label" })
+
+                                @*@Html.DropDownList("Material_CategoryID", new SelectList(ViewBag.materialCategoryname, "Material_CategoryID", "Material_CategoryName"), "Select", new { @class = "form-control input-col", @required = "required" })*@
+
+                                @Html.ListBox("Material_CategoryName", new SelectList(ViewBag.materialCategoryname, "Material_CategoryID", "Material_CategoryName"), new
+                                  {
+                                      @id = "Material_CategoryID",
+                                      @class = "form-control input-col",
+                                      @required = "required",
+                                      @onchange = "DisplayText()",
+                                      @disabled = "disabled"
+
+                             })
+                                <div>
+                                    @Html.ValidationMessageFor(model => model.Material_CategoryID, "", new { @class = "text-danger" })
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <input type="button" value="ADD" class="btn btn-primary btn-submit" name="type1" id="submit_add" onclick="Add_Click()" />
+                                    <input type="button" value="Update" class="btn btn-primary btn-submit" name="type2" id="submit_update" onclick="Update_Click()" />
+                                    <input type="button" value="Delete" class="btn btn-primary btn-submit" name="type3" id="submit_delete" onclick="Delete_Click()" />
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Material_CategoryName, htmlAttributes: new { @id = "category_lable", @class = "control-lable-small-forms", @style = "display:none;" })
+
+                                    @Html.EditorFor(model => model.Material_CategoryName, new { htmlAttributes = new { @id = "category_edit", @class = "form-control input-col", @name = "Material_CategoryName", @style = "display:none;" } })
+
+                                    <div class="error-message">
+                                        @Html.ValidationMessageFor(model => model.Material_CategoryName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <input type="submit" value="Submit" class="btn btn-primary btn-submit1 m-0" name="submit" id="submit" style='display:none;' onclick="RedirectValue()" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                }
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+</div>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script type="text/javascript">
+
+    function DisplayText() {
+        var select = document.getElementById("Material_CategoryName")
+
+        var selectedtext = select.options[select.selectedIndex].text;
+
+        var input = document.getElementById("category_edit");
+        input.value = selectedtext;
+
+        document.getElementById("category_id").value = select.value;
+    }
+
+
+    function Add_Click() {
+        document.getElementById("submit_update").disabled = true;
+        document.getElementById("submit_delete").disabled = true;
+        var val = document.getElementById("submit_add").value;
+
+        document.getElementById("type").value = val;
+
+        document.getElementById("category_lable").style.display = "block";
+        document.getElementById("category_edit").style.display = "block";
+        document.getElementById("submit").style.display = "block";
+    }
+
+    function RedirectValue() {
+
+        var cat_value = document.getElementById("category_edit").value;
+        document.getElementById("value").value = cat_value;
+    }
+</script>

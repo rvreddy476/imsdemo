@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="90e9f37cb55548ffa5b36a4d8fc862ed" Name="Diagram1">
+        <EntityTypeShape EntityType="ServiceVMSModel.Category_Number" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.CategoryExtraDocument" Width="1.5" PointX="11.25" PointY="37.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.CounterSignedPOReport" Width="1.5" PointX="3" PointY="46.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.DeliveryChallen" Width="1.5" PointX="5.25" PointY="34.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.ExceptionLogger" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.GatepassApprover" Width="1.5" PointX="3" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.GatePass" Width="1.5" PointX="3" PointY="53.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.HistoryServiceMaintenance" Width="1.5" PointX="11.25" PointY="40.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.HTV_Documents" Width="1.5" PointX="3" PointY="42.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.HTV_ForgotPasswordData" Width="1.5" PointX="6" PointY="41.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.HTV_Invoice" Width="1.5" PointX="8" PointY="44.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.HTV_Login" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.HTV_Service" Width="1.5" PointX="9" PointY="35.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.HTV_Sprint" Width="1.5" PointX="14.25" PointY="37.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.HTV_Tokens" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.HTV_Vendor" Width="1.5" PointX="0.75" PointY="40.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.HTV_VendorService" Width="1.5" PointX="3" PointY="49.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.IMSExceptionLogger" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.IMSRole" Width="1.5" PointX="6" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.IMSUser" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.Inventory_Register" Width="1.5" PointX="9.25" PointY="23.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.InvoiceExtraDocument" Width="1.5" PointX="10.25" PointY="48.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.InwardApprover" Width="1.5" PointX="3" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.InwardMaterial" Width="1.5" PointX="3" PointY="36.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.InwardMaterial_CAPEX" Width="1.5" PointX="8.25" PointY="30.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.InwardMaterial_OPEX" Width="1.5" PointX="11.25" PointY="31.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.InwardMaterial_Rental" Width="1.5" PointX="5.25" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.InwardMaterial_Temp" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.Material_Category" Width="1.5" PointX="3" PointY="28.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.Material" Width="1.5" PointX="3" PointY="31.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.OfficeAddress" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.OutMaterial" Width="1.5" PointX="5.25" PointY="52.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.OutwardMaterial" Width="1.5" PointX="5.25" PointY="57.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.PaymentTerm" Width="1.5" PointX="12" PointY="52.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.POReport" Width="1.5" PointX="14.25" PointY="42.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.RejectedInvMaterial" Width="1.5" PointX="13.5" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.Req_Service" Width="1.5" PointX="14.25" PointY="34.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.Requisition" Width="1.5" PointX="12" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.RequisitionApprover" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.RequisitionExtraDoc" Width="1.5" PointX="4.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.Serial_Number" Width="1.5" PointX="6.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.ServiceCategory" Width="1.5" PointX="6.75" PointY="26.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.ServiceDoccumentType" Width="1.5" PointX="16.5" PointY="55.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.ServiceType" Width="1.5" PointX="6.75" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.ServiceUser" Width="1.5" PointX="11.25" PointY="43.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.ServiceUserDepartment" Width="1.5" PointX="0.75" PointY="36.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.ServiceVendor" Width="1.5" PointX="17.25" PointY="42.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.Signature" Width="1.5" PointX="16.5" PointY="46" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.Tax" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.TempVendor" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.User" Width="1.5" PointX="14.25" PointY="54" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.UserFeedback" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.vendorAnnualTurnover" Width="1.5" PointX="3" PointY="76.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.vendorCustomerReference" Width="1.5" PointX="3" PointY="79.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.VendorDocument" Width="1.5" PointX="5.25" PointY="44.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.VendorReview" Width="1.5" PointX="6" PointY="38.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.VendorServiceType" Width="1.5" PointX="0.75" PointY="51.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.vendorUnitAddress" Width="1.5" PointX="3" PointY="85.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.HTV_Vendor_2092022" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ServiceVMSModel.Invoice_BKP_1012021" Width="1.5" PointX="5.75" PointY="10.75" IsExpanded="true" />
+        <AssociationConnector Association="ServiceVMSModel.FK_CategoryExtraDocument_Service" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_Service_categoryextradocument" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_CounterSignedPOReport_POReport" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_CounterSignedPOReport_Vendor" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_DeliveryChallen_InwardMaterial" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_GatepassApprovers_IMSUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_GatepassApprovers_ServiceUserDepartment" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_GatePasses_ServiceUserDepartment" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_OutMaterials_GatePasses" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_OutwardMaterial_GatePasses" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_HistoryServiceMaintenance_Service" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_Documents_Vendor" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_VendorDocuments_Documents" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_HTV_ForgotPasswordData_HTV_Vendor" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_HTV_ForgotPasswordData_User" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_Invoice_Service" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_Invoice_Sprint" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_Invoice_User" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_Invoice_User1" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_Invoice_Vendor" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_InvoiceExtraDocument_Invoice" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_Service_invoice" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK__HTV_Servi__userD__367C1819" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK__HTV_Servi__userD__37703C52" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK__Sprint__serviceCode" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_POReport_Service" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_Req_Service_Service" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_Service_poreport" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_Service_Service" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_Service_ServiceCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_Service_ServiceType" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_Service_serviceuser" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_Service_servicevendor" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_Service_sprint" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_ServiceUser_Service" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_ServiceVendor_Service" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_Sprint_POReport" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_InwardMaterial_Materials" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_POReport_Vendor" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_ServiceVendor_Vendor" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_vendorAnnualTurnover_Vendor" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_vendorCustomerReference_Vendor" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_VendorDocuments_Vendor" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_VendorReview_Vendor" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_VendorService_Vendor" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_vendorUnitAddressesVendor" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_VendorService_VendorServiceType" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_IMSRole_IMSUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_IMSRole_ServiceUserDepartment" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_InwardApprovers_IMSUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_Inventory_Register_Inventory_Register1" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_Inventory_Register_Material_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_Inventory_Register_Materials" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_InwardApprovers_InwardApprovers" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_InwardMaterial_CAPEX_InwardMaterial" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_InwardMaterial_InwardMaterial" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_InwardMaterial_OPEX_InwardMaterial" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_InwardMaterial_Rental_InwardMaterial" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_InwardMaterial_ServiceUserDepartment" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_InwardMaterial_CAPEX_Material_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_InwardMaterial_CAPEX_Materials" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_RejectedInvMaterial_InwardMaterial_CAPEX" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_InwardMaterial_OPEX_Material_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_InwardMaterial_OPEX_Materials" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_RejectedInvMaterial_InwardMaterial_OPEX" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_InwardMaterial_Rental_Material_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_InwardMaterial_Rental_Materials" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_Materials_Material_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK__POReport__Paymen__55F4C372" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK__POReport__Paymen__56E8E7AB" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_Signature_POReport" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_Req_Service_Requisition" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_ServiceDoccumentType_User" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_ServiceUser_ServiceUserDepartment" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_User_ServiceUserDepartment" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_Signature_User" ManuallyRouted="false" />
+        <AssociationConnector Association="ServiceVMSModel.FK_VendorReview_User" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ServiceVMSModel.InwardMaterial_CustomerAsset" Width="1.5" PointX="14.25" PointY="25.875" />
+        <AssociationConnector Association="ServiceVMSModel.FK_InwardMaterial_CustomerAsset_InwardMaterial" />
+        <AssociationConnector Association="ServiceVMSModel.FK_InwardMaterial_CustomerAsset_Material_Category" />
+        <AssociationConnector Association="ServiceVMSModel.FK_InwardMaterial_CustomerAsset_Materials" />
+        <EntityTypeShape EntityType="ServiceVMSModel.IMS_Signature" Width="1.5" PointX="3" PointY="10.625" />
+        <AssociationConnector Association="ServiceVMSModel.FK_IMS_Signature_IMSUsers" />
+        <AssociationConnector Association="ServiceVMSModel.FK_InwardMaterial_TempVendor" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

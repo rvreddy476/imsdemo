@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "UploadInventoryRegister";
+    Layout = "~/Views/Shared/_Layout_IMS.cshtml";
+}
+<link href="~/assets/css/custom.css" rel="stylesheet" />
+<link href="~/Content/Common.css" rel="stylesheet" />
+<div class="rightpanel-height">
+    <div id="loader"></div>
+    <h5 class="content-title mb-3">Upload Inventory Register</h5>
+    <div class="card">
+        <div class="card-body card-height">
+            @using (Html.BeginForm("UploadInventoryRegister", "Add_InventoryRegister", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-group mb-4 col-md-4">
+                    <label for="file" class="form-label">Select an Excel file</label>
+                    <input type="file" name="file" id="file" class="form-control" required />
+                </div>
+
+                <button type="submit" class="action-btn">Upload</button>
+            }
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-info">
+                    @ViewBag.Message
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Loader div -->
+@*<div id="loader" style="display: none;">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>*@
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Show loader when form is submitted
+        $('form').on('submit', function () {
+            $('#loader').show();
+        });
+    });
+</script>

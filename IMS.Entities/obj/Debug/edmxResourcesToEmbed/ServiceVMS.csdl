@@ -1,0 +1,2485 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ServiceVMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Category_Number">
+    <Key>
+      <PropertyRef Name="CategoryNameId" />
+    </Key>
+    <Property Name="CategoryNameId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Category_PO_Number" Type="Int32" />
+    <Property Name="Category_Agreement_Number" Type="Int32" />
+    <Property Name="Category_letterOfIntent_Number" Type="Int32" />
+    <Property Name="Category_Addendum_Number" Type="Int32" />
+    <Property Name="Vendor_Code_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Category_NoPO_Number" Type="Int32" />
+    <Property Name="Requisition_Identifier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="year_range" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="CategoryExtraDocument">
+    <Key>
+      <PropertyRef Name="serviceAdditionalDocx" />
+    </Key>
+    <Property Name="serviceAdditionalDocx" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="typeOfFile" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="DocFileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="DocFileSize" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="serviceCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Cat_extra_status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="HTV_Service" Relationship="Self.FK_CategoryExtraDocument_Service" FromRole="CategoryExtraDocument" ToRole="HTV_Service" />
+    <NavigationProperty Name="HTV_Service1" Relationship="Self.FK_Service_categoryextradocument" FromRole="CategoryExtraDocument" ToRole="HTV_Service" />
+  </EntityType>
+  <EntityType Name="CounterSignedPOReport">
+    <Key>
+      <PropertyRef Name="counterSignedId" />
+    </Key>
+    <Property Name="counterSignedId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="poReportId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="vendorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="POReport" Relationship="Self.FK_CounterSignedPOReport_POReport" FromRole="CounterSignedPOReport" ToRole="POReport" />
+    <NavigationProperty Name="HTV_Vendor" Relationship="Self.FK_CounterSignedPOReport_Vendor" FromRole="CounterSignedPOReport" ToRole="HTV_Vendor" />
+  </EntityType>
+  <EntityType Name="DeliveryChallen">
+    <Key>
+      <PropertyRef Name="DC_ID" />
+    </Key>
+    <Property Name="DC_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DC_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DC_Filename" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="DC_Filesize" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="InwardID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="InwardMaterial" Relationship="Self.FK_DeliveryChallen_InwardMaterial" FromRole="DeliveryChallen" ToRole="InwardMaterial" />
+  </EntityType>
+  <EntityType Name="ExceptionLogger">
+    <Key>
+      <PropertyRef Name="exceptionId" />
+    </Key>
+    <Property Name="exceptionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="exceptionMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="controllerName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="actionName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="exceptionStackTrace" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="exceptionLogTime" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="GatepassApprover">
+    <Key>
+      <PropertyRef Name="GatepassApprover_Id" />
+    </Key>
+    <Property Name="GatepassApprover_Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="userDepartmentId" Type="Int32" />
+    <Property Name="employeeId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="userEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RoleInIMS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="IMSUser" Relationship="Self.FK_GatepassApprovers_IMSUsers" FromRole="GatepassApprovers" ToRole="IMSUsers" />
+    <NavigationProperty Name="ServiceUserDepartment" Relationship="Self.FK_GatepassApprovers_ServiceUserDepartment" FromRole="GatepassApprovers" ToRole="ServiceUserDepartment" />
+  </EntityType>
+  <EntityType Name="GatePass">
+    <Key>
+      <PropertyRef Name="GatepassID" />
+    </Key>
+    <Property Name="GatepassID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="userDepartmentId" Type="Int32" />
+    <Property Name="GatepassType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="STP_Bonded_Item" Type="Boolean" />
+    <Property Name="SenderID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Gatepass_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ReceiverID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ReceiverName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ReceiverAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ReceiverContact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ReceiverEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Gatepass_DateTime" Type="DateTime" Precision="3" />
+    <Property Name="Expected_DateofReturn" Type="DateTime" Precision="0" />
+    <Property Name="TO_Office" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="From_Office" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="GatePass_Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="GatePass_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Created_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SEZ_Bonded_Item" Type="Boolean" />
+    <NavigationProperty Name="ServiceUserDepartment" Relationship="Self.FK_GatePasses_ServiceUserDepartment" FromRole="GatePasses" ToRole="ServiceUserDepartment" />
+    <NavigationProperty Name="OutMaterials" Relationship="Self.FK_OutMaterials_GatePasses" FromRole="GatePasses" ToRole="OutMaterials" />
+    <NavigationProperty Name="OutwardMaterials" Relationship="Self.FK_OutwardMaterial_GatePasses" FromRole="GatePasses" ToRole="OutwardMaterial" />
+    <Property Name="GatepassRejectReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Rejected_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="GatepassFileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="GatepassFileSize" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Gatepass_InvInchargeFileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Gatepass_InvInchargeFileSize" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Gatepass_SecurityGuardFileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Gatepass_SecurityGuardFileSize" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Approved_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Gatepass_DispatchBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="HistoryServiceMaintenance">
+    <Key>
+      <PropertyRef Name="historyServiceId" />
+    </Key>
+    <Property Name="historyServiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="serviceCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="historyService_Code" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="HTV_Service" Relationship="Self.FK_HistoryServiceMaintenance_Service" FromRole="HistoryServiceMaintenance" ToRole="HTV_Service" />
+  </EntityType>
+  <EntityType Name="HTV_Documents">
+    <Key>
+      <PropertyRef Name="documentId" />
+    </Key>
+    <Property Name="documentId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="typeOfDocument" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="documentDate" Type="DateTime" Precision="0" />
+    <Property Name="documentIdentifier" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="vendorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="document_filename" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="fileSize" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="HTV_Vendor" Relationship="Self.FK_Documents_Vendor" FromRole="HTV_Documents" ToRole="HTV_Vendor" />
+    <NavigationProperty Name="VendorDocuments" Relationship="Self.FK_VendorDocuments_Documents" FromRole="HTV_Documents" ToRole="VendorDocuments" />
+  </EntityType>
+  <EntityType Name="HTV_ForgotPasswordData">
+    <Key>
+      <PropertyRef Name="ForgotPasswordId" />
+    </Key>
+    <Property Name="ForgotPasswordId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ForgotPasswordTimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="employeeId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="vendorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="HTV_Vendor" Relationship="Self.FK_HTV_ForgotPasswordData_HTV_Vendor" FromRole="HTV_ForgotPasswordData" ToRole="HTV_Vendor" />
+    <NavigationProperty Name="User" Relationship="Self.FK_HTV_ForgotPasswordData_User" FromRole="HTV_ForgotPasswordData" ToRole="User" />
+  </EntityType>
+  <EntityType Name="HTV_Invoice">
+    <Key>
+      <PropertyRef Name="invoiceId" />
+    </Key>
+    <Property Name="invoiceId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="employeeId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="vendorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="sprintId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="serviceCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="invoiceStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="billingDate" Type="DateTime" Precision="0" />
+    <Property Name="invoiceReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="invoiceAmount" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="invoiceUploadDate" Type="DateTime" Precision="0" />
+    <Property Name="uploadedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="invoiceNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="approvedDate" Type="DateTime" Precision="0" />
+    <Property Name="paymentDueDate" Type="DateTime" Precision="0" />
+    <Property Name="invoiceProcessingDate" Type="DateTime" Precision="0" />
+    <Property Name="paymentProcessingDate" Type="DateTime" Precision="0" />
+    <Property Name="invoiceFileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="invoiceFileSize" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="invoiceRejectReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="invoiceProcessedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="isPriorPayment" Type="Boolean" />
+    <Property Name="approvalRemark" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="location" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ExpanseNature" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Nature_of_Business" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PaymentProcessedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="gstAmount" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="mail_count" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="second_level_approved_date" Type="DateTime" Precision="0" />
+    <Property Name="First_level_approved_date" Type="DateTime" Precision="0" />
+    <Property Name="CGST_amount" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SGST_amount" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="total_Invoice_amount" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="IGST_amount" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="invoiceDeleteReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="deletedby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="deletedDate" Type="DateTime" Precision="0" />
+    <Property Name="GRN_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="HTV_Service" Relationship="Self.FK_Invoice_Service" FromRole="HTV_Invoice" ToRole="HTV_Service" />
+    <NavigationProperty Name="HTV_Sprint" Relationship="Self.FK_Invoice_Sprint" FromRole="HTV_Invoice" ToRole="HTV_Sprint" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Invoice_User" FromRole="HTV_Invoice" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="Self.FK_Invoice_User1" FromRole="HTV_Invoice" ToRole="User" />
+    <NavigationProperty Name="HTV_Vendor" Relationship="Self.FK_Invoice_Vendor" FromRole="HTV_Invoice" ToRole="HTV_Vendor" />
+    <NavigationProperty Name="InvoiceExtraDocuments" Relationship="Self.FK_InvoiceExtraDocument_Invoice" FromRole="HTV_Invoice" ToRole="InvoiceExtraDocument" />
+    <NavigationProperty Name="HTV_Service1" Relationship="Self.FK_Service_invoice" FromRole="HTV_Invoice" ToRole="HTV_Service" />
+  </EntityType>
+  <EntityType Name="HTV_Login">
+    <Key>
+      <PropertyRef Name="LoginId" />
+    </Key>
+    <Property Name="LoginId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="countAttempt" Type="Int32" Nullable="false" />
+    <Property Name="loginDatetime" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="HTV_Service">
+    <Key>
+      <PropertyRef Name="serviceCode" />
+    </Key>
+    <Property Name="serviceCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="details" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="startDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="endDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="vendorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="serviceStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="serviceCategoryId" Type="Int32" Nullable="false" />
+    <Property Name="serviceTypeId" Type="Int32" Nullable="false" />
+    <Property Name="serviceValue" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="billingUnit" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="poNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="userDepartmentId" Type="Int32" Nullable="false" />
+    <Property Name="subTypeOfService" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="budgetValue" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="document_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="service_status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="service_delete_reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="budgetRemarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CategoryExtraDocuments" Relationship="Self.FK_CategoryExtraDocument_Service" FromRole="HTV_Service" ToRole="CategoryExtraDocument" />
+    <NavigationProperty Name="CategoryExtraDocuments1" Relationship="Self.FK_Service_categoryextradocument" FromRole="HTV_Service" ToRole="CategoryExtraDocument" />
+    <NavigationProperty Name="HistoryServiceMaintenances" Relationship="Self.FK_HistoryServiceMaintenance_Service" FromRole="HTV_Service" ToRole="HistoryServiceMaintenance" />
+    <NavigationProperty Name="HTV_Invoice" Relationship="Self.FK_Invoice_Service" FromRole="HTV_Service" ToRole="HTV_Invoice" />
+    <NavigationProperty Name="HTV_Invoice1" Relationship="Self.FK_Service_invoice" FromRole="HTV_Service" ToRole="HTV_Invoice" />
+    <NavigationProperty Name="ServiceUserDepartment" Relationship="Self.FK__HTV_Servi__userD__367C1819" FromRole="HTV_Service" ToRole="ServiceUserDepartment" />
+    <NavigationProperty Name="ServiceUserDepartment1" Relationship="Self.FK__HTV_Servi__userD__37703C52" FromRole="HTV_Service" ToRole="ServiceUserDepartment" />
+    <NavigationProperty Name="HTV_Sprint" Relationship="Self.FK__Sprint__serviceCode" FromRole="HTV_Service" ToRole="HTV_Sprint" />
+    <NavigationProperty Name="POReports" Relationship="Self.FK_POReport_Service" FromRole="HTV_Service" ToRole="POReport" />
+    <NavigationProperty Name="Req_Service" Relationship="Self.FK_Req_Service_Service" FromRole="HTV_Service" ToRole="Req_Service" />
+    <NavigationProperty Name="POReports1" Relationship="Self.FK_Service_poreport" FromRole="HTV_Service" ToRole="POReport" />
+    <NavigationProperty Name="HTV_Vendor" Relationship="Self.FK_Service_Service" FromRole="HTV_Service" ToRole="HTV_Vendor" />
+    <NavigationProperty Name="ServiceCategory" Relationship="Self.FK_Service_ServiceCategory" FromRole="HTV_Service" ToRole="ServiceCategory" />
+    <NavigationProperty Name="ServiceType" Relationship="Self.FK_Service_ServiceType" FromRole="HTV_Service" ToRole="ServiceType" />
+    <NavigationProperty Name="ServiceUsers" Relationship="Self.FK_Service_serviceuser" FromRole="HTV_Service" ToRole="ServiceUser" />
+    <NavigationProperty Name="ServiceVendors" Relationship="Self.FK_Service_servicevendor" FromRole="HTV_Service" ToRole="ServiceVendor" />
+    <NavigationProperty Name="HTV_Sprint1" Relationship="Self.FK_Service_sprint" FromRole="HTV_Service" ToRole="HTV_Sprint" />
+    <NavigationProperty Name="ServiceUsers1" Relationship="Self.FK_ServiceUser_Service" FromRole="HTV_Service" ToRole="ServiceUser" />
+    <NavigationProperty Name="ServiceVendors1" Relationship="Self.FK_ServiceVendor_Service" FromRole="HTV_Service" ToRole="ServiceVendor" />
+  </EntityType>
+  <EntityType Name="HTV_Sprint">
+    <Key>
+      <PropertyRef Name="sprintId" />
+    </Key>
+    <Property Name="sprintId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="sprintName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="poReportId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="sprintValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="sprintEndDate" Type="DateTime" Precision="0" />
+    <Property Name="sprintCreateDate" Type="DateTime" Precision="0" />
+    <Property Name="serviceCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="sprint_status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="sprint_delete_reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="HTV_Invoice" Relationship="Self.FK_Invoice_Sprint" FromRole="HTV_Sprint" ToRole="HTV_Invoice" />
+    <NavigationProperty Name="HTV_Service" Relationship="Self.FK__Sprint__serviceCode" FromRole="HTV_Sprint" ToRole="HTV_Service" />
+    <NavigationProperty Name="HTV_Service1" Relationship="Self.FK_Service_sprint" FromRole="HTV_Sprint" ToRole="HTV_Service" />
+    <NavigationProperty Name="POReport" Relationship="Self.FK_Sprint_POReport" FromRole="HTV_Sprint" ToRole="POReport" />
+  </EntityType>
+  <EntityType Name="HTV_Tokens">
+    <Key>
+      <PropertyRef Name="token_Id" />
+    </Key>
+    <Property Name="token_Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="employeeId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="token" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="creation_time" Type="DateTime" Precision="3" />
+    <Property Name="expire_time" Type="DateTime" Precision="3" />
+    <Property Name="redirect_path" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="invoiceId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="HTV_Vendor">
+    <Key>
+      <PropertyRef Name="vendorId" />
+    </Key>
+    <Property Name="vendorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="vendorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="vendorAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="vendorEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="vendorPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="poc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="vendorCreditPeriod" Type="Int32" />
+    <Property Name="vendorStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="legalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="businessNature" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="establishmentRegNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="establishmentRegNoCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="phoneNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="mobileNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="beneficiaryName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="bankName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="branchAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="accountNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IFSCCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PANNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TANNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ESICNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CSTNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PFNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ProfessionalTaxNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="GSTNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="vendorCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="registrationResult" Type="Boolean" />
+    <Property Name="MsmeVendorRegistrationNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="MSME_vendor_category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="vendorRegistrationDate" Type="DateTime" Precision="0" />
+    <Property Name="vendor_Reject_Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IsVendorLogin" Type="Int32" Nullable="false" />
+    <Property Name="IsTAVendor" Type="Boolean" Nullable="false" />
+    <Property Name="vendor_Active_Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="userDepartmentId" Type="Int32" />
+    <NavigationProperty Name="CounterSignedPOReports" Relationship="Self.FK_CounterSignedPOReport_Vendor" FromRole="HTV_Vendor" ToRole="CounterSignedPOReport" />
+    <NavigationProperty Name="HTV_Documents" Relationship="Self.FK_Documents_Vendor" FromRole="HTV_Vendor" ToRole="HTV_Documents" />
+    <NavigationProperty Name="HTV_ForgotPasswordData" Relationship="Self.FK_HTV_ForgotPasswordData_HTV_Vendor" FromRole="HTV_Vendor" ToRole="HTV_ForgotPasswordData" />
+    <NavigationProperty Name="HTV_Invoice" Relationship="Self.FK_Invoice_Vendor" FromRole="HTV_Vendor" ToRole="HTV_Invoice" />
+    <NavigationProperty Name="HTV_Service" Relationship="Self.FK_Service_Service" FromRole="HTV_Vendor" ToRole="HTV_Service" />
+    <NavigationProperty Name="InwardMaterials" Relationship="Self.FK_InwardMaterial_Materials" FromRole="HTV_Vendor" ToRole="InwardMaterial" />
+    <NavigationProperty Name="POReports" Relationship="Self.FK_POReport_Vendor" FromRole="HTV_Vendor" ToRole="POReport" />
+    <NavigationProperty Name="ServiceVendors" Relationship="Self.FK_ServiceVendor_Vendor" FromRole="HTV_Vendor" ToRole="ServiceVendor" />
+    <NavigationProperty Name="vendorAnnualTurnovers" Relationship="Self.FK_vendorAnnualTurnover_Vendor" FromRole="HTV_Vendor" ToRole="vendorAnnualTurnover" />
+    <NavigationProperty Name="vendorCustomerReferences" Relationship="Self.FK_vendorCustomerReference_Vendor" FromRole="HTV_Vendor" ToRole="vendorCustomerReference" />
+    <NavigationProperty Name="VendorDocuments" Relationship="Self.FK_VendorDocuments_Vendor" FromRole="HTV_Vendor" ToRole="VendorDocuments" />
+    <NavigationProperty Name="VendorReviews" Relationship="Self.FK_VendorReview_Vendor" FromRole="HTV_Vendor" ToRole="VendorReview" />
+    <NavigationProperty Name="HTV_VendorService" Relationship="Self.FK_VendorService_Vendor" FromRole="HTV_Vendor" ToRole="HTV_VendorService" />
+    <NavigationProperty Name="vendorUnitAddresses" Relationship="Self.FK_vendorUnitAddressesVendor" FromRole="HTV_Vendor" ToRole="vendorUnitAddresses" />
+  </EntityType>
+  <EntityType Name="HTV_VendorService">
+    <Key>
+      <PropertyRef Name="vendorServiceId" />
+    </Key>
+    <Property Name="vendorServiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="vendorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="vendorServiceTypeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="HTV_Vendor" Relationship="Self.FK_VendorService_Vendor" FromRole="HTV_VendorService" ToRole="HTV_Vendor" />
+    <NavigationProperty Name="VendorServiceType" Relationship="Self.FK_VendorService_VendorServiceType" FromRole="HTV_VendorService" ToRole="VendorServiceType" />
+  </EntityType>
+  <EntityType Name="IMSExceptionLogger">
+    <Key>
+      <PropertyRef Name="exceptionId" />
+    </Key>
+    <Property Name="exceptionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="exceptionMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="controllerName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="actionName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="exceptionStackTrace" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="exceptionLogTime" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="IMSRole">
+    <Key>
+      <PropertyRef Name="IMSRole_Id" />
+    </Key>
+    <Property Name="IMSRole_Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IMSuser_Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="userDepartmentId" Type="Int32" Nullable="false" />
+    <Property Name="RoleInIMS" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="userLocation" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Role_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="IMSUser" Relationship="Self.FK_IMSRole_IMSUsers" FromRole="IMSRole" ToRole="IMSUsers" />
+    <NavigationProperty Name="ServiceUserDepartment" Relationship="Self.FK_IMSRole_ServiceUserDepartment" FromRole="IMSRole" ToRole="ServiceUserDepartment" />
+    <Property Name="Reason" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="IMSUser">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="userName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="userEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="userPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="userphone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="userStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="archiveduserReason" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="GatepassApprovers" Relationship="Self.FK_GatepassApprovers_IMSUsers" FromRole="IMSUsers" ToRole="GatepassApprovers" />
+    <NavigationProperty Name="IMSRoles" Relationship="Self.FK_IMSRole_IMSUsers" FromRole="IMSUsers" ToRole="IMSRole" />
+    <NavigationProperty Name="InwardApprovers" Relationship="Self.FK_InwardApprovers_IMSUsers" FromRole="IMSUsers" ToRole="InwardApprovers" />
+    <NavigationProperty Name="IMS_Signature" Relationship="ServiceVMSModel.FK_IMS_Signature_IMSUsers" FromRole="IMSUser" ToRole="IMS_Signature" />
+  </EntityType>
+  <EntityType Name="Inventory_Register">
+    <Key>
+      <PropertyRef Name="InventoryReg_ID" />
+    </Key>
+    <Property Name="InventoryReg_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AssetID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MaterialID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MaterialName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Purchase_Rate" Type="Double" />
+    <Property Name="Asset_Cost" Type="Double" />
+    <Property Name="vendorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Make" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Serial_No" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="GRN_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Invoice_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Alloted_To" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Allot_date" Type="DateTime" Precision="0" />
+    <Property Name="InwardID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Inward_CP_Rental_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ExpenseNature" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Model_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Material_CategoryID" Type="Int32" />
+    <NavigationProperty Name="Inventory_Register1" Relationship="Self.FK_Inventory_Register_Inventory_Register1" FromRole="Inventory_Register" ToRole="Inventory_Register1" />
+    <NavigationProperty Name="Inventory_Register2" Relationship="Self.FK_Inventory_Register_Inventory_Register1" FromRole="Inventory_Register1" ToRole="Inventory_Register" />
+    <NavigationProperty Name="Material_Category" Relationship="Self.FK_Inventory_Register_Material_Category" FromRole="Inventory_Register" ToRole="Material_Category" />
+    <NavigationProperty Name="Material" Relationship="Self.FK_Inventory_Register_Materials" FromRole="Inventory_Register" ToRole="Materials" />
+    <Property Name="IR_Status" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="AssetGenerateDate" Type="DateTime" Precision="3" />
+    <Property Name="MachineID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="RAM" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="HDD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="OS" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="userDepartmentId" Type="Int32" />
+  </EntityType>
+  <EntityType Name="InvoiceExtraDocument">
+    <Key>
+      <PropertyRef Name="invoiceAdditionalId" />
+    </Key>
+    <Property Name="invoiceAdditionalId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="invoiceFileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="invoiceFileSize" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="invoiceTypeOfDoc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="invoiceId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="invoice_extra_doc_status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="HTV_Invoice" Relationship="Self.FK_InvoiceExtraDocument_Invoice" FromRole="InvoiceExtraDocument" ToRole="HTV_Invoice" />
+  </EntityType>
+  <EntityType Name="InwardApprover">
+    <Key>
+      <PropertyRef Name="InwardApprover_Id" />
+    </Key>
+    <Property Name="InwardApprover_Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="userDepartmentId" Type="Int32" />
+    <Property Name="employeeId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="userEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RoleInIMS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="IMSUser" Relationship="Self.FK_InwardApprovers_IMSUsers" FromRole="InwardApprovers" ToRole="IMSUsers" />
+    <NavigationProperty Name="ServiceUserDepartment" Relationship="Self.FK_InwardApprovers_InwardApprovers" FromRole="InwardApprovers" ToRole="ServiceUserDepartment" />
+  </EntityType>
+  <EntityType Name="InwardMaterial">
+    <Key>
+      <PropertyRef Name="InwardID" />
+    </Key>
+    <Property Name="InwardID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="vendorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="GRN_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="InwardDateTime" Type="DateTime" Precision="3" />
+    <Property Name="InwardNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Inward_ExpenseNature" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="userDepartmentId" Type="Int32" Nullable="false" />
+    <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="InwardEnteredBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BillofEntry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Inward_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DeliveryChallens" Relationship="Self.FK_DeliveryChallen_InwardMaterial" FromRole="InwardMaterial" ToRole="DeliveryChallen" />
+    <NavigationProperty Name="HTV_Vendor" Relationship="Self.FK_InwardMaterial_Materials" FromRole="InwardMaterial" ToRole="HTV_Vendor" />
+    <NavigationProperty Name="InwardMaterial_CAPEX" Relationship="Self.FK_InwardMaterial_CAPEX_InwardMaterial" FromRole="InwardMaterial" ToRole="InwardMaterial_CAPEX" />
+    <NavigationProperty Name="InwardMaterial1" Relationship="Self.FK_InwardMaterial_InwardMaterial" FromRole="InwardMaterial" ToRole="InwardMaterial1" />
+    <NavigationProperty Name="InwardMaterial2" Relationship="Self.FK_InwardMaterial_InwardMaterial" FromRole="InwardMaterial1" ToRole="InwardMaterial" />
+    <NavigationProperty Name="InwardMaterial_OPEX" Relationship="Self.FK_InwardMaterial_OPEX_InwardMaterial" FromRole="InwardMaterial" ToRole="InwardMaterial_OPEX" />
+    <NavigationProperty Name="InwardMaterial_Rental" Relationship="Self.FK_InwardMaterial_Rental_InwardMaterial" FromRole="InwardMaterial" ToRole="InwardMaterial_Rental" />
+    <NavigationProperty Name="ServiceUserDepartment" Relationship="Self.FK_InwardMaterial_ServiceUserDepartment" FromRole="InwardMaterial" ToRole="ServiceUserDepartment" />
+    <NavigationProperty Name="InwardMaterial_CustomerAsset" Relationship="ServiceVMSModel.FK_InwardMaterial_CustomerAsset_InwardMaterial" FromRole="InwardMaterial" ToRole="InwardMaterial_CustomerAsset" />
+    <Property Name="TempVendorID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TempVendor" Relationship="ServiceVMSModel.FK_InwardMaterial_TempVendor" FromRole="InwardMaterial" ToRole="TempVendor" />
+  </EntityType>
+  <EntityType Name="InwardMaterial_CAPEX">
+    <Key>
+      <PropertyRef Name="InvMaterialCP_ID" />
+    </Key>
+    <Property Name="InvMaterialCP_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="InwardID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MaterialID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MaterialName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Inward_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Acceptedby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Material_Price" Type="Double" />
+    <Property Name="Material_Totalprice" Type="Double" />
+    <Property Name="Material_Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Material_CategoryID" Type="Int32" />
+    <NavigationProperty Name="InwardMaterial" Relationship="Self.FK_InwardMaterial_CAPEX_InwardMaterial" FromRole="InwardMaterial_CAPEX" ToRole="InwardMaterial" />
+    <NavigationProperty Name="Material_Category" Relationship="Self.FK_InwardMaterial_CAPEX_Material_Category" FromRole="InwardMaterial_CAPEX" ToRole="Material_Category" />
+    <NavigationProperty Name="Material" Relationship="Self.FK_InwardMaterial_CAPEX_Materials" FromRole="InwardMaterial_CAPEX" ToRole="Materials" />
+    <NavigationProperty Name="RejectedInvMaterials" Relationship="Self.FK_RejectedInvMaterial_InwardMaterial_CAPEX" FromRole="InwardMaterial_CAPEX" ToRole="RejectedInvMaterial" />
+    <Property Name="Accepted_Date" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="InwardMaterial_OPEX">
+    <Key>
+      <PropertyRef Name="InvMaterialOP_ID" />
+    </Key>
+    <Property Name="InvMaterialOP_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="InwardID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MaterialID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Material_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Inward_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Acceptedby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Material_Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Material_CategoryID" Type="Int32" />
+    <NavigationProperty Name="InwardMaterial" Relationship="Self.FK_InwardMaterial_OPEX_InwardMaterial" FromRole="InwardMaterial_OPEX" ToRole="InwardMaterial" />
+    <NavigationProperty Name="Material_Category" Relationship="Self.FK_InwardMaterial_OPEX_Material_Category" FromRole="InwardMaterial_OPEX" ToRole="Material_Category" />
+    <NavigationProperty Name="Material" Relationship="Self.FK_InwardMaterial_OPEX_Materials" FromRole="InwardMaterial_OPEX" ToRole="Materials" />
+    <NavigationProperty Name="RejectedInvMaterials" Relationship="Self.FK_RejectedInvMaterial_InwardMaterial_OPEX" FromRole="InwardMaterial_OPEX" ToRole="RejectedInvMaterial" />
+    <Property Name="Accepted_Date" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="InwardMaterial_Rental">
+    <Key>
+      <PropertyRef Name="InvMaterialrental_ID" />
+    </Key>
+    <Property Name="InvMaterialrental_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="InwardID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MaterialID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MaterialName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Inward_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Acceptedby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Material_Price" Type="Double" />
+    <Property Name="Material_Totalprice" Type="Double" />
+    <Property Name="Material_Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Material_CategoryID" Type="Int32" />
+    <NavigationProperty Name="InwardMaterial" Relationship="Self.FK_InwardMaterial_Rental_InwardMaterial" FromRole="InwardMaterial_Rental" ToRole="InwardMaterial" />
+    <NavigationProperty Name="Material_Category" Relationship="Self.FK_InwardMaterial_Rental_Material_Category" FromRole="InwardMaterial_Rental" ToRole="Material_Category" />
+    <NavigationProperty Name="Material" Relationship="Self.FK_InwardMaterial_Rental_Materials" FromRole="InwardMaterial_Rental" ToRole="Materials" />
+    <Property Name="Accepted_Date" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="InwardMaterial_Temp">
+    <Key>
+      <PropertyRef Name="InvMaterialTemp_ID" />
+    </Key>
+    <Property Name="InvMaterialTemp_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="InwardID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MaterialID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MaterialName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Inward_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Material_Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Material_CategoryID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Material_Category">
+    <Key>
+      <PropertyRef Name="Material_CategoryID" />
+    </Key>
+    <Property Name="Material_CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Material_CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Inventory_Register" Relationship="Self.FK_Inventory_Register_Material_Category" FromRole="Material_Category" ToRole="Inventory_Register" />
+    <NavigationProperty Name="InwardMaterial_CAPEX" Relationship="Self.FK_InwardMaterial_CAPEX_Material_Category" FromRole="Material_Category" ToRole="InwardMaterial_CAPEX" />
+    <NavigationProperty Name="InwardMaterial_OPEX" Relationship="Self.FK_InwardMaterial_OPEX_Material_Category" FromRole="Material_Category" ToRole="InwardMaterial_OPEX" />
+    <NavigationProperty Name="InwardMaterial_Rental" Relationship="Self.FK_InwardMaterial_Rental_Material_Category" FromRole="Material_Category" ToRole="InwardMaterial_Rental" />
+    <NavigationProperty Name="Materials" Relationship="Self.FK_Materials_Material_Category" FromRole="Material_Category" ToRole="Materials" />
+    <NavigationProperty Name="InwardMaterial_CustomerAsset" Relationship="ServiceVMSModel.FK_InwardMaterial_CustomerAsset_Material_Category" FromRole="Material_Category" ToRole="InwardMaterial_CustomerAsset" />
+  </EntityType>
+  <EntityType Name="Material">
+    <Key>
+      <PropertyRef Name="MaterialID" />
+    </Key>
+    <Property Name="MaterialID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MaterialName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MaterialDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Material_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MaterialPrefix" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Material_CategoryID" Type="Int32" />
+    <NavigationProperty Name="Inventory_Register" Relationship="Self.FK_Inventory_Register_Materials" FromRole="Materials" ToRole="Inventory_Register" />
+    <NavigationProperty Name="InwardMaterial_CAPEX" Relationship="Self.FK_InwardMaterial_CAPEX_Materials" FromRole="Materials" ToRole="InwardMaterial_CAPEX" />
+    <NavigationProperty Name="InwardMaterial_OPEX" Relationship="Self.FK_InwardMaterial_OPEX_Materials" FromRole="Materials" ToRole="InwardMaterial_OPEX" />
+    <NavigationProperty Name="InwardMaterial_Rental" Relationship="Self.FK_InwardMaterial_Rental_Materials" FromRole="Materials" ToRole="InwardMaterial_Rental" />
+    <NavigationProperty Name="Material_Category" Relationship="Self.FK_Materials_Material_Category" FromRole="Materials" ToRole="Material_Category" />
+    <NavigationProperty Name="InwardMaterial_CustomerAsset" Relationship="ServiceVMSModel.FK_InwardMaterial_CustomerAsset_Materials" FromRole="Material" ToRole="InwardMaterial_CustomerAsset" />
+  </EntityType>
+  <EntityType Name="OfficeAddress">
+    <Key>
+      <PropertyRef Name="addressId" />
+    </Key>
+    <Property Name="addressId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="locationName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="locationAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="OutMaterial">
+    <Key>
+      <PropertyRef Name="OutMat_ID" />
+    </Key>
+    <Property Name="OutMat_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="GatepassID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Material_CategoryID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MaterialID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MaterialName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Serial_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Out_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Material_InDate" Type="DateTime" Precision="3" />
+    <Property Name="Model_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="InwardID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="InventoryReg_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="GatePass" Relationship="Self.FK_OutMaterials_GatePasses" FromRole="OutMaterials" ToRole="GatePasses" />
+    <Property Name="MaterialDispatchDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="OutwardMaterial">
+    <Key>
+      <PropertyRef Name="OW_MaterialID" />
+    </Key>
+    <Property Name="OW_MaterialID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="GatepassID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="OutwardNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="OutwardDatetime" Type="DateTime" Precision="3" />
+    <Property Name="Outward_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="GatePass" Relationship="Self.FK_OutwardMaterial_GatePasses" FromRole="OutwardMaterial" ToRole="GatePasses" />
+    <Property Name="OutwardNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="PaymentTerm">
+    <Key>
+      <PropertyRef Name="PaymentTermsId" />
+    </Key>
+    <Property Name="PaymentTermsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PaymentTerms" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CreditPeriod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="POReports" Relationship="Self.FK__POReport__Paymen__55F4C372" FromRole="PaymentTerms" ToRole="POReport" />
+    <NavigationProperty Name="POReports1" Relationship="Self.FK__POReport__Paymen__56E8E7AB" FromRole="PaymentTerms" ToRole="POReport" />
+  </EntityType>
+  <EntityType Name="POReport">
+    <Key>
+      <PropertyRef Name="poReportId" />
+    </Key>
+    <Property Name="poReportId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="poReportName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="vendorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="poReportReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="poReportStatus" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="poReportValue" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="poReportDate" Type="DateTime" Precision="0" />
+    <Property Name="serviceCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="poFileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="poFileSize" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="HSPLpercent" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="HILpercent" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="HTVpercent" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="HKPpercent" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="hsplBillingAddressId" Type="Int32" />
+    <Property Name="hsplShippingAddressId" Type="Int32" />
+    <Property Name="hilplBillingAddressId" Type="Int32" />
+    <Property Name="hilplShippingAddressId" Type="Int32" />
+    <Property Name="htvBillingAddressId" Type="Int32" />
+    <Property Name="htvShippingAddressId" Type="Int32" />
+    <Property Name="hkpplBillingAddressId" Type="Int32" />
+    <Property Name="hkpplShippingAddressId" Type="Int32" />
+    <Property Name="poCreditPeriod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PaymentTermsId" Type="Int32" />
+    <Property Name="po_delete_reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PoDate" Type="DateTime" Precision="0" />
+    <Property Name="Subject" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="AdditionalClause" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="QuotationNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="QuotationDate" Type="DateTime" Precision="0" />
+    <Property Name="ContractFromDate" Type="DateTime" Precision="0" />
+    <Property Name="ContractToDate" Type="DateTime" Precision="0" />
+    <Property Name="deliverybox" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Tax_Details" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="po_TLAFileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="po_TLAFileSize" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="po_FHFileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="po_FHFileSize" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CounterSignedPOReports" Relationship="Self.FK_CounterSignedPOReport_POReport" FromRole="POReport" ToRole="CounterSignedPOReport" />
+    <NavigationProperty Name="HTV_Service" Relationship="Self.FK_POReport_Service" FromRole="POReport" ToRole="HTV_Service" />
+    <NavigationProperty Name="HTV_Service1" Relationship="Self.FK_Service_poreport" FromRole="POReport" ToRole="HTV_Service" />
+    <NavigationProperty Name="HTV_Sprint" Relationship="Self.FK_Sprint_POReport" FromRole="POReport" ToRole="HTV_Sprint" />
+    <NavigationProperty Name="HTV_Vendor" Relationship="Self.FK_POReport_Vendor" FromRole="POReport" ToRole="HTV_Vendor" />
+    <NavigationProperty Name="PaymentTerm" Relationship="Self.FK__POReport__Paymen__55F4C372" FromRole="POReport" ToRole="PaymentTerms" />
+    <NavigationProperty Name="PaymentTerm1" Relationship="Self.FK__POReport__Paymen__56E8E7AB" FromRole="POReport" ToRole="PaymentTerms" />
+    <NavigationProperty Name="Signatures" Relationship="Self.FK_Signature_POReport" FromRole="POReport" ToRole="Signature" />
+  </EntityType>
+  <EntityType Name="RejectedInvMaterial">
+    <Key>
+      <PropertyRef Name="RejectedInv_ID" />
+    </Key>
+    <Property Name="RejectedInv_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="InvMaterialOP_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="InvMaterialCP_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RejectedInvDateTime" Type="DateTime" Precision="3" />
+    <Property Name="RejectedReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="RejectedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="InwardMaterial_CAPEX" Relationship="Self.FK_RejectedInvMaterial_InwardMaterial_CAPEX" FromRole="RejectedInvMaterial" ToRole="InwardMaterial_CAPEX" />
+    <NavigationProperty Name="InwardMaterial_OPEX" Relationship="Self.FK_RejectedInvMaterial_InwardMaterial_OPEX" FromRole="RejectedInvMaterial" ToRole="InwardMaterial_OPEX" />
+  </EntityType>
+  <EntityType Name="Req_Service">
+    <Key>
+      <PropertyRef Name="Req_ServiceID" />
+    </Key>
+    <Property Name="Req_ServiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="requisitionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="serviceCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="req_service_relationstatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="HTV_Service" Relationship="Self.FK_Req_Service_Service" FromRole="Req_Service" ToRole="HTV_Service" />
+    <NavigationProperty Name="Requisition" Relationship="Self.FK_Req_Service_Requisition" FromRole="Req_Service" ToRole="Requisition" />
+  </EntityType>
+  <EntityType Name="Requisition">
+    <Key>
+      <PropertyRef Name="requisitionCode" />
+    </Key>
+    <Property Name="requisitionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="requisitionIdentifier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="dateOfRequisition" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="raisedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="req_Department" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="req_CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="req_DeliveryLocation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="req_ContactDetails" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="budgeted_Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="req_status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="preparedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="checkedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="approvedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="productDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Rec_vendor_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Rec_vendor_address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Rec_vendor_contact_detail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Rec_vendor_contact_person" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Req_Reject_Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ComparisonSheet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ComparisonSheet_size" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Approved_by_date" Type="DateTime" Precision="0" />
+    <Property Name="Evalution_note" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="Payment_term" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="negotiatedValue" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="vendorProposedValue" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="requisition_delete_reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Req_Service" Relationship="Self.FK_Req_Service_Requisition" FromRole="Requisition" ToRole="Req_Service" />
+  </EntityType>
+  <EntityType Name="RequisitionApprover">
+    <Key>
+      <PropertyRef Name="ReqApproverNumber" />
+    </Key>
+    <Property Name="IT_approvers" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Non_IT_approvers" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ReqApproverNumber" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="RequisitionExtraDoc">
+    <Key>
+      <PropertyRef Name="RequisitionExtraDocID" />
+    </Key>
+    <Property Name="RequisitionExtraDocID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RequisitionExtraFileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RequisitionExtraFileSize" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RequisitionID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Serial_Number">
+    <Key>
+      <PropertyRef Name="Serial_NumberId" />
+    </Key>
+    <Property Name="Serial_NumberId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Serial_GRN_Number" Type="Int32" />
+    <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Year_Range" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Serial_Gatepass_Number" Type="Int32" />
+    <Property Name="Serial_Asset_Number" Type="Int32" />
+    <Property Name="Serial_Outward_Number" Type="Int32" />
+  </EntityType>
+  <EntityType Name="ServiceCategory">
+    <Key>
+      <PropertyRef Name="serviceCategoryId" />
+    </Key>
+    <Property Name="serviceCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="categoryName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="HTV_Service" Relationship="Self.FK_Service_ServiceCategory" FromRole="ServiceCategory" ToRole="HTV_Service" />
+  </EntityType>
+  <EntityType Name="ServiceDoccumentType">
+    <Key>
+      <PropertyRef Name="serviceDocumentId" />
+    </Key>
+    <Property Name="serviceDocumentId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="employeeId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="user_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="userDesignation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="documentType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_ServiceDoccumentType_User" FromRole="ServiceDoccumentType" ToRole="User" />
+  </EntityType>
+  <EntityType Name="ServiceType">
+    <Key>
+      <PropertyRef Name="serviceTypeId" />
+    </Key>
+    <Property Name="serviceTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="typeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="isTAService" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="HTV_Service" Relationship="Self.FK_Service_ServiceType" FromRole="ServiceType" ToRole="HTV_Service" />
+  </EntityType>
+  <EntityType Name="ServiceUser">
+    <Key>
+      <PropertyRef Name="serviceUserId" />
+    </Key>
+    <Property Name="serviceUserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="serviceCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="firstLevelApprover" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="secondLevelApprover" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="thirdLevelApprover" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="userDepartmentId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="HTV_Service" Relationship="Self.FK_Service_serviceuser" FromRole="ServiceUser" ToRole="HTV_Service" />
+    <NavigationProperty Name="HTV_Service1" Relationship="Self.FK_ServiceUser_Service" FromRole="ServiceUser" ToRole="HTV_Service" />
+    <NavigationProperty Name="ServiceUserDepartment" Relationship="Self.FK_ServiceUser_ServiceUserDepartment" FromRole="ServiceUser" ToRole="ServiceUserDepartment" />
+  </EntityType>
+  <EntityType Name="ServiceUserDepartment">
+    <Key>
+      <PropertyRef Name="userDepartmentId" />
+    </Key>
+    <Property Name="userDepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userDepartmentName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="GatepassApprovers" Relationship="Self.FK_GatepassApprovers_ServiceUserDepartment" FromRole="ServiceUserDepartment" ToRole="GatepassApprovers" />
+    <NavigationProperty Name="GatePasses" Relationship="Self.FK_GatePasses_ServiceUserDepartment" FromRole="ServiceUserDepartment" ToRole="GatePasses" />
+    <NavigationProperty Name="HTV_Service" Relationship="Self.FK__HTV_Servi__userD__367C1819" FromRole="ServiceUserDepartment" ToRole="HTV_Service" />
+    <NavigationProperty Name="HTV_Service1" Relationship="Self.FK__HTV_Servi__userD__37703C52" FromRole="ServiceUserDepartment" ToRole="HTV_Service" />
+    <NavigationProperty Name="IMSRoles" Relationship="Self.FK_IMSRole_ServiceUserDepartment" FromRole="ServiceUserDepartment" ToRole="IMSRole" />
+    <NavigationProperty Name="InwardApprovers" Relationship="Self.FK_InwardApprovers_InwardApprovers" FromRole="ServiceUserDepartment" ToRole="InwardApprovers" />
+    <NavigationProperty Name="InwardMaterials" Relationship="Self.FK_InwardMaterial_ServiceUserDepartment" FromRole="ServiceUserDepartment" ToRole="InwardMaterial" />
+    <NavigationProperty Name="ServiceUsers" Relationship="Self.FK_ServiceUser_ServiceUserDepartment" FromRole="ServiceUserDepartment" ToRole="ServiceUser" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_User_ServiceUserDepartment" FromRole="ServiceUserDepartment" ToRole="User" />
+  </EntityType>
+  <EntityType Name="ServiceVendor">
+    <Key>
+      <PropertyRef Name="serviceVendorId" />
+    </Key>
+    <Property Name="serviceVendorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="serviceCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="vendorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="HTV_Service" Relationship="Self.FK_Service_servicevendor" FromRole="ServiceVendor" ToRole="HTV_Service" />
+    <NavigationProperty Name="HTV_Service1" Relationship="Self.FK_ServiceVendor_Service" FromRole="ServiceVendor" ToRole="HTV_Service" />
+    <NavigationProperty Name="HTV_Vendor" Relationship="Self.FK_ServiceVendor_Vendor" FromRole="ServiceVendor" ToRole="HTV_Vendor" />
+  </EntityType>
+  <EntityType Name="Signature">
+    <Key>
+      <PropertyRef Name="signatureId" />
+    </Key>
+    <Property Name="signatureId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="categoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="referenceId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="role" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="signaturePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="employeeId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="signatureStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="POReport" Relationship="Self.FK_Signature_POReport" FromRole="Signature" ToRole="POReport" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Signature_User" FromRole="Signature" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Tax">
+    <Key>
+      <PropertyRef Name="TaxesId" />
+    </Key>
+    <Property Name="TaxesId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TaxesTerms" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="TempVendor">
+    <Key>
+      <PropertyRef Name="TempVendorID" />
+    </Key>
+    <Property Name="TempVendorID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TempVendorName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TempVendorEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TempVendorContact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TempVendorAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TempVendorStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TempCategory" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="InwardMaterials" Relationship="ServiceVMSModel.FK_InwardMaterial_TempVendor" FromRole="TempVendor" ToRole="InwardMaterial" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="employeeId" />
+    </Key>
+    <Property Name="employeeId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="userName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="designation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="userEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="userPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="archivedUserReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="userStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="userDepartmentId" Type="Int32" Nullable="false" />
+    <Property Name="userId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AccessinIMS" Type="Boolean" />
+    <Property Name="AccessinVMS" Type="Boolean" />
+    <NavigationProperty Name="HTV_ForgotPasswordData" Relationship="Self.FK_HTV_ForgotPasswordData_User" FromRole="User" ToRole="HTV_ForgotPasswordData" />
+    <NavigationProperty Name="HTV_Invoice" Relationship="Self.FK_Invoice_User" FromRole="User" ToRole="HTV_Invoice" />
+    <NavigationProperty Name="HTV_Invoice1" Relationship="Self.FK_Invoice_User1" FromRole="User" ToRole="HTV_Invoice" />
+    <NavigationProperty Name="ServiceDoccumentTypes" Relationship="Self.FK_ServiceDoccumentType_User" FromRole="User" ToRole="ServiceDoccumentType" />
+    <NavigationProperty Name="ServiceUserDepartment" Relationship="Self.FK_User_ServiceUserDepartment" FromRole="User" ToRole="ServiceUserDepartment" />
+    <NavigationProperty Name="Signatures" Relationship="Self.FK_Signature_User" FromRole="User" ToRole="Signature" />
+    <NavigationProperty Name="VendorReviews" Relationship="Self.FK_VendorReview_User" FromRole="User" ToRole="VendorReview" />
+  </EntityType>
+  <EntityType Name="UserFeedback">
+    <Key>
+      <PropertyRef Name="userfeedbackId" />
+    </Key>
+    <Property Name="userfeedbackId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="employeeId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="user_Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="user_Rating" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="user_Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="userDepartmentId" Type="Int32" />
+    <Property Name="userfeedbackaddeddate" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
+  <EntityType Name="vendorAnnualTurnover">
+    <Key>
+      <PropertyRef Name="annualTurnoverId" />
+    </Key>
+    <Property Name="annualTurnoverId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="annualTurnoverYear" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="annualTurnoverAmmount" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="vendorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="HTV_Vendor" Relationship="Self.FK_vendorAnnualTurnover_Vendor" FromRole="vendorAnnualTurnover" ToRole="HTV_Vendor" />
+  </EntityType>
+  <EntityType Name="vendorCustomerReference">
+    <Key>
+      <PropertyRef Name="customerId" />
+    </Key>
+    <Property Name="customerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="customerAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CR_poc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CR_phoneNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CR_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="billingRange" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="initialServiceYear" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="vendorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="HTV_Vendor" Relationship="Self.FK_vendorCustomerReference_Vendor" FromRole="vendorCustomerReference" ToRole="HTV_Vendor" />
+  </EntityType>
+  <EntityType Name="VendorDocument">
+    <Key>
+      <PropertyRef Name="vendorDocumentId" />
+    </Key>
+    <Property Name="vendorDocumentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="documentId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="vendorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="HTV_Documents" Relationship="Self.FK_VendorDocuments_Documents" FromRole="VendorDocuments" ToRole="HTV_Documents" />
+    <NavigationProperty Name="HTV_Vendor" Relationship="Self.FK_VendorDocuments_Vendor" FromRole="VendorDocuments" ToRole="HTV_Vendor" />
+  </EntityType>
+  <EntityType Name="VendorReview">
+    <Key>
+      <PropertyRef Name="reviewId" />
+    </Key>
+    <Property Name="reviewId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="employeeId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="vendorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="reviewText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="userDesignation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="HTV_Vendor" Relationship="Self.FK_VendorReview_Vendor" FromRole="VendorReview" ToRole="HTV_Vendor" />
+    <NavigationProperty Name="User" Relationship="Self.FK_VendorReview_User" FromRole="VendorReview" ToRole="User" />
+  </EntityType>
+  <EntityType Name="VendorServiceType">
+    <Key>
+      <PropertyRef Name="vendorServiceTypeId" />
+    </Key>
+    <Property Name="vendorServiceTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="vendorServiceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="HTV_VendorService" Relationship="Self.FK_VendorService_VendorServiceType" FromRole="VendorServiceType" ToRole="HTV_VendorService" />
+  </EntityType>
+  <EntityType Name="vendorUnitAddress">
+    <Key>
+      <PropertyRef Name="UnitAddressId" />
+    </Key>
+    <Property Name="UnitAddressId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UnitAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="UA_poc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="UA_phoneNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UA_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="vendorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="HTV_Vendor" Relationship="Self.FK_vendorUnitAddressesVendor" FromRole="vendorUnitAddresses" ToRole="HTV_Vendor" />
+  </EntityType>
+  <EntityType Name="HTV_Vendor_2092022">
+    <Key>
+      <PropertyRef Name="vendorId" />
+      <PropertyRef Name="vendorEmail" />
+      <PropertyRef Name="vendorPassword" />
+    </Key>
+    <Property Name="vendorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="vendorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="vendorAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="vendorEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="vendorPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="poc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="vendorCreditPeriod" Type="Int32" />
+    <Property Name="vendorStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="legalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="businessNature" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="establishmentRegNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="establishmentRegNoCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="phoneNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="mobileNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="beneficiaryName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="bankName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="branchAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="accountNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IFSCCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PANNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TANNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ESICNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CSTNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PFNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ProfessionalTaxNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="GSTNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="vendorCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="registrationResult" Type="Boolean" />
+    <Property Name="MsmeVendorRegistrationNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="MSME_vendor_category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="vendorRegistrationDate" Type="DateTime" Precision="0" />
+    <Property Name="vendor_Reject_Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Invoice_BKP_1012021">
+    <Key>
+      <PropertyRef Name="invoiceId" />
+      <PropertyRef Name="employeeId" />
+      <PropertyRef Name="vendorId" />
+      <PropertyRef Name="sprintId" />
+      <PropertyRef Name="serviceCode" />
+      <PropertyRef Name="invoiceNumber" />
+    </Key>
+    <Property Name="invoiceId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="employeeId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="vendorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="sprintId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="serviceCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="invoiceStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="billingDate" Type="DateTime" Precision="0" />
+    <Property Name="invoiceReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="invoiceAmount" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="invoiceUploadDate" Type="DateTime" Precision="0" />
+    <Property Name="uploadedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="invoiceNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="approvedDate" Type="DateTime" Precision="0" />
+    <Property Name="paymentDueDate" Type="DateTime" Precision="0" />
+    <Property Name="invoiceProcessingDate" Type="DateTime" Precision="0" />
+    <Property Name="paymentProcessingDate" Type="DateTime" Precision="0" />
+    <Property Name="invoiceFileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="invoiceFileSize" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="invoiceRejectReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="invoiceProcessedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="isPriorPayment" Type="Boolean" />
+    <Property Name="approvalRemark" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="location" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ExpanseNature" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Nature_of_Business" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PaymentProcessedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="gstAmount" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="mail_count" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="second_level_approved_date" Type="DateTime" Precision="0" />
+    <Property Name="First_level_approved_date" Type="DateTime" Precision="0" />
+    <Property Name="CGST_amount" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SGST_amount" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="total_Invoice_amount" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="IGST_amount" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="invoiceDeleteReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_CategoryExtraDocument_Service">
+    <End Role="HTV_Service" Type="Self.HTV_Service" Multiplicity="1" />
+    <End Role="CategoryExtraDocument" Type="Self.CategoryExtraDocument" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Service">
+        <PropertyRef Name="serviceCode" />
+      </Principal>
+      <Dependent Role="CategoryExtraDocument">
+        <PropertyRef Name="serviceCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Service_categoryextradocument">
+    <End Role="HTV_Service" Type="Self.HTV_Service" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CategoryExtraDocument" Type="Self.CategoryExtraDocument" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Service">
+        <PropertyRef Name="serviceCode" />
+      </Principal>
+      <Dependent Role="CategoryExtraDocument">
+        <PropertyRef Name="serviceCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CounterSignedPOReport_POReport">
+    <End Role="POReport" Type="Self.POReport" Multiplicity="1" />
+    <End Role="CounterSignedPOReport" Type="Self.CounterSignedPOReport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="POReport">
+        <PropertyRef Name="poReportId" />
+      </Principal>
+      <Dependent Role="CounterSignedPOReport">
+        <PropertyRef Name="poReportId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CounterSignedPOReport_Vendor">
+    <End Role="HTV_Vendor" Type="Self.HTV_Vendor" Multiplicity="1" />
+    <End Role="CounterSignedPOReport" Type="Self.CounterSignedPOReport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Vendor">
+        <PropertyRef Name="vendorId" />
+      </Principal>
+      <Dependent Role="CounterSignedPOReport">
+        <PropertyRef Name="vendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeliveryChallen_InwardMaterial">
+    <End Role="InwardMaterial" Type="Self.InwardMaterial" Multiplicity="0..1" />
+    <End Role="DeliveryChallen" Type="Self.DeliveryChallen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InwardMaterial">
+        <PropertyRef Name="InwardID" />
+      </Principal>
+      <Dependent Role="DeliveryChallen">
+        <PropertyRef Name="InwardID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GatepassApprovers_IMSUsers">
+    <End Role="IMSUsers" Type="Self.IMSUser" Multiplicity="0..1" />
+    <End Role="GatepassApprovers" Type="Self.GatepassApprover" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IMSUsers">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="GatepassApprovers">
+        <PropertyRef Name="employeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GatepassApprovers_ServiceUserDepartment">
+    <End Role="ServiceUserDepartment" Type="Self.ServiceUserDepartment" Multiplicity="0..1" />
+    <End Role="GatepassApprovers" Type="Self.GatepassApprover" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServiceUserDepartment">
+        <PropertyRef Name="userDepartmentId" />
+      </Principal>
+      <Dependent Role="GatepassApprovers">
+        <PropertyRef Name="userDepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GatePasses_ServiceUserDepartment">
+    <End Role="ServiceUserDepartment" Type="Self.ServiceUserDepartment" Multiplicity="0..1" />
+    <End Role="GatePasses" Type="Self.GatePass" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServiceUserDepartment">
+        <PropertyRef Name="userDepartmentId" />
+      </Principal>
+      <Dependent Role="GatePasses">
+        <PropertyRef Name="userDepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OutMaterials_GatePasses">
+    <End Role="GatePasses" Type="Self.GatePass" Multiplicity="0..1" />
+    <End Role="OutMaterials" Type="Self.OutMaterial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GatePasses">
+        <PropertyRef Name="GatepassID" />
+      </Principal>
+      <Dependent Role="OutMaterials">
+        <PropertyRef Name="GatepassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OutwardMaterial_GatePasses">
+    <End Role="GatePasses" Type="Self.GatePass" Multiplicity="0..1" />
+    <End Role="OutwardMaterial" Type="Self.OutwardMaterial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GatePasses">
+        <PropertyRef Name="GatepassID" />
+      </Principal>
+      <Dependent Role="OutwardMaterial">
+        <PropertyRef Name="GatepassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HistoryServiceMaintenance_Service">
+    <End Role="HTV_Service" Type="Self.HTV_Service" Multiplicity="1" />
+    <End Role="HistoryServiceMaintenance" Type="Self.HistoryServiceMaintenance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Service">
+        <PropertyRef Name="serviceCode" />
+      </Principal>
+      <Dependent Role="HistoryServiceMaintenance">
+        <PropertyRef Name="serviceCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Documents_Vendor">
+    <End Role="HTV_Vendor" Type="Self.HTV_Vendor" Multiplicity="1" />
+    <End Role="HTV_Documents" Type="Self.HTV_Documents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Vendor">
+        <PropertyRef Name="vendorId" />
+      </Principal>
+      <Dependent Role="HTV_Documents">
+        <PropertyRef Name="vendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VendorDocuments_Documents">
+    <End Role="HTV_Documents" Type="Self.HTV_Documents" Multiplicity="1" />
+    <End Role="VendorDocuments" Type="Self.VendorDocument" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Documents">
+        <PropertyRef Name="documentId" />
+      </Principal>
+      <Dependent Role="VendorDocuments">
+        <PropertyRef Name="documentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HTV_ForgotPasswordData_HTV_Vendor">
+    <End Role="HTV_Vendor" Type="Self.HTV_Vendor" Multiplicity="0..1" />
+    <End Role="HTV_ForgotPasswordData" Type="Self.HTV_ForgotPasswordData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Vendor">
+        <PropertyRef Name="vendorId" />
+      </Principal>
+      <Dependent Role="HTV_ForgotPasswordData">
+        <PropertyRef Name="vendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HTV_ForgotPasswordData_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="HTV_ForgotPasswordData" Type="Self.HTV_ForgotPasswordData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="employeeId" />
+      </Principal>
+      <Dependent Role="HTV_ForgotPasswordData">
+        <PropertyRef Name="employeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_Service">
+    <End Role="HTV_Service" Type="Self.HTV_Service" Multiplicity="1" />
+    <End Role="HTV_Invoice" Type="Self.HTV_Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Service">
+        <PropertyRef Name="serviceCode" />
+      </Principal>
+      <Dependent Role="HTV_Invoice">
+        <PropertyRef Name="serviceCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_Sprint">
+    <End Role="HTV_Sprint" Type="Self.HTV_Sprint" Multiplicity="1" />
+    <End Role="HTV_Invoice" Type="Self.HTV_Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Sprint">
+        <PropertyRef Name="sprintId" />
+      </Principal>
+      <Dependent Role="HTV_Invoice">
+        <PropertyRef Name="sprintId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="HTV_Invoice" Type="Self.HTV_Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="employeeId" />
+      </Principal>
+      <Dependent Role="HTV_Invoice">
+        <PropertyRef Name="employeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_User1">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="HTV_Invoice" Type="Self.HTV_Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="employeeId" />
+      </Principal>
+      <Dependent Role="HTV_Invoice">
+        <PropertyRef Name="employeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_Vendor">
+    <End Role="HTV_Vendor" Type="Self.HTV_Vendor" Multiplicity="1" />
+    <End Role="HTV_Invoice" Type="Self.HTV_Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Vendor">
+        <PropertyRef Name="vendorId" />
+      </Principal>
+      <Dependent Role="HTV_Invoice">
+        <PropertyRef Name="vendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceExtraDocument_Invoice">
+    <End Role="HTV_Invoice" Type="Self.HTV_Invoice" Multiplicity="1" />
+    <End Role="InvoiceExtraDocument" Type="Self.InvoiceExtraDocument" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Invoice">
+        <PropertyRef Name="invoiceId" />
+      </Principal>
+      <Dependent Role="InvoiceExtraDocument">
+        <PropertyRef Name="invoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Service_invoice">
+    <End Role="HTV_Service" Type="Self.HTV_Service" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="HTV_Invoice" Type="Self.HTV_Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Service">
+        <PropertyRef Name="serviceCode" />
+      </Principal>
+      <Dependent Role="HTV_Invoice">
+        <PropertyRef Name="serviceCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HTV_Servi__userD__367C1819">
+    <End Role="ServiceUserDepartment" Type="Self.ServiceUserDepartment" Multiplicity="1" />
+    <End Role="HTV_Service" Type="Self.HTV_Service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServiceUserDepartment">
+        <PropertyRef Name="userDepartmentId" />
+      </Principal>
+      <Dependent Role="HTV_Service">
+        <PropertyRef Name="userDepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HTV_Servi__userD__37703C52">
+    <End Role="ServiceUserDepartment" Type="Self.ServiceUserDepartment" Multiplicity="1" />
+    <End Role="HTV_Service" Type="Self.HTV_Service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServiceUserDepartment">
+        <PropertyRef Name="userDepartmentId" />
+      </Principal>
+      <Dependent Role="HTV_Service">
+        <PropertyRef Name="userDepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sprint__serviceCode">
+    <End Role="HTV_Service" Type="Self.HTV_Service" Multiplicity="1" />
+    <End Role="HTV_Sprint" Type="Self.HTV_Sprint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Service">
+        <PropertyRef Name="serviceCode" />
+      </Principal>
+      <Dependent Role="HTV_Sprint">
+        <PropertyRef Name="serviceCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_POReport_Service">
+    <End Role="HTV_Service" Type="Self.HTV_Service" Multiplicity="1" />
+    <End Role="POReport" Type="Self.POReport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Service">
+        <PropertyRef Name="serviceCode" />
+      </Principal>
+      <Dependent Role="POReport">
+        <PropertyRef Name="serviceCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Req_Service_Service">
+    <End Role="HTV_Service" Type="Self.HTV_Service" Multiplicity="1" />
+    <End Role="Req_Service" Type="Self.Req_Service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Service">
+        <PropertyRef Name="serviceCode" />
+      </Principal>
+      <Dependent Role="Req_Service">
+        <PropertyRef Name="serviceCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Service_poreport">
+    <End Role="HTV_Service" Type="Self.HTV_Service" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="POReport" Type="Self.POReport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Service">
+        <PropertyRef Name="serviceCode" />
+      </Principal>
+      <Dependent Role="POReport">
+        <PropertyRef Name="serviceCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Service_Service">
+    <End Role="HTV_Vendor" Type="Self.HTV_Vendor" Multiplicity="1" />
+    <End Role="HTV_Service" Type="Self.HTV_Service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Vendor">
+        <PropertyRef Name="vendorId" />
+      </Principal>
+      <Dependent Role="HTV_Service">
+        <PropertyRef Name="vendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Service_ServiceCategory">
+    <End Role="ServiceCategory" Type="Self.ServiceCategory" Multiplicity="1" />
+    <End Role="HTV_Service" Type="Self.HTV_Service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServiceCategory">
+        <PropertyRef Name="serviceCategoryId" />
+      </Principal>
+      <Dependent Role="HTV_Service">
+        <PropertyRef Name="serviceCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Service_ServiceType">
+    <End Role="ServiceType" Type="Self.ServiceType" Multiplicity="1" />
+    <End Role="HTV_Service" Type="Self.HTV_Service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServiceType">
+        <PropertyRef Name="serviceTypeId" />
+      </Principal>
+      <Dependent Role="HTV_Service">
+        <PropertyRef Name="serviceTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Service_serviceuser">
+    <End Role="HTV_Service" Type="Self.HTV_Service" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ServiceUser" Type="Self.ServiceUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Service">
+        <PropertyRef Name="serviceCode" />
+      </Principal>
+      <Dependent Role="ServiceUser">
+        <PropertyRef Name="serviceCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Service_servicevendor">
+    <End Role="HTV_Service" Type="Self.HTV_Service" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ServiceVendor" Type="Self.ServiceVendor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Service">
+        <PropertyRef Name="serviceCode" />
+      </Principal>
+      <Dependent Role="ServiceVendor">
+        <PropertyRef Name="serviceCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Service_sprint">
+    <End Role="HTV_Service" Type="Self.HTV_Service" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="HTV_Sprint" Type="Self.HTV_Sprint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Service">
+        <PropertyRef Name="serviceCode" />
+      </Principal>
+      <Dependent Role="HTV_Sprint">
+        <PropertyRef Name="serviceCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceUser_Service">
+    <End Role="HTV_Service" Type="Self.HTV_Service" Multiplicity="1" />
+    <End Role="ServiceUser" Type="Self.ServiceUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Service">
+        <PropertyRef Name="serviceCode" />
+      </Principal>
+      <Dependent Role="ServiceUser">
+        <PropertyRef Name="serviceCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceVendor_Service">
+    <End Role="HTV_Service" Type="Self.HTV_Service" Multiplicity="1" />
+    <End Role="ServiceVendor" Type="Self.ServiceVendor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Service">
+        <PropertyRef Name="serviceCode" />
+      </Principal>
+      <Dependent Role="ServiceVendor">
+        <PropertyRef Name="serviceCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sprint_POReport">
+    <End Role="POReport" Type="Self.POReport" Multiplicity="1" />
+    <End Role="HTV_Sprint" Type="Self.HTV_Sprint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="POReport">
+        <PropertyRef Name="poReportId" />
+      </Principal>
+      <Dependent Role="HTV_Sprint">
+        <PropertyRef Name="poReportId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InwardMaterial_Materials">
+    <End Role="HTV_Vendor" Type="Self.HTV_Vendor" Multiplicity="0..1" />
+    <End Role="InwardMaterial" Type="Self.InwardMaterial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Vendor">
+        <PropertyRef Name="vendorId" />
+      </Principal>
+      <Dependent Role="InwardMaterial">
+        <PropertyRef Name="vendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_POReport_Vendor">
+    <End Role="HTV_Vendor" Type="Self.HTV_Vendor" Multiplicity="1" />
+    <End Role="POReport" Type="Self.POReport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Vendor">
+        <PropertyRef Name="vendorId" />
+      </Principal>
+      <Dependent Role="POReport">
+        <PropertyRef Name="vendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceVendor_Vendor">
+    <End Role="HTV_Vendor" Type="Self.HTV_Vendor" Multiplicity="1" />
+    <End Role="ServiceVendor" Type="Self.ServiceVendor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Vendor">
+        <PropertyRef Name="vendorId" />
+      </Principal>
+      <Dependent Role="ServiceVendor">
+        <PropertyRef Name="vendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_vendorAnnualTurnover_Vendor">
+    <End Role="HTV_Vendor" Type="Self.HTV_Vendor" Multiplicity="1" />
+    <End Role="vendorAnnualTurnover" Type="Self.vendorAnnualTurnover" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Vendor">
+        <PropertyRef Name="vendorId" />
+      </Principal>
+      <Dependent Role="vendorAnnualTurnover">
+        <PropertyRef Name="vendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_vendorCustomerReference_Vendor">
+    <End Role="HTV_Vendor" Type="Self.HTV_Vendor" Multiplicity="1" />
+    <End Role="vendorCustomerReference" Type="Self.vendorCustomerReference" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Vendor">
+        <PropertyRef Name="vendorId" />
+      </Principal>
+      <Dependent Role="vendorCustomerReference">
+        <PropertyRef Name="vendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VendorDocuments_Vendor">
+    <End Role="HTV_Vendor" Type="Self.HTV_Vendor" Multiplicity="1" />
+    <End Role="VendorDocuments" Type="Self.VendorDocument" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Vendor">
+        <PropertyRef Name="vendorId" />
+      </Principal>
+      <Dependent Role="VendorDocuments">
+        <PropertyRef Name="vendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VendorReview_Vendor">
+    <End Role="HTV_Vendor" Type="Self.HTV_Vendor" Multiplicity="1" />
+    <End Role="VendorReview" Type="Self.VendorReview" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Vendor">
+        <PropertyRef Name="vendorId" />
+      </Principal>
+      <Dependent Role="VendorReview">
+        <PropertyRef Name="vendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VendorService_Vendor">
+    <End Role="HTV_Vendor" Type="Self.HTV_Vendor" Multiplicity="1" />
+    <End Role="HTV_VendorService" Type="Self.HTV_VendorService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Vendor">
+        <PropertyRef Name="vendorId" />
+      </Principal>
+      <Dependent Role="HTV_VendorService">
+        <PropertyRef Name="vendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_vendorUnitAddressesVendor">
+    <End Role="HTV_Vendor" Type="Self.HTV_Vendor" Multiplicity="1" />
+    <End Role="vendorUnitAddresses" Type="Self.vendorUnitAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HTV_Vendor">
+        <PropertyRef Name="vendorId" />
+      </Principal>
+      <Dependent Role="vendorUnitAddresses">
+        <PropertyRef Name="vendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VendorService_VendorServiceType">
+    <End Role="VendorServiceType" Type="Self.VendorServiceType" Multiplicity="1" />
+    <End Role="HTV_VendorService" Type="Self.HTV_VendorService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VendorServiceType">
+        <PropertyRef Name="vendorServiceTypeId" />
+      </Principal>
+      <Dependent Role="HTV_VendorService">
+        <PropertyRef Name="vendorServiceTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IMSRole_IMSUsers">
+    <End Role="IMSUsers" Type="Self.IMSUser" Multiplicity="0..1" />
+    <End Role="IMSRole" Type="Self.IMSRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IMSUsers">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="IMSRole">
+        <PropertyRef Name="IMSuser_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IMSRole_ServiceUserDepartment">
+    <End Role="ServiceUserDepartment" Type="Self.ServiceUserDepartment" Multiplicity="1" />
+    <End Role="IMSRole" Type="Self.IMSRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServiceUserDepartment">
+        <PropertyRef Name="userDepartmentId" />
+      </Principal>
+      <Dependent Role="IMSRole">
+        <PropertyRef Name="userDepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InwardApprovers_IMSUsers">
+    <End Role="IMSUsers" Type="Self.IMSUser" Multiplicity="0..1" />
+    <End Role="InwardApprovers" Type="Self.InwardApprover" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IMSUsers">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="InwardApprovers">
+        <PropertyRef Name="employeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Inventory_Register_Inventory_Register1">
+    <End Role="Inventory_Register" Type="Self.Inventory_Register" Multiplicity="1" />
+    <End Role="Inventory_Register1" Type="Self.Inventory_Register" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Inventory_Register">
+        <PropertyRef Name="InventoryReg_ID" />
+      </Principal>
+      <Dependent Role="Inventory_Register1">
+        <PropertyRef Name="InventoryReg_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Inventory_Register_Material_Category">
+    <End Role="Material_Category" Type="Self.Material_Category" Multiplicity="0..1" />
+    <End Role="Inventory_Register" Type="Self.Inventory_Register" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Material_Category">
+        <PropertyRef Name="Material_CategoryID" />
+      </Principal>
+      <Dependent Role="Inventory_Register">
+        <PropertyRef Name="Material_CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Inventory_Register_Materials">
+    <End Role="Materials" Type="Self.Material" Multiplicity="0..1" />
+    <End Role="Inventory_Register" Type="Self.Inventory_Register" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Materials">
+        <PropertyRef Name="MaterialID" />
+      </Principal>
+      <Dependent Role="Inventory_Register">
+        <PropertyRef Name="MaterialID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InwardApprovers_InwardApprovers">
+    <End Role="ServiceUserDepartment" Type="Self.ServiceUserDepartment" Multiplicity="0..1" />
+    <End Role="InwardApprovers" Type="Self.InwardApprover" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServiceUserDepartment">
+        <PropertyRef Name="userDepartmentId" />
+      </Principal>
+      <Dependent Role="InwardApprovers">
+        <PropertyRef Name="userDepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InwardMaterial_CAPEX_InwardMaterial">
+    <End Role="InwardMaterial" Type="Self.InwardMaterial" Multiplicity="0..1" />
+    <End Role="InwardMaterial_CAPEX" Type="Self.InwardMaterial_CAPEX" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InwardMaterial">
+        <PropertyRef Name="InwardID" />
+      </Principal>
+      <Dependent Role="InwardMaterial_CAPEX">
+        <PropertyRef Name="InwardID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InwardMaterial_InwardMaterial">
+    <End Role="InwardMaterial" Type="Self.InwardMaterial" Multiplicity="1" />
+    <End Role="InwardMaterial1" Type="Self.InwardMaterial" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="InwardMaterial">
+        <PropertyRef Name="InwardID" />
+      </Principal>
+      <Dependent Role="InwardMaterial1">
+        <PropertyRef Name="InwardID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InwardMaterial_OPEX_InwardMaterial">
+    <End Role="InwardMaterial" Type="Self.InwardMaterial" Multiplicity="0..1" />
+    <End Role="InwardMaterial_OPEX" Type="Self.InwardMaterial_OPEX" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InwardMaterial">
+        <PropertyRef Name="InwardID" />
+      </Principal>
+      <Dependent Role="InwardMaterial_OPEX">
+        <PropertyRef Name="InwardID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InwardMaterial_Rental_InwardMaterial">
+    <End Role="InwardMaterial" Type="Self.InwardMaterial" Multiplicity="0..1" />
+    <End Role="InwardMaterial_Rental" Type="Self.InwardMaterial_Rental" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InwardMaterial">
+        <PropertyRef Name="InwardID" />
+      </Principal>
+      <Dependent Role="InwardMaterial_Rental">
+        <PropertyRef Name="InwardID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InwardMaterial_ServiceUserDepartment">
+    <End Role="ServiceUserDepartment" Type="Self.ServiceUserDepartment" Multiplicity="1" />
+    <End Role="InwardMaterial" Type="Self.InwardMaterial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServiceUserDepartment">
+        <PropertyRef Name="userDepartmentId" />
+      </Principal>
+      <Dependent Role="InwardMaterial">
+        <PropertyRef Name="userDepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InwardMaterial_CAPEX_Material_Category">
+    <End Role="Material_Category" Type="Self.Material_Category" Multiplicity="0..1" />
+    <End Role="InwardMaterial_CAPEX" Type="Self.InwardMaterial_CAPEX" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Material_Category">
+        <PropertyRef Name="Material_CategoryID" />
+      </Principal>
+      <Dependent Role="InwardMaterial_CAPEX">
+        <PropertyRef Name="Material_CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InwardMaterial_CAPEX_Materials">
+    <End Role="Materials" Type="Self.Material" Multiplicity="0..1" />
+    <End Role="InwardMaterial_CAPEX" Type="Self.InwardMaterial_CAPEX" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Materials">
+        <PropertyRef Name="MaterialID" />
+      </Principal>
+      <Dependent Role="InwardMaterial_CAPEX">
+        <PropertyRef Name="MaterialID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RejectedInvMaterial_InwardMaterial_CAPEX">
+    <End Role="InwardMaterial_CAPEX" Type="Self.InwardMaterial_CAPEX" Multiplicity="0..1" />
+    <End Role="RejectedInvMaterial" Type="Self.RejectedInvMaterial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InwardMaterial_CAPEX">
+        <PropertyRef Name="InvMaterialCP_ID" />
+      </Principal>
+      <Dependent Role="RejectedInvMaterial">
+        <PropertyRef Name="InvMaterialCP_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InwardMaterial_OPEX_Material_Category">
+    <End Role="Material_Category" Type="Self.Material_Category" Multiplicity="0..1" />
+    <End Role="InwardMaterial_OPEX" Type="Self.InwardMaterial_OPEX" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Material_Category">
+        <PropertyRef Name="Material_CategoryID" />
+      </Principal>
+      <Dependent Role="InwardMaterial_OPEX">
+        <PropertyRef Name="Material_CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InwardMaterial_OPEX_Materials">
+    <End Role="Materials" Type="Self.Material" Multiplicity="0..1" />
+    <End Role="InwardMaterial_OPEX" Type="Self.InwardMaterial_OPEX" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Materials">
+        <PropertyRef Name="MaterialID" />
+      </Principal>
+      <Dependent Role="InwardMaterial_OPEX">
+        <PropertyRef Name="MaterialID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RejectedInvMaterial_InwardMaterial_OPEX">
+    <End Role="InwardMaterial_OPEX" Type="Self.InwardMaterial_OPEX" Multiplicity="0..1" />
+    <End Role="RejectedInvMaterial" Type="Self.RejectedInvMaterial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InwardMaterial_OPEX">
+        <PropertyRef Name="InvMaterialOP_ID" />
+      </Principal>
+      <Dependent Role="RejectedInvMaterial">
+        <PropertyRef Name="InvMaterialOP_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InwardMaterial_Rental_Material_Category">
+    <End Role="Material_Category" Type="Self.Material_Category" Multiplicity="0..1" />
+    <End Role="InwardMaterial_Rental" Type="Self.InwardMaterial_Rental" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Material_Category">
+        <PropertyRef Name="Material_CategoryID" />
+      </Principal>
+      <Dependent Role="InwardMaterial_Rental">
+        <PropertyRef Name="Material_CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InwardMaterial_Rental_Materials">
+    <End Role="Materials" Type="Self.Material" Multiplicity="0..1" />
+    <End Role="InwardMaterial_Rental" Type="Self.InwardMaterial_Rental" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Materials">
+        <PropertyRef Name="MaterialID" />
+      </Principal>
+      <Dependent Role="InwardMaterial_Rental">
+        <PropertyRef Name="MaterialID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Materials_Material_Category">
+    <End Role="Material_Category" Type="Self.Material_Category" Multiplicity="0..1" />
+    <End Role="Materials" Type="Self.Material" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Material_Category">
+        <PropertyRef Name="Material_CategoryID" />
+      </Principal>
+      <Dependent Role="Materials">
+        <PropertyRef Name="Material_CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__POReport__Paymen__55F4C372">
+    <End Role="PaymentTerms" Type="Self.PaymentTerm" Multiplicity="0..1" />
+    <End Role="POReport" Type="Self.POReport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentTerms">
+        <PropertyRef Name="PaymentTermsId" />
+      </Principal>
+      <Dependent Role="POReport">
+        <PropertyRef Name="PaymentTermsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__POReport__Paymen__56E8E7AB">
+    <End Role="PaymentTerms" Type="Self.PaymentTerm" Multiplicity="0..1" />
+    <End Role="POReport" Type="Self.POReport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentTerms">
+        <PropertyRef Name="PaymentTermsId" />
+      </Principal>
+      <Dependent Role="POReport">
+        <PropertyRef Name="PaymentTermsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Signature_POReport">
+    <End Role="POReport" Type="Self.POReport" Multiplicity="0..1" />
+    <End Role="Signature" Type="Self.Signature" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="POReport">
+        <PropertyRef Name="poReportId" />
+      </Principal>
+      <Dependent Role="Signature">
+        <PropertyRef Name="referenceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Req_Service_Requisition">
+    <End Role="Requisition" Type="Self.Requisition" Multiplicity="1" />
+    <End Role="Req_Service" Type="Self.Req_Service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Requisition">
+        <PropertyRef Name="requisitionCode" />
+      </Principal>
+      <Dependent Role="Req_Service">
+        <PropertyRef Name="requisitionCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceDoccumentType_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="ServiceDoccumentType" Type="Self.ServiceDoccumentType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="employeeId" />
+      </Principal>
+      <Dependent Role="ServiceDoccumentType">
+        <PropertyRef Name="employeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceUser_ServiceUserDepartment">
+    <End Role="ServiceUserDepartment" Type="Self.ServiceUserDepartment" Multiplicity="1" />
+    <End Role="ServiceUser" Type="Self.ServiceUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServiceUserDepartment">
+        <PropertyRef Name="userDepartmentId" />
+      </Principal>
+      <Dependent Role="ServiceUser">
+        <PropertyRef Name="userDepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_ServiceUserDepartment">
+    <End Role="ServiceUserDepartment" Type="Self.ServiceUserDepartment" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ServiceUserDepartment">
+        <PropertyRef Name="userDepartmentId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="userDepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Signature_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Signature" Type="Self.Signature" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="employeeId" />
+      </Principal>
+      <Dependent Role="Signature">
+        <PropertyRef Name="employeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VendorReview_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="VendorReview" Type="Self.VendorReview" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="employeeId" />
+      </Principal>
+      <Dependent Role="VendorReview">
+        <PropertyRef Name="employeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ServiceVMSEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Category_Number" EntityType="Self.Category_Number" />
+    <EntitySet Name="CategoryExtraDocuments" EntityType="Self.CategoryExtraDocument" />
+    <EntitySet Name="CounterSignedPOReports" EntityType="Self.CounterSignedPOReport" />
+    <EntitySet Name="DeliveryChallens" EntityType="Self.DeliveryChallen" />
+    <EntitySet Name="ExceptionLoggers" EntityType="Self.ExceptionLogger" />
+    <EntitySet Name="GatepassApprovers" EntityType="Self.GatepassApprover" />
+    <EntitySet Name="GatePasses" EntityType="Self.GatePass" />
+    <EntitySet Name="HistoryServiceMaintenances" EntityType="Self.HistoryServiceMaintenance" />
+    <EntitySet Name="HTV_Documents" EntityType="Self.HTV_Documents" />
+    <EntitySet Name="HTV_ForgotPasswordData" EntityType="Self.HTV_ForgotPasswordData" />
+    <EntitySet Name="HTV_Invoice" EntityType="Self.HTV_Invoice" />
+    <EntitySet Name="HTV_Login" EntityType="Self.HTV_Login" />
+    <EntitySet Name="HTV_Service" EntityType="Self.HTV_Service" />
+    <EntitySet Name="HTV_Sprint" EntityType="Self.HTV_Sprint" />
+    <EntitySet Name="HTV_Tokens" EntityType="Self.HTV_Tokens" />
+    <EntitySet Name="HTV_Vendor" EntityType="Self.HTV_Vendor" />
+    <EntitySet Name="HTV_VendorService" EntityType="Self.HTV_VendorService" />
+    <EntitySet Name="IMSExceptionLoggers" EntityType="Self.IMSExceptionLogger" />
+    <EntitySet Name="IMSRoles" EntityType="Self.IMSRole" />
+    <EntitySet Name="IMSUsers" EntityType="Self.IMSUser" />
+    <EntitySet Name="Inventory_Register" EntityType="Self.Inventory_Register" />
+    <EntitySet Name="InvoiceExtraDocuments" EntityType="Self.InvoiceExtraDocument" />
+    <EntitySet Name="InwardApprovers" EntityType="Self.InwardApprover" />
+    <EntitySet Name="InwardMaterials" EntityType="Self.InwardMaterial" />
+    <EntitySet Name="InwardMaterial_CAPEX" EntityType="Self.InwardMaterial_CAPEX" />
+    <EntitySet Name="InwardMaterial_OPEX" EntityType="Self.InwardMaterial_OPEX" />
+    <EntitySet Name="InwardMaterial_Rental" EntityType="Self.InwardMaterial_Rental" />
+    <EntitySet Name="InwardMaterial_Temp" EntityType="Self.InwardMaterial_Temp" />
+    <EntitySet Name="Material_Category" EntityType="Self.Material_Category" />
+    <EntitySet Name="Materials" EntityType="Self.Material" />
+    <EntitySet Name="OfficeAddresses" EntityType="Self.OfficeAddress" />
+    <EntitySet Name="OutMaterials" EntityType="Self.OutMaterial" />
+    <EntitySet Name="OutwardMaterials" EntityType="Self.OutwardMaterial" />
+    <EntitySet Name="PaymentTerms" EntityType="Self.PaymentTerm" />
+    <EntitySet Name="POReports" EntityType="Self.POReport" />
+    <EntitySet Name="RejectedInvMaterials" EntityType="Self.RejectedInvMaterial" />
+    <EntitySet Name="Req_Service" EntityType="Self.Req_Service" />
+    <EntitySet Name="Requisitions" EntityType="Self.Requisition" />
+    <EntitySet Name="RequisitionApprovers" EntityType="Self.RequisitionApprover" />
+    <EntitySet Name="RequisitionExtraDocs" EntityType="Self.RequisitionExtraDoc" />
+    <EntitySet Name="Serial_Number" EntityType="Self.Serial_Number" />
+    <EntitySet Name="ServiceCategories" EntityType="Self.ServiceCategory" />
+    <EntitySet Name="ServiceDoccumentTypes" EntityType="Self.ServiceDoccumentType" />
+    <EntitySet Name="ServiceTypes" EntityType="Self.ServiceType" />
+    <EntitySet Name="ServiceUsers" EntityType="Self.ServiceUser" />
+    <EntitySet Name="ServiceUserDepartments" EntityType="Self.ServiceUserDepartment" />
+    <EntitySet Name="ServiceVendors" EntityType="Self.ServiceVendor" />
+    <EntitySet Name="Signatures" EntityType="Self.Signature" />
+    <EntitySet Name="Taxes" EntityType="Self.Tax" />
+    <EntitySet Name="TempVendors" EntityType="Self.TempVendor" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="UserFeedbacks" EntityType="Self.UserFeedback" />
+    <EntitySet Name="vendorAnnualTurnovers" EntityType="Self.vendorAnnualTurnover" />
+    <EntitySet Name="vendorCustomerReferences" EntityType="Self.vendorCustomerReference" />
+    <EntitySet Name="VendorDocuments" EntityType="Self.VendorDocument" />
+    <EntitySet Name="VendorReviews" EntityType="Self.VendorReview" />
+    <EntitySet Name="VendorServiceTypes" EntityType="Self.VendorServiceType" />
+    <EntitySet Name="vendorUnitAddresses" EntityType="Self.vendorUnitAddress" />
+    <EntitySet Name="HTV_Vendor_2092022" EntityType="Self.HTV_Vendor_2092022" />
+    <EntitySet Name="Invoice_BKP_1012021" EntityType="Self.Invoice_BKP_1012021" />
+    <AssociationSet Name="FK_CategoryExtraDocument_Service" Association="Self.FK_CategoryExtraDocument_Service">
+      <End Role="HTV_Service" EntitySet="HTV_Service" />
+      <End Role="CategoryExtraDocument" EntitySet="CategoryExtraDocuments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Service_categoryextradocument" Association="Self.FK_Service_categoryextradocument">
+      <End Role="HTV_Service" EntitySet="HTV_Service" />
+      <End Role="CategoryExtraDocument" EntitySet="CategoryExtraDocuments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CounterSignedPOReport_POReport" Association="Self.FK_CounterSignedPOReport_POReport">
+      <End Role="POReport" EntitySet="POReports" />
+      <End Role="CounterSignedPOReport" EntitySet="CounterSignedPOReports" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CounterSignedPOReport_Vendor" Association="Self.FK_CounterSignedPOReport_Vendor">
+      <End Role="HTV_Vendor" EntitySet="HTV_Vendor" />
+      <End Role="CounterSignedPOReport" EntitySet="CounterSignedPOReports" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeliveryChallen_InwardMaterial" Association="Self.FK_DeliveryChallen_InwardMaterial">
+      <End Role="InwardMaterial" EntitySet="InwardMaterials" />
+      <End Role="DeliveryChallen" EntitySet="DeliveryChallens" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GatepassApprovers_IMSUsers" Association="Self.FK_GatepassApprovers_IMSUsers">
+      <End Role="IMSUsers" EntitySet="IMSUsers" />
+      <End Role="GatepassApprovers" EntitySet="GatepassApprovers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GatepassApprovers_ServiceUserDepartment" Association="Self.FK_GatepassApprovers_ServiceUserDepartment">
+      <End Role="ServiceUserDepartment" EntitySet="ServiceUserDepartments" />
+      <End Role="GatepassApprovers" EntitySet="GatepassApprovers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GatePasses_ServiceUserDepartment" Association="Self.FK_GatePasses_ServiceUserDepartment">
+      <End Role="ServiceUserDepartment" EntitySet="ServiceUserDepartments" />
+      <End Role="GatePasses" EntitySet="GatePasses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OutMaterials_GatePasses" Association="Self.FK_OutMaterials_GatePasses">
+      <End Role="GatePasses" EntitySet="GatePasses" />
+      <End Role="OutMaterials" EntitySet="OutMaterials" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OutwardMaterial_GatePasses" Association="Self.FK_OutwardMaterial_GatePasses">
+      <End Role="GatePasses" EntitySet="GatePasses" />
+      <End Role="OutwardMaterial" EntitySet="OutwardMaterials" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HistoryServiceMaintenance_Service" Association="Self.FK_HistoryServiceMaintenance_Service">
+      <End Role="HTV_Service" EntitySet="HTV_Service" />
+      <End Role="HistoryServiceMaintenance" EntitySet="HistoryServiceMaintenances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Documents_Vendor" Association="Self.FK_Documents_Vendor">
+      <End Role="HTV_Vendor" EntitySet="HTV_Vendor" />
+      <End Role="HTV_Documents" EntitySet="HTV_Documents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VendorDocuments_Documents" Association="Self.FK_VendorDocuments_Documents">
+      <End Role="HTV_Documents" EntitySet="HTV_Documents" />
+      <End Role="VendorDocuments" EntitySet="VendorDocuments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HTV_ForgotPasswordData_HTV_Vendor" Association="Self.FK_HTV_ForgotPasswordData_HTV_Vendor">
+      <End Role="HTV_Vendor" EntitySet="HTV_Vendor" />
+      <End Role="HTV_ForgotPasswordData" EntitySet="HTV_ForgotPasswordData" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HTV_ForgotPasswordData_User" Association="Self.FK_HTV_ForgotPasswordData_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="HTV_ForgotPasswordData" EntitySet="HTV_ForgotPasswordData" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_Service" Association="Self.FK_Invoice_Service">
+      <End Role="HTV_Service" EntitySet="HTV_Service" />
+      <End Role="HTV_Invoice" EntitySet="HTV_Invoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_Sprint" Association="Self.FK_Invoice_Sprint">
+      <End Role="HTV_Sprint" EntitySet="HTV_Sprint" />
+      <End Role="HTV_Invoice" EntitySet="HTV_Invoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_User" Association="Self.FK_Invoice_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="HTV_Invoice" EntitySet="HTV_Invoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_User1" Association="Self.FK_Invoice_User1">
+      <End Role="User" EntitySet="Users" />
+      <End Role="HTV_Invoice" EntitySet="HTV_Invoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_Vendor" Association="Self.FK_Invoice_Vendor">
+      <End Role="HTV_Vendor" EntitySet="HTV_Vendor" />
+      <End Role="HTV_Invoice" EntitySet="HTV_Invoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceExtraDocument_Invoice" Association="Self.FK_InvoiceExtraDocument_Invoice">
+      <End Role="HTV_Invoice" EntitySet="HTV_Invoice" />
+      <End Role="InvoiceExtraDocument" EntitySet="InvoiceExtraDocuments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Service_invoice" Association="Self.FK_Service_invoice">
+      <End Role="HTV_Service" EntitySet="HTV_Service" />
+      <End Role="HTV_Invoice" EntitySet="HTV_Invoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HTV_Servi__userD__367C1819" Association="Self.FK__HTV_Servi__userD__367C1819">
+      <End Role="ServiceUserDepartment" EntitySet="ServiceUserDepartments" />
+      <End Role="HTV_Service" EntitySet="HTV_Service" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HTV_Servi__userD__37703C52" Association="Self.FK__HTV_Servi__userD__37703C52">
+      <End Role="ServiceUserDepartment" EntitySet="ServiceUserDepartments" />
+      <End Role="HTV_Service" EntitySet="HTV_Service" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sprint__serviceCode" Association="Self.FK__Sprint__serviceCode">
+      <End Role="HTV_Service" EntitySet="HTV_Service" />
+      <End Role="HTV_Sprint" EntitySet="HTV_Sprint" />
+    </AssociationSet>
+    <AssociationSet Name="FK_POReport_Service" Association="Self.FK_POReport_Service">
+      <End Role="HTV_Service" EntitySet="HTV_Service" />
+      <End Role="POReport" EntitySet="POReports" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Req_Service_Service" Association="Self.FK_Req_Service_Service">
+      <End Role="HTV_Service" EntitySet="HTV_Service" />
+      <End Role="Req_Service" EntitySet="Req_Service" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Service_poreport" Association="Self.FK_Service_poreport">
+      <End Role="HTV_Service" EntitySet="HTV_Service" />
+      <End Role="POReport" EntitySet="POReports" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Service_Service" Association="Self.FK_Service_Service">
+      <End Role="HTV_Vendor" EntitySet="HTV_Vendor" />
+      <End Role="HTV_Service" EntitySet="HTV_Service" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Service_ServiceCategory" Association="Self.FK_Service_ServiceCategory">
+      <End Role="ServiceCategory" EntitySet="ServiceCategories" />
+      <End Role="HTV_Service" EntitySet="HTV_Service" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Service_ServiceType" Association="Self.FK_Service_ServiceType">
+      <End Role="ServiceType" EntitySet="ServiceTypes" />
+      <End Role="HTV_Service" EntitySet="HTV_Service" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Service_serviceuser" Association="Self.FK_Service_serviceuser">
+      <End Role="HTV_Service" EntitySet="HTV_Service" />
+      <End Role="ServiceUser" EntitySet="ServiceUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Service_servicevendor" Association="Self.FK_Service_servicevendor">
+      <End Role="HTV_Service" EntitySet="HTV_Service" />
+      <End Role="ServiceVendor" EntitySet="ServiceVendors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Service_sprint" Association="Self.FK_Service_sprint">
+      <End Role="HTV_Service" EntitySet="HTV_Service" />
+      <End Role="HTV_Sprint" EntitySet="HTV_Sprint" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceUser_Service" Association="Self.FK_ServiceUser_Service">
+      <End Role="HTV_Service" EntitySet="HTV_Service" />
+      <End Role="ServiceUser" EntitySet="ServiceUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceVendor_Service" Association="Self.FK_ServiceVendor_Service">
+      <End Role="HTV_Service" EntitySet="HTV_Service" />
+      <End Role="ServiceVendor" EntitySet="ServiceVendors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sprint_POReport" Association="Self.FK_Sprint_POReport">
+      <End Role="POReport" EntitySet="POReports" />
+      <End Role="HTV_Sprint" EntitySet="HTV_Sprint" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InwardMaterial_Materials" Association="Self.FK_InwardMaterial_Materials">
+      <End Role="HTV_Vendor" EntitySet="HTV_Vendor" />
+      <End Role="InwardMaterial" EntitySet="InwardMaterials" />
+    </AssociationSet>
+    <AssociationSet Name="FK_POReport_Vendor" Association="Self.FK_POReport_Vendor">
+      <End Role="HTV_Vendor" EntitySet="HTV_Vendor" />
+      <End Role="POReport" EntitySet="POReports" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceVendor_Vendor" Association="Self.FK_ServiceVendor_Vendor">
+      <End Role="HTV_Vendor" EntitySet="HTV_Vendor" />
+      <End Role="ServiceVendor" EntitySet="ServiceVendors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_vendorAnnualTurnover_Vendor" Association="Self.FK_vendorAnnualTurnover_Vendor">
+      <End Role="HTV_Vendor" EntitySet="HTV_Vendor" />
+      <End Role="vendorAnnualTurnover" EntitySet="vendorAnnualTurnovers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_vendorCustomerReference_Vendor" Association="Self.FK_vendorCustomerReference_Vendor">
+      <End Role="HTV_Vendor" EntitySet="HTV_Vendor" />
+      <End Role="vendorCustomerReference" EntitySet="vendorCustomerReferences" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VendorDocuments_Vendor" Association="Self.FK_VendorDocuments_Vendor">
+      <End Role="HTV_Vendor" EntitySet="HTV_Vendor" />
+      <End Role="VendorDocuments" EntitySet="VendorDocuments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VendorReview_Vendor" Association="Self.FK_VendorReview_Vendor">
+      <End Role="HTV_Vendor" EntitySet="HTV_Vendor" />
+      <End Role="VendorReview" EntitySet="VendorReviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VendorService_Vendor" Association="Self.FK_VendorService_Vendor">
+      <End Role="HTV_Vendor" EntitySet="HTV_Vendor" />
+      <End Role="HTV_VendorService" EntitySet="HTV_VendorService" />
+    </AssociationSet>
+    <AssociationSet Name="FK_vendorUnitAddressesVendor" Association="Self.FK_vendorUnitAddressesVendor">
+      <End Role="HTV_Vendor" EntitySet="HTV_Vendor" />
+      <End Role="vendorUnitAddresses" EntitySet="vendorUnitAddresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VendorService_VendorServiceType" Association="Self.FK_VendorService_VendorServiceType">
+      <End Role="VendorServiceType" EntitySet="VendorServiceTypes" />
+      <End Role="HTV_VendorService" EntitySet="HTV_VendorService" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IMSRole_IMSUsers" Association="Self.FK_IMSRole_IMSUsers">
+      <End Role="IMSUsers" EntitySet="IMSUsers" />
+      <End Role="IMSRole" EntitySet="IMSRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IMSRole_ServiceUserDepartment" Association="Self.FK_IMSRole_ServiceUserDepartment">
+      <End Role="ServiceUserDepartment" EntitySet="ServiceUserDepartments" />
+      <End Role="IMSRole" EntitySet="IMSRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InwardApprovers_IMSUsers" Association="Self.FK_InwardApprovers_IMSUsers">
+      <End Role="IMSUsers" EntitySet="IMSUsers" />
+      <End Role="InwardApprovers" EntitySet="InwardApprovers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Inventory_Register_Inventory_Register1" Association="Self.FK_Inventory_Register_Inventory_Register1">
+      <End Role="Inventory_Register" EntitySet="Inventory_Register" />
+      <End Role="Inventory_Register1" EntitySet="Inventory_Register" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Inventory_Register_Material_Category" Association="Self.FK_Inventory_Register_Material_Category">
+      <End Role="Material_Category" EntitySet="Material_Category" />
+      <End Role="Inventory_Register" EntitySet="Inventory_Register" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Inventory_Register_Materials" Association="Self.FK_Inventory_Register_Materials">
+      <End Role="Materials" EntitySet="Materials" />
+      <End Role="Inventory_Register" EntitySet="Inventory_Register" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InwardApprovers_InwardApprovers" Association="Self.FK_InwardApprovers_InwardApprovers">
+      <End Role="ServiceUserDepartment" EntitySet="ServiceUserDepartments" />
+      <End Role="InwardApprovers" EntitySet="InwardApprovers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InwardMaterial_CAPEX_InwardMaterial" Association="Self.FK_InwardMaterial_CAPEX_InwardMaterial">
+      <End Role="InwardMaterial" EntitySet="InwardMaterials" />
+      <End Role="InwardMaterial_CAPEX" EntitySet="InwardMaterial_CAPEX" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InwardMaterial_InwardMaterial" Association="Self.FK_InwardMaterial_InwardMaterial">
+      <End Role="InwardMaterial" EntitySet="InwardMaterials" />
+      <End Role="InwardMaterial1" EntitySet="InwardMaterials" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InwardMaterial_OPEX_InwardMaterial" Association="Self.FK_InwardMaterial_OPEX_InwardMaterial">
+      <End Role="InwardMaterial" EntitySet="InwardMaterials" />
+      <End Role="InwardMaterial_OPEX" EntitySet="InwardMaterial_OPEX" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InwardMaterial_Rental_InwardMaterial" Association="Self.FK_InwardMaterial_Rental_InwardMaterial">
+      <End Role="InwardMaterial" EntitySet="InwardMaterials" />
+      <End Role="InwardMaterial_Rental" EntitySet="InwardMaterial_Rental" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InwardMaterial_ServiceUserDepartment" Association="Self.FK_InwardMaterial_ServiceUserDepartment">
+      <End Role="ServiceUserDepartment" EntitySet="ServiceUserDepartments" />
+      <End Role="InwardMaterial" EntitySet="InwardMaterials" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InwardMaterial_CAPEX_Material_Category" Association="Self.FK_InwardMaterial_CAPEX_Material_Category">
+      <End Role="Material_Category" EntitySet="Material_Category" />
+      <End Role="InwardMaterial_CAPEX" EntitySet="InwardMaterial_CAPEX" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InwardMaterial_CAPEX_Materials" Association="Self.FK_InwardMaterial_CAPEX_Materials">
+      <End Role="Materials" EntitySet="Materials" />
+      <End Role="InwardMaterial_CAPEX" EntitySet="InwardMaterial_CAPEX" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RejectedInvMaterial_InwardMaterial_CAPEX" Association="Self.FK_RejectedInvMaterial_InwardMaterial_CAPEX">
+      <End Role="InwardMaterial_CAPEX" EntitySet="InwardMaterial_CAPEX" />
+      <End Role="RejectedInvMaterial" EntitySet="RejectedInvMaterials" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InwardMaterial_OPEX_Material_Category" Association="Self.FK_InwardMaterial_OPEX_Material_Category">
+      <End Role="Material_Category" EntitySet="Material_Category" />
+      <End Role="InwardMaterial_OPEX" EntitySet="InwardMaterial_OPEX" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InwardMaterial_OPEX_Materials" Association="Self.FK_InwardMaterial_OPEX_Materials">
+      <End Role="Materials" EntitySet="Materials" />
+      <End Role="InwardMaterial_OPEX" EntitySet="InwardMaterial_OPEX" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RejectedInvMaterial_InwardMaterial_OPEX" Association="Self.FK_RejectedInvMaterial_InwardMaterial_OPEX">
+      <End Role="InwardMaterial_OPEX" EntitySet="InwardMaterial_OPEX" />
+      <End Role="RejectedInvMaterial" EntitySet="RejectedInvMaterials" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InwardMaterial_Rental_Material_Category" Association="Self.FK_InwardMaterial_Rental_Material_Category">
+      <End Role="Material_Category" EntitySet="Material_Category" />
+      <End Role="InwardMaterial_Rental" EntitySet="InwardMaterial_Rental" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InwardMaterial_Rental_Materials" Association="Self.FK_InwardMaterial_Rental_Materials">
+      <End Role="Materials" EntitySet="Materials" />
+      <End Role="InwardMaterial_Rental" EntitySet="InwardMaterial_Rental" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Materials_Material_Category" Association="Self.FK_Materials_Material_Category">
+      <End Role="Material_Category" EntitySet="Material_Category" />
+      <End Role="Materials" EntitySet="Materials" />
+    </AssociationSet>
+    <AssociationSet Name="FK__POReport__Paymen__55F4C372" Association="Self.FK__POReport__Paymen__55F4C372">
+      <End Role="PaymentTerms" EntitySet="PaymentTerms" />
+      <End Role="POReport" EntitySet="POReports" />
+    </AssociationSet>
+    <AssociationSet Name="FK__POReport__Paymen__56E8E7AB" Association="Self.FK__POReport__Paymen__56E8E7AB">
+      <End Role="PaymentTerms" EntitySet="PaymentTerms" />
+      <End Role="POReport" EntitySet="POReports" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Signature_POReport" Association="Self.FK_Signature_POReport">
+      <End Role="POReport" EntitySet="POReports" />
+      <End Role="Signature" EntitySet="Signatures" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Req_Service_Requisition" Association="Self.FK_Req_Service_Requisition">
+      <End Role="Requisition" EntitySet="Requisitions" />
+      <End Role="Req_Service" EntitySet="Req_Service" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceDoccumentType_User" Association="Self.FK_ServiceDoccumentType_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="ServiceDoccumentType" EntitySet="ServiceDoccumentTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceUser_ServiceUserDepartment" Association="Self.FK_ServiceUser_ServiceUserDepartment">
+      <End Role="ServiceUserDepartment" EntitySet="ServiceUserDepartments" />
+      <End Role="ServiceUser" EntitySet="ServiceUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_ServiceUserDepartment" Association="Self.FK_User_ServiceUserDepartment">
+      <End Role="ServiceUserDepartment" EntitySet="ServiceUserDepartments" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Signature_User" Association="Self.FK_Signature_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Signature" EntitySet="Signatures" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VendorReview_User" Association="Self.FK_VendorReview_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="VendorReview" EntitySet="VendorReviews" />
+    </AssociationSet>
+    <EntitySet Name="InwardMaterial_CustomerAsset" EntityType="ServiceVMSModel.InwardMaterial_CustomerAsset" />
+    <AssociationSet Name="FK_InwardMaterial_CustomerAsset_InwardMaterial" Association="ServiceVMSModel.FK_InwardMaterial_CustomerAsset_InwardMaterial">
+      <End Role="InwardMaterial" EntitySet="InwardMaterials" />
+      <End Role="InwardMaterial_CustomerAsset" EntitySet="InwardMaterial_CustomerAsset" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InwardMaterial_CustomerAsset_Material_Category" Association="ServiceVMSModel.FK_InwardMaterial_CustomerAsset_Material_Category">
+      <End Role="Material_Category" EntitySet="Material_Category" />
+      <End Role="InwardMaterial_CustomerAsset" EntitySet="InwardMaterial_CustomerAsset" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InwardMaterial_CustomerAsset_Materials" Association="ServiceVMSModel.FK_InwardMaterial_CustomerAsset_Materials">
+      <End Role="Material" EntitySet="Materials" />
+      <End Role="InwardMaterial_CustomerAsset" EntitySet="InwardMaterial_CustomerAsset" />
+    </AssociationSet>
+    <EntitySet Name="IMS_Signature" EntityType="ServiceVMSModel.IMS_Signature" />
+    <AssociationSet Name="FK_IMS_Signature_IMSUsers" Association="ServiceVMSModel.FK_IMS_Signature_IMSUsers">
+      <End Role="IMSUser" EntitySet="IMSUsers" />
+      <End Role="IMS_Signature" EntitySet="IMS_Signature" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InwardMaterial_TempVendor" Association="ServiceVMSModel.FK_InwardMaterial_TempVendor">
+      <End Role="TempVendor" EntitySet="TempVendors" />
+      <End Role="InwardMaterial" EntitySet="InwardMaterials" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="InwardMaterial_CustomerAsset">
+    <Key>
+      <PropertyRef Name="InvMaterialCA_ID" />
+    </Key>
+    <Property Name="InvMaterialCA_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="InwardID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MaterialID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MaterialName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Inward_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Acceptedby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Material_Price" Type="Double" />
+    <Property Name="Material_Totalprice" Type="Double" />
+    <Property Name="Material_Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Material_CategoryID" Type="Int32" />
+    <Property Name="Accepted_Date" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="InwardMaterial" Relationship="ServiceVMSModel.FK_InwardMaterial_CustomerAsset_InwardMaterial" FromRole="InwardMaterial_CustomerAsset" ToRole="InwardMaterial" />
+    <NavigationProperty Name="Material_Category" Relationship="ServiceVMSModel.FK_InwardMaterial_CustomerAsset_Material_Category" FromRole="InwardMaterial_CustomerAsset" ToRole="Material_Category" />
+    <NavigationProperty Name="Material" Relationship="ServiceVMSModel.FK_InwardMaterial_CustomerAsset_Materials" FromRole="InwardMaterial_CustomerAsset" ToRole="Material" />
+  </EntityType>
+  <Association Name="FK_InwardMaterial_CustomerAsset_InwardMaterial">
+    <End Type="ServiceVMSModel.InwardMaterial" Role="InwardMaterial" Multiplicity="0..1" />
+    <End Type="ServiceVMSModel.InwardMaterial_CustomerAsset" Role="InwardMaterial_CustomerAsset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InwardMaterial">
+        <PropertyRef Name="InwardID" />
+      </Principal>
+      <Dependent Role="InwardMaterial_CustomerAsset">
+        <PropertyRef Name="InwardID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InwardMaterial_CustomerAsset_Material_Category">
+    <End Type="ServiceVMSModel.Material_Category" Role="Material_Category" Multiplicity="0..1" />
+    <End Type="ServiceVMSModel.InwardMaterial_CustomerAsset" Role="InwardMaterial_CustomerAsset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Material_Category">
+        <PropertyRef Name="Material_CategoryID" />
+      </Principal>
+      <Dependent Role="InwardMaterial_CustomerAsset">
+        <PropertyRef Name="Material_CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InwardMaterial_CustomerAsset_Materials">
+    <End Type="ServiceVMSModel.Material" Role="Material" Multiplicity="0..1" />
+    <End Type="ServiceVMSModel.InwardMaterial_CustomerAsset" Role="InwardMaterial_CustomerAsset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Material">
+        <PropertyRef Name="MaterialID" />
+      </Principal>
+      <Dependent Role="InwardMaterial_CustomerAsset">
+        <PropertyRef Name="MaterialID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="IMS_Signature">
+    <Key>
+      <PropertyRef Name="IMSsignatureId" />
+    </Key>
+    <Property Name="IMSsignatureId" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="categoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="referenceId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="role" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="IMSsignaturePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="userId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IMSsignatureStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="IMSUser" Relationship="ServiceVMSModel.FK_IMS_Signature_IMSUsers" FromRole="IMS_Signature" ToRole="IMSUser" />
+  </EntityType>
+  <Association Name="FK_IMS_Signature_IMSUsers">
+    <End Type="ServiceVMSModel.IMSUser" Role="IMSUser" Multiplicity="0..1" />
+    <End Type="ServiceVMSModel.IMS_Signature" Role="IMS_Signature" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IMSUser">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="IMS_Signature">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InwardMaterial_TempVendor">
+    <End Type="ServiceVMSModel.TempVendor" Role="TempVendor" Multiplicity="0..1" />
+    <End Type="ServiceVMSModel.InwardMaterial" Role="InwardMaterial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TempVendor">
+        <PropertyRef Name="TempVendorID" />
+      </Principal>
+      <Dependent Role="InwardMaterial">
+        <PropertyRef Name="TempVendorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

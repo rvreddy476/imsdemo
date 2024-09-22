@@ -1,0 +1,686 @@
+﻿@model IMS.Models.IMSEntity
+
+@{
+    ViewBag.Title = "Create_Gatepass";
+    Layout = "~/Views/Shared/_Layout_IMS.cshtml";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link href="~/Content/sweetalert2.min.css" rel="stylesheet" />
+<link href="~/assets/css/custom.css" rel="stylesheet" />
+<style>
+    td {
+        border: 1px solid black;
+        padding: 8px; /* Adding padding to cells for better appearance */
+    }
+</style>
+<div class="gate-pass gatepass-list">
+    <h5 class="content-title mb-4">Create Gatepass</h5>
+    <div class="card">
+        <div class="card-body">
+            <!--<h5 class="mandatory-fields p-2 mb-0">* All Fields are Mandatory</h5>-->
+            <div class="form addInward">
+                @using (Html.BeginForm("Create_Gatepass", "Add_Gatepass", FormMethod.Post, new { enctype = "multipart/form-data", name = "myForm" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <input type="hidden" id="SerialNumber" value="0" name="SerialNumber" />
+                    <input type="hidden" id="SerialNumberdetail" name="SerialNumbedetail" />
+                    <div class="card1">
+                        <div class="card-body1 row">
+                            <input type="hidden" name="GatepassID" id="GatepassID" value="@ViewBag.GatepassID" />
+                            <input type="hidden" name="Gatepass_DateTime" id="InwardDateTime" value="@DateTime.Now" />
+                            <input type="hidden" name="finalnumberforgatepass" id="finalnumberforgatepass" value="@ViewBag.finalnumber" />
+                            <div class="col-md-12 gatepass-no" style="text-align:left">
+                                <input type="hidden" name="Gatepass_Number" value="@ViewBag.gatepassnumber" />
+                                <label class="form-label"> GatePass Number:    </label><span>    @ViewBag.gatepassnumber</span>
+                            </div>
+                            <br />
+                            <br />
+                            <div class="row mb-3">
+                                <div class="col-md-4 mb-3">
+                                    @Html.LabelFor(model => model.userDepartmentId, htmlAttributes: new { @class = "form-label" })
+
+                                    @Html.DropDownList("userDepartmentId", new SelectList(ViewBag.userDepartment, "userDepartmentId", "userDepartmentName"), "Select", new { @class = "form-control input-col", @required = "required" })
+                                    <div>
+                                        @Html.ValidationMessageFor(model => model.userDepartmentId, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-8">
+                                    @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "form-label required" })
+
+                                    @if (ViewBag.location == "Global Port")
+                                    {
+                                        @Html.DropDownListFor(model => model.Location, new List<SelectListItem>
+                                         {
+                                            new SelectListItem{Text= "Global Port" , Value="Global Port", Selected = true},
+                                         }, new { disabled = "disabled" , @style = "width:50%", @class = "form-control input-col", @required = "required", @name = "Location" , @id = "Location" })
+                                    }
+                                    else if (ViewBag.location == "SEZ")
+                                    {
+                                        @Html.DropDownListFor(model => model.Location, new List<SelectListItem>
+                                         {
+                                            new SelectListItem{Text= "SEZ" , Value="SEZ", Selected = true},
+                                         }, new { disabled = "disabled", @style = "width:50%", @class = "form-control input-col", @required = "required", @name = "Location", @id = "Location" })
+
+                                    }
+                                    else if (ViewBag.location == "Siddhant")
+                                    {
+                                        @Html.DropDownListFor(model => model.Location, new List<SelectListItem>
+                                        {
+                                           new SelectListItem{Text= "Siddhant" , Value="Siddhant", Selected = true},
+                                        }, new { disabled = "disabled" , @style = "width:50%", @class = "form-control input-col", @required = "required", @name = "Location" , @id = "Location" })
+
+                                    }
+                                    else
+                                    {
+                                        @Html.DropDownListFor(model => model.Location, new List<SelectListItem>
+                                      {
+                                         new SelectListItem{Text= "Global Port" , Value="Global Port"},
+                                         new SelectListItem{Text= "Siddhant" , Value="Siddhant"},
+                                         new SelectListItem{Text= "SEZ" , Value="SEZ"},
+                                      }, "Select", new { @style = "width:50%", @class = "form-control input-col", @required = "required", @name = "Location" })
+
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="GatepassType" class="form-label">Gatepass Type</label><br />
+                                <div class="d-flex align-items-center gatepass-radio">
+                                    <div class="d-flex align-items-center"><input type="radio" name="GatepassType" id="Returnable" value="Returnable"><span class="mr-18"> Returnable</span></div>
+                                    <div class="d-flex align-items-center">
+                                        <input type="radio" name="GatepassType" id="NonReturnable" value="NonReturnable"><span> NonReturnable</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Expected_DateofReturn, htmlAttributes: new { @class = "form-label control-label-small-forms" })
+                                    <div>
+                                        @Html.TextBoxFor(model => model.Expected_DateofReturn, new { @class = "form-control input-col", @required = "required", @type = "date", @disabled = "disabled" })
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-8 reason-div mt-4 mb-4">
+                                <label class="form-label">Reason </label>
+                                <textarea class="form-control input-col" placeholder="Please Provide The Reason For Your Request." style="font-size:12px;" id="Reason" name="Reason"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="select-material mb-4">
+                        <div class="col-md-8 col-sm-6">
+                            <label class="form-label">Select Materials</label>
+
+                            @Html.DropDownList("material_cp_rental_ID", new SelectList(ViewBag.Searchmaterials, "InventoryReg_ID", "materialtext"), "Select Material", new { @class = "form-control input-col", @required = "required", onchange = "createTableRow()" })
+                            <div>
+                                @Html.ValidationMessageFor(model => model.material_cp_rental_ID, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+
+                        <table class="material-info" id="dynamic-table" border="1" cellspacing="4" cellpadding="4">
+                            <input type="hidden" id="hdnRows" value="1" />
+
+                            <tr>
+                                <th>Asset ID</th>
+                                <th>Material Name</th>
+                                <th>Expense Nature</th>
+                                <th>Model no.</th>
+                                <th>Serial No.</th>
+                                <th>GRN Number</th>
+                                <th>Material Remark</th>
+                            </tr>
+
+                        </table>
+
+                        <div style="display:none" id="errorGST">
+                            <p style="color:red;">Please fill the above details before submitting.</p>
+                        </div>
+
+
+                        <div style="display:none" id="datatable" class="mb-20">
+                            <input type="hidden" id="hdnRows" value="1" />
+                            <table border="1" cellspacing="4" cellpadding="4">
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Material</th>
+                                        <th>Serial Number</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tblPage" name="data[]">
+                                    <tr>
+                                        <input type="hidden" name="srno[]" />
+                                        <td><input type="hidden" name="mcategory[]" id="MaterialCategory" /></td>
+                                        <td><input type="hidden" name="material[]" id="Material" /></td>
+                                        <td><input type="hidden" name="serial_number[]" id="mserial" /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                    <div class="col-md-8 col-sm-6 mb-4">
+                        <div class="card1">
+                            <div class="card-body1">
+
+                                <div class="d-flex align-items-center gatepass-radio mb-4">
+                                    <div class="d-flex align-items-center"><input type="radio" name="Bonded_Item" id="yes" value="STP"><span class="mr-18"> STP Bonded Item</span></div>
+                                    <div class="d-flex align-items-center"><input type="radio" name="Bonded_Item" id="YESS" value="SEZ"><span> SEZ Bonded Item </span></div>
+                                </div>
+
+                                <label class="form-label col-md-12" for="GatePass_Category">GatePass Category  </label>
+                                <div class="d-flex align-items-center gatepass-radio mb-4">
+                                    <div class="d-flex align-items-center mr-18"><input type="radio" name="GatePass_Category" id="InterOffice" value="InterOffice"><span> InterOffice</span></div>
+                                    <div class="d-flex align-items-center">
+                                        <input type="radio" name="GatePass_Category" id="External" value="External" checked><span> External</span>
+                                    </div>
+                                </div>
+
+                                <div class="interoffice row" style="display:none">
+                                    <div class="col-md-4 form-group">
+                                        @Html.LabelFor(model => model.From_Office, htmlAttributes: new { @class = "form-label required" })
+                                        @Html.DropDownListFor(model => model.From_Office, new List<SelectListItem>
+                                         {
+                                            new SelectListItem{Text= "Global Port" , Value= "Global Port"},
+                                            new SelectListItem{Text= "Siddhant" , Value= "Siddhant"},
+                                            new SelectListItem{Text= "SEZ" , Value= "SEZ"},
+                                         }, "Select", new { @class = "form-control input-col"})
+                                        <div>
+                                            @Html.ValidationMessageFor(model => model.From_Office, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 form-group">
+                                        @Html.LabelFor(model => model.TO_Office, htmlAttributes: new { @class = "form-label required" })
+                                        @Html.DropDownListFor(model => model.TO_Office, new List<SelectListItem>
+                                         {
+                                            new SelectListItem{Text= "Global Port" , Value= "Global Port" },
+                                            new SelectListItem{Text= "Siddhant" , Value= "Siddhant" },
+                                            new SelectListItem{Text= "SEZ" , Value= "SEZ" },
+                                         }, "Select", new { @class = "form-control input-col" })
+                                        <div>
+                                            @Html.ValidationMessageFor(model => model.TO_Office, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <span id="officeError" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="External row col-md-12">
+                                    <div id="existvendor" class="mt-3 mb-3">
+                                        <div class="col-md-4">
+                                            @Html.LabelFor(model => model.ReceiverName, htmlAttributes: new { @class = "form-label" })
+                                            <span> </span> <button type="button" class="trasparantbutton" onclick="divshow()">Receiver Not Found?</button>
+                                            @Html.DropDownList("ReceiverID", new SelectList(ViewBag.vendorList, "vendorId", "vendorName"), "Select Receiver", new { @class = "form-control input-col", @required = "required" })
+                                            <div>
+                                                @Html.ValidationMessageFor(model => model.ReceiverID, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="tempvendor" style="display:none">
+                                        <div class="col-md-4">
+                                            <label for="ReceiverName" class="form-label">Receiver Name</label>
+                                            <span> </span> <button type="button" class="trasparantbutton" onclick="divshowexist()">Exist Receiver?</button>
+                                            <input type="text" class="form-control" name="ReceiverName" id="ReceiverName" value="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="ReceiverEmail" class="form-label">Receiver Email</label>
+                                        <input type="text" class="form-control" name="ReceiverEmail" id="ReceiverEmail" value="">
+                                        <div class="emailvalidation" style="color:red;margin-bottom:20px;display:none">Invalid email address. Please enter a valid email.</div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="ReceiverContact" class="form-label">Receiver Contact No.</label>
+                                        <input type="text" class="form-control" name="ReceiverContact" id="ReceiverContact" value="">
+                                        <div class="phonevalidation" style="color:red;margin-bottom: 20px;display:none">Please Enter valid phone number!</div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label">Receiver Address </label>
+                                        <textarea class="form-control input-col" style="font-size:12px;" id="ReceiverAddress" name="ReceiverAddress"></textarea>
+                                    </div>
+
+                                </div>
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-top"></div>
+                    <div class="mb-3 mt-2">
+                        <input type="submit" class="btn btn-primary action-btn" id="submit" value="Submit">
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <fieldset>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="modal" tabindex="-1" id="Editbudgetpopup"
+                             data-keyboard="true" data-backdrop="static">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        @*<button type="button" id="close" class="close" data-dismiss="modal">
+                                                ×
+                                            </button>*@
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label class="form-label">Material Remark</label>
+                                                <textarea class="form-control materialremark" id="Material_Remark" name="Material_Remark" required></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer" style="text-align:left">
+                                        <input type="button" value="Save" id="btnEditRow" onclick="save_row()" class="btn btn-primary m-0" />
+                                        <button type="button" id="closeedit" class="btn btn-primary button button4">Close</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+
+
+</div>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/sweetalert2.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        debugger;
+
+        $("#material_cp_rental_ID").select2();
+
+    });
+
+
+    function validateOffices() {
+        debugger;
+        var fromOffice = $('#From_Office').val();
+        var toOffice = $('#TO_Office').val();
+
+        if (fromOffice === toOffice && fromOffice !== "") {
+            $('#officeError').text("From Office and To Office cannot be the same.");
+            $('#TO_Office').val('');
+        } else {
+            $('#officeError').text(""); // Clear error message
+        }
+    }
+
+    $('#From_Office').change(function () {
+        debugger;
+        validateOffices();
+    });
+
+    $('#TO_Office').change(function () {
+        debugger;
+        validateOffices();
+    });
+
+    const dropdown = $('#ReceiverID');
+    var detailsurl;
+    function clearDropdown(dropdown) {
+        dropdown.empty().append('<option value="">Select Receiver</option>');
+    }
+
+    function fillDropdown(dropdown, options) {
+        options.forEach(option => {
+            dropdown.append($('<option>', {
+                value: option.value,
+                text: option.text
+            }));
+        });
+    }
+
+     function getUserReceiverDetails(){
+          $.ajax({
+                    url: '@Url.Action("getUserdetails", "Add_Gatepass")',
+                    type: 'GET',
+                    success: function(data) {
+                        const options = data.map(item => ({
+                            value: item.userId,
+                            text: item.userName
+                        }));
+                        clearDropdown(dropdown);
+                        fillDropdown(dropdown, options);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Failed to fetch data:', error);
+                    }
+                });
+    }
+
+    function getVendorReceiverDetails(){
+          $.ajax({
+                    url: '@Url.Action("getVendorreceiverdetails", "Add_Gatepass")',
+                    type: 'GET',
+                    success: function(data) {
+                        const options = data.map(item => ({
+                            value: item.vendorId,
+                            text: item.vendorName
+                        }));
+                        clearDropdown(dropdown);
+                        fillDropdown(dropdown, options);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Failed to fetch data:', error);
+                    }
+                });
+    }
+
+
+
+    $("#closeedit").on("click", function () {
+        $('#Editbudgetpopup').modal('hide');
+    });
+
+
+    $("#ReceiverEmail").change(function () {
+        $(".emailvalidation").hide();
+        var emailreg = /^[a-zA-Z0-9._-]+@@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        var enteredval = $("#userEmail").val();
+        if ((emailreg).test(enteredval)) {
+
+            $(".emailvalidation").show();
+            e.preventDefault();
+
+        }
+    });
+
+
+    $("#ReceiverContact").change(function () {
+        $(".phonevalidation").hide();
+
+        var phoneno = /^\d{10}$/;
+        var enteredval = $("#ReceiverContact").val();
+
+        if ((phoneno).test(enteredval)) {
+            $(".phonevalidation").hide();
+        }
+        else {
+            $(".phonevalidation").show();
+        }
+
+
+    });
+
+    $("#ReceiverID").change(function () {
+        debugger;
+        var Value = $(this).val();
+        var checkedvalue = document.querySelector('input[name="GatePass_Category"]:checked').value;
+        if (checkedvalue == "InterOffice") {
+          detailsurl = '@Url.Action("getIMSUserDetails", "Add_Gatepass")';
+        }
+        else if (checkedvalue == "External") {
+           detailsurl = '@Url.Action("getVendorDetails", "Add_Gatepass")';
+        }
+        $.ajax({
+            url: detailsurl,
+            data: { "vendorID": Value },
+            type: 'GET',
+            success: function (data) {
+                debugger
+                $("#ReceiverEmail").val(data.Email);
+                $("#ReceiverContact").val(data.contact);
+                $("#ReceiverAddress").val(data.address);
+
+                $("#ReceiverEmail").attr('disabled',true);
+                //$("#ReceiverContact").attr('disabled',true);
+                //$("#ReceiverAddress").attr('disabled',true);
+            }
+        });
+
+
+
+    });
+
+    $('input[type=radio][name=GatepassType]').change(function () {
+        debugger;
+        var Value = $(this).val();
+        if (Value == "Returnable") {
+            $("#Expected_DateofReturn").attr('disabled', false);
+            $("#Expected_DateofReturn").attr('required', true);
+        }
+        else {
+            $("#Expected_DateofReturn").attr('disabled', true);
+            $("#Expected_DateofReturn").attr('required', false);
+        }
+
+    });
+
+
+    function save_row() {
+        debugger;
+        var ser = $('#SerialNumberdetail').val();
+        var re = $('#Material_Remark').val();
+        //var remark = document.getElementById("matremark" + ser);
+        var classnm = document.getElementById("materialrema" + ser);
+        classnm.setAttribute("value", re);
+        var remark = document.querySelector('#matremark' + ser + ' input[type="text"]');
+        remark.innerHTML = re;
+        remark.setAttribute("value", re);
+        $('#Material_Remark').val('');
+        $('#Editbudgetpopup').modal('hide');
+
+    }
+    var selectedMaterials = [];
+    function createTableRow() {
+        debugger;
+        var serialno = $("#SerialNumber").val();
+        var srno = (parseInt(serialno) + 1);
+        var selectedOption = $("#material_cp_rental_ID option:selected").text();
+        var selecteid = document.getElementById("material_cp_rental_ID").value;
+
+        var rowData = selectedOption.split(" | ");
+
+        var table = document.getElementById("dynamic-table");
+        var newRow = table.insertRow(-1); // Append row to the end of the table
+
+
+        var selectedMaterial = selecteid;
+        if (selectedMaterials.includes(selectedMaterial)) {
+            // alert("Material already added!");
+            Swal.fire({
+
+                html: "Material already added!",
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            })
+            return false;
+        }
+        var hiddenInput = document.createElement("input");
+        hiddenInput.type = "hidden";
+        hiddenInput.name = "inventoryregid[]";
+        hiddenInput.id = "inventoryreg" + srno;
+        hiddenInput.value = selecteid;
+        newRow.appendChild(hiddenInput);
+
+        var hiddenInput = document.createElement("input");
+        hiddenInput.type = "hidden";
+        hiddenInput.name = "materialremarks[]";
+        hiddenInput.id = "materialrema" + srno;
+
+        newRow.appendChild(hiddenInput);
+
+        var hiddenIn = document.createElement("input");
+        hiddenIn.type = "hidden";
+        hiddenIn.name = "businessnature[]";
+        hiddenIn.id = "businessnature" + srno;
+        hiddenIn.value = rowData[2];
+        newRow.appendChild(hiddenIn);
+
+
+        for (var i = 0; i < rowData.length; i++) {
+            var cell = newRow.insertCell(i);
+            cell.innerHTML = rowData[i];
+
+        }
+
+        var newcell = newRow.insertCell();
+        newRow.appendChild(newcell);
+        newcell.id = "matremark" + srno;
+
+
+        var inputElement = document.createElement("input");
+        inputElement.setAttribute("type", "text");
+        inputElement.setAttribute("name", "matremark[]");
+        inputElement.id = "remark" + srno;
+        newcell.appendChild(inputElement);
+        inputElement.setAttribute('disabled', 'disabled');
+
+
+        var editbutton = document.createElement("button");
+        editbutton.innerHTML = "Edit Remark";
+        editbutton.className = "editbtn";
+        editbutton.id = srno;
+        editbutton.onclick = function () {
+            $('#Editbudgetpopup').modal('show');
+            var ser = document.getElementById('SerialNumberdetail');
+            ser.value = srno;
+        };
+        //editbutton.addEventListener('click', function () {
+        //    $('#Editbudgetpopup').modal('show');
+        //    var ser = document.getElementById('SerialNumberdetail');
+        //    ser.value = srno;
+        //});
+
+        newRow.appendChild(editbutton);
+        selectedMaterials.push(selectedMaterial);
+
+        document.getElementById('SerialNumber').value = srno;
+    }
+
+
+    var buttons = document.querySelectorAll('.editbtn');
+    buttons.forEach(function (button) {
+        debugger;
+        button.addEventListener('click', function (event) {
+            var buttonId = event.target.id;
+            $('#Editbudgetpopup').modal('show');
+            var ser = document.getElementById('SerialNumberdetail');
+            ser.value = buttonId;
+
+        });
+    });
+
+    $('input[type=radio][name=GatePass_Category]').change(function () {
+        if (this.value == 'InterOffice') {
+            debugger;
+            $('#officeError').text(""); 
+            $("#TO_Office").val('');
+            $("#From_Office").val('');
+            $("#ReceiverID").val('');
+            $("#ReceiverEmail").val("");
+            $("#ReceiverContact").val("");
+            $("#ReceiverAddress").val("");
+
+
+            $(".interoffice").show();
+            $(".External").show();
+
+            $("#ReceiverID").attr('required', false);
+            $("#TO_Office").attr('required', true);
+            $("#From_Office").attr('required', true);
+            getUserReceiverDetails();
+        }
+        else if (this.value == 'External') {
+            debugger
+            $('#officeError').text(""); 
+            $("#TO_Office").val('');
+            $("#From_Office").val('');
+            $("#ReceiverID").val('');
+            $("#ReceiverEmail").val("");
+            $("#ReceiverContact").val("");
+            $("#ReceiverAddress").val("");
+
+
+            $(".External").show();
+            $(".interoffice").hide();
+            $("#ReceiverID").attr('required', true);
+            $("#TO_Office").attr('required', false);
+            $("#From_Office").attr('required', false);
+            getVendorReceiverDetails();
+        }
+    });
+
+    function divshow() {
+        debugger
+
+        document.getElementById('existvendor').style.display = 'none';
+        document.getElementById('tempvendor').style.display = 'block';
+
+        $("#ReceiverEmail").val("");
+        $("#ReceiverContact").val("");
+        $("#ReceiverAddress").val("");
+
+        $("#ReceiverID").attr('required', false);
+        $("#ReceiverEmail").attr('disabled', false);
+        $("#ReceiverContact").attr('disabled', false);
+        $("#ReceiverAddress").attr('disabled', false);
+
+    }
+
+    function divshowexist() {
+
+        document.getElementById('existvendor').style.display = 'block';
+        document.getElementById('tempvendor').style.display = 'none';
+        $("#ReceiverID").attr('required', true);
+        $("#ReceiverEmail").val("");
+        $("#ReceiverContact").val("");
+        $("#ReceiverAddress").val("");
+
+    }
+
+
+    function deleteRow(obj, srno1) {
+        debugger;
+        console.log(obj);
+
+        var quantityvalue = document.getElementById("mserialno" + srno1);
+        var quan1;
+        quan1 = quantityvalue.value;
+
+        var serialno = $("#SerialNumber").val();
+        var srno = (parseInt(serialno) - 1);
+        document.getElementById('SerialNumber').value = srno;
+
+        $(obj).parent().parent().remove();
+        if (srno == 0) {
+            document.getElementById('datatable').style.display = 'none';
+        }
+        document.getElementById('QuantityDetails').value = "";
+    }
+
+</script>
+

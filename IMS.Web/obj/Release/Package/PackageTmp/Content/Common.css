@@ -1,0 +1,92 @@
+﻿
+
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 20px;
+    width: 76%;
+    color: #fff;
+    background-color: transparent;
+    padding: 10px;
+    border-top: none;
+    margin: auto;
+    right: 0%;
+}
+
+    footer .container {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    footer p {
+        margin-bottom: 0;
+        text-align: right;
+    }
+
+.open > .dropdown-menu.pull-right {
+    /*margin-top: 40px;*/
+    display: block;
+    padding: 10px;
+}
+
+.abc {
+    font-size: 20px !important;
+    font-family: 'Segoe UI' !important;
+}
+
+.password {
+    padding-top: 90px;
+}
+
+.elementToFadeInAndOut {
+    animation: fadein 2s;
+}
+
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+/*.fa-power-off:before {
+    padding-left: 118px !important;
+    content: "\f011";
+}*/
+
+
+.noScoll {
+    overflow-y: hidden;
+}
+
+/* loader css */
+
+.mainlogin {
+    position: relative;
+}
+
+#loader {
+    display: none;
+    background-image: url('../assets/images/icons/loader-dot.gif');
+    background-size: contain;
+    width: 100px;
+    height: 100px;
+    position: fixed;
+    top: 43%;
+    left: 46.6%;
+    z-index: 99;
+}
+
+.loginErrorMsg {
+    color: red;
+    padding-left: 20px;
+    margin-top: 14px;
+    margin-bottom: 12px;
+}
+
+.forget-link, .forget-link:hover{
+    color: #441292 !important;
+}

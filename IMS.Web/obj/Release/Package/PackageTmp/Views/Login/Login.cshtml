@@ -1,0 +1,268 @@
+﻿@model IMS.Models.IMS_Users
+@{
+    Layout = "~/Views/Shared/_Layout_Login.cshtml";
+}
+
+
+<div class="container mainlogin">
+    <div id="loader"></div>
+    <div class="row">
+        <div class="work-image col-lg-6 col-md-6 col-xs-12 col-sm-12">
+            <img class="loginleft-image" src="~/assets/images/backgrounds/Login-left.png" alt="login image" />
+        </div>
+        <div class="login-mid-panel col-lg-6 col-md-6 col-xs-12 col-sm-12">
+            <div class="login-form">
+                <div class="loginwrapper-logos">
+                    <img width="150" height="68" src="~/assets/images/logos/harbinger-logo.svg" />
+                    <span></span>
+                    <img width="220" height="68" src="~/assets/images/logos/logo-black.svg" />
+                </div>
+                <div class="panel-body vendor-panel">
+                    <h4>Log In</h4>
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group">
+
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.userEmail, new { htmlAttributes = new { @id = "userEmail", @class = "form-control userrounded login-border", placeholder = "Email address" } })
+                                @Html.ValidationMessageFor(model => model.userEmail, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.userPassword, new { htmlAttributes = new { @class = "form-control userrounded login-border", placeholder = "Password", type = "password" } })
+                                <div class="error-message">
+                                    @Html.ValidationMessageFor(model => model.userPassword, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="error" id="error" style="display:none; color:red;">Invalid Email and Password</p>
+
+                        @*<div class="remember-me d-flex align-items-center"><input type="checkbox" name="remember" />  <span>Remember me</span></div>*@
+                        <div id="forgotpassword">
+                            <a href="#" class="forget-link" id="forgotpassword" onclick="ForgetPassword();">
+                                Forgot Password
+                            </a>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <input type="submit" value="Login" class="btnlogin btn btn-default login-border" id="submit" name="submit" />
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+
+
+<script type="text/javascript">
+   var count;
+var userEmail;
+
+
+
+
+    @*$('#submit').click(function (e) {
+
+        debugger;
+
+        e.preventDefault();
+
+        userEmail = $('#userEmail').val();
+
+        var userPassword = $('#userPassword').val();
+
+        var encodedEmail = encodeBase64(userEmail);
+
+        $.ajax({
+
+            url: "@Url.Action("GetLDAPConnection")",
+
+            method: "GET",
+
+            data: { "userEmail": userEmail, "userPassword": userPassword },
+
+            success: function (data) {
+
+                data = JSON.parse(data);
+
+                console.log(data);
+
+                if (data == 10) {
+
+                    $('.error').hide();
+
+                    $('.blockError').hide();
+
+                    location.href = '@Url.Action("WelcomeUser", "Login")?uemail=' + encodedEmail;
+
+                }
+
+                else if (data == 11) {
+
+                    $('.error').show();
+
+                    return false;
+
+                }
+
+            }
+
+        });
+
+    });*@
+
+        $('#submit').click(function (e) {
+
+            debugger;
+            $('#loader').show();
+        e.preventDefault();
+
+        userEmail = $('#userEmail').val();
+
+        var userPassword = $('#userPassword').val();
+
+            var encodedEmail = encodeBase64(userEmail);
+
+        $.ajax({
+
+            url: "@Url.Action("IMSLogin", "Login")",
+
+            method: "POST",
+
+            data: { userEmail: userEmail, userPassword: userPassword },
+
+            success: function (response) {
+                debugger;
+
+                var data = JSON.parse(response);
+                console.log("Response data:", data);
+                $('#loader').hide();
+                if (data.data === "10") {
+
+                    location.href = '@Url.Action("WelcomeUser", "Login")?uemail=' + encodedEmail;
+
+                }
+
+                else if (data.data === "11") {
+
+                    $('.error').text(data.ErrorMsg).show();
+
+                }
+
+                else {
+
+                    $('.error').text(data.ErrorMsg).show();
+
+                }
+
+            },
+
+            error: function () {
+                $('#loader').hide();
+                alert("An error occurred while processing your request.");
+
+            }
+
+        });
+
+    });
+
+
+  function encodeBase64(str) {
+
+      return btoa(unescape(encodeURIComponent(str)));
+
+  }
+
+  function decodeBase64(str) {
+
+      return decodeURIComponent(escape(atob(str)));
+
+  }
+
+
+
+    $("#userEmail").focusout(function (e) {
+
+
+        $("#userEmail").parent().next(".validation").remove();
+
+        var emailreg = /^[a-zA-Z0-9._-]+@@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        var enteredval = $("#userEmail").val();
+
+        if ((emailreg).test(enteredval)) {
+            e.preventDefault();
+            $("#submit").attr('disabled', false);
+
+
+        }
+        else {
+            if ($("#userEmail").parent().next(".validation").length == 0) {
+                $("#userEmail").parent().after("<div class='validation loginErrorMsg'>Please Enter valid Email Address!</div>");
+            }
+            e.preventDefault();
+            $("#userEmail").focus();
+            $("#submit").attr('disabled', true);
+        }
+
+    });
+    function toggleForgotPasswordLink() {
+        var emailValue = $('#userEmail').val();
+        if (emailValue.trim() !== '') {
+            $('#forgotpassword').show();
+        } else {
+            $('#forgotpassword').hide();
+        }
+    }
+
+    toggleForgotPasswordLink();
+
+    $('#userEmail').on('input', function () {
+        toggleForgotPasswordLink();
+    });
+function ForgetPassword() {
+    var userEmail = $('#userEmail').val();
+
+    $.ajax({
+        type: 'POST',
+        url: '@Url.Action("ForgotPassword", "Login")',
+        data: { userEmail: userEmail },
+        dataType: 'text',
+        success: function (response) {
+            // Parsing the JSON string returned from the server
+            try {
+                var data = JSON.parse(response);
+                var count = data.count;
+
+                if (count === 1) {
+                    alert("Password sent to your email address");
+                } else {
+                    alert("Error: Email not found or failed to send email.");
+                }
+            } catch (e) {
+                alert("An error occurred while processing the response.");
+                console.error("Parsing error:", e);
+            }
+        },
+        error: function () {
+            alert("An error occurred while sending the password.");
+        }
+    });
+}
+
+
+</script>

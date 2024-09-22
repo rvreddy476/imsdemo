@@ -1,0 +1,279 @@
+﻿@model IMS.Models.IMSEntity
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout_IMS.cshtml";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link href="~/assets/css/custom.css" rel="stylesheet" />
+<div class="add-category">
+    <h5 class="content-title mb-2">Add Materials</h5>
+    <div class="card">
+        <div class="card-body p-0 card-height">
+            <div class="row">
+                <div class="col-lg-6">
+                    @using (Html.BeginForm("Add_MaterialCategory", "Add_Material", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="p-4 position-relative">
+
+                            <input type="hidden" value="" id="CategoryID" name="CategoryID" />
+                            <input type="hidden" value="" id="type" name="type" />
+                            <input type="hidden" value="" id="value" name="value" />
+
+                            <label for="Material_CategoryName" class="form-label mb-3">MaterialCategory Name</label>
+                            @Html.EditorFor(model => model.Material_CategoryName, new { htmlAttributes = new { @id = "Material_CategoryName", @class = "form-control matcatnm", @name = "Material_CategoryName" } })
+
+                            <button id="add-category" name="cattype" value="AddCategory" onclick="AddCategory()">Add</button>
+                            <button id="update-category" name="cattype" value="UpdateCategory" onclick="UpdateCategory()" style="display:none">Update</button>
+                            <button id="delete-category" name="cattype" value="DeleteCategory" onclick="DeleteCategory()" style="display:none">Delete</button>
+                            <div>
+                                @Html.ValidationMessageFor(model => model.Material_CategoryName, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="p-3 category-list">
+                                <div class="listing">
+                                    @foreach (var i in ViewBag.materialCategoryname)
+                                    {
+                                        <div class="d-flex align-items-center justify-content-between category-detail">
+                                            <p class="mb-0">@i.Material_CategoryName</p>
+                                            <input type="hidden" name="Material_CategoryID" id="Material_CategoryID" value="@i.Material_CategoryID" />
+                                            <div>
+                                                <button type="button" class="bg-transparent border-0 editcatbtn" data-catid="@i.Material_CategoryID" data-catnm="@i.Material_CategoryName">
+                                                    <img class="px-3" src="~/assets/images/icons/pen.svg" alt="">
+                                                </button>
+                                                <button type="button" class="bg-transparent border-0 deletecatbtn" data-catid="@i.Material_CategoryID" data-catnm="@i.Material_CategoryName">
+                                                    <img class="px-3" height="16" src="~/assets/images/icons/trash.svg" alt="">
+                                                </button>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="col-lg-6">
+                    @using (Html.BeginForm("Add_Material", "Add_Material", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="p-4 position-relative">
+                            <input type="hidden" value="" id="MaterialID" name="MaterialID" />
+                            <input type="hidden" value="" id="materialtype" name="materialtype" />
+
+                            <label for="Material_CategoryID" class="form-label mb-3">Material Category Name</label>
+                            @Html.DropDownList("Material_CategoryID", new SelectList(ViewBag.materialCategoryname, "Material_CategoryID", "Material_CategoryName"), "Select", new { @class = "form-control input-col add-category matcat custom-select" })
+
+                            <br />
+
+                            <label for="MaterialName" class="form-label mb-3">Material Name</label>
+                            @Html.EditorFor(model => model.MaterialName, new { htmlAttributes = new { @id = "MaterialName", @class = "form-control", @name = "MaterialName" } })
+                            <div>
+                                @Html.ValidationMessageFor(model => model.MaterialName, "", new { @class = "text-danger" })
+                            </div>
+                            <br />
+                            <div class="material-prefix">
+                                <label for="MaterialPrefix" class="form-label mb-3">Material Prefix</label>
+                                @Html.EditorFor(model => model.MaterialPrefix, new { htmlAttributes = new { @id = "MaterialPrefix", @class = "form-control", @name = "MaterialPrefix" } })
+                                <div>
+                                    @Html.ValidationMessageFor(model => model.MaterialPrefix, "", new { @class = "text-danger" })
+                                </div>
+                                <button id="addmaterial" name="mattype" value="AddMaterial">Add</button>
+                            </div>
+
+                            <div style="display:flex;justify-content:flex-end">
+                                <!--<button  id="addmaterial"    name="mattype" value="AddMaterial">Add</button>-->
+                                <button id="updatematerial" name="mattype" value="UpdateMaterial" style="display:none">Update</button>
+                                <button id="deletematerial" name="mattype" value="DeleteMaterial" style="display:none">Delete</button>
+                            </div>
+                            <div class="p-3 category-list">
+                                <div class="listing">
+                                    @foreach (var m in ViewBag.MaterialList)
+                                    {
+                                        <div class="d-flex align-items-center justify-content-between category-detail">
+                                            <p class="mb-0">@m.Material_CategoryName | @m.MaterialName | @m.MaterialPrefix</p>
+                                            <div>
+                                                <button type="button" class="bg-transparent border-0 editmatbtn" data-mcatid="@m.CategoryID" data-mid="@m.MaterialID" data-matnm="@m.MaterialName" data-prefix="@m.MaterialPrefix">
+                                                    <img class="px-3" src="~/assets/images/icons/pen.svg" alt="">
+                                                </button>
+                                                <button type="button" class="bg-transparent border-0 deletematbtn" data-mcatid="@m.CategoryID" data-mid="@m.MaterialID" data-matnm="@m.MaterialName" data-prefix="@m.MaterialPrefix">
+                                                    <img class="px-3" height="16" src="~/assets/images/icons/trash.svg" alt="">
+                                                </button>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+
+<script type="text/javascript">
+    //custom-select start
+
+    //$('.custom-select').each(function () {
+    //    var $this = $(this), numberOfOptions = $(this).children('option').length;
+
+    //    $this.addClass('select-hidden');
+    //    $this.wrap('<div class="select"></div>');
+    //    $this.after('<div class="select-styled"></div>');
+
+    //    var $styledSelect = $this.next('div.select-styled');
+    //    $styledSelect.text($this.children('option').eq(0).text());
+
+    //    var $list = $('<ul />', {
+    //        'class': 'select-options'
+    //    }).insertAfter($styledSelect);
+
+    //    for (var i = 0; i < numberOfOptions; i++) {
+    //        $('<li />', {
+    //            text: $this.children('option').eq(i).text(),
+    //            rel: $this.children('option').eq(i).val()
+    //        }).appendTo($list);
+    //        if ($this.children('option').eq(i).is(':selected')) {
+    //            $('li[rel="' + $this.children('option').eq(i).val() + '"]').addClass('is-selected')
+    //        }
+    //    }
+
+    //    var $listItems = $list.children('li');
+
+    //    $styledSelect.click(function (e) {
+    //        e.stopPropagation();
+    //        $('div.select-styled.active').not(this).each(function () {
+    //            $(this).removeClass('active').next('ul.select-options').hide();
+    //        });
+    //        $(this).toggleClass('active').next('ul.select-options').toggle();
+    //    });
+
+    //    $listItems.click(function (e) {
+    //        e.stopPropagation();
+    //        $styledSelect.text($(this).text()).removeClass('active');
+    //        $this.val($(this).attr('rel'));
+    //        $list.find('li.is-selected').removeClass('is-selected');
+    //        $list.find('li[rel="' + $(this).attr('rel') + '"]').addClass('is-selected');
+    //        $list.hide();
+    //        //console.log($this.val());
+    //    });
+
+    //    $(document).click(function () {
+    //        $styledSelect.removeClass('active');
+    //        $list.hide();
+    //    });
+
+    //});
+
+    //custom-select end\
+
+    const editButtons = document.querySelectorAll(".editcatbtn");
+
+    editButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            document.getElementById("add-category").style.display = "none";
+            document.getElementById("update-category").style.display = "block";
+            document.getElementById("delete-category").style.display = "none";
+            document.getElementById("type").value = "UpdateCategory";
+            const catid = button.getAttribute("data-catid");
+            const catnm = button.getAttribute("data-catnm");
+            document.getElementById("Material_CategoryName").value = catnm;
+            document.getElementById("CategoryID").value = catid;
+        });
+    });
+
+    const deleteButtons = document.querySelectorAll(".deletecatbtn");
+    deleteButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            document.getElementById("add-category").style.display = "none";
+            document.getElementById("update-category").style.display = "none";
+            document.getElementById("delete-category").style.display = "block";
+            document.getElementById("type").value = "DeleteCategory";
+            const catid = button.getAttribute("data-catid");
+            const catnm = button.getAttribute("data-catnm");
+
+            document.getElementById("Material_CategoryName").value = catnm;
+            document.getElementById("CategoryID").value = catid;
+        });
+    });
+
+    const editmatButtons = document.querySelectorAll(".editmatbtn");
+    editmatButtons.forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            document.getElementById("addmaterial").style.display = "none";
+            document.getElementById("updatematerial").style.display = "block";
+            document.getElementById("deletematerial").style.display = "none";
+            document.getElementById("type").value = "Updatematerial";
+            const catid = button.getAttribute("data-mcatid");
+            const catnm = button.getAttribute("data-matnm");
+            const prefix = button.getAttribute("data-prefix");
+            const mid = button.getAttribute("data-mid");
+            debugger;
+            $('.matcat option[value="' + catid + '"]').prop("selected", true);
+            document.getElementById("MaterialName").value = catnm;
+            document.getElementById("MaterialPrefix").value = prefix;
+            document.getElementById("CategoryID").value = catid;
+            document.getElementById("MaterialID").value = mid;
+        });
+    });
+
+    const deletematButtons = document.querySelectorAll(".deletematbtn");
+    debugger;
+    deletematButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            debugger;
+            document.getElementById("addmaterial").style.display = "none";
+            document.getElementById("updatematerial").style.display = "none";
+            document.getElementById("deletematerial").style.display = "block";
+            document.getElementById("type").value = "Deletematerial";
+            const catid = button.getAttribute("data-mcatid");
+            const catnm = button.getAttribute("data-matnm");
+            const prefix = button.getAttribute("data-prefix");
+            const mid = button.getAttribute("data-mid");
+
+            $('.matcat option[value="' + catid + '"]').prop("selected", true);
+
+            document.getElementById("MaterialID").value = mid;
+            document.getElementById("MaterialName").value = catnm;
+            document.getElementById("MaterialPrefix").value = prefix;
+            document.getElementById("CategoryID").value = catid;
+
+        });
+    });
+
+
+    function AddCategory() {
+        debugger;
+        document.getElementById("delete-category").disabled = true;
+        document.getElementById("update-category").disabled = true;
+        var val = document.getElementById("add-category").value;
+
+        document.getElementById("type").value = val;
+    }
+
+    //function UpdateCategory() {
+    //    debugger;
+    //    document.getElementById("delete-category").disabled = true;
+    //    document.getElementById("update-category").disabled = true;
+    //    var val = document.getElementById("update-category").value;
+
+    //    document.getElementById("type").value = val;
+    //}
+    //function DeleteCategory() {
+    //    debugger;
+    //    document.getElementById("delete-category").disabled = true;
+    //    document.getElementById("update-category").disabled = true;
+    //    var val = document.getElementById("delete-category").value;
+
+    //    document.getElementById("type").value = val;
+    //}
+
+</script>
+

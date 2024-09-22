@@ -1,0 +1,475 @@
+﻿@model PagedList.IPagedList<IMS.Models.IMSEntity>
+@using PagedList.Mvc;
+<link href="~/assets/css/custom.css" rel="stylesheet" />
+@{
+    string role = ViewBag.role;
+    string empid = ViewBag.userid;
+    string dept = ViewBag.department;
+    string location = ViewBag.location;
+    ViewBag.Title = "OutwardList";
+    Layout = "~/Views/Shared/_Layout_IMS.cshtml";
+}
+@*<link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />*@
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link href="~/assets/css/custom.css" rel="stylesheet" />
+
+@{
+    string count = string.Empty;
+}
+
+<div class="rightpanel-height">
+    <h5 class="content-title mb-3">Outward Items</h5>
+
+    <div class="card">
+        <!-- Add Tabs for Returnable and Non-Returnable -->
+        <!--<ul class="nav nav-tabs custom-tabs py-3 px-4 tab-listing" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="tab-list active" id="returnable-tab" data-bs-toggle="tab" href="#returnable" role="tab" aria-controls="returnable" aria-selected="true">Returnable</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="tab-list" id="nonreturnable-tab" data-bs-toggle="tab" href="#nonreturnable" role="tab" aria-controls="nonreturnable" aria-selected="false">Non-Returnable</a>
+            </li>
+        </ul> -->
+
+        <ul id="tab-listing" class="tab-listing pt-3 mx-4 d-flex mb-0">
+            <li id="tab-list" data-value="#tab-content1" class="tab-list active">Returnable</li>
+            <li id="tab-list" data-value="#tab-content2" class="tab-list">Non Returnable</li>
+        </ul>
+
+        <!-- Tab Content for Returnable and Non-Returnable -->
+        <!--<div class="tab-content custom-tab-content" id="myTabContent">-->
+        <!-- Returnable Section -->
+        <!--<div class="tab-pane fade show active" id="returnable" role="tabpanel" aria-labelledby="returnable-tab">-->
+        <div id="tab-content1" class="tab-content">
+            @{
+                count = ViewBag.display;
+            }
+            <div class="d-flex p-3 px-4 align-items-center justify-content-between inward-search-div ol-md-12">
+                <div class="search-div d-flex align-items-center">
+                    <h5 class="search-font pe-2 mb-0">Search By:</h5>
+
+                    @using (Html.BeginForm("OutwardList", "Add_OutwardMaterial", FormMethod.Post))
+                    {
+                        @Html.DropDownList("Name", new List<SelectListItem>
+                            {
+                               new SelectListItem{Text = "Outward No", Value="Outward_no"},
+                               new SelectListItem{Text = "Gatepass Number", Value = "Gatepass_Number"},
+                               new SelectListItem{Text= "Department" , Value="OW_department"},
+                               new SelectListItem{Text= "Location" , Value="Outward_Location"},
+                               new SelectListItem{Text = "OutwardDatetime", Value = "OutwardDatetime"},
+                               new SelectListItem{Text = "ReceiverName", Value = "ReceiverName"},
+                               new SelectListItem{Text= "OutwardStatus" , Value="OutwardStatus"},
+
+
+                            }, "Select", new { @id = "select_returnable", @class = "form-control input-col inward-list-dropdown", @onchange = "ValuefunctionReturnable()" })
+
+                        @Html.TextBox("SearchValue", null, new { @style = "display:none;", @class = "search1", @id = "search_by_text_returnable", @placeholder = "Search" })
+                        {
+                            List<SelectListItem> departmentItems = new List<SelectListItem>();
+                            var context = new IMS.Entities.ServiceVMSEntities();
+                            var departmentsList = (from s in context.ServiceUserDepartments
+                                                   select new
+                                                   {
+                                                       userDepartmentName = s.userDepartmentName,
+
+                                                   });
+
+
+                            foreach (var department in departmentsList)
+                            {
+                                departmentItems.Add(new SelectListItem { Text = department.userDepartmentName, Value = department.userDepartmentName });
+                            }
+                            @Html.DropDownList("SearchValue1", departmentItems, "Select Department", new { @id = "select_DN_returnable", @style = "display:none; ", @class = "form-control input-col inward-list-dropdown", @onchange = "ValuefunctionReturnable()" })
+                        }
+
+                        <input class="search2" type="date" value="Search" style="display:none;" id="search_by_date_returnable" name="searchdate" />
+                        <input type="submit" value="Search" id="submit">
+
+                        if (ViewBag.countForsearch == 1)
+                        {
+
+                            <a class="clear-font" href="@Url.Action("OutwardList", "Add_OutwardMaterial")">
+                                Clear Search
+                            </a>
+                        }
+                    }
+                </div>
+
+                <div class="rightactionalble-btns d-flex">
+                    @if (Session["role"].ToString() == "Security Guard")
+                    {
+                        var isActionable = Request.QueryString["name"] == "actionable";
+                        <a class="action-btn mr-18" href="@Url.Action("OutwardList", "Add_OutwardMaterial", new { name = "actionable" })" style="margin-bottom:3px;">
+                            Actionable Items
+                        </a>
+                        if (isActionable)
+                        {
+                            <a class="action-btn" href="@Url.Action("OutwardList", "Add_OutwardMaterial")" style="margin-bottom:3px;">
+                                Clear Search
+                            </a>
+                        }
+                    }
+                </div>
+            </div>
+
+
+            <div class="card-body pt-0">
+                <div class="form addInward inward-list-table">
+                    <div class="table-wrapper">
+                        <table id="paginatedTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">
+                                        @Html.ActionLink("Outward_No", "OutwardList", new { sortOrder = ViewBag.Outward_no, searchString = ViewBag.searchString, Name = ViewBag.Name, SearchValue = ViewBag.searchValue, searchdate = ViewBag.searchdate })
+                                    </th>
+                                    <th scope="col">
+                                        @Html.ActionLink("Gatepass_Number", "OutwardList", new { sortOrder = ViewBag.Gatepass_Number, searchString = ViewBag.searchString, Name = ViewBag.Name, SearchValue = ViewBag.searchValue, searchdate = ViewBag.searchdate })
+                                    </th>
+                                    <th scope="col">
+                                        @Html.ActionLink("Department", "OutwardList", new { sortOrder = ViewBag.Department, searchString = ViewBag.searchString, Name = ViewBag.Name, SearchValue = ViewBag.searchValue, searchdate = ViewBag.searchdate })
+                                    </th>
+                                    <th scope="col">
+                                        @Html.ActionLink("Location", "OutwardList", new { sortOrder = ViewBag.Location, searchString = ViewBag.searchString, Name = ViewBag.Name, SearchValue = ViewBag.searchValue, searchdate = ViewBag.searchdate })
+                                    </th>
+                                    <th scope="col">
+                                        @Html.ActionLink("OutwardDatetime", "OutwardList", new { sortOrder = ViewBag.OutwardDatetime, searchString = ViewBag.searchString, Name = ViewBag.Name, SearchValue = ViewBag.searchValue, searchdate = ViewBag.searchdate })
+                                    </th>
+                                    <th scope="col">
+                                        @Html.ActionLink("ReceiverName", "OutwardList", new { sortOrder = ViewBag.ReceiverName, searchString = ViewBag.searchString, Name = ViewBag.Name, SearchValue = ViewBag.searchValue, searchdate = ViewBag.searchdate })
+                                    </th>
+                                    <th scope="col">
+                                        @Html.ActionLink("Outward Status", "OutwardList", new { sortOrder = ViewBag.OutwardStatus, searchString = ViewBag.searchString, Name = ViewBag.Name, SearchValue = ViewBag.searchValue, searchdate = ViewBag.searchdate })
+                                    </th>
+                                    <th scope="col">
+                                    </th>
+                                    <th scope="col">
+                                    </th>
+
+                                </tr>
+                                @if (Model.Count() == 0)
+                                {
+                                    <tr>
+                                        <td> Records not found </td>
+                                    </tr>
+                                }
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Where(x => x.GatepassType == "Returnable").ToList())
+                                {
+                                    <tr>
+                                        <td data-label="inward-date">
+                                            @Html.DisplayFor(modelItem => item.OutwardNo)
+                                        </td>
+                                        <td data-label="inward-date">
+                                            @Html.DisplayFor(modelItem => item.Gatepass_Number)
+                                        </td>
+                                        <td data-label="department">
+                                            @Html.DisplayFor(modelItem => item.userDepartmentName)
+                                        </td>
+                                        <td data-label="location">
+                                            @Html.DisplayFor(modelItem => item.Location)
+                                        </td>
+
+                                        <td data-label="expense-nature">
+                                            @Html.DisplayFor(modelItem => item.OutwardDatetime)
+                                        </td>
+                                        <td data-label="expense-nature">
+                                            @Html.DisplayFor(modelItem => item.ReceiverName)
+                                        </td>
+                                        <td data-label="outwardstatus" class="@Html.DisplayFor(modelItem => item.Outward_Status)">
+                                            <span> @Html.DisplayFor(modelItem => item.Outward_Status)</span>
+                                        </td>
+
+
+                                        <td data-label="actions" class="d-flex align-items-center justify-content-between">
+                                            @{
+                                                byte[] encoded = System.Text.Encoding.UTF8.GetBytes(item.OW_MaterialID);
+                                                var OWCode = Convert.ToBase64String(encoded);
+                                            }
+
+                                            <a class="dropdown-item1" href="@Url.Action("OutwardDetails", "Add_OutwardMaterial", new { id = item.OW_MaterialID },null)"> <img class="px-2 action-item" src="~/assets/images/icons/view.svg" alt="View" /></a>
+
+
+                                        </td>
+
+                                        @{
+                                            string outwardstatus = string.Empty;
+                                            string roleinims = string.Empty;
+                                            string Location = string.Empty;
+
+                                            int Outwardcount = 1;
+                                            var outward_id = string.Empty;
+                                            var context2 = new IMS.Entities.ServiceVMSEntities();
+
+
+                                            var q = (from t in context2.OutwardMaterials
+                                                     where t.OW_MaterialID == item.OW_MaterialID
+                                                     select new { t.Outward_Status, t.OW_MaterialID });
+
+                                            foreach (var t in q)
+                                            {
+                                                outwardstatus = t.Outward_Status;
+                                                outward_id = t.OW_MaterialID;
+
+
+                                                if (role == "Security Guard" && outwardstatus == "Material Out" && Outwardcount == 1)
+                                                {
+                                                    Outwardcount++;
+                                                    <td class="col-md-1">
+                                                        <span>
+                                                            <i class="fa fa-exclamation-circle icon_Inward" style="color:red" title="Pending Approver for Inward"></i>
+                                                        </span>
+                                                    </td>
+                                                    break;
+                                                }
+
+
+                                            }
+                                        }
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <br />
+
+                </div>
+                <div class="d-flex align-items-center justify-content-between">
+                    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                    <div class="pagination justify-content-end">
+                        @Html.PagedListPager(Model, page => Url.Action("OutwardList",
+                            new { Page_no = page, sortOrder = ViewBag.CurrentSort, Name = ViewBag.Name, SearchValue = ViewBag.SearchValue, SearchValue1 = ViewBag.SearchValue1, SearchValue2 = ViewBag.SearchValue2, SearchValue3 = ViewBag.SearchValue3, reason = ViewBag.reason, searchdate = ViewBag.searchdate }))
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- Non-Returnable Section -->
+        <!--<div class="tab-pane fade" id="nonreturnable" role="tabpanel" aria-labelledby="nonreturnable-tab">-->
+        <!-- Non-Returnable Content -->
+        <div id="tab-content2" class="tab-content" style="display:none;">
+            @{
+                count = ViewBag.display;
+            }
+            <div class="d-flex p-3 px-4 align-items-center justify-content-between inward-search-div ol-md-12">
+                <div class="search-div d-flex align-items-center">
+                    <h5 class="search-font pe-2 mb-0">Search By:</h5>
+
+                    @using (Html.BeginForm("OutwardList", "Add_OutwardMaterial", FormMethod.Post))
+                    {
+                        @Html.DropDownList("Name", new List<SelectListItem>
+                            {
+                               new SelectListItem{Text = "Outward No", Value="Outward_no"},
+                               new SelectListItem{Text = "Gatepass Number", Value = "Gatepass_Number"},
+                               new SelectListItem{Text= "Department" , Value="OW_department"},
+                               new SelectListItem{Text= "Location" , Value="Outward_Location"},
+                               new SelectListItem{Text = "OutwardDatetime", Value = "OutwardDatetime"},
+                               new SelectListItem{Text = "ReceiverName", Value = "ReceiverName"},
+                               new SelectListItem{Text= "OutwardStatus" , Value="OutwardStatus"},
+
+
+                            }, "Select", new { @id = "select_non_returnable", @class = "form-control input-col inward-list-dropdown", @onchange = "ValuefunctionNonReturnable()" })
+
+                        @Html.TextBox("SearchValue", null, new { @style = "display:none;", @class = "search1", @id = "search_by_text_non_returnable", @placeholder = "Search" })
+                        {
+                            List<SelectListItem> departmentItems = new List<SelectListItem>();
+                            var context = new IMS.Entities.ServiceVMSEntities();
+                            var departmentsList = (from s in context.ServiceUserDepartments
+                                                   select new
+                                                   {
+                                                       userDepartmentName = s.userDepartmentName,
+
+                                                   });
+
+
+                            foreach (var department in departmentsList)
+                            {
+                                departmentItems.Add(new SelectListItem { Text = department.userDepartmentName, Value = department.userDepartmentName });
+                            }
+                            @Html.DropDownList("SearchValue1", departmentItems, "Select Department", new { @id = "select_DN_non_returnable", @style = "display:none; ", @class = "form-control input-col inward-list-dropdown", @onchange = "ValuefunctionNonReturnable()" })
+                        }
+
+                        <input class="search2" type="date" value="Search" style="display:none;" id="search_by_date_non_returnable" name="searchdate" />
+                        <input type="submit" value="Search" id="submit">
+
+                        if (ViewBag.countForsearch == 1)
+                        {
+
+                            <a class="clear-font" href="@Url.Action("OutwardList", "Add_OutwardMaterial")">
+                                Clear Search
+                            </a>
+                        }
+                    }
+                </div>
+            </div>
+
+            <div class="card-body pt-0">
+                <div class="form addInward inward-list-table">
+                    <div class="table-wrapper">
+                        <table id="paginatedTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">
+                                        @Html.ActionLink("Outward_No", "OutwardList", new { sortOrder = ViewBag.Outward_no, searchString = ViewBag.searchString, Name = ViewBag.Name, SearchValue = ViewBag.searchValue, searchdate = ViewBag.searchdate })
+                                    </th>
+                                    <th scope="col">
+                                        @Html.ActionLink("Gatepass_Number", "OutwardList", new { sortOrder = ViewBag.Gatepass_Number, searchString = ViewBag.searchString, Name = ViewBag.Name, SearchValue = ViewBag.searchValue, searchdate = ViewBag.searchdate })
+                                    </th>
+                                    <th scope="col">
+                                        @Html.ActionLink("Department", "OutwardList", new { sortOrder = ViewBag.Department, searchString = ViewBag.searchString, Name = ViewBag.Name, SearchValue = ViewBag.searchValue, searchdate = ViewBag.searchdate })
+                                    </th>
+                                    <th scope="col">
+                                        @Html.ActionLink("Location", "OutwardList", new { sortOrder = ViewBag.Location, searchString = ViewBag.searchString, Name = ViewBag.Name, SearchValue = ViewBag.searchValue, searchdate = ViewBag.searchdate })
+                                    </th>
+                                    <th scope="col">
+                                        @Html.ActionLink("OutwardDatetime", "OutwardList", new { sortOrder = ViewBag.OutwardDatetime, searchString = ViewBag.searchString, Name = ViewBag.Name, SearchValue = ViewBag.searchValue, searchdate = ViewBag.searchdate })
+                                    </th>
+                                    <th scope="col">
+                                        @Html.ActionLink("ReceiverName", "OutwardList", new { sortOrder = ViewBag.ReceiverName, searchString = ViewBag.searchString, Name = ViewBag.Name, SearchValue = ViewBag.searchValue, searchdate = ViewBag.searchdate })
+                                    </th>
+                                    <th scope="col">
+                                        @Html.ActionLink("Outward Status", "OutwardList", new { sortOrder = ViewBag.OutwardStatus, searchString = ViewBag.searchString, Name = ViewBag.Name, SearchValue = ViewBag.searchValue, searchdate = ViewBag.searchdate })
+                                    </th>
+
+                                    <th scope="col">
+                                    </th>
+                                    <th scope="col">
+                                    </th>
+
+                                </tr>
+                                @if (Model.Count() == 0)
+                                {
+                                    <tr>
+                                        <td> Records not found </td>
+                                    </tr>
+                                }
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Where(X => X.GatepassType == "NonReturnable").ToList())
+                                {
+                                    <tr>
+                                        <td data-label="inward-date">
+                                            @Html.DisplayFor(modelItem => item.OutwardNo)
+                                        </td>
+                                        <td data-label="inward-date">
+                                            @Html.DisplayFor(modelItem => item.Gatepass_Number)
+                                        </td>
+                                        <td data-label="department">
+                                            @Html.DisplayFor(modelItem => item.userDepartmentName)
+                                        </td>
+                                        <td data-label="location">
+                                            @Html.DisplayFor(modelItem => item.Location)
+                                        </td>
+
+                                        <td data-label="expense-nature">
+                                            @Html.DisplayFor(modelItem => item.OutwardDatetime)
+                                        </td>
+                                        <td data-label="expense-nature">
+                                            @Html.DisplayFor(modelItem => item.ReceiverName)
+                                        </td>
+
+                                        <td data-label="outwardstatus">
+                                            @Html.DisplayFor(modelItem => item.Outward_Status)
+                                        </td>
+
+
+                                        <td data-label="actions" class="d-flex align-items-center justify-content-between">
+                                            @{
+                                                byte[] encoded = System.Text.Encoding.UTF8.GetBytes(item.OW_MaterialID);
+                                                var OWCode = Convert.ToBase64String(encoded);
+                                            }
+
+                                            <a class="dropdown-item1" href="@Url.Action("OutwardDetails", "Add_OutwardMaterial", new { id = item.OW_MaterialID },null)"> <img class="px-2 action-item" src="~/assets/images/icons/view.svg" alt="View" /></a>
+
+
+                                        </td>
+
+
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <br />
+
+                </div>
+                <div class="d-flex align-items-center justify-content-between">
+                    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                    <div class="pagination justify-content-end">
+                        @Html.PagedListPager(Model, page => Url.Action("OutwardList",
+                            new { Page_no = page, sortOrder = ViewBag.CurrentSort, Name = ViewBag.Name, SearchValue = ViewBag.SearchValue, SearchValue1 = ViewBag.SearchValue1, SearchValue2 = ViewBag.SearchValue2, SearchValue3 = ViewBag.SearchValue3, reason = ViewBag.reason, searchdate = ViewBag.searchdate }))
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+@section Scripts
+		{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('table tbody tr').each(function () {
+                if ($(this).find('td span i').hasClass('fa-exclamation-circle')) {
+                    $(this).addClass('highlight');
+                }
+            });
+        });
+
+        function ValuefunctionReturnable() {
+            var selectedValue = document.getElementById("select_returnable").value;
+            var searchByText = document.getElementById("search_by_text_returnable");
+            var selectDN = document.getElementById("select_DN_returnable");
+            var searchByDate = document.getElementById("search_by_date_returnable");
+
+            if (searchByText) searchByText.style.display = "none";
+            if (selectDN) selectDN.style.display = "none";
+            if (searchByDate) searchByDate.style.display = "none";
+
+            if (selectedValue === "Outward_no" || selectedValue === "Outward_Location" || selectedValue === "OutwardStatus" || selectedValue === "Gatepass_Number" || selectedValue === "ReceiverName") {
+                if (searchByText) searchByText.style.display = "block";
+            } else if (selectedValue === "OW_department") {
+                if (selectDN) selectDN.style.display = "block";
+            } else if (selectedValue === "OutwardDatetime") {
+                if (searchByDate) searchByDate.style.display = "block";
+            }
+        }
+
+        function ValuefunctionNonReturnable() {
+            var selectedValue = document.getElementById("select_non_returnable").value;
+            var searchByText = document.getElementById("search_by_text_non_returnable");
+            var selectDN = document.getElementById("select_DN_non_returnable");
+            var searchByDate = document.getElementById("search_by_date_non_returnable");
+
+            if (searchByText) searchByText.style.display = "none";
+            if (selectDN) selectDN.style.display = "none";
+            if (searchByDate) searchByDate.style.display = "none";
+
+            if (selectedValue === "Outward_no" || selectedValue === "Outward_Location" || selectedValue === "OutwardStatus" || selectedValue === "Gatepass_Number" || selectedValue === "ReceiverName") {
+                if (searchByText) searchByText.style.display = "block";
+            } else if (selectedValue === "OW_department") {
+                if (selectDN) selectDN.style.display = "block";
+            } else if (selectedValue === "OutwardDatetime") {
+                if (searchByDate) searchByDate.style.display = "block";
+            }
+        }
+        $(document).ready(function () {
+            $('.tab-list').click(function () {
+                $(this).addClass('active').siblings().removeClass('active');
+
+                var value = $(this).data('value');
+                $(value).show().siblings('.tab-content').hide();
+
+            })
+        })
+    </script>
+}

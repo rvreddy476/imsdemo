@@ -1,0 +1,10 @@
+D:\IMS\IMS_Application\IMS\IMS.Entities\bin\Release\IMS.Entities.dll.config
+D:\IMS\IMS_Application\IMS\IMS.Entities\bin\Release\IMS.Entities.dll
+D:\IMS\IMS_Application\IMS\IMS.Entities\bin\Release\IMS.Entities.pdb
+D:\IMS\IMS_Application\IMS\IMS.Entities\bin\Release\EntityFramework.dll
+D:\IMS\IMS_Application\IMS\IMS.Entities\bin\Release\EntityFramework.xml
+D:\IMS\IMS_Application\IMS\IMS.Entities\obj\Release\IMS.Entities.csprojAssemblyReference.cache
+D:\IMS\IMS_Application\IMS\IMS.Entities\obj\Release\IMS.Entities.csproj.CoreCompileInputs.cache
+D:\IMS\IMS_Application\IMS\IMS.Entities\obj\Release\IMS.Entities.csproj.CopyComplete
+D:\IMS\IMS_Application\IMS\IMS.Entities\obj\Release\IMS.Entities.dll
+D:\IMS\IMS_Application\IMS\IMS.Entities\obj\Release\IMS.Entities.pdb
