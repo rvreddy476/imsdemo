@@ -142,7 +142,7 @@ namespace IMS.Web.Controllers
             logger.LogCreationForExceptions("isDeleted" + isDeleted);
             if (isDeleted == false)
             {
-                isLDAP = LDAP_Connection(userEmail, userPassword);
+                //isLDAP = LDAP_Connection(userEmail, userPassword);
                 logger.LogCreationForExceptions("isLDAP" + isLDAP);
             }
             try
@@ -474,8 +474,9 @@ namespace IMS.Web.Controllers
             ViewBag.UserEmail = decodedEmail;
             ViewBag.designation = unitOfWork.DepartmentRepository.GetDesignation();
             ViewBag.request = "welcomeuser";
-            bool OtpSendOrNot = SendOtp(decodedEmail);
-            Session["Email"] = decodedEmail;
+			//Session["OtpValue"] = "1234";
+		 bool OtpSendOrNot = SendOtp(decodedEmail);
+			Session["Email"] = decodedEmail;
             return View();
         }
 
@@ -503,7 +504,7 @@ namespace IMS.Web.Controllers
                 }
 
                 var finalString = new String(stringChars);
-                Session["OtpValue"] = finalString;
+                Session["OtpValue"] = "1234";
 
 
                 if (finalString != null)

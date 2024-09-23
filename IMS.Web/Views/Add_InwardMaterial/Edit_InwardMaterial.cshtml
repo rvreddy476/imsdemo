@@ -482,7 +482,7 @@
 
 <script type="text/javascript">
        $(document).ready(function () {
-           debugger;
+         
            var list = @Html.Raw(Json.Encode(ViewBag.details));
 
            var len = '@ViewBag.rowlength';
@@ -525,7 +525,7 @@
 
 
         $(".dcnm").keyup(function () {
-            debugger;
+            
                 // Get the value of the .DC-numbers-list element
             var existingValues = $('.DC-numbers-list').val();
             var inputElement = document.querySelector('.DC-numbers-list');
@@ -564,13 +564,13 @@
         });
 
        function editDeliveryChallen(dcId) {
-           debugger
+           
            $(".uploadfile").hide();
            $(".delivery-challen-row[data-dc-id='" + dcId + "'] .uploadfile").show();
 
        }
        function deleteRow(obj, srno1) {
-           debugger;
+        
            console.log(obj);
 
            var quantityvalue = document.getElementById("M_Quantity" + srno1);
@@ -588,8 +588,7 @@
            document.getElementById('QuantityDetails').value = "";
        }
 
-       function editRow(srno, materialcat, material, qty, invtype, remark) {
-           debugger;
+       function editRow(srno, materialcat, material, qty, invtype, remark) {         
 
            $('#EditMaterialpopup').modal('show');
            $('#btnAddRow').hide();
@@ -703,7 +702,7 @@
        });
 
          function ddlistmaterialfunction(id) {
-               debugger;
+               
                $.ajax({
                    type: 'POST',
                    url: '@Url.Action("Getmaterials", "Add_InwardMaterial")',
@@ -711,9 +710,7 @@
                    dataType: 'text',
                    async: 'false',
                    success: function (data) {
-                       debugger;
-
-
+                      
                        var parsedata = JSON.parse(data);
                        parsedata = JSON.parse(parsedata);
                        console.log(parsedata);
@@ -731,8 +728,7 @@
        }
 
 
-       function save_rowinward() {
-           debugger;
+       function save_rowinward() {           
            var InwordId = "@ViewBag.InwardID";
            var ser = $('#SerialNumberdetail').val();
            var material = $('.materialedit').find('option:selected').text();
@@ -758,7 +754,7 @@
              
                isDuplicate = true;
                if (isDuplicate) {
-                   debugger
+                   
                    Swal.fire({
                        html: "Material Already Added!",
                        showClass: {
@@ -778,7 +774,7 @@
 
            if (Material != "Select" || qty != "0" || invtype != "Select") {
                $('#submit').show();
-               debugger;
+             
                document.getElementById('errorGST').style.display = 'none';
 
                var mcat = document.getElementById("materialcat" + ser);
@@ -845,7 +841,7 @@
 
 
         function ddlistmaterialeditfunction(id) {
-               debugger;
+             
                $.ajax({
                    type: 'POST',
                    url: '@Url.Action("Getmaterials", "Add_InwardMaterial")',
@@ -853,7 +849,7 @@
                    dataType: 'text',
                    async: 'false',
                    success: function (data) {
-                       debugger;
+                       
                        var parsedata = JSON.parse(data);
                        parsedata = JSON.parse(parsedata);
                        console.log(parsedata);
@@ -873,8 +869,7 @@
 
 
 
-       $('.materialcatadd').change(function () {
-           debugger;
+       $('.materialcatadd').change(function () {           
            var id = $(".materialcatadd").val();
            ddlistmaterialfunction(id);
        });
@@ -887,8 +882,7 @@
            $(".uploadfile").css("display", "block");
 
        });
-        $('.addfiles').on('click', function () {
-               debugger;
+        $('.addfiles').on('click', function () {              
             var fileupload = $(this).closest('.delivery-challen-row').find('.fileupload');
 
            // Clear the file input value (limited browser support)
@@ -997,13 +991,11 @@
            });*@
 
 
-       $('.addfiles1').on('click', function () {
-               debugger;
+       $('.addfiles1').on('click', function () {              
                $('#fileupload1').click(); return false;
            });
 
-            $('#fileupload1').change(function () {
-               debugger;
+            $('#fileupload1').change(function () {               
                $('.uploadsowerror1').hide();
 
                var Value = $(this).val();
@@ -1045,7 +1037,7 @@
        });
 
        $('.addfiles2').on('click', function () {
-               debugger;
+               
            $('#fileupload2').click();
            return false;
            });
@@ -1093,13 +1085,11 @@
            });
 
 
-        $('.addfiles3').on('click', function () {
-               debugger;
+        $('.addfiles3').on('click', function () {              
                $('#fileupload3').click(); return false;
            });
 
-            $('#fileupload3').change(function () {
-               debugger;
+            $('#fileupload3').change(function () {              
                $('.uploadsowerror3').hide();
 
                var Value = $(this).val();

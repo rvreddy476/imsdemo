@@ -1,0 +1,942 @@
+
+• 9/23/2024 11:31:24 AM:- 
+Edit_InwardMaterialUser: 
+Edit_InwardMaterialUpdated existing Delivery Challen for Inward ID: INWcRaD15-09-202418, DC ID: DC-20240915181722478-181-699
+Edit_InwardMaterialStarted editing inward material with ID: INWcRaD15-09-202418
+Edit_InwardMaterialUser: 
+Edit_InwardMaterialUpdated existing Delivery Challen for Inward ID: INWcRaD15-09-202418, DC ID: DC-20240915181722478-181-699
+Edit_InwardMaterialStarted editing inward material with ID: INWcRaD15-09-202418
+Edit_InwardMaterialUser: 
+
+• 9/23/2024 10:27:29 AM:- Security GP has changed InwardDateTime from 9/15/2024 6:17:22 PM to 9/23/2024 10:20:25 AM having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed Inward_Status from Inward Added to  having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed Location from Global Port to  having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed SerialNumber from 0 to 1 having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed srno from  to System.Int32[] having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed material from  to System.String[] having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed mcategory from  to System.String[] having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed m_quantity from  to System.Int32[] having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed invtype from  to System.String[] having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed matremark from  to System.String[] having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed InvTemp_ID from  to System.String[] having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed mid from  to System.String[] having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed mcatid from  to System.String[] having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed ReceiverID from  to aqBz15-09-202418 having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed ReceiverName from  to Sparkle Intigrity  having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed ReceiverAddress from  to pune having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed ReceiverContact from  to 9898989898 having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed ReceiverEmail from  to sparkle@yopmail.com having InwardID INWcRaD15-09-202418
+Edit_InwardMaterialUpdated existing Delivery Challen for Inward ID: INWcRaD15-09-202418, DC ID: DC-20240915181722478-181-699
+Edit_InwardMaterialStarted editing inward material with ID: INWcRaD15-09-202418
+Edit_InwardMaterialUser: 
+Edit_InwardMaterialStarted editing inward material with ID: INWcRaD15-09-202418
+Edit_InwardMaterialUser: 
+• 20-09-2024 17:12:32:- Security GP has Logged Out
+• 20-09-2024 16:48:47:- Security GP has change Gatepass status Approved having GatepassID isGatepassRCdh20-09-202416
+• 20-09-2024 16:46:50:- Incharge has Logged Out
+• 20-09-2024 16:46:39:- Incharge has change Gatepass status Approved having GatepassID isGatepassYJUZ20-09-202415
+• 20-09-2024 16:39:46:- Incharge has change Gatepass status Approved having GatepassID isGatepassRCdh20-09-202416
+• 20-09-2024 16:34:17:- Incharge has added Gatepass GatepassRCdh20-09-202416
+• 20-09-2024 16:28:54:- Incharge has Change Inward Pending status change to Inward Accepted for capexINWXHBG20-09-202416
+• 20-09-2024 16:20:04:- Approver has Logged Out
+• 20-09-2024 16:14:46:- Approver has change status Material Accepted OPEX having MaterialID is and InwardID isINWXHBG20-09-202416
+• 20-09-2024 16:14:46:- Approver has change Inward status capex having InwardID isINWXHBG20-09-202416
+• 20-09-2024 16:12:24:- Security GP has Logged Out
+• 20-09-2024 16:10:45:- Security GP has added Inward INWXHBG20-09-202416
+• 20-09-2024 16:00:59:- Incharge has Logged Out
+• 20-09-2024 15:52:35:- Incharge has added Gatepass GatepassYJUZ20-09-202415
+• 20-09-2024 13:39:33:- Incharge has Logged Out
+• 20-09-2024 12:03:47:- Incharge has deleted Gatepass Gatepass20Xx20-09-202412
+• 20-09-2024 12:03:28:- Incharge has added Gatepass Gatepass20Xx20-09-202412
+• 19-09-2024 21:27:33:- Approver has Logged Out
+• 19-09-2024 20:56:14:- Security GP has Logged Out
+
+• 19-09-2024 15:41:54:- Security GP has changed InwardDateTime from 15-09-2024 22:06:25 to 19-09-2024 15:30:44 having InwardID INWil2315-09-202422
+• 19-09-2024 15:41:54:- Security GP has changed Inward_Status from Inward Added to  having InwardID INWil2315-09-202422
+• 19-09-2024 15:41:54:- Security GP has changed Location from Global Port to  having InwardID INWil2315-09-202422
+• 19-09-2024 15:41:54:- Security GP has changed Quantity from  to 0 having InwardID INWil2315-09-202422
+• 19-09-2024 15:41:54:- Security GP has changed SerialNumber from 0 to 2 having InwardID INWil2315-09-202422
+• 19-09-2024 15:41:54:- Security GP has changed srno from  to System.Int32[] having InwardID INWil2315-09-202422
+• 19-09-2024 15:41:54:- Security GP has changed material from  to System.String[] having InwardID INWil2315-09-202422
+• 19-09-2024 15:41:54:- Security GP has changed mcategory from  to System.String[] having InwardID INWil2315-09-202422
+• 19-09-2024 15:41:54:- Security GP has changed m_quantity from  to System.Int32[] having InwardID INWil2315-09-202422
+• 19-09-2024 15:41:54:- Security GP has changed invtype from  to System.String[] having InwardID INWil2315-09-202422
+• 19-09-2024 15:41:54:- Security GP has changed matremark from  to System.String[] having InwardID INWil2315-09-202422
+• 19-09-2024 15:41:54:- Security GP has changed InvTemp_ID from  to System.String[] having InwardID INWil2315-09-202422
+• 19-09-2024 15:41:54:- Security GP has changed mid from  to System.String[] having InwardID INWil2315-09-202422
+• 19-09-2024 15:41:54:- Security GP has changed mcatid from  to System.String[] having InwardID INWil2315-09-202422
+• 19-09-2024 15:41:54:- Security GP has changed DC_Filename from  to System.Web.HttpPostedFileWrapper having InwardID INWil2315-09-202422
+• 19-09-2024 15:41:54:- Security GP has changed DC_Number1 from  to dc-3 having InwardID INWil2315-09-202422
+Edit_InwardMaterialCreated new Delivery Challen for Inward ID: INWil2315-09-202422, DC ID: DC-20240919154037190-374-7d5
+Edit_InwardMaterialUpdated existing Delivery Challen for Inward ID: INWil2315-09-202422, DC ID: DC-20240915220625577-859-223
+Edit_InwardMaterialStarted editing inward material with ID: INWil2315-09-202422
+Edit_InwardMaterialUser: 
+• 19-09-2024 13:57:04:- Approver has Logged Out
+• 19-09-2024 13:56:59:- Approver has change status Material Accepted OPEX having MaterialID is and InwardID isINW8epx17-09-202413
+• 19-09-2024 13:56:59:- Approver has change Inward status capex having InwardID isINW8epx17-09-202413
+• 19-09-2024 13:56:41:- Approver has change Inward status opex having InwardID isINWKbSP17-09-202413
+• 19-09-2024 13:56:40:- Approver has change status Material Accepted OPEX having MaterialID is ps4V15-09-202420and InwardID isINWKbSP17-09-202413
+• 19-09-2024 13:56:40:- Approver has change status Material Accepted OPEX having MaterialID is GLhl15-09-202420and InwardID isINWKbSP17-09-202413
+• 19-09-2024 13:56:40:- Approver has change status Material Rejected OPEX having MaterialID is D6w015-09-202420and InwardID isINWKbSP17-09-202413
+• 17-09-2024 13:59:24:- Incharge has Logged Out
+• 17-09-2024 13:58:56:- Incharge has Change Inward Pending status change to Inward Accepted for capexINWX7Tw16-09-202411
+• 17-09-2024 13:53:26:- Approver has Logged Out
+• 17-09-2024 13:52:57:- Approver has added a material - Projector
+• 17-09-2024 13:52:38:- Approver has added a material - Refrigerator 
+• 17-09-2024 13:52:23:- Approver has added a material - CCTV Camara
+• 17-09-2024 13:50:14:- Approver has change status Material Accepted OPEX having MaterialID is and InwardID isINWX7Tw16-09-202411
+• 17-09-2024 13:50:14:- Approver has change Inward status capex having InwardID isINWX7Tw16-09-202411
+• 17-09-2024 13:48:14:- Security GP has Logged Out
+• 17-09-2024 13:48:10:- Security GP has added Inward INW8epx17-09-202413
+• 17-09-2024 13:46:40:- Security GP has added Inward INWKbSP17-09-202413
+• 17-09-2024 13:39:58:- Approver has Logged Out
+• 17-09-2024 13:39:36:- Approver has added Gatepass GatepassW2q217-09-202413
+• 17-09-2024 13:32:18:- Security GP has Logged Out
+• 16-09-2024 16:06:12:- Security GP has Logged Out
+• 16-09-2024 15:26:54:- Security GP has change Gatepass status Approved having GatepassID isGatepassUOUm16-09-202415
+• 16-09-2024 15:26:09:- Security GP has change Gatepass status Approved having GatepassID isGatepassfIoc16-09-202415
+• 16-09-2024 15:21:08:- Incharge has Logged Out
+• 16-09-2024 15:20:24:- Incharge has change Gatepass status Approved having GatepassID isGatepassfIoc16-09-202415
+• 16-09-2024 15:19:52:- Incharge has change Gatepass status Approved having GatepassID isGatepassUOUm16-09-202415
+• 16-09-2024 15:19:30:- Incharge has added Gatepass GatepassUOUm16-09-202415
+• 16-09-2024 15:18:50:- Incharge has added Gatepass GatepassfIoc16-09-202415
+• 16-09-2024 15:15:53:- Security GP has Logged Out
+• 16-09-2024 15:05:11:- Security GP has Logged Out
+• 16-09-2024 13:07:16:- Security GP has Logged Out
+• 16-09-2024 12:00:11:- Security GP has Logged Out
+
+• 16-09-2024 11:51:27:- Security GP has changed InwardDateTime from 16-09-2024 11:50:06 to 16-09-2024 11:51:13 having InwardID INWX7Tw16-09-202411
+• 16-09-2024 11:51:27:- Security GP has changed Inward_Status from Inward Added to  having InwardID INWX7Tw16-09-202411
+• 16-09-2024 11:51:27:- Security GP has changed Location from Global Port to  having InwardID INWX7Tw16-09-202411
+• 16-09-2024 11:51:27:- Security GP has changed SerialNumber from 0 to 1 having InwardID INWX7Tw16-09-202411
+• 16-09-2024 11:51:27:- Security GP has changed srno from  to System.Int32[] having InwardID INWX7Tw16-09-202411
+• 16-09-2024 11:51:27:- Security GP has changed material from  to System.String[] having InwardID INWX7Tw16-09-202411
+• 16-09-2024 11:51:27:- Security GP has changed mcategory from  to System.String[] having InwardID INWX7Tw16-09-202411
+• 16-09-2024 11:51:27:- Security GP has changed m_quantity from  to System.Int32[] having InwardID INWX7Tw16-09-202411
+• 16-09-2024 11:51:27:- Security GP has changed invtype from  to System.String[] having InwardID INWX7Tw16-09-202411
+• 16-09-2024 11:51:27:- Security GP has changed matremark from  to System.String[] having InwardID INWX7Tw16-09-202411
+• 16-09-2024 11:51:27:- Security GP has changed InvTemp_ID from  to System.String[] having InwardID INWX7Tw16-09-202411
+• 16-09-2024 11:51:27:- Security GP has changed mid from  to System.String[] having InwardID INWX7Tw16-09-202411
+• 16-09-2024 11:51:27:- Security GP has changed mcatid from  to System.String[] having InwardID INWX7Tw16-09-202411
+Edit_InwardMaterialUpdated existing Delivery Challen for Inward ID: INWX7Tw16-09-202411, DC ID: DC-20240916114542967-478-d5c
+Edit_InwardMaterialStarted editing inward material with ID: INWX7Tw16-09-202411
+Edit_InwardMaterialUser: 
+
+• 16-09-2024 11:50:06:- Security GP has changed InwardDateTime from 16-09-2024 11:45:42 to 16-09-2024 11:49:14 having InwardID INWX7Tw16-09-202411
+• 16-09-2024 11:50:06:- Security GP has changed Inward_Status from Inward Added to  having InwardID INWX7Tw16-09-202411
+• 16-09-2024 11:50:06:- Security GP has changed Location from Global Port to  having InwardID INWX7Tw16-09-202411
+• 16-09-2024 11:50:06:- Security GP has changed Quantity from  to 0 having InwardID INWX7Tw16-09-202411
+• 16-09-2024 11:50:06:- Security GP has changed SerialNumber from 0 to 2 having InwardID INWX7Tw16-09-202411
+• 16-09-2024 11:50:06:- Security GP has changed srno from  to System.Int32[] having InwardID INWX7Tw16-09-202411
+• 16-09-2024 11:50:06:- Security GP has changed material from  to System.String[] having InwardID INWX7Tw16-09-202411
+• 16-09-2024 11:50:06:- Security GP has changed mcategory from  to System.String[] having InwardID INWX7Tw16-09-202411
+• 16-09-2024 11:50:06:- Security GP has changed m_quantity from  to System.Int32[] having InwardID INWX7Tw16-09-202411
+• 16-09-2024 11:50:06:- Security GP has changed invtype from  to System.String[] having InwardID INWX7Tw16-09-202411
+• 16-09-2024 11:50:06:- Security GP has changed matremark from  to System.String[] having InwardID INWX7Tw16-09-202411
+• 16-09-2024 11:50:06:- Security GP has changed InvTemp_ID from  to System.String[] having InwardID INWX7Tw16-09-202411
+• 16-09-2024 11:50:06:- Security GP has changed mid from  to System.String[] having InwardID INWX7Tw16-09-202411
+• 16-09-2024 11:50:06:- Security GP has changed mcatid from  to System.String[] having InwardID INWX7Tw16-09-202411
+Edit_InwardMaterialUpdated existing Delivery Challen for Inward ID: INWX7Tw16-09-202411, DC ID: DC-20240916114542967-478-d5c
+Edit_InwardMaterialStarted editing inward material with ID: INWX7Tw16-09-202411
+Edit_InwardMaterialUser: 
+• 16-09-2024 11:45:43:- Security GP has added Inward INWX7Tw16-09-202411
+• 15-09-2024 22:12:37:- Incharge has Change Inward Pending status change to Inward Accepted for capexINWK40o15-09-202421
+• 15-09-2024 22:10:40:- Approver has Logged Out
+• 15-09-2024 22:10:14:- Approver has change Inward status opex having InwardID isINW4yjB15-09-202421
+• 15-09-2024 22:10:14:- Approver has change status Material Rejected OPEX having MaterialID is svkt15-09-202420and InwardID isINW4yjB15-09-202421
+• 15-09-2024 22:10:14:- Approver has change status Material Accepted OPEX having MaterialID is ps4V15-09-202420and InwardID isINW4yjB15-09-202421
+• 15-09-2024 22:10:14:- Approver has change status Material Accepted OPEX having MaterialID is GLhl15-09-202420and InwardID isINW4yjB15-09-202421
+• 15-09-2024 22:08:54:- Security GP has Logged Out
+• 15-09-2024 22:06:25:- Security GP has added Inward INWil2315-09-202422
+
+• 15-09-2024 22:02:20:- Security GP has changed InwardDateTime from 15-09-2024 21:52:22 to 15-09-2024 22:00:38 having InwardID INW4yjB15-09-202421
+• 15-09-2024 22:02:20:- Security GP has changed Inward_Status from Inward Added to  having InwardID INW4yjB15-09-202421
+• 15-09-2024 22:02:20:- Security GP has changed Location from Global Port to  having InwardID INW4yjB15-09-202421
+• 15-09-2024 22:02:20:- Security GP has changed SerialNumber from 0 to 2 having InwardID INW4yjB15-09-202421
+• 15-09-2024 22:02:20:- Security GP has changed srno from  to System.Int32[] having InwardID INW4yjB15-09-202421
+• 15-09-2024 22:02:20:- Security GP has changed material from  to System.String[] having InwardID INW4yjB15-09-202421
+• 15-09-2024 22:02:20:- Security GP has changed mcategory from  to System.String[] having InwardID INW4yjB15-09-202421
+• 15-09-2024 22:02:20:- Security GP has changed m_quantity from  to System.Int32[] having InwardID INW4yjB15-09-202421
+• 15-09-2024 22:02:20:- Security GP has changed invtype from  to System.String[] having InwardID INW4yjB15-09-202421
+• 15-09-2024 22:02:20:- Security GP has changed matremark from  to System.String[] having InwardID INW4yjB15-09-202421
+• 15-09-2024 22:02:20:- Security GP has changed InvTemp_ID from  to System.String[] having InwardID INW4yjB15-09-202421
+• 15-09-2024 22:02:20:- Security GP has changed mid from  to System.String[] having InwardID INW4yjB15-09-202421
+• 15-09-2024 22:02:20:- Security GP has changed mcatid from  to System.String[] having InwardID INW4yjB15-09-202421
+Edit_InwardMaterialUpdated existing Delivery Challen for Inward ID: INW4yjB15-09-202421, DC ID: DC-20240915214737750-962-a1b
+Edit_InwardMaterialStarted editing inward material with ID: INW4yjB15-09-202421
+Edit_InwardMaterialUser: 
+• 15-09-2024 21:56:35:- Approver has Logged Out
+• 15-09-2024 21:56:23:- Approver has change status Material Accepted OPEX having MaterialID is and InwardID isINWK40o15-09-202421
+• 15-09-2024 21:56:23:- Approver has change Inward status capex having InwardID isINWK40o15-09-202421
+• 15-09-2024 21:52:28:- Security GP has Logged Out
+
+• 15-09-2024 21:52:22:- Security GP has changed InwardDateTime from 15-09-2024 21:52:10 to 15-09-2024 21:52:14 having InwardID INW4yjB15-09-202421
+• 15-09-2024 21:52:22:- Security GP has changed Inward_Status from Inward Added to  having InwardID INW4yjB15-09-202421
+• 15-09-2024 21:52:22:- Security GP has changed Location from Global Port to  having InwardID INW4yjB15-09-202421
+• 15-09-2024 21:52:22:- Security GP has changed InwardEnteredBy from Dilip Surwalkar to Kavita Thorat having InwardID INW4yjB15-09-202421
+• 15-09-2024 21:52:22:- Security GP has changed SerialNumber from 0 to 3 having InwardID INW4yjB15-09-202421
+• 15-09-2024 21:52:22:- Security GP has changed srno from  to System.Int32[] having InwardID INW4yjB15-09-202421
+• 15-09-2024 21:52:22:- Security GP has changed material from  to System.String[] having InwardID INW4yjB15-09-202421
+• 15-09-2024 21:52:22:- Security GP has changed mcategory from  to System.String[] having InwardID INW4yjB15-09-202421
+• 15-09-2024 21:52:22:- Security GP has changed m_quantity from  to System.Int32[] having InwardID INW4yjB15-09-202421
+• 15-09-2024 21:52:22:- Security GP has changed invtype from  to System.String[] having InwardID INW4yjB15-09-202421
+• 15-09-2024 21:52:22:- Security GP has changed matremark from  to System.String[] having InwardID INW4yjB15-09-202421
+• 15-09-2024 21:52:22:- Security GP has changed InvTemp_ID from  to System.String[] having InwardID INW4yjB15-09-202421
+• 15-09-2024 21:52:22:- Security GP has changed mid from  to System.String[] having InwardID INW4yjB15-09-202421
+• 15-09-2024 21:52:22:- Security GP has changed mcatid from  to System.String[] having InwardID INW4yjB15-09-202421
+Edit_InwardMaterialUpdated existing Delivery Challen for Inward ID: INW4yjB15-09-202421, DC ID: DC-20240915214737750-962-a1b
+Edit_InwardMaterialStarted editing inward material with ID: INW4yjB15-09-202421
+Edit_InwardMaterialUser: 
+
+• 15-09-2024 21:52:10:- Security GP has changed InwardDateTime from 15-09-2024 21:47:37 to 15-09-2024 21:51:23 having InwardID INW4yjB15-09-202421
+• 15-09-2024 21:52:10:- Security GP has changed Inward_Status from Inward Added to  having InwardID INW4yjB15-09-202421
+• 15-09-2024 21:52:10:- Security GP has changed Location from Global Port to  having InwardID INW4yjB15-09-202421
+• 15-09-2024 21:52:10:- Security GP has changed Quantity from  to 0 having InwardID INW4yjB15-09-202421
+• 15-09-2024 21:52:10:- Security GP has changed SerialNumber from 0 to 3 having InwardID INW4yjB15-09-202421
+• 15-09-2024 21:52:10:- Security GP has changed srno from  to System.Int32[] having InwardID INW4yjB15-09-202421
+• 15-09-2024 21:52:10:- Security GP has changed material from  to System.String[] having InwardID INW4yjB15-09-202421
+• 15-09-2024 21:52:10:- Security GP has changed mcategory from  to System.String[] having InwardID INW4yjB15-09-202421
+• 15-09-2024 21:52:10:- Security GP has changed m_quantity from  to System.Int32[] having InwardID INW4yjB15-09-202421
+• 15-09-2024 21:52:10:- Security GP has changed invtype from  to System.String[] having InwardID INW4yjB15-09-202421
+• 15-09-2024 21:52:10:- Security GP has changed matremark from  to System.String[] having InwardID INW4yjB15-09-202421
+• 15-09-2024 21:52:10:- Security GP has changed InvTemp_ID from  to System.String[] having InwardID INW4yjB15-09-202421
+• 15-09-2024 21:52:10:- Security GP has changed mid from  to System.String[] having InwardID INW4yjB15-09-202421
+• 15-09-2024 21:52:10:- Security GP has changed mcatid from  to System.String[] having InwardID INW4yjB15-09-202421
+Edit_InwardMaterialUpdated existing Delivery Challen for Inward ID: INW4yjB15-09-202421, DC ID: DC-20240915214737750-962-a1b
+Edit_InwardMaterialStarted editing inward material with ID: INW4yjB15-09-202421
+Edit_InwardMaterialUser: 
+• 15-09-2024 21:49:13:- Security GP has added Inward INWK40o15-09-202421
+• 15-09-2024 21:47:37:- Security GP has added Inward INW4yjB15-09-202421
+• 15-09-2024 20:37:46:- Incharge has Logged Out
+• 15-09-2024 20:37:43:- Incharge has added a material - UPS Busbar Panel
+• 15-09-2024 20:37:30:- Incharge has added a material - TV
+• 15-09-2024 20:37:23:- Incharge has added a material - laptop
+• 15-09-2024 20:37:06:- Incharge has added a material - Cassate - 2.5 TR
+• 15-09-2024 20:36:39:- Incharge has added a material - Split AC - 1.5 TR
+• 15-09-2024 20:36:20:- Incharge has added a material - Chair - Cafeteria
+• 15-09-2024 20:35:59:- Incharge has added a material - Table
+• 15-09-2024 20:35:52:- Incharge has added a material - Chair - Cabin
+• 15-09-2024 20:35:40:- Incharge has added a material - Chair - Workstation
+• 15-09-2024 20:34:29:- Security GP has Logged Out
+• 15-09-2024 19:08:27:- Incharge has Logged Out
+• 15-09-2024 18:43:27:- Incharge has Change Inward Pending status change to Inward Accepted for capexINW1KDO15-09-202418
+• 15-09-2024 18:41:02:- Approver has Logged Out
+• 15-09-2024 18:39:22:- Approver has change status Material Rejected OPEX having MaterialID is and InwardID isINWPHBE15-09-202418
+• 15-09-2024 18:39:22:- Approver has change Inward status opex having InwardID isINWPHBE15-09-202418
+• 15-09-2024 18:38:32:- Approver has change Inward status capex having InwardID isINW1KDO15-09-202418
+• 15-09-2024 18:38:31:- Approver has change status Material Accepted OPEX having MaterialID is ah1i15-09-202418and InwardID isINW1KDO15-09-202418
+• 15-09-2024 18:38:31:- Approver has change status Material Rejected OPEX having MaterialID is ddro15-09-202418and InwardID isINW1KDO15-09-202418
+• 15-09-2024 18:36:48:- Approver has change status Material Accepted OPEX having MaterialID is and InwardID isINWwytb15-09-202418
+• 15-09-2024 18:36:48:- Approver has change Inward status opex having InwardID isINWwytb15-09-202418
+• 15-09-2024 18:28:28:- Security GP has Logged Out
+• 15-09-2024 18:22:45:- Security GP has added Inward INWwytb15-09-202418
+
+• 15-09-2024 18:20:04:- Security GP has changed InwardDateTime from 15-09-2024 18:16:17 to 15-09-2024 18:18:03 having InwardID INW1KDO15-09-202418
+• 15-09-2024 18:20:04:- Security GP has changed Inward_Status from Inward Added to  having InwardID INW1KDO15-09-202418
+• 15-09-2024 18:20:04:- Security GP has changed Location from Global Port to  having InwardID INW1KDO15-09-202418
+• 15-09-2024 18:20:04:- Security GP has changed InwardEnteredBy from Kavita Thorat to Security GP1 having InwardID INW1KDO15-09-202418
+• 15-09-2024 18:20:04:- Security GP has changed SerialNumber from 0 to 2 having InwardID INW1KDO15-09-202418
+• 15-09-2024 18:20:04:- Security GP has changed srno from  to System.Int32[] having InwardID INW1KDO15-09-202418
+• 15-09-2024 18:20:04:- Security GP has changed material from  to System.String[] having InwardID INW1KDO15-09-202418
+• 15-09-2024 18:20:04:- Security GP has changed mcategory from  to System.String[] having InwardID INW1KDO15-09-202418
+• 15-09-2024 18:20:04:- Security GP has changed m_quantity from  to System.Int32[] having InwardID INW1KDO15-09-202418
+• 15-09-2024 18:20:04:- Security GP has changed invtype from  to System.String[] having InwardID INW1KDO15-09-202418
+• 15-09-2024 18:20:04:- Security GP has changed matremark from  to System.String[] having InwardID INW1KDO15-09-202418
+• 15-09-2024 18:20:04:- Security GP has changed InvTemp_ID from  to System.String[] having InwardID INW1KDO15-09-202418
+• 15-09-2024 18:20:04:- Security GP has changed mid from  to System.String[] having InwardID INW1KDO15-09-202418
+• 15-09-2024 18:20:04:- Security GP has changed mcatid from  to System.String[] having InwardID INW1KDO15-09-202418
+Edit_InwardMaterialUpdated existing Delivery Challen for Inward ID: INW1KDO15-09-202418, DC ID: DC-20240915181617657-229-b81
+Edit_InwardMaterialUpdated existing Delivery Challen for Inward ID: INW1KDO15-09-202418, DC ID: DC-20240915181617651-392-8b8
+Edit_InwardMaterialUpdated existing Delivery Challen for Inward ID: INW1KDO15-09-202418, DC ID: DC-20240915181617644-392-f68
+Edit_InwardMaterialUpdated existing Delivery Challen for Inward ID: INW1KDO15-09-202418, DC ID: DC-20240915181617631-034-e6e
+Edit_InwardMaterialStarted editing inward material with ID: INW1KDO15-09-202418
+Edit_InwardMaterialUser: 
+• 15-09-2024 18:18:00:- Security GP has added Inward INWPHBE15-09-202418
+• 15-09-2024 18:17:22:- Security GP has added Inward INWcRaD15-09-202418
+• 15-09-2024 18:16:17:- Security GP has added Inward INW1KDO15-09-202418
+• 15-09-2024 18:11:57:- 
+• 15-09-2024 18:11:51:- Security GP has added a material - Table
+• 15-09-2024 18:11:37:- Security GP has added a material - UPS Busbar Panel
+• 15-09-2024 18:11:23:- Security GP has added a material - AC
+• 15-09-2024 18:11:01:- Security GPhas changed InwardMaterial_CustomerAsset from System.Collections.Generic.HashSet`1[IMS.Entities.InwardMaterial_CustomerAsset] to System.Collections.Generic.HashSet`1[IMS.Entities.InwardMaterial_CustomerAsset]
+• 15-09-2024 18:10:43:- Security GP has added a material - Podium Mic
+• 15-09-2024 18:10:17:- Security GP has added a material - DG Battery - 65 AH 
+• 15-09-2024 18:09:41:- Security GP has added a material - Chair - Cabin
+• 15-09-2024 18:09:22:- Security GP has added a material - Chair - Workstation
+• 15-09-2024 18:08:28:- Security GP has added a category - Computers
+• 15-09-2024 18:08:16:- Security GP has deleted a category - abc
+• 15-09-2024 18:08:12:- Security GP has added a category - abc
+• 15-09-2024 18:08:05:- Security GPhas changed InwardMaterial_CustomerAsset from System.Collections.Generic.HashSet`1[IMS.Entities.InwardMaterial_CustomerAsset] to System.Collections.Generic.HashSet`1[IMS.Entities.InwardMaterial_CustomerAsset]
+• 15-09-2024 18:07:58:- Security GPhas changed InwardMaterial_CustomerAsset from System.Collections.Generic.HashSet`1[IMS.Entities.InwardMaterial_CustomerAsset] to System.Collections.Generic.HashSet`1[IMS.Entities.InwardMaterial_CustomerAsset]
+• 15-09-2024 18:07:49:- Security GP has added a category - Electrical
+• 15-09-2024 18:07:38:- Security GP has added a category - Air Conditioner
+• 12-09-2024 12:15:11:- Kartika has Logged Out
+• 11-09-2024 22:11:51:- Kartika has Logged Out
+• 03-09-2024 11:40:30:- Security GP has change Gatepass status Approved having GatepassID isGatepassZ1oI03-09-202411
+• 03-09-2024 11:36:46:- Incharge has Logged Out
+• 03-09-2024 11:35:42:- Incharge has change Gatepass status Approved having GatepassID isGatepassZ1oI03-09-202411
+• 03-09-2024 11:30:26:- Incharge has added Gatepass GatepassZ1oI03-09-202411
+• 03-09-2024 11:17:40:- Incharge has Change Inward Pending status change to Inward Accepted for capexINWV2i603-09-202411
+• 03-09-2024 11:15:15:- Approver has Logged Out
+• 03-09-2024 11:14:35:- Approver has change status Material Accepted OPEX having MaterialID is and InwardID isINWV2i603-09-202411
+• 03-09-2024 11:14:35:- Approver has change Inward status capex having InwardID isINWV2i603-09-202411
+• 03-09-2024 11:12:44:- Security GP has Logged Out
+• 03-09-2024 11:10:05:- Security GP has added Inward INWV2i603-09-202411
+• 02-09-2024 22:42:50:- Security GP has Logged Out
+• 30-08-2024 15:19:00:- Incharge has Logged Out
+• 30-08-2024 13:07:59:- Incharge has Logged Out
+• 30-08-2024 12:07:11:- Security GP has Logged Out
+• 30-08-2024 11:35:23:- Security GP has Logged Out
+• 30-08-2024 11:28:01:- Incharge has Logged Out
+• 30-08-2024 11:09:19:- Security GP has Logged Out
+• 29-08-2024 23:29:45:- Security GP has change Gatepass status Approved having GatepassID isGatepasskc4j10-07-202413
+• 29-08-2024 22:10:53:- Incharge has Logged Out
+• 29-08-2024 21:23:44:- Incharge has Logged Out
+• 29-08-2024 19:47:42:- Security GP has Logged Out
+• 29-08-2024 18:56:10:- Security GP has Logged Out
+• 28-08-2024 20:45:02:- Incharge has change Gatepass status Approved having GatepassID isGatepassZZ2P17-06-202416
+• 28-08-2024 15:25:48:- Incharge has change Gatepass status Approved having GatepassID isGatepassmHAU24-06-202415
+• 27-08-2024 17:03:18:- Incharge has Logged Out
+• 22-08-2024 11:54:28:- Incharge has Logged in
+• 22-08-2024 11:11:38:- Incharge has Logged in
+• 20-08-2024 15:04:27:- Incharge has Logged in
+• 19-08-2024 14:31:13:- Incharge has Logged in
+• 19-08-2024 13:14:30:- Incharge has Logged in
+• 19-08-2024 13:14:05:- Incharge has Logged Out
+• 19-08-2024 13:04:36:- Incharge has Logged in
+• 09-08-2024 15:22:43:- Incharge has Logged in
+• 09-08-2024 15:22:31:- Security GP has Logged Out
+• 09-08-2024 15:12:48:- Security GP has Logged in
+• 09-08-2024 14:51:41:- Security GP has Logged in
+• 09-08-2024 12:48:34:- Security GP has Logged in
+• 09-08-2024 12:04:38:- Security GP has Logged Out
+• 09-08-2024 11:54:20:- Security GP has Logged in
+• 09-08-2024 11:11:44:- Security GP has Logged in
+• 08-08-2024 19:31:04:- Incharge has Logged in
+• 08-08-2024 19:30:44:- Approver has Logged Out
+• 08-08-2024 19:29:49:- Approver has added Gatepass Gatepass4Aa908-08-202419
+• 08-08-2024 19:04:27:- Approver has Logged in
+• 08-08-2024 19:03:13:- Approver has Logged Out
+• 08-08-2024 19:02:45:- Approver has Logged in
+• 07-08-2024 17:23:56:- Incharge has Logged in
+• 07-08-2024 16:46:00:- Incharge has Logged in
+• 07-08-2024 15:24:37:- Incharge has Logged in
+• 07-08-2024 11:17:31:- Approver has change Inward status opex having InwardID isINWzjhg07-08-202411
+• 07-08-2024 11:17:31:- Approver has change status Material Accepted OPEX having MaterialID is 1and InwardID isINWzjhg07-08-202411
+• 07-08-2024 11:17:31:- Approver has change status Material Rejected OPEX having MaterialID is 2and InwardID isINWzjhg07-08-202411
+• 07-08-2024 11:14:05:- Approver has Logged in
+• 07-08-2024 11:13:55:- Security GP has Logged Out
+• 07-08-2024 11:12:57:- Security GP has added Inward INWzjhg07-08-202411
+• 07-08-2024 11:11:53:- Security GP has Logged in
+• 05-08-2024 19:20:11:- Incharge has Logged in
+• 05-08-2024 11:43:46:- Incharge has Change Inward Pending status change to Inward Accepted for capexINWvQim05-08-202411
+• 05-08-2024 11:41:40:- Incharge has Logged in
+• 05-08-2024 11:41:23:- Approver has Logged Out
+• 05-08-2024 11:37:03:- Approver has change status Material Accepted OPEX having MaterialID is and InwardID isINWvQim05-08-202411
+• 05-08-2024 11:37:03:- Approver has change Inward status capex having InwardID isINWvQim05-08-202411
+• 05-08-2024 11:33:23:- Approver has Logged in
+• 05-08-2024 11:32:47:- Incharge has Logged Out
+• 05-08-2024 11:32:24:- Incharge has Logged in
+• 05-08-2024 11:31:51:- Security GP has Logged Out
+• 05-08-2024 11:27:04:- Security GP has added Inward INWvQim05-08-202411
+• 05-08-2024 11:09:32:- Security GP has Logged in
+• 05-08-2024 11:09:16:- Incharge has Logged Out
+• 05-08-2024 11:01:50:- Incharge has Logged in
+• 01-08-2024 17:17:12:- Incharge has Logged in
+• 01-08-2024 17:17:02:- Approver has Logged Out
+• 01-08-2024 17:16:59:- Approver has change status Material Accepted OPEX having MaterialID is and InwardID isINWThYS01-08-202417
+• 01-08-2024 17:16:59:- Approver has change Inward status opex having InwardID isINWThYS01-08-202417
+• 01-08-2024 17:16:46:- Approver has Logged in
+• 01-08-2024 17:16:36:- Security GP has Logged Out
+• 01-08-2024 17:16:27:- Security GP has added Inward INWThYS01-08-202417
+• 01-08-2024 17:14:24:- Security GP has Logged in
+• 01-08-2024 15:37:45:- Security GP has Logged in
+• 01-08-2024 13:07:36:- Security GP has Logged in
+• 31-07-2024 11:54:29:- Security GP has Logged in
+• 30-07-2024 19:24:27:- Security GP has Logged in
+• 30-07-2024 19:24:13:- Incharge has Logged Out
+• 30-07-2024 19:12:13:- Incharge has Change Inward Pending status change to Inward Accepted for rentalINWtvLn30-07-202417
+• 30-07-2024 17:37:54:- Incharge has Logged in
+• 30-07-2024 17:37:45:- Approver has Logged Out
+• 30-07-2024 17:37:41:- Approver has change status Material Accepted OPEX having MaterialID is and InwardID isINWtvLn30-07-202417
+• 30-07-2024 17:37:41:- Approver has change Inward status opex having InwardID isINWtvLn30-07-202417
+• 30-07-2024 17:37:30:- Approver has Logged in
+• 30-07-2024 17:37:17:- Security GP has Logged Out
+• 30-07-2024 17:37:13:- Security GP has added Inward INWtvLn30-07-202417
+• 30-07-2024 17:35:52:- Security GP has Logged in
+• 30-07-2024 17:31:51:- Incharge has Logged Out
+• 30-07-2024 17:30:48:- Incharge has Logged in
+• 30-07-2024 15:42:15:- Incharge has Logged in
+• 30-07-2024 15:40:32:- Incharge has Change Inward Pending status change to Inward Accepted for rentalINWOc5x30-07-202411
+• 30-07-2024 11:47:07:- Incharge has Logged in
+• 30-07-2024 11:46:46:- Approver has Logged Out
+• 30-07-2024 11:46:40:- Approver has change status Material Accepted OPEX having MaterialID is and InwardID isINWOc5x30-07-202411
+• 30-07-2024 11:46:40:- Approver has change Inward status opex having InwardID isINWOc5x30-07-202411
+• 30-07-2024 11:46:25:- Approver has Logged in
+• 30-07-2024 11:46:12:- Security GP has Logged Out
+• 30-07-2024 11:46:05:- Security GP has added Inward INWOc5x30-07-202411
+• 30-07-2024 11:27:36:- Security GP has Logged in
+• 30-07-2024 11:27:17:- Incharge has Logged Out
+• 30-07-2024 11:22:39:- Incharge has Logged in
+• 29-07-2024 15:32:50:- Incharge has Change Inward Pending status change to Inward Accepted for rentalINWCydM26-07-202418
+• 29-07-2024 15:04:00:- Incharge has Logged in
+• 29-07-2024 10:39:43:- Incharge has Logged in
+• 26-07-2024 18:46:59:- Incharge has Logged in
+• 26-07-2024 18:46:09:- Approver has Logged Out
+• 26-07-2024 18:46:03:- Approver has change status Material Accepted OPEX having MaterialID is and InwardID isINWCydM26-07-202418
+• 26-07-2024 18:46:03:- Approver has change Inward status opex having InwardID isINWCydM26-07-202418
+• 26-07-2024 18:45:28:- Approver has Logged in
+• 26-07-2024 18:45:09:- Security GP has Logged Out
+• 26-07-2024 18:39:47:- Security GP has added Inward INWCydM26-07-202418
+• 26-07-2024 18:33:11:- Security GP has Logged in
+• 26-07-2024 18:32:59:- Incharge has Logged Out
+• 26-07-2024 17:57:10:- Incharge has Logged in
+• 26-07-2024 17:06:06:- Incharge has Logged in
+• 26-07-2024 15:51:17:- Incharge has Logged in
+• 25-07-2024 18:55:50:- Incharge has Logged in
+• 23-07-2024 14:55:16:- Security GP has Logged Out
+• 23-07-2024 14:48:51:- Security GP has Logged in
+• 23-07-2024 14:48:29:- Incharge has Logged Out
+• 23-07-2024 14:45:18:- Incharge has Logged in
+• 22-07-2024 20:55:21:- Incharge has Logged in
+• 22-07-2024 17:29:17:- Incharge has Logged in
+• 22-07-2024 16:48:22:- Incharge has Logged in
+• 22-07-2024 16:16:20:- Incharge has Logged in
+• 22-07-2024 12:21:01:- Incharge has Logged in
+• 22-07-2024 11:38:36:- Incharge has Logged in
+• 22-07-2024 11:23:54:- Incharge has Logged in
+• 21-07-2024 20:44:20:- Incharge has Logged in
+• 21-07-2024 20:41:15:- Incharge has change Gatepass status Rejected having GatepassID isGatepass6Q7Z26-06-202418
+• 21-07-2024 20:34:19:- Incharge has Logged in
+• 21-07-2024 20:13:41:- Incharge has Logged in
+• 21-07-2024 19:46:44:- Incharge has Logged in
+• 21-07-2024 19:20:09:- Incharge has Logged in
+• 21-07-2024 18:51:51:- Incharge has change Gatepass status Approved having GatepassID isGatepassEXsL27-06-202411
+• 21-07-2024 18:45:29:- Incharge has change Gatepass status Approved having GatepassID isGatepassEXsL27-06-202411
+• 21-07-2024 18:33:33:- Incharge has change Gatepass status Approved having GatepassID isGatepassEXsL27-06-202411
+• 21-07-2024 17:49:05:- Incharge has change Gatepass status Approved having GatepassID isGatepassEXsL27-06-202411
+• 21-07-2024 17:31:53:- Incharge has Logged in
+• 19-07-2024 15:49:46:- Incharge has Logged in
+• 19-07-2024 11:54:54:- Incharge has Logged in
+• 18-07-2024 15:29:17:- Incharge has Logged in
+• 18-07-2024 11:23:13:- Incharge has Logged in
+• 11-07-2024 15:47:23:- Incharge has Logged in
+• 11-07-2024 15:47:10:- Approver has Logged Out
+• 11-07-2024 15:46:23:- Approver has change status Material Accepted OPEX having MaterialID is and InwardID isINW6PG011-07-202415
+• 11-07-2024 15:46:23:- Approver has change Inward status capex having InwardID isINW6PG011-07-202415
+• 11-07-2024 15:45:05:- Approver has Logged in
+• 11-07-2024 15:44:54:- Security GP has Logged Out
+• 11-07-2024 15:44:14:- Security GP has added Inward INW6PG011-07-202415
+• 11-07-2024 15:43:28:- Security GP has Logged in
+• 10-07-2024 14:52:43:- Incharge has Logged in
+• 10-07-2024 14:52:33:- Security GP has Logged Out
+• 10-07-2024 14:46:06:- Security GP has Logged in
+• 10-07-2024 14:45:56:- Approver has Logged Out
+• 10-07-2024 14:43:09:- Approver has change status Material Accepted OPEX having MaterialID is and InwardID isINWq8nP05-07-202415
+• 10-07-2024 14:43:09:- Approver has change Inward status opex having InwardID isINWq8nP05-07-202415
+• 10-07-2024 14:42:38:- Approver has Logged in
+• 10-07-2024 14:42:22:- Incharge has Logged Out
+• 10-07-2024 14:41:35:- Incharge has Change Inward Pending status change to Inward Accepted for capexINW4iVt27-06-202411
+• 10-07-2024 14:37:15:- Incharge has Logged in
+• 10-07-2024 13:32:19:- Incharge has Logged in
+• 10-07-2024 13:32:14:- Incharge has Logged Out
+• 10-07-2024 13:11:40:- Incharge has Change Inward Pending status change to Inward Accepted for rentalINWUTXD10-07-202412
+• 10-07-2024 13:09:38:- Incharge has Logged in
+• 10-07-2024 12:40:37:- Incharge has Logged in
+• 10-07-2024 12:40:27:- Approver has Logged Out
+• 10-07-2024 12:37:54:- Approver has change Inward status opex having InwardID isINWUTXD10-07-202412
+• 10-07-2024 12:37:51:- Approver has change status Material Accepted OPEX having MaterialID is 12and InwardID isINWUTXD10-07-202412
+• 10-07-2024 12:37:51:- Approver has change status Material Rejected OPEX having MaterialID is 132and InwardID isINWUTXD10-07-202412
+• 10-07-2024 12:34:53:- Approver has Logged in
+• 10-07-2024 12:34:38:- Security GP has Logged Out
+• 10-07-2024 12:32:54:- Security GP has added Inward INWUTXD10-07-202412
+• 10-07-2024 12:32:03:- Security GP has Logged in
+• 10-07-2024 12:13:10:- Incharge has Logged in
+• 08-07-2024 17:02:34:- Incharge has Logged in
+• 08-07-2024 12:25:56:- Incharge has Logged in
+• 08-07-2024 11:35:57:- Incharge has Logged in
+• 05-07-2024 16:31:50:- Approver has Logged in
+• 05-07-2024 16:02:24:- Approver has Logged in
+• 05-07-2024 15:08:43:- Security GP has Logged Out
+• 05-07-2024 15:08:35:- Security GP has added Inward INWq8nP05-07-202415
+• 05-07-2024 15:07:42:- Security GP has Logged in
+• 05-07-2024 15:07:30:- Incharge has Logged Out
+• 05-07-2024 15:05:12:- Incharge has Logged in
+• 05-07-2024 13:20:58:- Incharge has Logged in
+• 05-07-2024 12:25:06:- Incharge has Logged in
+• 03-07-2024 15:43:50:- Incharge has Logged in
+• 03-07-2024 12:52:50:- Incharge has Logged in
+• 03-07-2024 12:52:38:- Security GP has Logged Out
+• 03-07-2024 12:52:28:- Security GP has Logged in
+• 02-07-2024 16:19:18:- Incharge has Logged in
+• 02-07-2024 16:19:07:- Security GP has Logged Out
+• 02-07-2024 16:18:58:- Security GP has Logged in
+• 02-07-2024 16:08:49:- Security GP has Logged in
+• 02-07-2024 16:08:38:- Security GP has Logged Out
+• 02-07-2024 15:57:26:- Security GP has Logged in
+• 02-07-2024 15:57:17:- Incharge has Logged Out
+• 02-07-2024 15:57:09:- Incharge has Logged in
+• 02-07-2024 12:43:45:- Incharge has Logged in
+• 02-07-2024 12:09:08:- Incharge has Logged in
+• 02-07-2024 11:47:52:- Incharge has Logged in
+• 02-07-2024 11:42:11:- Incharge has Logged in
+• 01-07-2024 18:25:41:- Incharge has Logged in
+• 01-07-2024 18:05:37:- Incharge has Logged Out
+• 01-07-2024 18:04:58:- Incharge has Logged in
+• 01-07-2024 17:24:38:- Incharge has Logged in
+• 01-07-2024 16:19:26:- Incharge has Logged in
+• 01-07-2024 15:31:05:- Incharge has Logged in
+• 01-07-2024 13:41:16:- Incharge has Logged in
+• 06-06-2024 16:11:05:- Approver has Logged Out
+• 06-06-2024 16:10:27:- Approver has Logged in
+• 06-06-2024 16:10:05:- Incharge has Logged Out
+• 06-06-2024 15:55:18:- Incharge has Logged in
+• 06-06-2024 14:52:55:- Incharge has Logged in
+• 06-06-2024 13:55:04:- Incharge has Logged in
+• 06-06-2024 13:48:54:- Incharge has Logged in
+• 06-06-2024 10:49:32:- Incharge has Logged in
+• 04-06-2024 17:27:22:- Incharge has Logged in
+• 04-06-2024 15:31:28:- Incharge has Logged in
+• 04-06-2024 15:18:15:- Incharge has Logged in
+• 04-06-2024 15:06:58:- 
+• 04-06-2024 10:47:25:- Approver has Logged in
+• 04-06-2024 10:47:10:- Incharge has Logged Out
+• 04-06-2024 10:27:45:- Incharge has Logged in
+• 03-06-2024 11:29:36:- Incharge has Logged in
+• 03-06-2024 11:00:45:- Incharge has Logged in
+• 31-05-2024 13:57:44:- Incharge has Logged in
+• 31-05-2024 11:14:44:- Incharge has Logged in
+• 30-05-2024 17:50:11:- Incharge has Logged in
+• 30-05-2024 14:30:03:- Incharge has Logged in
+• 30-05-2024 11:13:53:- Incharge has Logged in
+• 30-05-2024 10:41:16:- Incharge has Logged in
+• 29-05-2024 19:21:11:- Incharge has Logged in
+• 29-05-2024 17:36:13:- Incharge has Logged in
+• 29-05-2024 16:45:35:- Incharge has Logged in
+• 29-05-2024 15:57:52:- Incharge has Logged in
+• 29-05-2024 15:34:44:- Incharge has Logged in
+• 29-05-2024 11:52:48:- Incharge has Logged in
+• 29-05-2024 11:52:22:- Receiver Siddhant has Logged Out
+• 29-05-2024 11:51:55:- Receiver Siddhant has Logged in
+• 29-05-2024 11:51:41:- Incharge has Logged Out
+• 29-05-2024 11:50:49:- Incharge has Logged in
+• 29-05-2024 11:50:31:- Incharge has Logged Out
+• 29-05-2024 11:39:22:- Incharge has Logged in
+• 29-05-2024 10:40:06:- Incharge has Logged in
+• 28-05-2024 15:04:49:- Incharge has Logged in
+• 28-05-2024 13:03:14:- Incharge has Logged in
+• 28-05-2024 12:46:48:- Incharge has Logged in
+• 28-05-2024 12:46:03:- 
+• 28-05-2024 11:43:53:- Incharge has Logged in
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

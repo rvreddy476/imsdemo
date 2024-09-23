@@ -1,4 +1,36 @@
 
+Edit_InwardMaterialStarted editing inward material with ID: INWcRaD15-09-202418
+Edit_InwardMaterialUser: 
+Edit_InwardMaterialUpdated existing Delivery Challen for Inward ID: INWcRaD15-09-202418, DC ID: DC-20240915181722478-181-699
+Edit_InwardMaterialStarted editing inward material with ID: INWcRaD15-09-202418
+Edit_InwardMaterialUser: 
+Edit_InwardMaterialUpdated existing Delivery Challen for Inward ID: INWcRaD15-09-202418, DC ID: DC-20240915181722478-181-699
+Edit_InwardMaterialStarted editing inward material with ID: INWcRaD15-09-202418
+Edit_InwardMaterialUser: 
+
+• 9/23/2024 10:27:29 AM:- Security GP has changed InwardDateTime from 9/15/2024 6:17:22 PM to 9/23/2024 10:20:25 AM having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed Inward_Status from Inward Added to  having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed Location from Global Port to  having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed SerialNumber from 0 to 1 having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed srno from  to System.Int32[] having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed material from  to System.String[] having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed mcategory from  to System.String[] having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed m_quantity from  to System.Int32[] having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed invtype from  to System.String[] having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed matremark from  to System.String[] having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed InvTemp_ID from  to System.String[] having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed mid from  to System.String[] having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed mcatid from  to System.String[] having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed ReceiverID from  to aqBz15-09-202418 having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed ReceiverName from  to Sparkle Intigrity  having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed ReceiverAddress from  to pune having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed ReceiverContact from  to 9898989898 having InwardID INWcRaD15-09-202418
+• 9/23/2024 10:27:29 AM:- Security GP has changed ReceiverEmail from  to sparkle@yopmail.com having InwardID INWcRaD15-09-202418
+Edit_InwardMaterialUpdated existing Delivery Challen for Inward ID: INWcRaD15-09-202418, DC ID: DC-20240915181722478-181-699
+Edit_InwardMaterialStarted editing inward material with ID: INWcRaD15-09-202418
+Edit_InwardMaterialUser: 
+Edit_InwardMaterialStarted editing inward material with ID: INWcRaD15-09-202418
+Edit_InwardMaterialUser: 
 • 20-09-2024 17:12:32:- Security GP has Logged Out
 • 20-09-2024 16:48:47:- Security GP has change Gatepass status Approved having GatepassID isGatepassRCdh20-09-202416
 • 20-09-2024 16:46:50:- Incharge has Logged Out
@@ -496,6 +528,20 @@ Edit_InwardMaterialUser:
 • 28-05-2024 12:46:48:- Incharge has Logged in
 • 28-05-2024 12:46:03:- 
 • 28-05-2024 11:43:53:- Incharge has Logged in
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

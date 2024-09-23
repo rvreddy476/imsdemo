@@ -1,4 +1,56 @@
 
+• 9/23/2024 11:26:28 AM:- Result{ data = 10 }
+• 9/23/2024 11:26:28 AM:- isValidUserTrue
+• 9/23/2024 11:26:28 AM:- isLDAPFalse
+• 9/23/2024 11:26:28 AM:- isDeletedFalse
+• 9/23/2024 11:24:17 AM:- Result{ data = 10 }
+• 9/23/2024 11:24:17 AM:- isValidUserTrue
+• 9/23/2024 11:24:17 AM:- isLDAPFalse
+• 9/23/2024 11:24:17 AM:- isDeletedFalse
+• 9/23/2024 11:20:17 AM:- Result{ data = 10 }
+• 9/23/2024 11:20:17 AM:- isValidUserTrue
+• 9/23/2024 11:20:17 AM:- isLDAPFalse
+• 9/23/2024 11:20:17 AM:- isDeletedFalse
+• 9/23/2024 10:15:34 AM:- Result{ data = 10 }
+• 9/23/2024 10:15:34 AM:- isValidUserTrue
+• 9/23/2024 10:15:34 AM:- isLDAPFalse
+• 9/23/2024 10:15:34 AM:- isDeletedFalse
+• 9/23/2024 1:44:50 AM:- Result{ data = 10 }
+• 9/23/2024 1:44:49 AM:- isValidUserTrue
+• 9/23/2024 1:44:49 AM:- isLDAPFalse
+• 9/23/2024 1:44:49 AM:- isDeletedFalse
+• 9/23/2024 1:43:06 AM:- Result{ data = 10 }
+• 9/23/2024 1:43:06 AM:- isValidUserTrue
+• 9/23/2024 1:43:06 AM:- isLDAPFalse
+• 9/23/2024 1:43:06 AM:- isDeletedFalse
+• 9/23/2024 1:42:16 AM:- Result{ data = 10 }
+• 9/23/2024 1:42:09 AM:- isValidUserTrue
+• 9/23/2024 1:42:05 AM:- isLDAPFalse
+• 9/23/2024 1:42:04 AM:- isDeletedFalse
+• 9/23/2024 1:41:15 AM:- Result{ data = 10 }
+• 9/23/2024 1:41:15 AM:- isValidUserTrue
+• 9/23/2024 1:41:15 AM:- isLDAPFalse
+• 9/23/2024 1:41:15 AM:- isDeletedFalse
+• 9/23/2024 1:39:01 AM:- Result{ data = 10 }
+• 9/23/2024 1:39:01 AM:- isValidUserTrue
+• 9/23/2024 1:39:01 AM:- isLDAPFalse
+• 9/23/2024 1:39:01 AM:- ldapfalse--------------------------
+• 9/23/2024 1:39:01 AM:- LDAP_Connection :The LDAP server is unavailable. :    at System.DirectoryServices.Protocols.LdapConnection.Connect()
+   at System.DirectoryServices.Protocols.LdapConnection.BindHelper(NetworkCredential newCredential, Boolean needSetCredential)
+   at IMS.Web.Controllers.LoginController.LDAP_Connection(String userEmail, String userPassword) in C:\Learning\ims\imsdemo\IMS.Web\Controllers\LoginController.cs:line 454
+• 9/23/2024 1:38:39 AM:- LdapConnection is created successfully.
+• 9/23/2024 1:38:39 AM:- isDeletedFalse
+• 9/23/2024 1:36:53 AM:- LdapConnection is created successfully.
+• 9/23/2024 1:36:53 AM:- isDeletedFalse
+• 9/23/2024 1:36:34 AM:- Result{ data = 10 }
+• 9/23/2024 1:36:34 AM:- isValidUserTrue
+• 9/23/2024 1:36:34 AM:- isLDAPFalse
+• 9/23/2024 1:36:34 AM:- ldapfalse--------------------------
+• 9/23/2024 1:36:34 AM:- LDAP_Connection :The LDAP server is unavailable. :    at System.DirectoryServices.Protocols.LdapConnection.Connect()
+   at System.DirectoryServices.Protocols.LdapConnection.BindHelper(NetworkCredential newCredential, Boolean needSetCredential)
+   at IMS.Web.Controllers.LoginController.LDAP_Connection(String userEmail, String userPassword) in C:\Learning\ims\imsdemo\IMS.Web\Controllers\LoginController.cs:line 454
+• 9/23/2024 1:36:13 AM:- LdapConnection is created successfully.
+• 9/23/2024 1:36:13 AM:- isDeletedFalse
 • 20-09-2024 17:12:59:- Result{ data = 10 }
 • 20-09-2024 17:12:59:- isValidUserTrue
 • 20-09-2024 17:12:59:- isLDAPFalse
@@ -7532,6 +7584,54 @@
 • 3/22/2022 4:18:00 PM:- LDAP_Connection :The supplied credential is invalid. :    at System.DirectoryServices.Protocols.LdapConnection.BindHelper(NetworkCredential newCredential, Boolean needSetCredential)
    at System.DirectoryServices.Protocols.LdapConnection.Bind(NetworkCredential newCredential)
    at HTV_HIL_LOGIN_VMS.Controllers.LoginController.LDAP_Connection(String userEmail, String userPassword) in D:\HTV_VMS\HTV_HIL_LOGIN_VMS\HTV_HIL_LOGIN_VMS\Controllers\LoginController.cs:line 293
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

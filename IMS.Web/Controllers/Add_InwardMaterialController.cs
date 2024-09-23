@@ -1525,7 +1525,7 @@ namespace IMS.Web.Controllers
                     var materialdetails = (from t in context.Material_Category
                                            join c in context.Materials on t.Material_CategoryID equals c.Material_CategoryID
                                            join i in context.InwardMaterial_Temp on c.MaterialID equals i.MaterialID
-                                           where i.InwardID.Equals(id)
+                                           where i.InwardID.Equals(id) && i.Status != "Deleted"
                                            select new
                                            {
                                                i.InwardID,
@@ -1843,16 +1843,44 @@ namespace IMS.Web.Controllers
                         }
                         else
                         {
-                            var tempid = inwardtemplist[i].ToString();
-                            var materialtemp = context.InwardMaterial_Temp.Single(x => x.InvMaterialTemp_ID == tempid);
-                            materialtemp.InwardID = model.InwardID;
-                            materialtemp.Material_CategoryID = int.Parse(materialcatlist[j].ToString());
-                            materialtemp.MaterialID = model.mid[j];
-                            materialtemp.MaterialName = materiallist[j];
-                            materialtemp.Quantity = model.m_quantity[j];
-                            materialtemp.Inward_Type = model.invtype[j];
-                            materialtemp.Material_Remark = model.matremark[j];
-                            context.SaveChanges();
+                            //var tempid = inwardtemplist[i].ToString();
+                            //var materialtemp = context.InwardMaterial_Temp.Single(x => x.InvMaterialTemp_ID == tempid);
+                            //materialtemp.InwardID = model.InwardID;
+                            //materialtemp.Material_CategoryID = int.Parse(materialcatlist[j].ToString());
+                            //materialtemp.MaterialID = model.mid[j];
+                            //materialtemp.MaterialName = materiallist[j];
+                            //materialtemp.Quantity = model.m_quantity[j];
+                            //materialtemp.Inward_Type = model.invtype[j];
+                            //materialtemp.Material_Remark = model.matremark[j];
+                            //context.SaveChanges();
+
+                            var inwardMaterial_Temp_List = context.InwardMaterial_Temp.Where(x => x.InwardID == model.InwardID).ToList();
+                            if(inwardMaterial_Temp_List.Count > 0)
+                            {
+                                foreach (var materialtemp in inwardMaterial_Temp_List)
+                                {
+
+                                    if (materiallist.Contains(materialtemp.MaterialName)){
+
+										materialtemp.InwardID = model.InwardID;
+										materialtemp.Material_CategoryID = int.Parse(materialcatlist[j].ToString());
+										materialtemp.MaterialID = context.Materials.Where(x => x.MaterialName == materialtemp.MaterialName).Select(x => x.MaterialID).FirstOrDefault();
+										materialtemp.MaterialName = materiallist.Where(x => x == materialtemp.MaterialName).Select(x => x).FirstOrDefault();
+										materialtemp.Quantity = model.m_quantity[j];
+										materialtemp.Inward_Type = model.invtype[j];
+										materialtemp.Material_Remark = model.matremark[j];
+										materialtemp.Status = "Deleted";
+										context.SaveChanges();
+									}
+                                    else
+                                    {										
+                                        materialtemp.Status = "Deleted";
+										context.SaveChanges();
+									}
+                                        
+                                        
+                                }
+                            }
                         }
 
 

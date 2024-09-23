@@ -4,3 +4,9 @@ D:\IMS\IMS_Application\IMS\IMS.Models\obj\Debug\IMS.Models.csprojAssemblyReferen
 D:\IMS\IMS_Application\IMS\IMS.Models\obj\Debug\IMS.Models.csproj.CoreCompileInputs.cache
 D:\IMS\IMS_Application\IMS\IMS.Models\obj\Debug\IMS.Models.dll
 D:\IMS\IMS_Application\IMS\IMS.Models\obj\Debug\IMS.Models.pdb
+C:\Learning\ims\imsdemo\IMS.Models\bin\Debug\IMS.Models.dll
+C:\Learning\ims\imsdemo\IMS.Models\bin\Debug\IMS.Models.pdb
+C:\Learning\ims\imsdemo\IMS.Models\obj\Debug\IMS.Models.csproj.AssemblyReference.cache
+C:\Learning\ims\imsdemo\IMS.Models\obj\Debug\IMS.Models.csproj.CoreCompileInputs.cache
+C:\Learning\ims\imsdemo\IMS.Models\obj\Debug\IMS.Models.dll
+C:\Learning\ims\imsdemo\IMS.Models\obj\Debug\IMS.Models.pdb
